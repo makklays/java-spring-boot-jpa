@@ -12,5 +12,5 @@ Crear el contenido de Docker como Imagine.
 
 La programa carga en el repositorio de github.
 
---------------------------------------------------------------
+-------------------------------------------------------------
 
