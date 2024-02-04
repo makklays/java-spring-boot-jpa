@@ -14,3 +14,17 @@ Crear el contenido de Docker como Imagine.
 La programa carga en el repositorio de github.
 
 
+### TASK of PROJECT (EN)
+
+Create the program with several Entities and relations between them.
+Entities: Users, Cities, Stocks, Categories, Products, Invoices.
+
+Use: JPA, Hibernate, Logback, Spring Rest, H2, MySQL, Spring Data, Spring Security.
+
+Create REST API (with methods POST, GET, PUT, PATCH, DELETE, OPTION).
+
+Create the container of Docker as Image.
+
+The program upload at the repository of github.
+
+
