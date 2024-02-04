@@ -1,5 +1,5 @@
 
----------- La TAREA del PROJECTO -----------------------------
+### La TAREA del PROJECTO
 
 Crear la programa con varios entidades y las relaciónes entre ellas.
 Entidades: Usuarios, Ciudades, Almacén, Categorías, Productos, Facturas.
