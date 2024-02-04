@@ -1,5 +1,5 @@
 
-### La TAREA del PROYECTO
+### La TAREA del PROYECTO (ES)
 
 Crear la programa con varios entidades y las relaciónes entre ellas.
 
