@@ -5,7 +5,7 @@ Crear la programa con varios entidades y las relaciónes entre ellas.
 
 Entidades: Usuarios, Ciudades, Almacén, Categorías, Productos, Facturas.
 
-Utilizar: JPA, Hibernate, Logback, Spring Rest, H2, MySQL, Spring Data, Spring Security.
+Utilizar: JAVA, JPA, Hibernate, Logback, Spring Boot, Spring Rest, H2, MySQL, Spring Data, Spring Security.
 
 Crear REST API (con metodos POST, GET, PUT, PATCH, DELETE, OPTION).
 
@@ -19,7 +19,7 @@ La programa carga en el repositorio de github.
 Create the program with several Entities and relations between them.
 Entities: Users, Cities, Stocks, Categories, Products, Invoices.
 
-Use: JPA, Hibernate, Logback, Spring Rest, H2, MySQL, Spring Data, Spring Security.
+Use: JAVA, JPA, Hibernate, Logback, Spring Boot, Spring Rest, H2, MySQL, Spring Data, Spring Security.
 
 Create REST API (with methods POST, GET, PUT, PATCH, DELETE, OPTION).
 
