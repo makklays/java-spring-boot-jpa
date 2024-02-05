@@ -13,6 +13,8 @@ Crear el contenido de Docker como Imagine.
 
 La programa carga en el repositorio de github.
 
+PS: Y por supuesto esta tarea creé Alexander Kuziv para empresa técnica TechMatrix18.com
+
 
 ### TASK of PROJECT (EN)
 
@@ -27,4 +29,5 @@ Create the container of Docker as Image.
 
 The program upload at the repository of github.
 
+PS: This task create Alexander Kuziv for company TechMatrix18.com
 
