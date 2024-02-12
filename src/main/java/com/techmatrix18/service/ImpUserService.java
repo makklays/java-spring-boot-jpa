@@ -1,7 +1,7 @@
-package com.techmatrix18.services;
+package com.techmatrix18.service;
 
-import com.techmatrix18.entities.User;
-import com.techmatrix18.rep.UserRep;
+import com.techmatrix18.model.User;
+import com.techmatrix18.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class UserService implements IUserService {
+public class ImpUserService implements InterfaceUserService {
     @Autowired
-    private UserRep userRepository;
+    private UserRepository userRepository;
 
     @Override
     public List<User> getAllUsers() {

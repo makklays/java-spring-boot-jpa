@@ -1,18 +1,16 @@
-package com.techmatrix18.rep;
+package com.techmatrix18.repository;
 
-import com.techmatrix18.entities.User;
+import com.techmatrix18.model.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 //import org.springframework.data.jpa.repository.JpaRepository;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.List;
 
 // CrudRepository -> PagingAndSortingRepository -> JpaRepository
 @Repository
-public interface UserRep extends CrudRepository<User, Long> {
+public interface UserRepository extends CrudRepository<User, Long> {
     //@PersistenceContext
     //EntityManager em;
 
