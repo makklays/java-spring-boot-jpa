@@ -1,6 +1,6 @@
 package com.techmatrix18.repository;
 
-import com.techmatrix18.model.Category;
+import com.techmatrix18.model.Position;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
@@ -9,10 +9,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CategoryRepository extends CrudRepository<Category, Long> {
-    List<Category> findByID(Long id);
-    List<Category> findByTitle(String firstname, String lastname);
+public interface PositionRepository extends CrudRepository<Position, Long> {
+    List<Position> findByID(Long id);
+    List<Position> findByTitle(String title);
 
-    Page<Category> findAll(Pageable pageable);
+    Page<Position> findAll(Pageable pageable);
 }
 

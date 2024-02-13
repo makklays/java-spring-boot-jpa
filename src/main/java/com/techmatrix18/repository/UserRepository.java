@@ -5,20 +5,19 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-//import org.springframework.data.jpa.repository.JpaRepository;
+
 import java.util.List;
 
-// CrudRepository -> PagingAndSortingRepository -> JpaRepository
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {
     //@PersistenceContext
     //EntityManager em;
 
-    //User findByID(Long id);
-
-    List<User> findByFirstnameAndLastname(String firstname, String lastname);
-    List<User> findByEmail(String email);
+    List<User> findByFirstname(String firstname);
     List<User> findByLastname(String lastname);
+    List<User> findByFirstnameAndLastname(String firstname, String lastname);
+
+    List<User> findByEmail(String email);
 
     Page<User> findAll(Pageable pageable);
 }

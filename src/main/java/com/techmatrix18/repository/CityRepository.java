@@ -1,6 +1,6 @@
 package com.techmatrix18.repository;
 
-import com.techmatrix18.model.Category;
+import com.techmatrix18.model.City;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
@@ -9,10 +9,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CategoryRepository extends CrudRepository<Category, Long> {
-    List<Category> findByID(Long id);
-    List<Category> findByTitle(String firstname, String lastname);
+public interface CityRepository extends CrudRepository<City, Long> {
+    List<City> findByID(Long id);
+    List<City> findByTitle(String title);
 
-    Page<Category> findAll(Pageable pageable);
+    Page<City> findAll(Pageable pageable);
 }
 
