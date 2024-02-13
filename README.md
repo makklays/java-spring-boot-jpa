@@ -4,7 +4,7 @@
 Crear un almacén virtual de mercancías.
 Crear la programa con varios entidades y las relaciónes entre ellas.
 
-Entidades: Usuarios, Ciudades, Almacén, Categorías, Productos, Facturas.
+Entidades: Usuarios, Puestos, Ciudades, Almacén, Barcos, Categorías, Productos, Transportes, Facturas.
 
 Utilizar: JAVA, JPA, Hibernate, Logback, Spring Boot, Spring Rest, H2, MySQL, Spring Data, Spring Security.
 
@@ -23,7 +23,7 @@ PSS: Without 'batch' as 'пакет';
 
 Create a virtual warehouse of goods.
 Create the program with several Entities and relations between them.
-Entities: Users, Cities, Stocks, Categories, Products, Invoices.
+Entities: Users, Positions, Cities, Store houses, Barcos, Categories, Products, Transportations, Invoices.
 
 Use: JAVA, JPA, Hibernate, Logback, Spring Boot, Spring Rest, H2, MySQL, Spring Data, Spring Security.
 
