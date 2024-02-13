@@ -23,6 +23,10 @@ public class Invoice {
     @Column(name = "transportation_id")
     private Integer transportationId;
 
+    @ManyToOne
+    @JoinColumn(name="transportation_id")
+    private Transportation transportation;
+
     @Column(name = "amount")
     private Float amount;
 

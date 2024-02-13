@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ImpUserService implements InterfaceUserService {
+public class ImplUserService implements InterfaceUserService {
     @Autowired
     private UserRepository userRepository;
 

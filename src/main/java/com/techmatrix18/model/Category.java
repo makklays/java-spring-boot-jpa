@@ -4,6 +4,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.*;
@@ -20,6 +21,10 @@ public class Category {
 
     @Column(name = "description", length = 500)
     private String description;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "category", cascade = CascadeType.ALL)
+    @JoinColumn(name = "category_id", insertable = false, updatable = false)
+    private List<Product> products;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)

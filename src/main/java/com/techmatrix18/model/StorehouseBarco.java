@@ -17,8 +17,16 @@ public class StorehouseBarco {
     @Column(name = "storehouse_id")
     private Long storehouseId;
 
+    @ManyToOne
+    @JoinColumn(name = "storehouse_id", nullable = false)
+    private Storehouse storehouse;
+
     @Column(name = "barco_id")
     private Long barcoId;
+
+    @ManyToOne
+    @JoinColumn(name = "barco_id", nullable = false)
+    private Barco barco;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)

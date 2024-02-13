@@ -5,6 +5,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -17,8 +18,20 @@ public class Transportation {
     @Column(name = "barco_id")
     private Long barcoId;
 
+    @ManyToOne
+    @JoinColumn(name = "barco_id", nullable = false)
+    private Barco barco;
+
     @Column(name = "storehouse_id")
     private Long storehouseId;
+
+    @ManyToOne
+    @JoinColumn(name = "storehouse_id", nullable = false)
+    private Storehouse storehouse;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "transportation", cascade = CascadeType.ALL)
+    @JoinColumn(name = "transportation_id", insertable = false, updatable = false)
+    private List<Invoice> invoices;
 
     @Column(name = "distance")
     private Integer distance;  // km

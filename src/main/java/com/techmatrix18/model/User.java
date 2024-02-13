@@ -5,6 +5,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.sql.Timestamp;
 import java.util.Objects;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -34,6 +35,14 @@ public class User {
 
     @Column(name = "position_id")
     private Long positionId;
+
+    @ManyToOne
+    @JoinColumn(name = "position_id", nullable = false)
+    private Position position;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    private List<BarcoUser> barcoUsers;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)

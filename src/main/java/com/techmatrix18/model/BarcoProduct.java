@@ -17,8 +17,16 @@ public class BarcoProduct {
     @Column(name = "barco_id")
     private Long barcoId;
 
+    @ManyToOne
+    @JoinColumn(name="barco_id")
+    private Barco barco;
+
     @Column(name = "product_id")
     private Long productId;
+
+    @ManyToOne
+    @JoinColumn(name="product_id")
+    private Product product;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)

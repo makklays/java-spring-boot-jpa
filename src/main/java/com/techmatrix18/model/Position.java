@@ -5,6 +5,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -19,6 +20,10 @@ public class Position {
 
     @Column(name = "description", length = 500)
     private String description;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "position", cascade = CascadeType.ALL)
+    @JoinColumn(name = "position_id", insertable = false, updatable = false)
+    private List<User> users;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)

@@ -17,8 +17,16 @@ public class BarcoUser {
     @Column(name = "barco_id")
     private Long barcoId;
 
+    @ManyToOne
+    @JoinColumn(name="barco_id")
+    private Barco barco;
+
     @Column(name = "user_id")
     private Long userId;
+
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    private User user;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
