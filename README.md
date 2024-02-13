@@ -40,8 +40,8 @@ PS: This task create Alexander Kuziv for company TechMatrix18.com
 
 1. Añadi `<dependiencies>` para MySQL, H2, Spring, Hibernate, Logback.
 2. Crea la connección a las base de datos MySQL, H2.
-3. Crea las Entidades: User, City, Stock, Category, Product, Invoice.
-4. Crea los repositorios: UserRepository, CityRepository, StockRepository, CategoryRepository, ProductRepository, InvoiceRepository.
+3. Crea las Entidades: Usuarios, Puestos, Ciudades, Almacén, Barcos, Categorías, Productos, Transportes, Facturas y las entidades con relaciónes entre ellas.
+4. Crea los repositorios: UserRepository, CityRepository, StockRepository, CategoryRepository, ProductRepository, InvoiceRepository y otros repositorios.
 5. Crea los Tests de integracion (para Entidades, Repositories).
 6. Crea los Controladores con Entidades y Repositories.
 7. Crea los Tests de integracion (para Controladores).
