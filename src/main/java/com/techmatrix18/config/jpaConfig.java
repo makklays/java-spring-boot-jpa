@@ -11,16 +11,16 @@ import javax.sql.DataSource;
 @Configuration
 public class jpaConfig {
 
-    @Bean(name = "h2DataSource")
+    /*@Bean(name = "h2DataSource")
     public DataSource h2DataSource()
     {
         DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
         dataSourceBuilder.driverClassName("org.h2.Driver");
-        dataSourceBuilder.url("jdbc:h2:file:C:/temp/test");
-        dataSourceBuilder.username("sa");
+        dataSourceBuilder.url("jdbc:h2:file:home/alexander/h2-test");
+        dataSourceBuilder.username("");
         dataSourceBuilder.password("");
         return dataSourceBuilder.build();
-    }
+    }*/
 
     @Bean(name = "mysqlDataSource")
     @Primary

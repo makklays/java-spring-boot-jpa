@@ -18,3 +18,10 @@ package com.techmatrix18.model;
 //        private Position position;
 //    }
 
+// example: @Bean
+//    @Component
+//    class Position {
+//        @Bean('myBean')
+//        @Scope('prototype') // области видимости бинов:
+//
+

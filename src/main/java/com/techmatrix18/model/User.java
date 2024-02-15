@@ -54,6 +54,9 @@ public class User {
     @Column(name = "updated_at")
     private Timestamp updatedAt;
 
+    public User() {}
+    public User(String firstname, String lastname, String email, Integer positionId) {}
+
     public Long getId() {
         return Id;
     }
