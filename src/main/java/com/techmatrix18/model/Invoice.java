@@ -84,6 +84,10 @@ public class Invoice {
         this.amount = amount;
     }
 
+    public String getStatus() { return status; }
+
+    public void setStatus(String status) { this.status = status; }
+
     public Timestamp getCreatedAt() {
         return createdAt;
     }
