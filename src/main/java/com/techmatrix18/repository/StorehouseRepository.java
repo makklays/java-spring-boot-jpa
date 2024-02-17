@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public interface StorehouseRepository extends CrudRepository<Storehouse, Long> {
-    List<Storehouse> findByID(Long id);
+    Storehouse getById(Long id);
     List<Storehouse> findByTitle(String title);
     List<Storehouse> findByCityId(Integer cityId);
 

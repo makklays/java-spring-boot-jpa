@@ -7,7 +7,8 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
 
-import javax.persistence.*;
+//import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "categories")
@@ -23,7 +24,7 @@ public class Category {
     private String description;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "category", cascade = CascadeType.ALL)
-    @JoinColumn(name = "category_id", insertable = false, updatable = false)
+    //@JoinColumn(name = "category_id", insertable = false, updatable = false)
     private List<Product> products;
 
     @CreationTimestamp

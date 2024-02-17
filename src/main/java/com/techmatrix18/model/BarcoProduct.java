@@ -3,7 +3,8 @@ package com.techmatrix18.model;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.*;
+//import javax.persistence.*;
+import jakarta.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
 
@@ -14,18 +15,18 @@ public class BarcoProduct {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "barco_id")
+    @Column(name = "barco_id", insertable=false, updatable=false)
     private Long barcoId;
 
     @ManyToOne
-    @JoinColumn(name="barco_id")
+    //@JoinColumn(name="barco_id")
     private Barco barco;
 
-    @Column(name = "product_id")
+    @Column(name = "product_id", insertable=false, updatable=false)
     private Long productId;
 
     @ManyToOne
-    @JoinColumn(name="product_id")
+    //@JoinColumn(name="product_id")
     private Product product;
 
     @CreationTimestamp

@@ -13,7 +13,6 @@ import javax.xml.bind.ValidationException;
 @RequestMapping("/api/v1/users")
 public class UserController {
 
-    @Autowired
     private UserRepository userRepository;
 
     @GetMapping(path = "/")

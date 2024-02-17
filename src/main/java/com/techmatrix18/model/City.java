@@ -3,7 +3,8 @@ package com.techmatrix18.model;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.*;
+//import javax.persistence.*;
+import jakarta.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
@@ -22,7 +23,7 @@ public class City {
     private String description;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "city", cascade = CascadeType.ALL)
-    @JoinColumn(name = "city_id", insertable = false, updatable = false)
+    //@JoinColumn(name = "city_id", insertable = false, updatable = false)
     private List<Storehouse> storehouses;
 
     @CreationTimestamp

@@ -7,7 +7,8 @@ import java.sql.Timestamp;
 import java.util.Objects;
 import java.util.List;
 
-import javax.persistence.*;
+//import javax.persistence.*;
+import jakarta.persistence.*;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -15,7 +16,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Table(name = "users")
 public class User {
     @Id
-    @GeneratedValue(strategy = IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long Id;
 
     @Column(name = "firstname", length = 255)
@@ -33,7 +34,7 @@ public class User {
     @Column(name = "bio", length = 500)
     private String bio;
 
-    @Column(name = "position_id")
+    @Column(name = "position_id", insertable=false, updatable=false)
     private Long positionId;
 
     @ManyToOne
@@ -41,7 +42,7 @@ public class User {
     private Position position;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    //@JoinColumn(name = "user_id", insertable = false, updatable = false)
     private List<BarcoUser> barcoUsers;
 
     @CreationTimestamp

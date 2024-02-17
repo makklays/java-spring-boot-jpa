@@ -3,7 +3,8 @@ package com.techmatrix18.model;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.*;
+//import javax.persistence.*;
+import jakarta.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
@@ -15,7 +16,7 @@ public class Storehouse {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "city_id")
+    @Column(name = "city_id", insertable=false, updatable=false)
     private Long cityId;
 
     @ManyToOne
@@ -23,7 +24,7 @@ public class Storehouse {
     private City city;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "storehouse", cascade = CascadeType.ALL)
-    @JoinColumn(name = "storehouse_id", insertable = false, updatable = false)
+    //@JoinColumn(name = "storehouse_id", insertable = false, updatable = false)
     private List<StorehouseBarco> storehouseBarcos;
 
     @Column(name = "title", length = 255)

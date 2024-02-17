@@ -3,7 +3,8 @@ package com.techmatrix18.model;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.*;
+//import javax.persistence.*;
+import jakarta.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
@@ -30,7 +31,7 @@ public class Product {
     @Column(name = "is_glass")
     private Integer isGlass; // 0 or 1
 
-    @Column(name = "category_id")
+    @Column(name = "category_id", insertable=false, updatable=false)
     private Long categoryId;
 
     @ManyToOne
@@ -38,7 +39,7 @@ public class Product {
     private Category category;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "product", cascade = CascadeType.ALL)
-    @JoinColumn(name = "product_id", insertable = false, updatable = false)
+    //@JoinColumn(name = "product_id", insertable = false, updatable = false)
     private List<BarcoProduct> barcoProducts;
 
     @CreationTimestamp

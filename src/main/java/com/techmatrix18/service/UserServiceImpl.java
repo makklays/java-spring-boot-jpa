@@ -15,6 +15,11 @@ public class UserServiceImpl implements InterfaceUserService {
     @Autowired
     private UserRepository userRepository;
 
+    /*@Autowired
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }*/
+
     @Override
     public List<User> getAllUsers() {
         List<User> list = new ArrayList<>();
@@ -23,8 +28,8 @@ public class UserServiceImpl implements InterfaceUserService {
     }
 
     @Override
-    public User getUserById(long userId) {
-        User obj = userRepository.findById(userId).get();
+    public User getUserById(Long userId) {
+        User obj = userRepository.getById(userId);
         return obj;
     }
 
@@ -46,7 +51,7 @@ public class UserServiceImpl implements InterfaceUserService {
     }
 
     @Override
-    public void deleteUser(int userId) {
+    public void deleteUser(Long userId) {
         userRepository.delete(getUserById(userId));
     }
 }

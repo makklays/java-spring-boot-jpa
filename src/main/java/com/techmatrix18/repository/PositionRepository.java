@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public interface PositionRepository extends CrudRepository<Position, Long> {
-    List<Position> findByID(Long id);
+    Position getById(Long id);
     List<Position> findByTitle(String title);
 
     Page<Position> findAll(Pageable pageable);

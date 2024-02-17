@@ -3,7 +3,8 @@ package com.techmatrix18.model;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.*;
+//import javax.persistence.*;
+import jakarta.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
 
@@ -20,8 +21,8 @@ public class Invoice {
     @Column(name = "description", length = 500)
     private String description; // kg and km at description
 
-    @Column(name = "transportation_id")
-    private Integer transportationId;
+    @Column(name = "transportation_id", insertable=false, updatable=false)
+    private Long transportationId;
 
     @ManyToOne
     @JoinColumn(name="transportation_id")
@@ -67,11 +68,11 @@ public class Invoice {
         this.description = description;
     }
 
-    public Integer getTransportationId() {
+    public Long getTransportationId() {
         return transportationId;
     }
 
-    public void setTransportationId(Integer transportationId) {
+    public void setTransportationId(Long transportationId) {
         this.transportationId = transportationId;
     }
 

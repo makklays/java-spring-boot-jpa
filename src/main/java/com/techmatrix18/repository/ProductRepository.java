@@ -10,13 +10,13 @@ import java.util.List;
 
 @Repository
 public interface ProductRepository extends CrudRepository<Product, Long> {
-    List<Product> findByID(Long id);
+    Product getById(Long id);
     List<Product> findByTitle(String title);
     List<Product> findByCategoryId(Integer categoryId);
 
     List<Product> findByWeight(Integer distance);
-    List<Product> findByWeightLess(Integer distance);
-    List<Product> findByWeightMore(Integer distance);
+    //List<Product> findByWeightLess(Integer distance);
+    //List<Product> findByWeightMore(Integer distance);
 
     Page<Product> findAll(Pageable pageable);
 }

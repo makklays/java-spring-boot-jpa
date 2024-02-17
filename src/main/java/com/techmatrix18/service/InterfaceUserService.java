@@ -5,9 +5,9 @@ import java.util.List;
 
 public interface InterfaceUserService {
     List<User> getAllUsers();
-    User getUserById(long userId);
+    User getUserById(Long userId);
     boolean addUser(User user);
     void updateUser(User user);
-    void deleteUser(int userId);
+    void deleteUser(Long userId);
 }
 
