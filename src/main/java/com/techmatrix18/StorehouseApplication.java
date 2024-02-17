@@ -1,17 +1,15 @@
 package com.techmatrix18;
 
-import com.techmatrix18.model.User;
-import com.techmatrix18.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.boot.CommandLineRunner;
 
 @SpringBootApplication //(scanBasePackages = "com.techmatrix18.config", exclude = {jpaConfig.class })
 //@PropertySource(value = { "classpath:application.properties" })
