@@ -26,8 +26,8 @@ public class BarcoProductTest {
         Assertions.assertEquals(1L, barcoProduct.getId());
         Assertions.assertEquals(1L, barcoProduct.getBarcoId());
         Assertions.assertEquals(1L, barcoProduct.getProductId());
-        Assertions.assertEquals("2024-02-16 12:00:00.0000000", barcoProduct.getCreatedAt());
-        Assertions.assertEquals("2024-02-16 12:00:00.0000000", barcoProduct.getUpdatedAt());
+        Assertions.assertEquals(timestamp, barcoProduct.getCreatedAt());
+        Assertions.assertEquals(timestamp, barcoProduct.getUpdatedAt());
     }
 
     @Test

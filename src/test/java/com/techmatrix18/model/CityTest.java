@@ -23,7 +23,7 @@ public class CityTest {
         city.setUpdatedAt(timestamp);
 
         // Test getter
-        Assertions.assertEquals("1L", city.getId());
+        Assertions.assertEquals(1L, city.getId());
         Assertions.assertEquals("Valencia", city.getTitle());
         Assertions.assertEquals("This is Valencia", city.getDescription());
         Assertions.assertEquals(timestamp, city.getCreatedAt());

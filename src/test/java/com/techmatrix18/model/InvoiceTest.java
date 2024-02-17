@@ -26,7 +26,7 @@ public class InvoiceTest {
         invoice.setUpdatedAt(timestamp);
 
         // Test getter
-        Assertions.assertEquals("1L", invoice.getId());
+        Assertions.assertEquals(1L, invoice.getId());
         Assertions.assertEquals("#001-2024-02-26", invoice.getTitle());
         Assertions.assertEquals("This is invoice", invoice.getDescription());
         Assertions.assertEquals(100.00f, invoice.getAmount());

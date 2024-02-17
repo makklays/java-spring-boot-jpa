@@ -26,7 +26,7 @@ public class BarcoTest {
         barco.setUpdatedAt(timestamp);
 
         // Test getter
-        Assertions.assertEquals("1L", barco.getId());
+        Assertions.assertEquals(1L, barco.getId());
         Assertions.assertEquals("BestBarco", barco.getTitle());
         Assertions.assertEquals("This is best and fastly Barco", barco.getDescription());
         Assertions.assertEquals(2022, barco.getYear());

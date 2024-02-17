@@ -34,8 +34,8 @@ public class UserTest {
         Assertions.assertEquals("password", user.getPassword());
         Assertions.assertEquals("This is my bio", user.getBio());
         Assertions.assertEquals(1L, user.getPositionId());
-        Assertions.assertEquals("2024-02-16 12:00:00.0000000", user.getCreatedAt());
-        Assertions.assertEquals("2024-02-16 12:00:00.0000000", user.getUpdatedAt());
+        Assertions.assertEquals(timestamp, user.getCreatedAt());
+        Assertions.assertEquals(timestamp, user.getUpdatedAt());
     }
 
     @Test

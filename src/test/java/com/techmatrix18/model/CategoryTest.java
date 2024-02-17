@@ -23,7 +23,7 @@ public class CategoryTest {
         category.setUpdatedAt(timestamp);
 
         // Test getter
-        Assertions.assertEquals("1L", category.getId());
+        Assertions.assertEquals(1L, category.getId());
         Assertions.assertEquals("Category", category.getTitle());
         Assertions.assertEquals("This is description category", category.getDescription());
         Assertions.assertEquals(timestamp, category.getCreatedAt());
