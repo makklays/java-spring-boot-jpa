@@ -49,7 +49,7 @@ public class User {
     @JoinColumn(name = "position_id", nullable = false)
     private Position position;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL) // name="user_id", referencedColumnName="userId"
     //@JoinColumn(name = "user_id", insertable = false, updatable = false)
     private List<BarcoUser> barcoUsers;
 
