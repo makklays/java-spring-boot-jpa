@@ -8,12 +8,23 @@ import org.springframework.web.bind.annotation.*;
 import javax.xml.bind.ValidationException;
 import java.util.List;
 
+/************************************
+ * Author: Alexander Kuziv
+ *  Email: makklays@gmail.com
+ *   Date: 19-02-2024
+ ***********************************/
+
 @RestController
 @RequestMapping("/api/v1/users")
 public class UserController {
 
     private UserRepository userRepository;
     private UserImpl userService;
+
+    @GetMapping(path = "/test")
+    public String getTest() throws ValidationException {
+        return "Test";
+    }
 
     @GetMapping(path = "/")
     public List<User> getUsers() throws ValidationException {
