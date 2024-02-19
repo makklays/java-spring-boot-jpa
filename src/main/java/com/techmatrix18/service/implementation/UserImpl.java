@@ -25,7 +25,11 @@ public class UserImpl implements InterfaceUser {
         List<User> list = new ArrayList<>();
         userRepository.findAll().forEach(e -> list.add(e));
 
-        return list;
+        if (list != null) {
+            return list;
+        } else {
+            return null;
+        }
     }
 
     @Override
@@ -59,8 +63,8 @@ public class UserImpl implements InterfaceUser {
 
     @Override
     public boolean deleteUser(Long userId) {
-        User usr = userRepository.getById(userId);
-        if (!usr.getEmail().isEmpty()) {
+        if (userRepository.existsById(userId)) {
+            User usr = userRepository.getById(userId);
             userRepository.delete(usr);
             return true;
         } else {

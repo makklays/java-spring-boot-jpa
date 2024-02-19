@@ -6,7 +6,10 @@ import com.techmatrix18.service.implementation.UserImpl;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.bind.ValidationException;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 /************************************
  * Author: Alexander Kuziv
@@ -28,7 +31,12 @@ public class UserController {
 
     @GetMapping(path = "/")
     public List<User> getUsers() throws ValidationException {
-        return userService.getAllUsers();
+        List<User> list = userService.getAllUsers();
+        if (list != null) {
+            return list;
+        } else {
+            return null; // ? algun json
+        }
     }
 
     @PostMapping(path = "/add")
