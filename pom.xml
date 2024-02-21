@@ -110,6 +110,15 @@
             <version>5.9.2</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- Bot -->
+        <dependency>
+            <groupId>org.telegram</groupId>
+            <artifactId>telegrambots-spring-boot-starter</artifactId>
+            <version>5.0.1</version>
+        </dependency>
+        <!-- end Bot -->
+
     </dependencies>
 
     <build>
