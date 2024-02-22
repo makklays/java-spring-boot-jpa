@@ -25,6 +25,8 @@ public class UserImpl implements InterfaceUser {
         List<User> list = new ArrayList<>();
         userRepository.findAll().forEach(e -> list.add(e));
 
+        System.out.println("== all users ===> " + list);
+
         if (list != null) {
             return list;
         } else {

@@ -1,5 +1,6 @@
 package com.techmatrix18.config;
 
+import com.mysql.cj.x.protobuf.MysqlxDatatypes;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
@@ -57,6 +58,7 @@ public class jpaConfig {
         return dataSourceBuilder.build();
     }*/
 
+    /*****
     @Bean(name = "dataSource")
     @Description("This is DataSource for MySQL")
     public DriverManagerDataSource dataSource() {
@@ -92,7 +94,7 @@ public class jpaConfig {
 
             }
         };
-    }
+    }********/
 
     /*@Bean
     public DataSource todosDataSource() {

@@ -4,6 +4,7 @@ import com.techmatrix18.model.City;
 import com.techmatrix18.model.Storehouse;
 import com.techmatrix18.repository.StorehouseRepository;
 import com.techmatrix18.service.implementation.StorehouseImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.bind.ValidationException;
@@ -19,7 +20,9 @@ import java.util.List;
 @RequestMapping("/api/v1/storehouses")
 public class StorehouseController {
 
+    @Autowired
     private StorehouseRepository storehouseRepository;
+    @Autowired
     private StorehouseImpl storehouseService;
 
     @GetMapping(path = "/test")

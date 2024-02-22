@@ -3,6 +3,7 @@ package com.techmatrix18.web.api;
 import com.techmatrix18.model.Barco;
 import com.techmatrix18.repository.BarcoRepository;
 import com.techmatrix18.service.implementation.BarcoImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.bind.ValidationException;
@@ -18,7 +19,9 @@ import java.util.List;
 @RequestMapping("/api/v1/barcos")
 public class BarcoController {
 
+    @Autowired
     private BarcoRepository barcoRepository;
+    @Autowired
     private BarcoImpl barcoService;
 
     @GetMapping(path = "/test")

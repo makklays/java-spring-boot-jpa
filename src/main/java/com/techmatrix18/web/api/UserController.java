@@ -3,6 +3,7 @@ package com.techmatrix18.web.api;
 import com.techmatrix18.model.User;
 import com.techmatrix18.repository.UserRepository;
 import com.techmatrix18.service.implementation.UserImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.bind.ValidationException;
@@ -21,7 +22,9 @@ import java.util.ListIterator;
 @RequestMapping("/api/v1/users")
 public class UserController {
 
+    @Autowired
     private UserRepository userRepository;
+    @Autowired
     private UserImpl userService;
 
     @GetMapping(path = "/test")
@@ -29,7 +32,7 @@ public class UserController {
         return "Test";
     }
 
-    @GetMapping(path = "/")
+    @GetMapping(path = "/all")
     public List<User> getUsers() throws ValidationException {
         List<User> list = userService.getAllUsers();
         if (list != null) {

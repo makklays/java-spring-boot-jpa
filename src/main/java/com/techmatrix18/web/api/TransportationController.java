@@ -3,6 +3,7 @@ package com.techmatrix18.web.api;
 import com.techmatrix18.model.Transportation;
 import com.techmatrix18.repository.TransportationRepository;
 import com.techmatrix18.service.implementation.TransportationImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.bind.ValidationException;
@@ -12,7 +13,9 @@ import java.util.List;
 @RequestMapping("/api/v1/transportations")
 public class TransportationController {
 
+    @Autowired
     private TransportationRepository transportationRepository;
+    @Autowired
     private TransportationImpl transportationService;
 
     @GetMapping(path = "/test")
