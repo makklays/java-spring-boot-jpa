@@ -23,7 +23,7 @@ public class TransportationController {
         return "Test";
     }
 
-    @GetMapping(path = "/")
+    @GetMapping(path = "/all")
     public List<Transportation> getTransportations() throws ValidationException {
         return transportationService.getAllTransportations();
     }

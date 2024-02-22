@@ -30,7 +30,7 @@ public class StorehouseController {
         return "Test";
     }
 
-    @GetMapping(path = "/")
+    @GetMapping(path = "/all")
     public List<Storehouse> getStorehouses() throws ValidationException {
         return storehouseService.getAllStorehouses();
     }

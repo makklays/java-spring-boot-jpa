@@ -23,7 +23,7 @@ public class InvoiceController {
         return "Test";
     }
 
-    @GetMapping(path = "/")
+    @GetMapping(path = "/all")
     public List<Invoice> getInvoices() throws ValidationException {
         return invoiceService.getAllInvoices();
     }

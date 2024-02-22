@@ -23,7 +23,7 @@ public class PositionController {
         return "Test";
     }
 
-    @GetMapping(path = "/")
+    @GetMapping(path = "/all")
     public List<Position> getPositions() throws ValidationException {
         return positionService.getAllPositions();
     }

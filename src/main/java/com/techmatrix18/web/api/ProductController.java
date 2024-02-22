@@ -24,7 +24,7 @@ public class ProductController {
         return "Test";
     }
 
-    @GetMapping(path = "/")
+    @GetMapping(path = "/all")
     public List<Product> getProducts() throws ValidationException {
         return productService.getAllProducts();
     }

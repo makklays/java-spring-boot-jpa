@@ -23,7 +23,7 @@ public class CityController {
         return "Test";
     }
 
-    @GetMapping(path = "/")
+    @GetMapping(path = "/all")
     public List<City> getCities() throws ValidationException {
         return cityService.getAllCities();
     }

@@ -29,7 +29,7 @@ public class BarcoController {
         return "Test";
     }
 
-    @GetMapping(path = "/")
+    @GetMapping(path = "/all")
     public List<Barco> getBarcos() throws ValidationException {
         return barcoService.getAllBarcos();
     }

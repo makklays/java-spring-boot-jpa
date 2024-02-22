@@ -24,7 +24,7 @@ public class CategoryController {
     @Autowired
     private CategoryImpl categoryService;
 
-    @GetMapping(path = "/")
+    @GetMapping(path = "/all")
     public List<Category> getCategories() throws ValidationException {
         return categoryService.getAllCategories();
     }
