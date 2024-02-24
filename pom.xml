@@ -46,6 +46,14 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+        <!-- for jps -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!-- end jps -->
+
         <!-- JavaX -->
         <dependency>
             <groupId>javax.persistence</groupId>
@@ -139,6 +147,39 @@
             <scope>test</scope>
         </dependency>
         <!-- end JUnit -->
+
+        <!-- for JSP -->
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-jasper</artifactId>
+            <!--version>9.0.44</version-->
+            <!--scope>provided</scope-->
+        </dependency>
+
+        <!--dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency-->
+        <!-- end JSP -->
+
+        <!-- for jstl tags for JSP -->
+        <!--dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency-->
+
+        <dependency>
+            <groupId>jakarta.servlet.jsp.jstl</groupId>
+            <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.web</groupId>
+            <artifactId>jakarta.servlet.jsp.jstl</artifactId>
+
+        </dependency>
+        <!-- end jstl -->
 
     </dependencies>
 

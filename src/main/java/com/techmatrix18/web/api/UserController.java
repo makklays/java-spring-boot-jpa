@@ -3,8 +3,13 @@ package com.techmatrix18.web.api;
 import com.techmatrix18.model.User;
 import com.techmatrix18.repository.UserRepository;
 import com.techmatrix18.service.implementation.UserImpl;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.xml.bind.ValidationException;
 import java.util.Collection;
@@ -31,6 +36,47 @@ public class UserController {
     public String getTest() throws ValidationException {
         return "Test";
     }
+
+    @RequestMapping(value = "/products.do", method = RequestMethod.GET)
+    public String handleRequest() {
+        return "products";
+    }
+
+    @GetMapping("/list")
+    public ModelAndView list(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mav = new ModelAndView("users-index");
+        //mav.addObject("greeting", "GeeksForGeeks Welcomes you to Spring!");
+        mav.addObject("users", userService.getAllUsers());
+        return mav;
+    }
+
+    @GetMapping(path = "/list1")
+    public String list1(Model model) {
+        model.addAttribute("users", userService.getAllUsers());
+        return "users-index";
+    }
+
+    @GetMapping(path = "/list2")
+    public ModelAndView viewUsers2() {
+        ModelAndView mav = new ModelAndView("users-index");
+        //mav.addObject("greeting", "GeeksForGeeks Welcomes you to Spring!");
+        mav.addObject("users", userService.getAllUsers());
+        return mav;
+    }
+
+    /*@PostMapping("/addBook")
+    public RedirectView addBook(@ModelAttribute("book") Book book, RedirectAttributes redirectAttributes) {
+        final RedirectView redirectView = new RedirectView("/book/addBook", true);
+        Book savedBook = bookService.addBook(book);
+        redirectAttributes.addFlashAttribute("savedBook", savedBook);
+        redirectAttributes.addFlashAttribute("addBookSuccess", true);
+        return redirectView;
+    } */
+    /*@RequestMapping(method = RequestMethod.DELETE)
+    public String deletePet(@PathVariable int ownerId, @PathVariable int petId) {
+        this.clinic.deletePet(petId);
+        return "redirect:/owners/" + ownerId;
+    }*/
 
     @GetMapping(path = "/all")
     public List<User> getUsers() throws ValidationException {
