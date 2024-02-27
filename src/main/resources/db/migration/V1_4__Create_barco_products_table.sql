@@ -9,7 +9,7 @@ CREATE TABLE `barco_products` (
  PRIMARY KEY (`id`),
  KEY `barco_id` (`barco_id`),
  KEY `product_id` (`product_id`),
- KEY `created_at` (`created_at`)
+ KEY `created_at` (`created_at`),
  KEY `updated_at` (`updated_at`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 

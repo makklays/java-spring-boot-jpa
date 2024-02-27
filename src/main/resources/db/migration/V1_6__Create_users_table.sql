@@ -17,7 +17,7 @@ CREATE TABLE `users` (
  KEY `password` (`password`),
  KEY `bio` (`bio`),
  KEY `position_id` (`position_id`),
- KEY `created_at` (`created_at`)
+ KEY `created_at` (`created_at`),
  KEY `updated_at` (`updated_at`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 

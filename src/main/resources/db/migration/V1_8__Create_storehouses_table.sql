@@ -11,7 +11,7 @@ CREATE TABLE `storehouse` (
  KEY `city_id` (`city_id`),
  KEY `title` (`title`),
  KEY `description` (`description`),
- KEY `created_at` (`created_at`)
+ KEY `created_at` (`created_at`),
  KEY `updated_at` (`updated_at`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 

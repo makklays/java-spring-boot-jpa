@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS positions;
+DROP TABLE IF EXISTS categories;
 
-CREATE TABLE `positions` (
+CREATE TABLE `categories` (
    `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
    `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
    `description` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
@@ -9,7 +9,7 @@ CREATE TABLE `positions` (
  PRIMARY KEY (`id`),
  KEY `title` (`title`),
  KEY `description` (`description`),
- KEY `created_at` (`created_at`)
+ KEY `created_at` (`created_at`),
  KEY `updated_at` (`updated_at`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 

@@ -1,5 +1,5 @@
 
-ALTER TABLE `positions` DELETE COLUMN `code` ;
+ALTER TABLE `positions` DROP COLUMN `code`;
 ALTER TABLE `positions` ADD COLUMN `code_pos` varchar(25) NULL AFTER `title`;
 
 # Example RENAME column
