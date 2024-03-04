@@ -4,7 +4,7 @@
 Crear un almacén virtual de mercancías.
 Crear la programa con varios entidades y las relaciónes entre ellas.
 
-Entidades: Usuarios, Ciudades, Almacén, Categorías, Productos, Facturas.
+Entidades: Usuarios, Puestos, Ciudades, Almacén, Barcos, Categorías, Productos, Transportes, Facturas.
 
 Utilizar: JAVA, JPA, Hibernate, Logback, Spring Boot, Spring Rest, H2, MySQL, Spring Data, Spring Security.
 
@@ -23,7 +23,7 @@ PSS: Without 'batch' as 'пакет';
 
 Create a virtual warehouse of goods.
 Create the program with several Entities and relations between them.
-Entities: Users, Cities, Stocks, Categories, Products, Invoices.
+Entities: Users, Positions, Cities, Store houses, Barcos, Categories, Products, Transportations, Invoices.
 
 Use: JAVA, JPA, Hibernate, Logback, Spring Boot, Spring Rest, H2, MySQL, Spring Data, Spring Security.
 
@@ -40,8 +40,8 @@ PS: This task create Alexander Kuziv for company TechMatrix18.com
 
 1. Añadi `<dependiencies>` para MySQL, H2, Spring, Hibernate, Logback.
 2. Crea la connección a las base de datos MySQL, H2.
-3. Crea las Entidades: User, City, Stock, Category, Product, Invoice.
-4. Crea los repositorios: UserRepository, CityRepository, StockRepository, CategoryRepository, ProductRepository, InvoiceRepository.
+3. Crea las Entidades: Usuarios, Puestos, Ciudades, Almacén, Barcos, Categorías, Productos, Transportes, Facturas y las entidades con relaciónes entre ellas.
+4. Crea los repositorios: UserRepository, CityRepository, StockRepository, CategoryRepository, ProductRepository, InvoiceRepository y otros repositorios.
 5. Crea los Tests de integracion (para Entidades, Repositories).
 6. Crea los Controladores con Entidades y Repositories.
 7. Crea los Tests de integracion (para Controladores).
