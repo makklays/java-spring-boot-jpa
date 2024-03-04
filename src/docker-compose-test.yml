@@ -1,0 +1,26 @@
+version: '3.1'
+
+services:
+  my-jpa-db:
+    image: mysql:5.7
+    restart: always
+    container_name: dev-jpa-db
+    environment:
+      MYSQL_DATABASE: 'dev_jpa_db'
+      # So you don't have to use root, but you can if you like
+      MYSQL_USER: 'dev_jpa_db_user'
+      # You can use whatever password you like
+      MYSQL_PASSWORD: 'dev_jpa_db_password'
+      # Password for root access
+      MYSQL_ROOT_PASSWORD: 'root'
+    ports:
+      - '3306:3306'
+    expose:
+      # Opens port 3306 on the container
+      - '3306'
+
+# command for start:
+#    docker-compose -f docker-compose-test.yml up -d
+# fo logs:
+#    docker-compose -f docker-compose-test.yml logs
+
