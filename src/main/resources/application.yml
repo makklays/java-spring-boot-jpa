@@ -1,0 +1,44 @@
+
+spring:
+  datasource:
+    # MySQL
+    mysql:
+      url: jdbc:mysql://localhost:3306/currency_rest
+      username: admin
+      password: admin
+      driver-class-name: com.mysql.jdbc.Driver
+    # H2 DB
+    h2:
+      url: jdbc:h2:file:C:/temp/test
+      username: admin
+      password: admin
+      driver-class-name: org.h2.Driver
+    # Oracle
+    oracle:
+      url: jdbc:oracle:thin:@localhost:1521:orcl
+      username: dbuser
+      password: dbpass
+      driver-class-name: oracle.jdbc.OracleDriver
+    # SQL Server
+    mssql:
+      url: jdbc:sqlserver://localhost;databaseName=springbootdb
+      username: dbuser
+      password: dbpass
+      driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    hikari:
+      connection-timeout: 30000
+      maximum-pool-size: 10
+      minimum-idle: 5
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      pool-name: collection-pool
+    tomcat:
+      validation-query: SELECT 1
+      validation-interval: 30000
+      test-on-borrow: true
+      remove-abandoned: true
+      remove-abandoned-timeout: 480
+      test-while-idle: true
+      time-between-eviction-runs-millis: 60000
+      log-validation-errors: true
+      log-abandoned: true
