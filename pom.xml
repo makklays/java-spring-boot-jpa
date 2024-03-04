@@ -147,6 +147,13 @@
             <scope>test</scope>
         </dependency>
         <!-- end JUnit -->
+      
+        <!-- FlyWay -->
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-mysql</artifactId>
+        </dependency>
+        <!-- end FlyWay -->
 
         <!-- for JSP -->
         <dependency>
@@ -172,20 +179,18 @@
         <dependency>
             <groupId>jakarta.servlet.jsp.jstl</groupId>
             <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
-
         </dependency>
         <dependency>
             <groupId>org.glassfish.web</groupId>
             <artifactId>jakarta.servlet.jsp.jstl</artifactId>
-
         </dependency>
         <!-- end jstl -->
 
     </dependencies>
 
     <build>
-        <!--plugins>
-            <plugin>
+        <plugins>
+            <!--plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
@@ -199,6 +204,16 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M6</version>
+            </plugin-->
+
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <configuration>
+                    <user>admin</user>
+                    <password>admin</password>
+                    <url>jdbc:mysql://localhost:3306/storehouse_db</url>
+                </configuration>
             </plugin>
         </plugins-->
     </build>
