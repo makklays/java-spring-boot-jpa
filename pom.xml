@@ -215,7 +215,7 @@
                     <url>jdbc:mysql://localhost:3306/storehouse_db</url>
                 </configuration>
             </plugin>
-        </plugins-->
+        </plugins>
     </build>
 </project>
 
