@@ -105,24 +105,32 @@ public class UserController {
     }
 
     @PatchMapping(path = "/update")
-    public @ResponseBody String updateUser (@RequestParam Long userId, @RequestParam String firstname, @RequestParam String lastname, @RequestParam String email, @RequestParam String password, @RequestParam Long positionId) {
-        User u = userService.getUserById(userId);
+    public @ResponseBody String updateUser (@RequestParam String userId, @RequestParam String firstname, @RequestParam String lastname, @RequestParam String email, @RequestParam String password, @RequestParam String positionId) {
+        Long longUserId = Long.parseLong(userId);
+        User u = userService.getUserById(longUserId);
         if (!u.getEmail().isEmpty()) {
             u.setFirstname(firstname);
             u.setLastname(lastname);
             u.setEmail(email);
             u.setPassword(password);
-            u.setPositionId(positionId);
+            Long longPositionId = Long.parseLong(positionId);
+            u.setPositionId(longPositionId);
             userService.updateUser(u);
         }
         return "Updated";
     }
 
-    @DeleteMapping(path = "/delete/{userId:\\\\d+}")
-    public @ResponseBody String deleteUser (@PathVariable Long userId) {
-        User u = userService.getUserById(userId);
-        if (!u.getEmail().isEmpty()) {
-            userService.deleteUser(userId);
+    @DeleteMapping(path = "/delete/{userId}")
+    public @ResponseBody String deleteUser (@PathVariable String userId) {
+        Long longUserId = Long.parseLong(userId);
+        User u = userService.getUserById(longUserId);
+
+        System.out.println("userId =====> " + u.getId());
+
+        if (u.getId() != null) {
+            userService.deleteUser(longUserId);
+        } else {
+            return "Hasn't userId = " + userId;
         }
         return "Deleted";
     }
