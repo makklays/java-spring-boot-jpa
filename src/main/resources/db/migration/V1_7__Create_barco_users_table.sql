@@ -1,9 +1,13 @@
+# DROP SEQUENCE IF EXISTS `barco_users_seq`;
+# CREATE SEQUENCE `barco_users_seq`;
+
 DROP TABLE IF EXISTS `barco_users`;
 
 CREATE TABLE `barco_users` (
-   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-   `barco_id` int(10) NOT NULL,
-   `user_id` int(10) NOT NULL,
+   #`id` BIGINT(21) DEFAULT nextval(`barco_users_seq`),
+   `id` bigint(21) unsigned NOT NULL AUTO_INCREMENT,
+   `barco_id` bigint(10) NOT NULL,
+   `user_id` bigint(10) NOT NULL,
    `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
    `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
  PRIMARY KEY (`id`),

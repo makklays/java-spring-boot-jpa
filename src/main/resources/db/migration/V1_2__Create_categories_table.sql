@@ -1,7 +1,11 @@
+# DROP SEQUENCE IF EXISTS `categories_seq`;
+# CREATE SEQUENCE `categories_seq`;
+
 DROP TABLE IF EXISTS categories;
 
 CREATE TABLE `categories` (
-   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+   #`id` BIGINT(21) DEFAULT nextval(`categories_seq`),
+   `id` bigint(21) unsigned NOT NULL AUTO_INCREMENT,
    `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
    `description` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
    `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,

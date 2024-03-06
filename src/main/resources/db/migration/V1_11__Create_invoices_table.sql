@@ -1,10 +1,14 @@
+# DROP SEQUENCE IF EXISTS `invoices_seq`;
+# CREATE SEQUENCE `invoices_seq`;
+
 DROP TABLE IF EXISTS invoices;
 
 CREATE TABLE `invoices` (
-   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+   #`id` BIGINT(21) DEFAULT nextval(`invoices_seq`),
+   `id` bigint(21) unsigned NOT NULL AUTO_INCREMENT,
    `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
    `description` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
-   `transportation_id` int(10) NOT NULL,
+   `transportation_id` bigint(10) NOT NULL,
    `amount` float(10,2) NOT NULL,
    `status` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
    `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,

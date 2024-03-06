@@ -1,7 +1,11 @@
+# DROP SEQUENCE IF EXISTS `barcos_seq`;
+# CREATE SEQUENCE `barcos_seq`;
+
 DROP TABLE IF EXISTS barcos;
 
 CREATE TABLE `barcos` (
-   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+   #`id` BIGINT(21) DEFAULT nextval(`barcos_seq`),
+   `id` bigint(21) unsigned NOT NULL AUTO_INCREMENT,
    `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
    `description` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
    `year` int(10) NULL,
