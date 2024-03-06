@@ -16,15 +16,16 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Table(name = "users")
 public class User {
     @Id
-    @SequenceGenerator(
-            name = "user_sequence",
-            sequenceName = "user_sequence",
+    /*@SequenceGenerator(
+            name = "users_seq",
+            sequenceName = "users_seq",
             allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "user_sequence"
-    )
+            generator = "users_seq"
+    )*/
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
     @Column(name = "firstname", length = 255)
@@ -42,12 +43,12 @@ public class User {
     @Column(name = "bio", length = 500)
     private String bio;
 
-    @Column(name = "position_id", insertable=false, updatable=false)
+    @Column(name = "position_id", insertable=true, updatable=true)
     private Long positionId;
 
-    @ManyToOne
+    /*@ManyToOne
     @JoinColumn(name = "position_id", nullable = false)
-    private Position position;
+    private Position position;*/
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL) // name="user_id", referencedColumnName="userId"
     //@JoinColumn(name = "user_id", insertable = false, updatable = false)
@@ -64,7 +65,7 @@ public class User {
     private Timestamp updatedAt;
 
     public User() {}
-    public User(String firstname, String lastname, String email, Integer positionId) {}
+    public User(String firstname, String lastname, String email, String password, Long positionId) {}
 
     public Long getId() {
         return Id;

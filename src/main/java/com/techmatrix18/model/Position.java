@@ -13,7 +13,7 @@ import java.util.Objects;
 @Table(name = "positions")
 public class Position {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "title", length = 255)
@@ -22,9 +22,9 @@ public class Position {
     @Column(name = "description", length = 500)
     private String description;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "position", cascade = CascadeType.ALL)
+    /*@OneToMany(fetch = FetchType.LAZY, mappedBy = "position", cascade = CascadeType.ALL)
     //@JoinColumn(name = "position_id", insertable = false, updatable = false)
-    private List<User> users;
+    private List<User> users;*/
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)

@@ -89,23 +89,29 @@ public class UserController {
     }
 
     @PostMapping(path = "/add")
-    public @ResponseBody String addUser (@RequestParam String firstname, @RequestParam String lastname, @RequestParam String email, @RequestParam Long positionId) {
+    public @ResponseBody String addUser (@RequestParam String firstname, @RequestParam String lastname, @RequestParam String email, @RequestParam String password, @RequestParam String positionId) {
         User u = new User();
         u.setFirstname(firstname);
         u.setLastname(lastname);
         u.setEmail(email);
-        u.setPositionId(positionId);
+        u.setPassword(password);
+        Long longPositionId = Long.parseLong(positionId);
+        u.setPositionId(longPositionId);
+
+        System.out.println(u.toString());
+
         userService.addUser(u);
         return "Saved";
     }
 
     @PatchMapping(path = "/update")
-    public @ResponseBody String updateUser (@RequestParam Long userId, @RequestParam String firstname, @RequestParam String lastname, @RequestParam String email, @RequestParam Long positionId) {
+    public @ResponseBody String updateUser (@RequestParam Long userId, @RequestParam String firstname, @RequestParam String lastname, @RequestParam String email, @RequestParam String password, @RequestParam Long positionId) {
         User u = userService.getUserById(userId);
         if (!u.getEmail().isEmpty()) {
             u.setFirstname(firstname);
             u.setLastname(lastname);
             u.setEmail(email);
+            u.setPassword(password);
             u.setPositionId(positionId);
             userService.updateUser(u);
         }

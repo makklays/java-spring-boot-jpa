@@ -12,20 +12,29 @@ import java.util.Objects;
 @Table(name = "barco_products")
 public class BarcoProduct {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    /*@SequenceGenerator(
+        name = "barco_product_seq",
+        sequenceName = "barco_product_seq",
+        allocationSize = 1
+    )
+    @GeneratedValue(
+        strategy = GenerationType.SEQUENCE,
+        generator = "barco_product_seq"
+    )*/
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "barco_id", insertable=false, updatable=false)
     private Long barcoId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     //@JoinColumn(name="barco_id")
     private Barco barco;
 
     @Column(name = "product_id", insertable=false, updatable=false)
     private Long productId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     //@JoinColumn(name="product_id")
     private Product product;
 
