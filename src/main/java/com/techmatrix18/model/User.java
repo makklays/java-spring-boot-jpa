@@ -43,12 +43,12 @@ public class User {
     @Column(name = "bio", length = 500)
     private String bio;
 
-    @Column(name = "position_id", insertable=true, updatable=true)
-    private Long positionId;
+    /*@Column(name = "position_id", insertable=true, updatable=true)
+    private Long positionId;*/
 
-    /*@ManyToOne
-    @JoinColumn(name = "position_id", nullable = false)
-    private Position position;*/
+    @ManyToOne
+    @JoinColumn(name = "position_id") //, nullable = false)
+    private Position position;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL) // name="user_id", referencedColumnName="userId"
     //@JoinColumn(name = "user_id", insertable = false, updatable = false)
@@ -115,12 +115,12 @@ public class User {
         this.bio = bio;
     }
 
-    public Long getPositionId() {
-        return positionId;
+    public Position getPosition() {
+        return position;
     }
 
-    public void setPositionId(Long positionId) {
-        this.positionId = positionId;
+    public void setPosition(Position position) {
+        this.position = position;
     }
 
     public Timestamp getCreatedAt() {
@@ -143,12 +143,12 @@ public class User {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof User user)) return false;
-        return getId().equals(user.getId()) && getFirstname().equals(user.getFirstname()) && getLastname().equals(user.getLastname()) && getEmail().equals(user.getEmail()) && getPassword().equals(user.getPassword()) && getBio().equals(user.getBio()) && getPositionId().equals(user.getPositionId()) && getCreatedAt().equals(user.getCreatedAt()) && getUpdatedAt().equals(user.getUpdatedAt());
+        return getId().equals(user.getId()) && getFirstname().equals(user.getFirstname()) && getLastname().equals(user.getLastname()) && getEmail().equals(user.getEmail()) && getPassword().equals(user.getPassword()) && getBio().equals(user.getBio()) && getPosition().equals(user.getPosition()) && getCreatedAt().equals(user.getCreatedAt()) && getUpdatedAt().equals(user.getUpdatedAt());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getFirstname(), getLastname(), getEmail(), getPassword(), getBio(), getPositionId(), getCreatedAt(), getUpdatedAt());
+        return Objects.hash(getId(), getFirstname(), getLastname(), getEmail(), getPassword(), getBio(), getPosition(), getCreatedAt(), getUpdatedAt());
     }
 
     @Override
@@ -160,7 +160,7 @@ public class User {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", bio='" + bio + '\'' +
-                ", positionId=" + positionId +
+                ", position=" + position +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';

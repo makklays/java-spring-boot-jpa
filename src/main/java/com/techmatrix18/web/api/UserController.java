@@ -95,8 +95,8 @@ public class UserController {
         u.setLastname(lastname);
         u.setEmail(email);
         u.setPassword(password);
-        Long longPositionId = Long.parseLong(positionId);
-        u.setPositionId(longPositionId);
+        //Long longPositionId = Long.parseLong(positionId);
+        //u.setPositionId(longPositionId);
 
         System.out.println(u.toString());
 
@@ -113,8 +113,8 @@ public class UserController {
             u.setLastname(lastname);
             u.setEmail(email);
             u.setPassword(password);
-            Long longPositionId = Long.parseLong(positionId);
-            u.setPositionId(longPositionId);
+            //Long longPositionId = Long.parseLong(positionId);
+            //u.setPositionId(longPositionId);
             userService.updateUser(u);
         }
         return "Updated";

@@ -22,7 +22,7 @@ public class UserTest {
         user.setEmail("f.last@hotmail.com");
         user.setPassword("password");
         user.setBio("This is my bio");
-        user.setPositionId(1L);
+        //user.setPositionId(1L);
         user.setCreatedAt(timestamp);
         user.setUpdatedAt(timestamp);
 
@@ -33,7 +33,7 @@ public class UserTest {
         Assertions.assertEquals("f.last@hotmail.com", user.getEmail());
         Assertions.assertEquals("password", user.getPassword());
         Assertions.assertEquals("This is my bio", user.getBio());
-        Assertions.assertEquals(1L, user.getPositionId());
+        //Assertions.assertEquals(1L, user.getPositionId());
         Assertions.assertEquals(timestamp, user.getCreatedAt());
         Assertions.assertEquals(timestamp, user.getUpdatedAt());
     }
@@ -47,7 +47,7 @@ public class UserTest {
         user1.setEmail("f.last@hotmail.com");
         user1.setPassword("password");
         user1.setBio("This is my bio");
-        user1.setPositionId(1L);
+        //user1.setPositionId(1L);
         user1.setCreatedAt(timestamp);
         user1.setUpdatedAt(timestamp);
 
@@ -58,7 +58,7 @@ public class UserTest {
         user2.setEmail("f.last@hotmail.com");
         user2.setPassword("password");
         user2.setBio("This is my bio");
-        user2.setPositionId(1L);
+        //user2.setPositionId(1L);
         user2.setCreatedAt(timestamp);
         user2.setUpdatedAt(timestamp);
 
@@ -69,7 +69,7 @@ public class UserTest {
         user3.setEmail("name.surname@hot.com");
         user3.setPassword("2222222");
         user3.setBio("This is your bio");
-        user3.setPositionId(2L);
+       // user3.setPositionId(2L);
         user3.setCreatedAt(timestamp);
         user3.setUpdatedAt(timestamp);
 
@@ -91,7 +91,7 @@ public class UserTest {
         user.setEmail("f.last@hotmail.com");
         user.setPassword("password");
         user.setBio("This is my bio");
-        user.setPositionId(1L);
+        //user.setPositionId(1L);
         user.setCreatedAt(timestamp);
         user.setUpdatedAt(timestamp);
 
