@@ -6,8 +6,10 @@ import org.hibernate.annotations.UpdateTimestamp;
 //import javax.persistence.*;
 import jakarta.persistence.*;
 import java.sql.Timestamp;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "positions")
@@ -22,9 +24,9 @@ public class Position {
     @Column(name = "description", length = 500)
     private String description;
 
-    /*@OneToMany(fetch = FetchType.LAZY, mappedBy = "position", cascade = CascadeType.ALL)
-    //@JoinColumn(name = "position_id", insertable = false, updatable = false)
-    private List<User> users;*/
+    @OneToMany(cascade = CascadeType.ALL) // fetch = FetchType.LAZY, mappedBy = "position",
+    @JoinColumn(name = "position_id") // , insertable = false, updatable = false
+    private Set<User> users; // = new HashSet<User>();
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
