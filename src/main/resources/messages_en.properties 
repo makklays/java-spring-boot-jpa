@@ -1,0 +1,32 @@
+
+app.title= Spring Boot + Thymeleaf (EN)
+
+locale.language= Eng
+locale.country= Espana
+
+app.create-user= Create User
+app.user-details= User Details
+
+user.id= Id
+user.name= Name
+user.gender= Gender
+user.married= Married
+user.profile= Profile
+
+user.firstname= Firstname
+user.lastname= Lastname
+user.email= Email
+user.password= Password
+user.position= Position
+
+user.gender.male= Male
+user.gender.female= Female
+
+user.form.submit= Submit
+user.form.reset= Reset
+user.add-more-users= Add More Users
+
+error.user.id= Id must be between 3 to 10 characters.
+error.user.name= User name must be between 5 to 20 characters.
+error.user.gender= Select  gender.
+

@@ -53,6 +53,9 @@ public class Barco {
     @Column(name = "updated_at")
     private Timestamp updatedAt;
 
+    public Barco() {}
+    public Barco(String title, String description, Integer year, Integer weight, Integer speedometer, Timestamp createdAt, Timestamp updatedAt) {}
+
     public Long getId() {
         return id;
     }
