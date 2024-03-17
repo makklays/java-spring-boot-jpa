@@ -5,17 +5,18 @@ import com.techmatrix18.repository.UserRepository;
 import com.techmatrix18.service.implementation.UserImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.xml.bind.ValidationException;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
 /************************************
  * Author: Alexander Kuziv
@@ -26,6 +27,9 @@ import java.util.ListIterator;
 @RestController
 @RequestMapping("/api/v1/users")
 public class UserController {
+
+    // log
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private UserRepository userRepository;
@@ -62,6 +66,51 @@ public class UserController {
         //mav.addObject("greeting", "GeeksForGeeks Welcomes you to Spring!");
         mav.addObject("users", userService.getAllUsers());
         return mav;
+    }
+
+    // ---- thymeleaf example -------
+    @GetMapping("/create-user")
+    public ModelAndView createUserView() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("user-creation");
+        mav.addObject("user", new User());
+        mav.addObject("allProfiles", getProfiles());
+        return mav;
+    }
+    @PostMapping("/create-user")
+    public ModelAndView createUser(@Valid User user, BindingResult result) {
+        ModelAndView mav = new ModelAndView();
+        if(result.hasErrors()) {
+            logger.info("Validation errors while submitting form.");
+            mav.setViewName("user-creation");
+            mav.addObject("user", user);
+            mav.addObject("allProfiles", getProfiles());
+            return mav;
+        }
+        userService.addUser(user);
+        mav.addObject("allUsers", userService.getAllUsers());
+        mav.setViewName("user-info");
+        logger.info("Form submitted successfully.");
+        return mav;
+    }
+    private List<String> getProfiles() {
+        List<String> list = new ArrayList<>();
+        list.add("Developer");
+        list.add("Manager");
+        list.add("Director");
+        return list;
+    }
+    // ----------- end --------------
+
+    @GetMapping("/example")
+    public String toExample(Model model) {
+        model.addAttribute("example", "Garry");
+        return "/users/example";
+    }
+    @PostMapping("/example/add")
+    public String createUser(@RequestParam String firstname, @RequestParam String lastname) {
+        System.out.printf("First name: %s; Last name: %s \n", firstname, lastname);
+        return "redirect:/users";
     }
 
     /*@PostMapping("/addBook")

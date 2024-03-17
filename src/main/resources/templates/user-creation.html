@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{app.title}"> Title </title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+</head>
+<body>
+    <div class="container" style="background-color:#e7e7e7;">
+        <h1 th:text="#{app.create-user}">Create</h1>
+        <form action="#" th:action="@{/api/v1/users/create-user}" th:object="${user}" method="POST">
+            <table>
+                <tr><td th:text="#{user.id}"/></td>
+                    <td>
+                        <input type="text" th:field="*{Id}" />
+                        <label th:if="${#fields.hasErrors('Id')}" th:text="#{error.user.id}" th:class="'error'">Id Error</label>
+                    </td>
+                </tr>
+                <tr><td th:text="#{user.firstname}"></td>
+                    <td>
+                        <input type="text" th:field="*{firstname}" />
+                        <label th:if="${#fields.hasErrors('firstname')}" th:text="#{error.user.firstname}" th:class="'error'">Firstname Error</label>
+                    </td>
+                </tr>
+                <tr><td th:text="#{user.email}"></td>
+                    <td>
+                        <input type="text" th:field="*{email}" />
+                        <label th:if="${#fields.hasErrors('email')}" th:text="#{error.user.email}" th:class="'error'">Email Error</label>
+                    </td>
+                </tr>
+                <tr><td th:text="#{user.password}"></td>
+                    <td>
+                        <input type="text" th:field="*{password}" />
+                        <label th:if="${#fields.hasErrors('password')}" th:text="#{error.user.password}" th:class="'error'">Password Error</label>
+                    </td>
+                </tr>
+                <tr><td th:text="#{user.position}"></td>
+                    <td>
+                        <input type="text" th:field="*{position}" />
+                        <label th:if="${#fields.hasErrors('position')}" th:text="#{error.user.position_id}" th:class="'error'">Position Error</label>
+                    </td>
+                </tr>
+                <!--tr><td th:text="#{user.gender}"></td>
+                    <td>
+                        <input type="radio" th:field="*{gender}" value="Male"/><label th:text="#{user.gender.male}">M</label>
+                        <input type="radio" th:field="*{gender}" value="Female"/><label th:text="#{user.gender.female}">F</label>
+                        <label th:if="${#fields.hasErrors('gender')}" th:text="#{error.user.gender}" th:class="'error'">Gender Error</label>
+                    </td>
+                </tr>
+                <tr><td th:text="#{user.married}+ '?'"></td>
+                    <td>
+                        <input type="checkbox" th:field="*{married}" />
+                    </td>
+                </tr-->
+                <!--tr><td th:text="#{user.profile}"></td>
+                    <td>
+                        <select th:field="*{profile}">
+                            <option th:each="profile : ${allProfiles}" th:value="${profile}" th:text="${profile}">Profile</option>
+                        </select>
+                    </td>
+                </tr-->
+                <tr><td colspan="2">
+                    <input type="submit" th:value="#{user.form.submit}"/>
+                    <input type="reset" th:value="#{user.form.reset}"/>
+                </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+</html>
+
