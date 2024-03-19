@@ -6,6 +6,7 @@ locale.country= Espana
 
 app.create-user= Create User
 app.user-details= User Details
+app.list-users= List of Users
 
 user.id= Id
 user.name= Name
@@ -19,14 +20,19 @@ user.email= Email
 user.password= Password
 user.position= Position
 
+user.position.title= Position
+
 user.gender.male= Male
 user.gender.female= Female
 
 user.form.submit= Submit
-user.form.reset= Reset
+user.form.reset= Cancel
 user.add-more-users= Add More Users
 
 error.user.id= Id must be between 3 to 10 characters.
 error.user.name= User name must be between 5 to 20 characters.
 error.user.gender= Select  gender.
+
+page.actions= Actions
+page.back= Back
 

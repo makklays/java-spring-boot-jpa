@@ -2,6 +2,7 @@ package com.techmatrix18.web.api;
 
 import com.techmatrix18.model.User;
 import com.techmatrix18.repository.UserRepository;
+import com.techmatrix18.service.implementation.PositionImpl;
 import com.techmatrix18.service.implementation.UserImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -35,6 +36,8 @@ public class UserController {
     private UserRepository userRepository;
     @Autowired
     private UserImpl userService;
+    @Autowired
+    private PositionImpl positionService;
 
     @GetMapping(path = "/test")
     public String getTest() throws ValidationException {
@@ -69,36 +72,36 @@ public class UserController {
     }
 
     // ---- thymeleaf example -------
-    @GetMapping("/create-user")
-    public ModelAndView createUserView() {
+    @GetMapping("/web-user-list")
+    public ModelAndView listUserView() {
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("user-creation");
-        mav.addObject("user", new User());
-        mav.addObject("allProfiles", getProfiles());
+        mav.setViewName("user/list");
+        mav.addObject("users", userService.getAllUsers());
         return mav;
     }
-    @PostMapping("/create-user")
+    @GetMapping("/web-user-add")
+    public ModelAndView createUserView() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("user/add");
+        mav.addObject("user", new User());
+        mav.addObject("positions", positionService.getAllPositions());
+        return mav;
+    }
+    @PostMapping("/web-user-add")
     public ModelAndView createUser(@Valid User user, BindingResult result) {
         ModelAndView mav = new ModelAndView();
         if(result.hasErrors()) {
             logger.info("Validation errors while submitting form.");
-            mav.setViewName("user-creation");
+            mav.setViewName("user/add");
             mav.addObject("user", user);
-            mav.addObject("allProfiles", getProfiles());
+            mav.addObject("positions", positionService.getAllPositions());
             return mav;
         }
         userService.addUser(user);
-        mav.addObject("allUsers", userService.getAllUsers());
-        mav.setViewName("user-info");
+        mav.addObject("users", userService.getAllUsers());
+        mav.setViewName("user/list");
         logger.info("Form submitted successfully.");
         return mav;
-    }
-    private List<String> getProfiles() {
-        List<String> list = new ArrayList<>();
-        list.add("Developer");
-        list.add("Manager");
-        list.add("Director");
-        return list;
     }
     // ----------- end --------------
 

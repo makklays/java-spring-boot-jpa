@@ -5,34 +5,53 @@
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
 </head>
 <body>
-    <div class="container" style="background-color:#e7e7e7;">
-        <h1 th:text="#{api/v1/users/web-user-add}">Details</h1>
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-6">
+                <h1 th:text="#{app.list-users}">List of users</h1>
+            </div>
+            <div class="col-md-6" style="text-align:right;">
+                <a href="#" th:href="@{/api/v1/users/web-user-add}" th:text="#{user.add-more-users}" class="btn btn-primary"> Add User</a>
+            </div>
+        </div>
 
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a th:href="@{/api/v1/user-web-info}">Home</a></li>
+                <li class="breadcrumb-item"><a th:href="@{/api/v1/users/web-user-list}">Home</a></li>
                 <li class="breadcrumb-item active" aria-current="page">List of users</li>
             </ol>
         </nav>
 
-        <table>
-            <tr>
-                <th th:text="#{user.id}"/></th>
-                <th th:text="#{user.firstname}"></th>
-                <!--th th:text="#{user.gender}"></th>
-                <th th:text="#{user.married}+ '?'"></th>
-                <th th:text="#{user.profile}"></th-->
-            </tr>
-            <tr th:each="user : ${allUsers}">
-                <td th:text="${user.Id}">Id</td>
-                <td th:text="${user.firstname}">Title</td>
-                <!--td th:text="${user.gender}">Gender</td>
-                <td th:text="${user.married}">Married</td>
-                <td th:text="${user.profile}">Profile</td-->
-            </tr>
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th th:text="#{user.id}"/></th>
+                    <th th:text="#{user.firstname}"></th>
+                    <th th:text="#{user.lastname}"></th>
+                    <th th:text="#{user.email}"></th>
+                    <th th:text="#{user.position.title}"></th>
+                    <th th:text="#{page.actions}"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="user : ${users}">
+                    <td th:text="${user.Id}">Id</td>
+                    <td th:text="${user.firstname}">Firstname</td>
+                    <td th:text="${user.lastname}">Lastname</td>
+                    <td th:text="${user.email}">E-mail</td>
+                    <td th:text="${user.position.title}">Position</td>
+                    <td>
+                        <a href="#" th:href="@{/api/v1/users/web-user-view}">view</a> |
+                        <a href="#" th:href="@{/api/v1/users/web-user-edit}">edit</a> |
+                        <a href="#" th:href="@{/api/v1/users/web-user-delete}">delete</a>
+                    </td>
+                </tr>
+            </tbody>
         </table>
 
-        <a href="#" th:href="@{/api/v1/users/web-user-add}" th:text="#{user.add-more-users}">Add User</a>
+        <br/><br/>
+
     </div>
 </body>
 </html>
