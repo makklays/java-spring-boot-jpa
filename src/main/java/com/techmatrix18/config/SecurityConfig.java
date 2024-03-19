@@ -25,12 +25,12 @@ public class SecurityConfig extends WebSecurityConfiguration {
     @Bean
     public InMemoryUserDetailsManager userDetailsService() {
         UserDetails user = User.withUsername("user")
-                .password(passwordEncoder().encode("user"))
+                .password("user") // passwordEncoder().encode("user")
                 .roles("USER")
                 //.authorities(Role.USER.getAuthorities())
                 .build();
         UserDetails admin = User.withUsername("admin")
-                .password(passwordEncoder().encode("admin"))
+                .password("admin") // passwordEncoder().encode("admin")
                 .roles("ADMIN")
                 //.authorities(Role.ADMIN.getAuthorities())
                 .build();
@@ -42,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfiguration {
 
         http
                 .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/vertretungsplan").hasAnyRole("SCHUELER", "LEHRER", "VERWALTUNG")
+                        .requestMatchers("/api/v1/**").hasAnyRole("USER", "ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form

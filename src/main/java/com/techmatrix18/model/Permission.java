@@ -1,8 +1,8 @@
 package com.techmatrix18.model;
 
 public enum Permission {
-    DEVELOPERS_READ("developers:read"),
-    DEVELOPERS_WRITE("developers:write");
+    USER_READ("user:read"),
+    USER_WRITE("user:write");
 
     private final String permission;
 
