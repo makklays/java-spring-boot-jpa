@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.data.domain.Page;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -72,6 +73,10 @@ public class UserController {
     }
 
     // ---- thymeleaf example -------
+    @GetMapping("/web-user-list-paging")
+    public ModelAndView listUserViewPaging() {
+        return findPaginated(1);
+    }
     @GetMapping("/web-user-list")
     public ModelAndView listUserView() {
         ModelAndView mav = new ModelAndView();
@@ -101,6 +106,28 @@ public class UserController {
         mav.addObject("users", userService.getAllUsers());
         mav.setViewName("user/list");
         logger.info("Form submitted successfully.");
+        return mav;
+    }
+    @GetMapping("/web-user-list-paging/page/{pageNo}")
+    public ModelAndView findPaginated(@PathVariable(value = "pageNo") int pageNo) {
+        int pageSize = 3;
+
+        Page <User> page = userService.findPaginated(pageNo, pageSize);
+        List <User> listUsers = page.getContent();
+
+        /*model.addAttribute("currentPage", pageNo);
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("totalItems", page.getTotalElements());
+        model.addAttribute("listEmployees", listEmployees);
+        return "index";*/
+
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("user/list");
+        //mav.addObject("users", userService.getAllUsers());
+        mav.addObject("currentPage", pageNo);
+        mav.addObject("totalPages", page.getTotalPages());
+        mav.addObject("totalItems", page.getTotalElements());
+        mav.addObject("users", listUsers);
         return mav;
     }
     // ----------- end --------------
