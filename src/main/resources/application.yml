@@ -1,5 +1,9 @@
 
 spring:
+  security:
+    user:
+      name: admin
+      password: admin
   datasource:
     # MySQL
     mysql:
