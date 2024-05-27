@@ -1,15 +1,12 @@
 package com.techmatrix18.config;
 
-import com.techmatrix18.model.Permission;
-import com.techmatrix18.model.Role;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
-import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
+import org.springframework.security.config.annotation.web.configurers.AbstractAuthenticationFilterConfigurer;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -23,7 +20,28 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig extends WebSecurityConfiguration {
 
     @Bean
-    public InMemoryUserDetailsManager userDetailsService() {
+    public UserDetailsService userDetailsService(PasswordEncoder encoder) {
+        UserDetails admin = User.builder().username("admin").password(encoder.encode("admin")).roles("ADMIN").build();
+        UserDetails user = User.builder().username("user").password(encoder.encode("user")).roles("USER").build();
+        UserDetails alex41 = User.builder().username("alex41").password(encoder.encode("alex41")).roles("ADMIN", "USER").build();
+
+        //UserDetails admin = User.builder().username("admin").password(encoder.encode("admin")).build();
+        //UserDetails user = User.builder().username("user").password(encoder.encode("user")).build();
+        //UserDetails alex41 = User.builder().username("alex41").password(encoder.encode("alex41")).build();
+
+        return new InMemoryUserDetailsManager(admin, user, alex41);
+    }
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        return http.csrf(AbstractHttpConfigurer::disable).authorizeHttpRequests(auth -> auth.requestMatchers("/api/v1/welcome").permitAll()
+                .requestMatchers("/api/v1/**").authenticated())
+                .formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
+                .build();
+    }
+
+    @Bean
+    public InMemoryUserDetailsManager userDetailsService_old() {
         UserDetails user = User.withUsername("user")
                 .password("user") // passwordEncoder().encode("user")
                 .roles("USER")
@@ -38,7 +56,7 @@ public class SecurityConfig extends WebSecurityConfiguration {
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain_old(HttpSecurity http) throws Exception {
 
         http
                 .authorizeHttpRequests(requests -> requests
