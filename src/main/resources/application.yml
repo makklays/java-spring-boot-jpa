@@ -1,5 +1,6 @@
 
 spring:
+  # SPRING SECURITY by Login/Password
   security:
     user:
       name: admin
