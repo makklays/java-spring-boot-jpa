@@ -40,6 +40,9 @@ public class User {
     @Column(name = "password", length = 255)
     private String password;
 
+    @Column(name = "roles", length = 255)
+    private String roles;
+
     @Column(name = "bio", length = 500)
     private String bio;
 
@@ -115,6 +118,10 @@ public class User {
         this.bio = bio;
     }
 
+    public String getRoles() { return roles; }
+
+    public void setRoles(String roles) { this.roles = roles; }
+
     public Position getPosition() {
         return position;
     }
@@ -143,12 +150,12 @@ public class User {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof User user)) return false;
-        return getId().equals(user.getId()) && getFirstname().equals(user.getFirstname()) && getLastname().equals(user.getLastname()) && getEmail().equals(user.getEmail()) && getPassword().equals(user.getPassword()) && getBio().equals(user.getBio()) && getPosition().equals(user.getPosition()) && getCreatedAt().equals(user.getCreatedAt()) && getUpdatedAt().equals(user.getUpdatedAt());
+        return getId().equals(user.getId()) && getFirstname().equals(user.getFirstname()) && getLastname().equals(user.getLastname()) && getEmail().equals(user.getEmail()) && getPassword().equals(user.getPassword()) && getBio().equals(user.getBio()) && getRoles().equals(user.getRoles()) && getPosition().equals(user.getPosition()) && getCreatedAt().equals(user.getCreatedAt()) && getUpdatedAt().equals(user.getUpdatedAt());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getFirstname(), getLastname(), getEmail(), getPassword(), getBio(), getPosition(), getCreatedAt(), getUpdatedAt());
+        return Objects.hash(getId(), getFirstname(), getLastname(), getEmail(), getPassword(), getBio(), getRoles(), getPosition(), getCreatedAt(), getUpdatedAt());
     }
 
     @Override
@@ -160,6 +167,7 @@ public class User {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", bio='" + bio + '\'' +
+                ", roles='" + roles + '\'' +
                 ", position=" + position +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +

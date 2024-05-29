@@ -8,12 +8,15 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class UserImpl implements InterfaceUser {
+public class UserImpl implements InterfaceUser /*, UserDetailsService*/ {
     @Lazy
     @Autowired
     private UserRepository userRepository;
@@ -21,6 +24,16 @@ public class UserImpl implements InterfaceUser {
     /*@Autowired
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
+    }*/
+
+    /*@Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        return null;
+    }*/
+
+    /*@Override
+    public String getPassword() {
+        return null;
     }*/
 
     @Override

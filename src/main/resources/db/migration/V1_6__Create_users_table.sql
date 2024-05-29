@@ -11,6 +11,7 @@ CREATE TABLE `users` (
    `email` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
    `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
    `bio` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
+   `roles` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
    `position_id` bigint(10) NOT NULL,
    `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
    `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -20,6 +21,7 @@ CREATE TABLE `users` (
  KEY `email` (`email`),
  KEY `password` (`password`),
  KEY `bio` (`bio`),
+ KEY `roles` (`roles`),
  KEY `position_id` (`position_id`),
  KEY `created_at` (`created_at`),
  KEY `updated_at` (`updated_at`)
