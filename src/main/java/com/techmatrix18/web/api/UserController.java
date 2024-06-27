@@ -61,7 +61,7 @@ public class UserController {
     @GetMapping(path = "/list1")
     public String list1(Model model) {
         model.addAttribute("users", userService.getAllUsers());
-        return "users-index";
+        return "list";
     }
 
     @GetMapping(path = "/list2")
@@ -80,14 +80,14 @@ public class UserController {
     @GetMapping("/web-user-list")
     public ModelAndView listUserView() {
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("user/list");
+        mav.setViewName("list");
         mav.addObject("users", userService.getAllUsers());
         return mav;
     }
     @GetMapping("/web-user-add")
     public ModelAndView createUserView() {
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("user/add");
+        mav.setViewName("add");
         mav.addObject("user", new User());
         mav.addObject("positions", positionService.getAllPositions());
         return mav;
@@ -97,14 +97,14 @@ public class UserController {
         ModelAndView mav = new ModelAndView();
         if(result.hasErrors()) {
             logger.info("Validation errors while submitting form.");
-            mav.setViewName("user/add");
+            mav.setViewName("add");
             mav.addObject("user", user);
             mav.addObject("positions", positionService.getAllPositions());
             return mav;
         }
         userService.addUser(user);
         mav.addObject("users", userService.getAllUsers());
-        mav.setViewName("user/list");
+        mav.setViewName("list");
         logger.info("Form submitted successfully.");
         return mav;
     }
@@ -122,7 +122,7 @@ public class UserController {
         return "index";*/
 
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("user/list");
+        mav.setViewName("list");
         //mav.addObject("users", userService.getAllUsers());
         mav.addObject("currentPage", pageNo);
         mav.addObject("totalPages", page.getTotalPages());
