@@ -9,11 +9,12 @@ import org.springframework.web.bind.annotation.*;
 import javax.xml.bind.ValidationException;
 import java.util.List;
 
-/************************************
- * Author: Alexander Kuziv
- *  Email: makklays@gmail.com
- *   Date: 19-02-2024
- ***********************************/
+/**
+ * Simple controller for Category
+ *
+ * @author Alexander Kuziv
+ * @version 1.0
+ */
 
 @RestController
 @RequestMapping("/api/v1/categories")

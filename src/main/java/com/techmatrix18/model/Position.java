@@ -11,6 +11,14 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+/**
+ * Simple JavaBean domain that represents a Position
+ *
+ * @author Alexander Kuziv
+ * @version 1.0
+ * @since 19-02-2024
+ */
+
 @Entity
 @Table(name = "positions")
 public class Position {

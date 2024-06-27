@@ -9,6 +9,13 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Service class for {@link com.techmatrix18.model.Invoice}
+ *
+ * @author Alexander Kuziv
+ * @version 1.0
+ */
+
 @Service
 public class InvoiceImpl implements InterfaceInvoice {
     @Lazy

@@ -10,6 +10,14 @@ import java.util.Objects;
 //import javax.persistence.*;
 import jakarta.persistence.*;
 
+/**
+ * Simple JavaBean domain that represents a Category
+ *
+ * @author Alexander Kuziv
+ * @version 1.0
+ * @since 19-02-2024
+ */
+
 @Entity
 @Table(name = "categories")
 public class Category {

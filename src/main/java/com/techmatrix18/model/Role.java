@@ -5,6 +5,13 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * Simple JavaBean domain that represents a Role
+ *
+ * @author Alexander Kuziv
+ * @version 1.0
+ */
+
 public enum Role {
     USER(Set.of(Permission.USER_READ)),
     ADMIN(Set.of(Permission.USER_READ, Permission.USER_WRITE));

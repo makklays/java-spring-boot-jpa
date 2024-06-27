@@ -14,11 +14,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/************************************
- * Author: Alexander Kuziv
- *  Email: makklays@gmail.com
- *   Date: 19-02-2024
- ***********************************/
+/**
+ * Simple Controller for Barco
+ *
+ * @author Alexander Kuziv
+ * @version 1.0
+ */
 
 @RestController
 @RequestMapping("/api/v1/barcos")

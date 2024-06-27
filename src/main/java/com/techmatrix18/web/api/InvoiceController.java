@@ -9,6 +9,13 @@ import org.springframework.web.bind.annotation.*;
 import javax.xml.bind.ValidationException;
 import java.util.List;
 
+/**
+ * Simple controller for Invoice
+ *
+ * @author Alexander Kuziv
+ * @version 1.0
+ */
+
 @RestController
 @RequestMapping("/api/v1/invoices")
 public class InvoiceController {

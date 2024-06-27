@@ -20,11 +20,12 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.xml.bind.ValidationException;
 import java.util.*;
 
-/************************************
- * Author: Alexander Kuziv
- *  Email: makklays@gmail.com
- *   Date: 19-02-2024
- ***********************************/
+/**
+ * Simple controller for User
+ *
+ * @author Alexander Kuziv
+ * @version 1.0
+ */
 
 @RestController
 @RequestMapping("/api/v1/users")

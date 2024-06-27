@@ -9,11 +9,13 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-/************************************
- * Author: Alexander Kuziv
- *  Email: makklays@gmail.com
- *   Date: 19-02-2024
- ***********************************/
+/**
+ * Service class for {@link com.techmatrix18.model.Barco}
+ *
+ * @author Alexander Kuziv
+ * @version 1.0
+ * @since 19-02-2024
+ */
 
 @Service
 public class BarcoImpl implements InterfaceBarco {

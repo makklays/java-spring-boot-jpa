@@ -8,6 +8,14 @@ import jakarta.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
 
+/**
+ * Simple JavaBean domain that represents a BarcoUser
+ *
+ * @author Alexander Kuziv
+ * @version 1.0
+ * @since 19-02-2024
+ */
+
 @Entity
 @Table(name = "barco_users")
 public class BarcoUser {

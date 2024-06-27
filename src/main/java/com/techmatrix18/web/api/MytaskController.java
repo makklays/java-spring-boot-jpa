@@ -5,6 +5,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**
+ * Simple controller for Mytask
+ *
+ * @author Alexander Kuziv
+ * @version 1.0
+ */
+
 @Controller
 @RequestMapping("/mytask")
 public class MytaskController {

@@ -9,6 +9,14 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Simple JavaBean domain that represents a Barco
+ *
+ * @author Alexander Kuziv
+ * @version 1.0
+ * @since 19-02-2024
+ */
+
 @Entity
 @Table(name = "barcos")
 public class Barco {

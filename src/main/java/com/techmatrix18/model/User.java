@@ -12,6 +12,14 @@ import jakarta.persistence.*;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+/**
+ * Simple JavaBean domain that represents a User
+ *
+ * @author Alexander Kuziv
+ * @version 1.0
+ * @since 19-02-2024
+ */
+
 @Entity
 @Table(name = "users")
 public class User {

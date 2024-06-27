@@ -10,6 +10,13 @@ import org.springframework.web.bind.annotation.*;
 import javax.xml.bind.ValidationException;
 import java.util.List;
 
+/**
+ * Simple controller for Product
+ *
+ * @author Alexander Kuziv
+ * @version 1.0
+ */
+
 @RestController
 @RequestMapping("/api/v1/products")
 public class ProductController {

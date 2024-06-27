@@ -9,6 +9,13 @@ import org.springframework.web.bind.annotation.*;
 import javax.xml.bind.ValidationException;
 import java.util.List;
 
+/**
+ * Simple controller for Position
+ *
+ * @author Alexander Kuziv
+ * @version 1.0
+ */
+
 @RestController
 @RequestMapping("/api/v1/positions")
 public class PositionController {
