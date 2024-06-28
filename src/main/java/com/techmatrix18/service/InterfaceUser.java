@@ -5,6 +5,13 @@ import org.springframework.data.domain.Page;
 
 import java.util.List;
 
+/**
+ * Service class for {@link com.techmatrix18.model.User}
+ *
+ * @author Alexander Kuziv
+ * @version 1.0
+ */
+
 public interface InterfaceUser {
     List<User> getAllUsers();
     User getUserById(Long id);

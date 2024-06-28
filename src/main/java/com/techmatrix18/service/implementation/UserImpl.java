@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Service class for {@link com.techmatrix18.model.User}
+ * Implementation of {@link InterfaceUser} interface.
  *
  * @author Alexander Kuziv
  * @version 1.0

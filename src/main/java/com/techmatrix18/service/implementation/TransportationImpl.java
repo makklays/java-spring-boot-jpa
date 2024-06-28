@@ -3,6 +3,7 @@ package com.techmatrix18.service.implementation;
 import com.techmatrix18.model.Transportation;
 import com.techmatrix18.repository.TransportationRepository;
 import com.techmatrix18.service.InterfaceTransportation;
+import com.techmatrix18.service.InterfaceUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Service class for {@link com.techmatrix18.model.Transportation}
+ * Implementation of {@link InterfaceTransportation} interface.
  *
  * @author Alexander Kuziv
  * @version 1.0
