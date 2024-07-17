@@ -2,7 +2,7 @@ package com.techmatrix18.web.api;
 
 import com.techmatrix18.model.Invoice;
 import com.techmatrix18.repository.InvoiceRepository;
-import com.techmatrix18.service.implementation.InvoiceImpl;
+import com.techmatrix18.service.implementation.InvoiceServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +23,7 @@ public class InvoiceController {
     @Autowired
     private InvoiceRepository invoiceRepository;
     @Autowired
-    private InvoiceImpl invoiceService;
+    private InvoiceServiceImpl invoiceService;
 
     @GetMapping(path = "/test")
     public String getTest() throws ValidationException {

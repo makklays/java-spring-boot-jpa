@@ -2,7 +2,7 @@ package com.techmatrix18.web.api;
 
 import com.techmatrix18.model.Barco;
 import com.techmatrix18.repository.BarcoRepository;
-import com.techmatrix18.service.implementation.BarcoImpl;
+import com.techmatrix18.service.implementation.BarcoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +28,7 @@ public class BarcoController {
     @Autowired
     private BarcoRepository barcoRepository;
     @Autowired
-    private BarcoImpl barcoService;
+    private BarcoServiceImpl barcoService;
 
     private final LocalDateTime localDateTime = LocalDateTime.of(2024, 2, 16, 12, 0, 0);
     private final Timestamp timestamp = Timestamp.valueOf(localDateTime);

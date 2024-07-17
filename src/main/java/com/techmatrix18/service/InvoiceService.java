@@ -10,7 +10,7 @@ import java.util.List;
  * @version 1.0
  */
 
-public interface InterfaceInvoice {
+public interface InvoiceService {
     List<Invoice> getAllInvoices();
     Invoice getInvoiceById(Long id);
 

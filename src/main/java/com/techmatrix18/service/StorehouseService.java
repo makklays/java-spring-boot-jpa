@@ -10,7 +10,7 @@ import java.util.List;
  * @version 1.0
  */
 
-public interface InterfaceStorehouse {
+public interface StorehouseService {
     List<Storehouse> getAllStorehouses();
     Storehouse getStorehouseById(Long id);
 

@@ -2,8 +2,7 @@ package com.techmatrix18.service.implementation;
 
 import com.techmatrix18.model.City;
 import com.techmatrix18.repository.CityRepository;
-import com.techmatrix18.service.InterfaceCity;
-import com.techmatrix18.service.InterfacePosition;
+import com.techmatrix18.service.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
@@ -11,14 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Implementation of {@link InterfaceCity} interface.
+ * Implementation of {@link CityService} interface.
  *
  * @author Alexander Kuziv
  * @version 1.0
  */
 
 @Service
-public class CityImpl implements InterfaceCity {
+public class CityServiceImpl implements CityService {
     @Lazy
     @Autowired
     private CityRepository cityRepository;

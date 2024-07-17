@@ -12,9 +12,11 @@ import java.util.List;
  * @version 1.0
  */
 
-public interface InterfaceUser {
+public interface UserService {
     List<User> getAllUsers();
     User getUserById(Long id);
+
+    List<User> findByFirstname(String firstname);
 
     boolean addUser(User user);
     boolean updateUser(User user);

@@ -10,7 +10,7 @@ import java.util.List;
  * @version 1.0
  */
 
-public interface InterfaceCity {
+public interface CityService {
     List<City> getAllCities();
     City getCityById(Long id);
 

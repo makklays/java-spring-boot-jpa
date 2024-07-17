@@ -10,7 +10,7 @@ import java.util.List;
  * @version 1.0
  */
 
-public interface InterfaceProduct {
+public interface ProductService {
     List<Product> getAllProducts();
     Product getProductById(Long id);
 

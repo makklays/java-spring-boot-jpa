@@ -2,8 +2,7 @@ package com.techmatrix18.service.implementation;
 
 import com.techmatrix18.model.Transportation;
 import com.techmatrix18.repository.TransportationRepository;
-import com.techmatrix18.service.InterfaceTransportation;
-import com.techmatrix18.service.InterfaceUser;
+import com.techmatrix18.service.TransportationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
@@ -11,14 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Implementation of {@link InterfaceTransportation} interface.
+ * Implementation of {@link TransportationService} interface.
  *
  * @author Alexander Kuziv
  * @version 1.0
  */
 
 @Service
-public class TransportationImpl implements InterfaceTransportation {
+public class TransportationServiceImpl implements TransportationService {
     @Lazy
     @Autowired
     private TransportationRepository transportationRepository;

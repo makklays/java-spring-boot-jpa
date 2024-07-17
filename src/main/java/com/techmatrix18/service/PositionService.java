@@ -10,7 +10,7 @@ import java.util.List;
  * @version 1.0
  */
 
-public interface InterfacePosition {
+public interface PositionService {
     List<Position> getAllPositions();
     Position getPositionById(Long id);
 

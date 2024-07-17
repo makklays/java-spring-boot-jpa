@@ -2,7 +2,7 @@ package com.techmatrix18.web.api;
 
 import com.techmatrix18.model.City;
 import com.techmatrix18.repository.CityRepository;
-import com.techmatrix18.service.implementation.CityImpl;
+import com.techmatrix18.service.implementation.CityServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +23,7 @@ public class CityController {
     @Autowired
     private CityRepository cityRepository;
     @Autowired
-    private CityImpl cityService;
+    private CityServiceImpl cityService;
 
     @GetMapping(path = "/test")
     public String getTest() throws ValidationException {

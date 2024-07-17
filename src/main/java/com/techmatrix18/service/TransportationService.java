@@ -10,7 +10,7 @@ import java.util.List;
  * @version 1.0
  */
 
-public interface InterfaceTransportation {
+public interface TransportationService {
     List<Transportation> getAllTransportations();
     Transportation getTransportationById(Long id);
 

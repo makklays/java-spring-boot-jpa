@@ -11,7 +11,7 @@ import java.util.List;
  * @since 19-02-2024
  */
 
-public interface InterfaceBarco {
+public interface BarcoService {
     List<Barco> getAllBarcos();
     Barco getBarcoById(Long id);
 

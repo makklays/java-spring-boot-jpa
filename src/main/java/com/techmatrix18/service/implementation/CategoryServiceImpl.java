@@ -2,8 +2,7 @@ package com.techmatrix18.service.implementation;
 
 import com.techmatrix18.model.Category;
 import com.techmatrix18.repository.CategoryRepository;
-import com.techmatrix18.service.InterfaceCategory;
-import com.techmatrix18.service.InterfacePosition;
+import com.techmatrix18.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
@@ -11,14 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Implementation of {@link InterfaceCategory} interface.
+ * Implementation of {@link CategoryService} interface.
  *
  * @author Alexander Kuziv
  * @version 1.0
  */
 
 @Service
-public class CategoryImpl implements InterfaceCategory {
+public class CategoryServiceImpl implements CategoryService {
     @Lazy
     @Autowired
     private CategoryRepository categoryRepository;

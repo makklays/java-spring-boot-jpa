@@ -2,8 +2,7 @@ package com.techmatrix18.service.implementation;
 
 import com.techmatrix18.model.Invoice;
 import com.techmatrix18.repository.InvoiceRepository;
-import com.techmatrix18.service.InterfaceInvoice;
-import com.techmatrix18.service.InterfacePosition;
+import com.techmatrix18.service.InvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
@@ -11,14 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Implementation of {@link InterfaceInvoice} interface.
+ * Implementation of {@link InvoiceService} interface.
  *
  * @author Alexander Kuziv
  * @version 1.0
  */
 
 @Service
-public class InvoiceImpl implements InterfaceInvoice {
+public class InvoiceServiceImpl implements InvoiceService {
     @Lazy
     @Autowired
     private InvoiceRepository invoiceRepository;

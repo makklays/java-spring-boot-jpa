@@ -10,7 +10,7 @@ import java.util.List;
  * @version 1.0
  */
 
-public interface InterfaceCategory {
+public interface CategoryService {
     List<Category> getAllCategories();
     Category getCategoryById(Long id);
 

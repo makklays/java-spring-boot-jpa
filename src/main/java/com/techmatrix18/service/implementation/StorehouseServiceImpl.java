@@ -2,8 +2,7 @@ package com.techmatrix18.service.implementation;
 
 import com.techmatrix18.model.Storehouse;
 import com.techmatrix18.repository.StorehouseRepository;
-import com.techmatrix18.service.InterfaceStorehouse;
-import com.techmatrix18.service.InterfaceTransportation;
+import com.techmatrix18.service.StorehouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
@@ -11,14 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Implementation of {@link InterfaceStorehouse} interface.
+ * Implementation of {@link StorehouseService} interface.
  *
  * @author Alexander Kuziv
  * @version 1.0
  */
 
 @Service
-public class StorehouseImpl implements InterfaceStorehouse {
+public class StorehouseServiceImpl implements StorehouseService {
     @Lazy
     @Autowired
     private StorehouseRepository storehouseRepository;

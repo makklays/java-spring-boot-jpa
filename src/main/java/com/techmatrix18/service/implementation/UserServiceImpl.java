@@ -2,31 +2,31 @@ package com.techmatrix18.service.implementation;
 
 import com.techmatrix18.model.User;
 import com.techmatrix18.repository.UserRepository;
-import com.techmatrix18.service.InterfaceUser;
+import com.techmatrix18.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Implementation of {@link InterfaceUser} interface.
+ * Implementation of {@link UserService} interface.
  *
  * @author Alexander Kuziv
  * @version 1.0
  */
 
 @Service
-public class UserImpl implements InterfaceUser /*, UserDetailsService*/ {
+public class UserServiceImpl implements UserService /*, UserDetailsService*/ {
     @Lazy
     @Autowired
     private UserRepository userRepository;
+
+    //@Autowired
+    //private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     /*@Autowired
     public UserServiceImpl(UserRepository userRepository) {
@@ -42,6 +42,19 @@ public class UserImpl implements InterfaceUser /*, UserDetailsService*/ {
     public String getPassword() {
         return null;
     }*/
+
+    /*@Autowired
+    public void save(User user) {
+        //user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        //Set<Role> roles = new HashSet<>();
+        user.setRoles("USER");
+        userRepository.save(user);
+    }*/
+
+    @Override
+    public List<User> findByFirstname(String firstname) {
+        return userRepository.findByFirstname(firstname);
+    }
 
     @Override
     public List<User> getAllUsers() {
