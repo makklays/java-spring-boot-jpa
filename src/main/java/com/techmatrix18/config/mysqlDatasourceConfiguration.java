@@ -5,6 +5,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.sql.DataSource;
+
 @Configuration
 public class mysqlDatasourceConfiguration {
 
@@ -12,6 +14,13 @@ public class mysqlDatasourceConfiguration {
     @ConfigurationProperties("spring.datasource.mysql")
     public DataSourceProperties mysqlDataSourceProperties() {
         return new DataSourceProperties();
+    }
+
+    @Bean
+    public DataSource mysqlDataSource() {
+        return mysqlDataSourceProperties()
+                .initializeDataSourceBuilder()
+                .build();
     }
 }
 
