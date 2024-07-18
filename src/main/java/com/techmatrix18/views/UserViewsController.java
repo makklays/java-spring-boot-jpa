@@ -34,11 +34,18 @@ public class UserViewsController {
     private static final Logger logger = LoggerFactory.getLogger(com.techmatrix18.web.api.UserController.class);
 
     @Autowired
-    private UserRepository userRepository;
-    @Autowired
     private UserServiceImpl userService;
     @Autowired
     private PositionServiceImpl positionService;
+
+    //@Autowired
+    //private UserRepository userRepository;
+
+    private final UserRepository userRepository;
+
+    public UserViewsController(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @GetMapping("/list")
     public ModelAndView list(HttpServletRequest request, HttpServletResponse response) throws Exception {
