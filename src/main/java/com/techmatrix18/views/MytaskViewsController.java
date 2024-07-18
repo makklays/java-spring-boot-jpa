@@ -1,6 +1,7 @@
-package com.techmatrix18.web.web;
+package com.techmatrix18.views;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Simple controller for Mytask
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
  */
 
 @Controller
+@RequestMapping("/tasks")
 public class WebMytaskController {
 
     /*private final MytaskService mytaskService;

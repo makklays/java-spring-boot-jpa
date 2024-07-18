@@ -1,4 +1,4 @@
-package com.techmatrix18.web.web;
+package com.techmatrix18.views;
 
 import com.techmatrix18.model.User;
 import com.techmatrix18.repository.UserRepository;
@@ -28,7 +28,7 @@ import java.util.*;
  */
 
 @Controller
-@RequestMapping("/api/v1/users")
+@RequestMapping("/users")
 public class WebUserController {
     // log
     private static final Logger logger = LoggerFactory.getLogger(com.techmatrix18.web.api.UserController.class);
