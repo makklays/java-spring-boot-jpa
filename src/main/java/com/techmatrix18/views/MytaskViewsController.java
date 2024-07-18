@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/tasks")
-public class WebMytaskController {
+public class MytaskViewsController {
 
     /*private final MytaskService mytaskService;
 

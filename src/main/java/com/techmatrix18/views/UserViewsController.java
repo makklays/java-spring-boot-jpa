@@ -29,7 +29,7 @@ import java.util.*;
 
 @Controller
 @RequestMapping("/users")
-public class WebUserController {
+public class UserViewsController {
     // log
     private static final Logger logger = LoggerFactory.getLogger(com.techmatrix18.web.api.UserController.class);
 
