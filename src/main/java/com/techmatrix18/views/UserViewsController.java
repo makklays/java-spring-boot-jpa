@@ -64,7 +64,7 @@ public class UserViewsController {
 
     @GetMapping(path = "/list2")
     public ModelAndView viewUsers2() {
-        ModelAndView mav = new ModelAndView("users-index");
+        ModelAndView mav = new ModelAndView("list");
         //mav.addObject("greeting", "GeeksForGeeks Welcomes you to Spring!");
         mav.addObject("users", userService.getAllUsers());
         return mav;

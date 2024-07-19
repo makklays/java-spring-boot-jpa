@@ -13,18 +13,18 @@ spring:
     #time-between-eviction-runs-millis: 30000
     #validation-query: select 1
     # MySQL
-    url: jdbc:mysql://localhost:3306/currency_rest
+    url: jdbc:mysql://localhost:3306/storehouse_db
     username: admin
     password: admin
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     #initialization-mode: ALWAYS
     #schema: classpath*:database/initDB.sql
   # H2 DB
-  h2-datasource:
-    url: jdbc:h2:file:C:/temp/test
-    username: admin
-    password: admin
-    driver-class-name: org.h2.Driver
+  #h2-datasource:
+  #  url: jdbc:h2:file:C:/temp/test
+  #  username: admin
+  #  password: admin
+  #  driver-class-name: org.h2.Driver
   # Oracle
   #oracle-datasource:
   #  url: jdbc:oracle:thin:@localhost:1521:orcl
@@ -79,7 +79,7 @@ spring:
   # Teamleaf - use
   thymeleaf:
     check-template-location: true
-    prefix: classpath:/resources/templates/  #this is the main
+    prefix: classpath:/resources/templates  #this is the main
     suffix: .html
     mode: HTML
     encoding: UTF-8
