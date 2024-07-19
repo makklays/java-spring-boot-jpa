@@ -16,7 +16,7 @@ public class MytaskViewsController {
 
     /*private final MytaskService mytaskService;
 
-    public MytaskController(MytaskService mytaskService) {
+    public MytaskViewsController(MytaskService mytaskService) {
         this.mytaskService = mytaskService;
     }
 

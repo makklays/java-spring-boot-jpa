@@ -1,10 +1,11 @@
 
 spring:
   # SPRING SECURITY by Login/Password
-  security:
-    user:
-      name: admin
-      password: admin
+  #security:
+  #  user:
+  #    name: admin
+  #    password: admin
+  #    roles: ADMIN
   # Datasource
   datasource:
     #continue-on-error: false
@@ -79,7 +80,7 @@ spring:
   # Teamleaf - use
   thymeleaf:
     check-template-location: true
-    prefix: classpath:/resources/templates  #this is the main
+    prefix: classpath:/templates/  #this is the main
     suffix: .html
     mode: HTML
     encoding: UTF-8

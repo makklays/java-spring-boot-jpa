@@ -2,6 +2,8 @@ package com.techmatrix18.web.api;
 
 import com.techmatrix18.model.Barco;
 import com.techmatrix18.repository.BarcoRepository;
+import com.techmatrix18.service.BarcoService;
+import com.techmatrix18.service.CategoryService;
 import com.techmatrix18.service.implementation.BarcoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,10 +27,11 @@ import java.util.stream.Stream;
 @RequestMapping("/api/v1/barcos")
 public class BarcoController {
 
-    @Autowired
-    private BarcoRepository barcoRepository;
-    @Autowired
-    private BarcoServiceImpl barcoService;
+    private final BarcoService barcoService;
+
+    public BarcoController(BarcoService barcoService) {
+        this.barcoService = barcoService;
+    }
 
     private final LocalDateTime localDateTime = LocalDateTime.of(2024, 2, 16, 12, 0, 0);
     private final Timestamp timestamp = Timestamp.valueOf(localDateTime);

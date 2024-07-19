@@ -2,6 +2,8 @@ package com.techmatrix18.web.api;
 
 import com.techmatrix18.model.User;
 import com.techmatrix18.repository.UserRepository;
+import com.techmatrix18.service.PositionService;
+import com.techmatrix18.service.UserService;
 import com.techmatrix18.service.implementation.PositionServiceImpl;
 import com.techmatrix18.service.implementation.UserServiceImpl;
 import org.slf4j.Logger;
@@ -27,12 +29,13 @@ public class UserController {
     // log
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private UserServiceImpl userService;
-    @Autowired
-    private PositionServiceImpl positionService;
+    private final UserService userService;
+    private final PositionService positionService;
+
+    public UserController(UserService userService, PositionService positionService) {
+        this.userService = userService;
+        this.positionService = positionService;
+    }
 
     @GetMapping(path = "/test")
     public String getTest() throws ValidationException {

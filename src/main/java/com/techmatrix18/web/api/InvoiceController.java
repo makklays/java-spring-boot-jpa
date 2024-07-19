@@ -2,6 +2,8 @@ package com.techmatrix18.web.api;
 
 import com.techmatrix18.model.Invoice;
 import com.techmatrix18.repository.InvoiceRepository;
+import com.techmatrix18.service.InvoiceService;
+import com.techmatrix18.service.PositionService;
 import com.techmatrix18.service.implementation.InvoiceServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,10 +22,11 @@ import java.util.List;
 @RequestMapping("/api/v1/invoices")
 public class InvoiceController {
 
-    @Autowired
-    private InvoiceRepository invoiceRepository;
-    @Autowired
-    private InvoiceServiceImpl invoiceService;
+    private final InvoiceService invoiceService;
+
+    public InvoiceController(InvoiceService invoiceService) {
+        this.invoiceService = invoiceService;
+    }
 
     @GetMapping(path = "/test")
     public String getTest() throws ValidationException {

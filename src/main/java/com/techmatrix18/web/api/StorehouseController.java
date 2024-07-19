@@ -2,6 +2,7 @@ package com.techmatrix18.web.api;
 
 import com.techmatrix18.model.Storehouse;
 import com.techmatrix18.repository.StorehouseRepository;
+import com.techmatrix18.service.StorehouseService;
 import com.techmatrix18.service.implementation.StorehouseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,10 +22,11 @@ import java.util.List;
 @RequestMapping("/api/v1/storehouses")
 public class StorehouseController {
 
-    @Autowired
-    private StorehouseRepository storehouseRepository;
-    @Autowired
-    private StorehouseServiceImpl storehouseService;
+    private final StorehouseService storehouseService;
+
+    public StorehouseController(StorehouseService storehouseService) {
+        this.storehouseService = storehouseService;
+    }
 
     @GetMapping(path = "/test")
     public String getTest() throws ValidationException {

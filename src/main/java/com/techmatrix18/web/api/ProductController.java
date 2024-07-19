@@ -2,6 +2,7 @@ package com.techmatrix18.web.api;
 
 import com.techmatrix18.model.Product;
 import com.techmatrix18.repository.ProductRepository;
+import com.techmatrix18.service.ProductService;
 import com.techmatrix18.service.implementation.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,10 +21,11 @@ import java.util.List;
 @RequestMapping("/api/v1/products")
 public class ProductController {
 
-    @Autowired
-    private ProductRepository productRepository;
-    @Autowired
-    private ProductServiceImpl productService;
+    private final ProductService productService;
+
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
 
     @GetMapping(path = "/test")
     public String getTest() throws ValidationException {

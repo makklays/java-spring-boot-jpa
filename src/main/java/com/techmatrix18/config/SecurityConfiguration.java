@@ -39,6 +39,7 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http.csrf(AbstractHttpConfigurer::disable).authorizeHttpRequests(auth -> auth.requestMatchers("/api/v1/welcome").permitAll()
+                .requestMatchers("/css/bootstrap.min.css", "/js/bootstrap.bundle.min.js", "/css/style.scss").permitAll()
                 .requestMatchers("/api/v1/**").authenticated().requestMatchers("/users/**").authenticated())
                 .formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
                 .build();

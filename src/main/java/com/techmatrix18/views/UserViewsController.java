@@ -2,6 +2,8 @@ package com.techmatrix18.views;
 
 import com.techmatrix18.model.User;
 import com.techmatrix18.repository.UserRepository;
+import com.techmatrix18.service.PositionService;
+import com.techmatrix18.service.UserService;
 import com.techmatrix18.service.implementation.PositionServiceImpl;
 import com.techmatrix18.service.implementation.UserServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
@@ -33,18 +35,12 @@ public class UserViewsController {
     // log
     private static final Logger logger = LoggerFactory.getLogger(com.techmatrix18.web.api.UserController.class);
 
-    @Autowired
-    private UserServiceImpl userService;
-    @Autowired
-    private PositionServiceImpl positionService;
+    private final UserService userService;
+    private final PositionService positionService;
 
-    //@Autowired
-    //private UserRepository userRepository;
-
-    private final UserRepository userRepository;
-
-    public UserViewsController(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserViewsController(UserService userService, PositionService positionService) {
+        this.userService = userService;
+        this.positionService = positionService;
     }
 
     @GetMapping("/list")
@@ -53,6 +49,13 @@ public class UserViewsController {
         //mav.addObject("greeting", "GeeksForGeeks Welcomes you to Spring!");
         mav.addObject("users", userService.getAllUsers());
         return mav;
+    }
+
+    @GetMapping(path = "/simple")
+    public String simple1(Model model) {
+        //model.addAttribute("users", userService.getAllUsers());
+        model.addAttribute("vv", "V-V-V");
+        return "simple";
     }
 
     @GetMapping(path = "/list1")

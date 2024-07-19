@@ -2,6 +2,8 @@ package com.techmatrix18.web.api;
 
 import com.techmatrix18.model.Position;
 import com.techmatrix18.repository.PositionRepository;
+import com.techmatrix18.service.PositionService;
+import com.techmatrix18.service.ProductService;
 import com.techmatrix18.service.implementation.PositionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,10 +22,11 @@ import java.util.List;
 @RequestMapping("/api/v1/positions")
 public class PositionController {
 
-    @Autowired
-    private PositionRepository positionRepository;
-    @Autowired
-    private PositionServiceImpl positionService;
+    private final PositionService positionService;
+
+    public PositionController(PositionService positionService) {
+        this.positionService = positionService;
+    }
 
     @GetMapping(path = "/test")
     public String getTest() throws ValidationException {
