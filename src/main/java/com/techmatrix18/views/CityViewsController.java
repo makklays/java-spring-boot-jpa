@@ -102,16 +102,15 @@ public class CityViewsController {
         response.sendRedirect("/list");
     }
 
-    @GetMapping(path = "/view/{cityId:\\\\d+}")
-    public String view(Model model, HttpServletRequest request) throws IOException {
-        String cityId = request.getParameter("cityId");
+    @GetMapping(path = "/{cityId}")
+    public String view(Model model, @PathVariable String cityId) {
         City city = cityService.getCityById(Long.parseLong(cityId));
         if (city.getId() != null) {
             model.addAttribute("city", city);
-            System.out.println("City found..");
+           logger.info("City found..");
         } else {
             model.addAttribute("city", null);
-            System.out.println("Error! City not found..");
+            logger.info("Error! City not found..");
         }
 
         return "cities/view";
