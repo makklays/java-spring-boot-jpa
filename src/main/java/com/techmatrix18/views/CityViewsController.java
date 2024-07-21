@@ -54,7 +54,7 @@ public class CityViewsController {
         response.sendRedirect("/list");
     }
 
-    @GetMapping(path = "/edit/{cityId:\\\\d+}")
+    @GetMapping(path = "/edit/{cityId}")
     public String edit(HttpServletRequest request, HttpServletResponse response, Model model, @PathVariable Long cityId) throws IOException {
         City city = cityService.getCityById(cityId);
         //ModelAndView mav = new ModelAndView("cities-edit");
@@ -71,7 +71,7 @@ public class CityViewsController {
         return "cities/edit";
     }
 
-    @PostMapping(path = "/edit/{cityId:\\\\d+}")
+    @PostMapping(path = "/edit/{cityId}")
     public void editPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String title = request.getParameter("title");
         String description = request.getParameter("description");
@@ -92,7 +92,7 @@ public class CityViewsController {
         response.sendRedirect("/edit/" + city.getId() );
     }
 
-    @GetMapping(path = "/delete/{cityId:\\\\d+}")
+    @GetMapping(path = "/delete/{cityId}")
     public void delete(HttpServletRequest request, HttpServletResponse response, @PathVariable Long cityId) throws IOException {
         City city = cityService.getCityById(cityId);
         if (city.getId() != null) {
