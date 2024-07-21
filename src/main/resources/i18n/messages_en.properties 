@@ -4,20 +4,24 @@ app.title= Spring Boot + Thymeleaf (EN)
 locale.language= Eng
 locale.country= Espana
 
+app.menu= Menu
+
+app.users= Users
 app.create-user= Create User
 app.user-details= User Details
 app.list-users= List of Users
 
-app.add-city= Anadir ciudad
-app.city-details= Ciudad detalles
-app.list-cities= Lista de las ciudades
-app.back= << Atras
-app.view-city= Mostra la ciudad
-app.edit-city= Editar la ciudad
+app.cities= Cities
+app.add-city= Add city
+app.city-details= City details
+app.list-cities= List of cities
+app.back= << Back
+app.view-city= View city
+app.edit-city= Edit city
 
 id= ID
-title= Titulo
-description= Descripcion
+title= Title
+description= Description
 
 user.id= Id
 user.name= Name

@@ -3,6 +3,7 @@ package com.techmatrix18.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractAuthenticationFilterConfigurer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -41,13 +42,17 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http.csrf(AbstractHttpConfigurer::disable).authorizeHttpRequests(auth -> auth.requestMatchers("/api/v1/welcome").permitAll()
                 .requestMatchers("/css/bootstrap.min.css", "/js/bootstrap.bundle.min.js", "/css/style.scss").permitAll()
-                .requestMatchers("/imgs/*").permitAll()
+                .requestMatchers("/imgs/**").permitAll()
                 .requestMatchers("/api/v1/**").authenticated()
-                .requestMatchers("/users/**").authenticated()
+                .requestMatchers("/users/**", "/menu").authenticated()
                 .requestMatchers("/cities/**").authenticated())
                 .formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
                 .build();
     }
+
+    /*public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
+    }*/
 
     //---- old realization ----
     /*@Bean
