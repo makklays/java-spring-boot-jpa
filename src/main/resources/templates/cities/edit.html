@@ -22,19 +22,31 @@
         </ol>
     </nav>
 
-    <div class="card">
-        <div class="card-body">
+    <form action="#" th:action="@{/cities/edit-post}" th:object="${cityForm}" method="POST" >
 
-            <form action="" method="POST" >
+        <input type="hidden" name="cityId" th:value="${city.Id}">
 
-            </form>
+        <div class="card">
+            <div class="card-body">
 
+                <div class="mb-3">
+                    <label for="title1" class="form-label">Title</label>
+                    <input type="text" class="form-control" id="title1" th:value="${city.title}" >
+                    <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" style="color:red;">Title error</div>
+                </div>
+                <div class="mb-3">
+                    <label for="text1" class="form-label">Description</label>
+                    <textarea rows="6" name="description" class="form-control" id="text1" th:text="${city.description}"></textarea>
+                </div>
+
+            </div>
         </div>
-    </div>
 
-    <br/><br/>
+        <br/>
+        <button type="submit" class="btn btn-primary" th:text="#{form.submit}">Submit</button>
+        <a href="#" th:href="@{/cities/list}" th:text="#{app.back}" class="btn btn-secondary" style="margin-left:20px;"> Back</a>
 
-    <a href="#" th:href="@{/cities/list}" th:text="#{app.back}" class="btn btn-secondary"> Back</a>
+    </form>
 
     <br/><br/>
 

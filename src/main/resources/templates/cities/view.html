@@ -28,7 +28,7 @@
     <div class="card">
         <div class="card-body">
 
-            <table >
+            <table class="table table-striped table-hover">
                 <tr>
                     <th>ID</th>
                     <td th:text="${city.Id}"></td>
@@ -40,6 +40,14 @@
                 <tr>
                     <th>Description</th>
                     <td th:text="${city.description}"></td>
+                </tr>
+                <tr>
+                    <th>Created</th>
+                    <td th:text="${city.createdAt}"></td>
+                </tr>
+                <tr>
+                    <th>Updated</th>
+                    <td th:text="${city.updatedAt}"></td>
                 </tr>
             </table>
 
