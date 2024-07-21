@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{app.title}"> Title </title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-6">
+            <h1 th:text="#{app.edit-city}">Edit city</h1>
+        </div>
+    </div>
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/welcome}">Home</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/menu}">Menu</a></li>
+            <li class="breadcrumb-item active" aria-current="page" th:text="#{app.edit-city}" >Edit city</li>
+        </ol>
+    </nav>
+
+    <div class="card">
+        <div class="card-body">
+
+            <form action="" method="POST" >
+
+            </form>
+
+        </div>
+    </div>
+
+    <br/><br/>
+
+    <a href="#" th:href="@{/cities/list}" th:text="#{app.back}" class="btn btn-secondary"> Back</a>
+
+    <br/><br/>
+
+</div>
+</body>
+</html>
+

@@ -42,7 +42,9 @@ public class SecurityConfiguration {
         return http.csrf(AbstractHttpConfigurer::disable).authorizeHttpRequests(auth -> auth.requestMatchers("/api/v1/welcome").permitAll()
                 .requestMatchers("/css/bootstrap.min.css", "/js/bootstrap.bundle.min.js", "/css/style.scss").permitAll()
                 .requestMatchers("/imgs/*").permitAll()
-                .requestMatchers("/api/v1/**").authenticated().requestMatchers("/users/**").authenticated())
+                .requestMatchers("/api/v1/**").authenticated()
+                .requestMatchers("/users/**").authenticated()
+                .requestMatchers("/cities/**").authenticated())
                 .formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
                 .build();
     }

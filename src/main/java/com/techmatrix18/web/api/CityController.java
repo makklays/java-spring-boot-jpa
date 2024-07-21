@@ -5,6 +5,7 @@ import com.techmatrix18.repository.CityRepository;
 import com.techmatrix18.service.CityService;
 import com.techmatrix18.service.InvoiceService;
 import com.techmatrix18.service.implementation.CityServiceImpl;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,12 +29,12 @@ public class CityController {
         this.cityService = cityService;
     }
 
-    @GetMapping(path = "/test")
-    public String getTest() throws ValidationException {
-        return "Test";
+    @GetMapping("/cities-request")
+    public String byGetQueryString(HttpServletRequest request) {
+        return request.getQueryString();
     }
 
-    @GetMapping(path = "/all")
+    @GetMapping(path = "/list")
     public List<City> getCities() throws ValidationException {
         return cityService.getAllCities();
     }
