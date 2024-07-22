@@ -24,7 +24,8 @@
 
     <form action="#" th:action="@{/cities/update/{id}(id=${city.id})}" th:object="${city}" method="post">
 
-        <input type="hidden" name="cityId" th:value="${city.Id}">
+        <input type="hidden" name="cityId" th:value="${city.Id}" />
+        <!--input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /-->
 
         <div class="card">
             <div class="card-body">
