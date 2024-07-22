@@ -1,4 +1,4 @@
-package com.techmatrix18.views;
+package com.techmatrix18.web.views;
 
 import com.techmatrix18.model.City;
 import com.techmatrix18.service.CityService;
