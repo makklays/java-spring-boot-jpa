@@ -38,6 +38,12 @@
                     <td th:text="${storehouse.title}"></td>
                 </tr>
                 <tr>
+                    <th>City</th>
+                    <td >
+                        <a href="#" th:href="@{'/cities/' + ${city.id}}" th:text="${city.title}">Title</a>
+                    </td>
+                </tr>
+                <tr>
                     <th>Description</th>
                     <td th:text="${storehouse.description}"></td>
                 </tr>

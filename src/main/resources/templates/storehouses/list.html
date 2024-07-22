@@ -43,13 +43,13 @@
                         <a href="#" th:href="@{'/storehouses/' + ${storehouse.id}}" th:text="${storehouse.title}">Title</a>
                     </td>
                     <td>
-                        <a href="#" th:href="@{'/city/' + ${storehouse.city_id}}" th:text="${storehouse.city.title}">Title</a>
+                        <a href="#" th:href="@{'/cities/' + ${storehouse.cityId}}" th:text="${storehouse.cityId}">Title</a>
                     </td>
 
                     <td class="text-center" style="width:150px;">
-                        <a href="#" th:href="@{'/storehouses/' + ${city.id}}">view</a> |
-                        <a href="#" th:href="@{'/storehouses/edit/' + ${city.id}}">edit</a> |
-                        <a href="#" th:href="@{'/storehouses/delete/' + ${city.id}}">delete</a>
+                        <a href="#" th:href="@{'/storehouses/' + ${storehouse.id}}">view</a> |
+                        <a href="#" th:href="@{'/storehouses/edit/' + ${storehouse.id}}">edit</a> |
+                        <a href="#" th:href="@{'/storehouses/delete/' + ${storehouse.id}}">delete</a>
                     </td>
                 </tr>
                 </tbody>
