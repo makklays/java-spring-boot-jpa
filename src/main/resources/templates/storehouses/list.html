@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{app.title}"> Title </title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-6">
+            <h1 th:text="#{app.list-storehouses}">List of storehouses</h1>
+        </div>
+        <div class="col-md-6 align-self-center" style="text-align:right;">
+            <a href="#" th:href="@{/storehouses/add}" th:text="#{app.add-storehouse}" class="btn btn-primary"> Add storehouse</a>
+        </div>
+    </div>
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/welcome}">Home</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/menu}">Menu</a></li>
+            <li class="breadcrumb-item active" aria-current="page" th:text="#{app.list-storehouses}" >List of storehouses</li>
+        </ol>
+    </nav>
+
+    <div class="card">
+        <div class="card-body">
+
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th class="text-center" style="width:50px;" th:text="#{id}"/></th>
+                    <th th:text="#{title}"></th>
+                    <th th:text="#{city}"></th>
+                    <th class="text-center" th:text="#{page.actions}"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="storehouse : ${storehouses}">
+                    <td class="text-center" style="width:30px;" th:text="${storehouse.Id}">Id</td>
+                    <td>
+                        <a href="#" th:href="@{'/storehouses/' + ${storehouse.id}}" th:text="${storehouse.title}">Title</a>
+                    </td>
+                    <td>
+                        <a href="#" th:href="@{'/city/' + ${storehouse.city_id}}" th:text="${storehouse.city.title}">Title</a>
+                    </td>
+
+                    <td class="text-center" style="width:150px;">
+                        <a href="#" th:href="@{'/storehouses/' + ${city.id}}">view</a> |
+                        <a href="#" th:href="@{'/storehouses/edit/' + ${city.id}}">edit</a> |
+                        <a href="#" th:href="@{'/storehouses/delete/' + ${city.id}}">delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <br/><br/>
+
+</div>
+</body>
+</html>
+
