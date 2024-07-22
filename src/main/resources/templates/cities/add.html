@@ -20,23 +20,38 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a th:href="@{/welcome}">Home</a></li>
             <li class="breadcrumb-item"><a th:href="@{/menu}">Menu</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/cities/list}" th:text="#{app.list-cities}">List</a></li>
             <li class="breadcrumb-item active" aria-current="page" th:text="#{app.add-city}" >Add city</li>
         </ol>
     </nav>
 
-    <div class="card">
-        <div class="card-body">
+    <form action="#" th:action="@{/cities/add-post}" th:object="${cityForm}" method="POST" >
+        <div class="card">
+            <div class="card-body">
 
-            <form action="" method="POST" >
+                <div class="mb-3">
+                    <label for="title1" class="form-label">Title</label>
+                    <input type="text" th:field="*{title}" class="form-control" id="title1">
+                    <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" style="color:red;">Title error</div>
+                    <!--div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div-->
+                </div>
+                <div class="mb-3">
+                    <label for="text1" class="form-label">Description</label>
+                    <textarea rows="6" name="description" class="form-control" id="text1"></textarea>
+                </div>
+                <!--div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                </div-->
 
-            </form>
-
+            </div>
         </div>
-    </div>
 
-    <br/><br/>
+        <br/>
+        <button type="submit" class="btn btn-primary" th:text="#{form.submit}">Submit</button>
+        <a href="#" th:href="@{/cities/list}" th:text="#{app.back}" class="btn btn-secondary" style="margin-left:20px;"> Back</a>
 
-    <a href="#" th:href="@{/cities/list}" th:text="#{app.back}" class="btn btn-secondary"> Back</a>
+    </form>
 
     <br/><br/>
 

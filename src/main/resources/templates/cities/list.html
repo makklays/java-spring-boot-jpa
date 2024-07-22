@@ -39,11 +39,11 @@
                 <tr th:each="city : ${cities}">
                     <td class="text-center" style="width:30px;" th:text="${city.Id}">Id</td>
                     <td>
-                        <a href="#" th:href="@{'/cities/view/' + ${city.id}}" th:text="${city.title}">Title</a>
+                        <a href="#" th:href="@{'/cities/' + ${city.id}}" th:text="${city.title}">Title</a>
                     </td>
 
                     <td class="text-center" style="width:150px;">
-                        <a href="#" th:href="@{'/cities/view/' + ${city.id}}">view</a> |
+                        <a href="#" th:href="@{'/cities/' + ${city.id}}">view</a> |
                         <a href="#" th:href="@{'/cities/edit/' + ${city.id}}">edit</a> |
                         <a href="#" th:href="@{'/cities/delete/' + ${city.id}}">delete</a>
                     </td>

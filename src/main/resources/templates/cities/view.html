@@ -20,6 +20,7 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a th:href="@{/welcome}">Home</a></li>
             <li class="breadcrumb-item"><a th:href="@{/menu}">Menu</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/cities/list}" th:text="#{app.list-cities}">List</a></li>
             <li class="breadcrumb-item active" aria-current="page" th:text="#{app.view-city}" >View city</li>
         </ol>
     </nav>
@@ -27,18 +28,26 @@
     <div class="card">
         <div class="card-body">
 
-            <table >
+            <table class="table table-striped table-hover">
                 <tr>
                     <th>ID</th>
-                    <td>1</td>
+                    <td th:text="${city.Id}"></td>
                 </tr>
                 <tr>
                     <th>Title</th>
-                    <td>1111111</td>
+                    <td th:text="${city.title}"></td>
                 </tr>
                 <tr>
                     <th>Description</th>
-                    <td>decrr text</td>
+                    <td th:text="${city.description}"></td>
+                </tr>
+                <tr>
+                    <th>Created</th>
+                    <td th:text="${city.createdAt}"></td>
+                </tr>
+                <tr>
+                    <th>Updated</th>
+                    <td th:text="${city.updatedAt}"></td>
                 </tr>
             </table>
 

@@ -2,21 +2,25 @@ package com.techmatrix18.views;
 
 import com.techmatrix18.model.City;
 import com.techmatrix18.service.CityService;
+import com.techmaxtrix18.validatingforminput.CityForm;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.io.IOException;
 import java.util.List;
 
 @Controller
 @RequestMapping("/cities")
-public class CityViewsController {
+public class CityViewsController implements WebMvcConfigurer {
 
     private static final Logger logger = LoggerFactory.getLogger(com.techmatrix18.web.api.UserController.class);
 
@@ -34,12 +38,16 @@ public class CityViewsController {
     }
 
     @GetMapping("/add")
-    public String add() {
+    public String add(CityForm cityForm) {
         return "cities/add";
     }
 
     @PostMapping("/add-post")
-    public void addPost(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public String addPost(HttpServletRequest request, HttpServletResponse response, @Valid CityForm cityForm, BindingResult bindingResult) throws Exception {
+        if (bindingResult.hasErrors()) {
+            return "cities/add";
+        }
+
         String title = request.getParameter("title");
         String description = request.getParameter("description");
 
@@ -50,59 +58,58 @@ public class CityViewsController {
 
         System.out.printf("First name: %s; Last name: %s \n", title, description);
 
-        //return "redirect/:cities";
-        response.sendRedirect("/list");
+        return "redirect:/cities/list";
     }
 
-    @GetMapping(path = "/edit/{cityId:\\\\d+}")
-    public String edit(HttpServletRequest request, HttpServletResponse response, Model model, @PathVariable Long cityId) throws IOException {
+    @GetMapping(path = "/edit/{cityId}")
+    public String edit(Model model, @PathVariable Long cityId, CityForm cityForm) throws IOException {
         City city = cityService.getCityById(cityId);
-        //ModelAndView mav = new ModelAndView("cities-edit");
         if (city.getId() != null) {
-            //mav.addObject("city", cityService.getCityById(cityId));
             model.addAttribute("city", city);
             System.out.println("City found..");
         } else {
             model.addAttribute("city", null);
-            //mav.addObject("city", null);
             System.out.println("Error! City not found..");
         }
 
         return "cities/edit";
     }
 
-    @PostMapping(path = "/edit/{cityId:\\\\d+}")
-    public void editPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    @PostMapping("/edit-post")
+    public String editPost(HttpServletRequest request, HttpServletResponse response, @Valid CityForm cityForm, BindingResult bindingResult) {
+        /*if (bindingResult.hasErrors()) {
+            return "cities/edit";
+        }*/
+
         String title = request.getParameter("title");
         String description = request.getParameter("description");
         String cityId = request.getParameter("cityId");
 
         City city = cityService.getCityById(Long.parseLong(cityId));
-        ModelAndView mav = new ModelAndView("cities-edit");
         if (city.getId() != null) {
             city.setTitle(title);
             city.setDescription(description);
             cityService.updateCity(city);
             System.out.println("City updated successfully!");
         } else {
-            mav.addObject("city", null);
             System.out.println("Error! City not found..");
         }
 
-        response.sendRedirect("/edit/" + city.getId() );
+        //response.sendRedirect("/cities/edit/" + city.getId() );
+        return "redirect:/cities/edit/" + city.getId();
     }
 
-    @GetMapping(path = "/delete/{cityId:\\\\d+}")
+    @GetMapping("/delete/{cityId}")
     public void delete(HttpServletRequest request, HttpServletResponse response, @PathVariable Long cityId) throws IOException {
         City city = cityService.getCityById(cityId);
         if (city.getId() != null) {
             cityService.deleteCity(cityId);
         }
 
-        response.sendRedirect("/list");
+        response.sendRedirect("/cities/list");
     }
 
-    @GetMapping(path = "/{cityId}")
+    @GetMapping("/{cityId}")
     public String view(Model model, @PathVariable String cityId) {
         City city = cityService.getCityById(Long.parseLong(cityId));
         if (city.getId() != null) {
