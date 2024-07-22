@@ -22,7 +22,7 @@
         </ol>
     </nav>
 
-    <form action="#" th:action="@{/cities/edit-post}" th:object="${cityForm}" method="POST" >
+    <form action="#" th:action="@{/cities/update/{id}(id=${city.id})}" th:object="${city}" method="post">
 
         <input type="hidden" name="cityId" th:value="${city.Id}">
 
@@ -31,12 +31,12 @@
 
                 <div class="mb-3">
                     <label for="title1" class="form-label">Title</label>
-                    <input type="text" class="form-control" id="title1" th:value="${city.title}" >
-                    <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" style="color:red;">Title error</div>
+                    <input type="text" class="form-control" id="title1" th:field="*{title}">
+                    <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" style="color:red;">Title error</span>
                 </div>
                 <div class="mb-3">
                     <label for="text1" class="form-label">Description</label>
-                    <textarea rows="6" name="description" class="form-control" id="text1" th:text="${city.description}"></textarea>
+                    <textarea rows="6" name="description" class="form-control" id="text1" th:field="*{description}"></textarea>
                 </div>
 
             </div>

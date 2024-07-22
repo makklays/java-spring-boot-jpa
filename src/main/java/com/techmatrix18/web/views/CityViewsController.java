@@ -66,37 +66,25 @@ public class CityViewsController implements WebMvcConfigurer {
         City city = cityService.getCityById(cityId);
         if (city.getId() != null) {
             model.addAttribute("city", city);
-            System.out.println("City found..");
+            logger.info("City found..");
         } else {
             model.addAttribute("city", null);
-            System.out.println("Error! City not found..");
+            logger.warn("Error! City not found..");
         }
 
         return "cities/edit";
     }
 
-    @PostMapping("/edit-post")
-    public String editPost(HttpServletRequest request, HttpServletResponse response, @Valid CityForm cityForm, BindingResult bindingResult) {
-        /*if (bindingResult.hasErrors()) {
+    @PostMapping("/update/{id}")
+    public String editPost(@PathVariable("id") long id, @Valid City city, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            city.setId(id);
             return "cities/edit";
-        }*/
-
-        String title = request.getParameter("title");
-        String description = request.getParameter("description");
-        String cityId = request.getParameter("cityId");
-
-        City city = cityService.getCityById(Long.parseLong(cityId));
-        if (city.getId() != null) {
-            city.setTitle(title);
-            city.setDescription(description);
-            cityService.updateCity(city);
-            System.out.println("City updated successfully!");
-        } else {
-            System.out.println("Error! City not found..");
         }
 
-        //response.sendRedirect("/cities/edit/" + city.getId() );
-        return "redirect:/cities/edit/" + city.getId();
+        cityService.updateCity(city);
+
+        return "redirect:/cities/list";
     }
 
     @GetMapping("/delete/{cityId}")

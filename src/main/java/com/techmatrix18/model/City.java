@@ -1,5 +1,6 @@
 package com.techmatrix18.model;
 
+import jakarta.validation.constraints.NotBlank;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -25,6 +26,7 @@ public class City {
     private Long id;
 
     @Column(name = "title", length = 255)
+    @NotBlank
     private String title;
 
     @Column(name = "description", length = 500)
