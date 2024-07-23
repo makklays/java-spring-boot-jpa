@@ -40,7 +40,7 @@ public class StorehouseController {
         return storehouseService.getAllStorehouses();
     }
 
-    @PostMapping(path = "/add")
+    @PostMapping(path = "/add", produces = "application/json;charset=UTF-8")
     public ResponseEntity<Storehouse> addStorehouse (@Valid @RequestBody Storehouse storehouse) {
        if (storehouse.getId() != null) {
            return ResponseEntity.badRequest().build();
@@ -49,7 +49,7 @@ public class StorehouseController {
         return ResponseEntity.ok(storehouse);
     }
 
-    @PatchMapping(path = "/update")
+    @PatchMapping(path = "/update", produces = "application/json;charset=UTF-8")
     public @ResponseBody String updateStorehouse (@RequestParam Long storehouseId, @RequestParam Long cityId, @RequestParam String title, @RequestParam String description) {
         Storehouse s = storehouseService.getStorehouseById(storehouseId);
         if (s.getId() != null) {
@@ -58,16 +58,16 @@ public class StorehouseController {
             s.setDescription(description);
             storehouseService.updateStorehouse(s);
         }
-        return "Updated";
+        return "{\"status\": \"success\", \"message\": \"City updated successfully!\"}";
     }
 
-    @DeleteMapping(path = "/delete/{storehouseId:\\\\d+}")
+    @DeleteMapping(path = "/delete/{storehouseId}", produces = "application/json;charset=UTF-8")
     public @ResponseBody String deleteStorehouse (@PathVariable Long storehouseId) {
         Storehouse s = storehouseService.getStorehouseById(storehouseId);
         if (s.getId() != null) {
             storehouseService.deleteStorehouse(storehouseId);
         }
-        return "Deleted";
+        return "{\"status\": \"success\", \"message\": \"City deleted successfully!\"}";
     }
 }
 

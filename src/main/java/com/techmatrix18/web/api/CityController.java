@@ -39,16 +39,16 @@ public class CityController {
         return cityService.getAllCities();
     }
 
-    @PostMapping(path = "/add")
+    @PostMapping(path = "/add", produces = "application/json;charset=UTF-8")
     public @ResponseBody String addCity (@RequestParam String title, @RequestParam String description) {
         City c = new City();
         c.setTitle(title);
         c.setDescription(description);
         cityService.addCity(c);
-        return "Saved";
+        return "{\"status\": \"success\", \"message\": \"City saved successfully!\"}";
     }
 
-    @PatchMapping(path = "/update")
+    @PatchMapping(path = "/update", produces = "application/json;charset=UTF-8")
     public @ResponseBody String updateBarco (@RequestParam Long cityId, @RequestParam String title, @RequestParam String description) {
         City c = cityService.getCityById(cityId);
         if (c.getId() != null) {
@@ -56,16 +56,18 @@ public class CityController {
             c.setDescription(description);
             cityService.updateCity(c);
         }
-        return "Updated";
+        //return "Updated";
+        return "{\"status\": \"success\", \"message\": \"City updated successfully!\"}";
     }
 
-    @DeleteMapping(path = "/delete/{cityId:\\\\d+}")
+    @DeleteMapping(path = "/delete/{cityId}", produces = "application/json;charset=UTF-8")
     public @ResponseBody String deleteCity (@PathVariable Long cityId) {
         City c = cityService.getCityById(cityId);
         if (c.getId() != null) {
             cityService.deleteCity(cityId);
         }
-        return "Deleted";
+        //return "Deleted";
+        return "{\"status\": \"success\", \"message\": \"City deleted successfully!\"}";
     }
 }
 
