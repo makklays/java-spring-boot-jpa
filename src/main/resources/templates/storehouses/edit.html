@@ -40,7 +40,7 @@
                     <label for="city1" class="form-label">City</label>
                     <select name="city_id" class="form-control" id="city1">
                         <option value="">---- Select option ----</option>
-                        <option th:each="city : ${cities}" th:value="${city.getId()}" th:text="${city.getTitle()}"></option>
+                        <option th:each="city : ${cities}" th:value="${city.getId()}" th:text="${city.getTitle()}" th:selected="${city.getId()==storehouse.city.getId()}"></option>
                     </select>
                 </div>
 
