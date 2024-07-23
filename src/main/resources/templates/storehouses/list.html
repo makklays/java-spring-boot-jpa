@@ -43,7 +43,7 @@
                         <a href="#" th:href="@{'/storehouses/' + ${storehouse.id}}" th:text="${storehouse.title}">Title</a>
                     </td>
                     <td>
-                        <a href="#" th:href="@{'/cities/' + ${storehouse.cityId}}" th:text="${storehouse.cityId}">Title</a>
+                        <a href="#" th:href="@{'/cities/' + ${storehouse.city.getId()}}" th:text="${storehouse.city.getTitle()}">Title</a>
                     </td>
 
                     <td class="text-center" style="width:150px;">

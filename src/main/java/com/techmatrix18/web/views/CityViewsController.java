@@ -2,7 +2,6 @@ package com.techmatrix18.web.views;
 
 import com.techmatrix18.model.City;
 import com.techmatrix18.service.CityService;
-import com.techmaxtrix18.validatingforminput.CityForm;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -37,13 +36,8 @@ public class CityViewsController implements WebMvcConfigurer {
         return "cities/list";
     }
 
-    @GetMapping("/add")
-    public String add(CityForm cityForm) {
-        return "cities/add";
-    }
-
     @PostMapping("/add-post")
-    public String addPost(HttpServletRequest request, HttpServletResponse response, @Valid CityForm cityForm, BindingResult bindingResult) throws Exception {
+    public String addPost(HttpServletRequest request, HttpServletResponse response, BindingResult bindingResult) throws Exception {
         if (bindingResult.hasErrors()) {
             return "cities/add";
         }
@@ -62,7 +56,7 @@ public class CityViewsController implements WebMvcConfigurer {
     }
 
     @GetMapping(path = "/edit/{cityId}")
-    public String edit(Model model, @PathVariable Long cityId, CityForm cityForm) throws IOException {
+    public String edit(Model model, @PathVariable Long cityId) throws IOException {
         City city = cityService.getCityById(cityId);
         if (city.getId() != null) {
             model.addAttribute("city", city);

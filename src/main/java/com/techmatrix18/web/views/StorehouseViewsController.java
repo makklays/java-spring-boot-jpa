@@ -35,7 +35,7 @@ public class StorehouseViewsController {
     }
 
     @GetMapping("/list")
-    public String list(Model model) throws Exception {
+    public String list(Model model) {
         //
         model.addAttribute("storehouses", storehouseService.getAllStorehouses());
         return "storehouses/list";
@@ -51,27 +51,12 @@ public class StorehouseViewsController {
     }
 
     @PostMapping("/add-post")
-    public String addPost(HttpServletRequest request, HttpServletResponse response, Model model, @Valid Storehouse storehouse, BindingResult bindingResult) {
+    public String addPost(Model model, @Valid Storehouse storehouse, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "storehouses/add";
         }
 
-        String title = request.getParameter("title");
-        String description = request.getParameter("description");
-        String city_id = request.getParameter("city_id");
-
-        System.out.printf("city_id: %s \n", Long.parseLong(city_id));
-
-        Storehouse st = new Storehouse();
-        st.setTitle(title);
-        st.setDescription(description);
-        st.setCityId(Long.parseLong(city_id));
-
-        System.out.println("Storehouse: " + st.toString());
-
-        storehouseService.addStorehouse(st);
-
-        //System.out.printf("Title: %s; description: %s city_id: %s \n", title, description, Long.parseLong(city_id));
+        storehouseService.addStorehouse(storehouse);
 
         return "redirect:/storehouses/list";
     }
@@ -81,7 +66,7 @@ public class StorehouseViewsController {
         Storehouse storehouse = storehouseService.getStorehouseById(storehouseId);
         if (storehouse.getId() != null) {
             model.addAttribute("storehouse", storehouse);
-            model.addAttribute("city", cityService.getCityById(storehouse.getCityId()));
+            //model.addAttribute("city", cityService.getCityById(storehouse.getCityId()));
             logger.info("Storehouse found..");
         } else {
             model.addAttribute("storehouse", null);
@@ -122,7 +107,7 @@ public class StorehouseViewsController {
         Storehouse storehouse = storehouseService.getStorehouseById(Long.parseLong(storehouseId));
         if (storehouse.getId() != null) {
             model.addAttribute("storehouse", storehouse);
-            model.addAttribute("city", cityService.getCityById(storehouse.getCityId()));
+            //model.addAttribute("city", cityService.getCityById(storehouse.getCityId()));
             logger.info("Storehouse found..");
         } else {
             model.addAttribute("storehouse", null);

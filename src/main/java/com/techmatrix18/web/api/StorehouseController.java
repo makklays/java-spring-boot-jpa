@@ -4,7 +4,9 @@ import com.techmatrix18.model.Storehouse;
 import com.techmatrix18.repository.StorehouseRepository;
 import com.techmatrix18.service.StorehouseService;
 import com.techmatrix18.service.implementation.StorehouseServiceImpl;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.bind.ValidationException;
@@ -39,20 +41,19 @@ public class StorehouseController {
     }
 
     @PostMapping(path = "/add")
-    public @ResponseBody String addStorehouse (@RequestParam Long cityId, @RequestParam String title, @RequestParam String description) {
-        Storehouse s = new Storehouse();
-        s.setCityId(cityId);
-        s.setTitle(title);
-        s.setDescription(description);
-        storehouseService.addStorehouse(s);
-        return "Saved";
+    public ResponseEntity<Storehouse> addStorehouse (@Valid @RequestBody Storehouse storehouse) {
+       if (storehouse.getId() != null) {
+           return ResponseEntity.badRequest().build();
+       }
+        storehouseService.addStorehouse(storehouse);
+        return ResponseEntity.ok(storehouse);
     }
 
     @PatchMapping(path = "/update")
     public @ResponseBody String updateStorehouse (@RequestParam Long storehouseId, @RequestParam Long cityId, @RequestParam String title, @RequestParam String description) {
         Storehouse s = storehouseService.getStorehouseById(storehouseId);
         if (s.getId() != null) {
-            s.setCityId(cityId);
+          //  s.setCityId(cityId);
             s.setTitle(title);
             s.setDescription(description);
             storehouseService.updateStorehouse(s);

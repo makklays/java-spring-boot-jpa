@@ -52,11 +52,13 @@ public class SecurityConfiguration {
                                 .requestMatchers(new AntPathRequestMatcher("/js/**")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/*.{css,js}")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/*.{ico,png,svg,webapp}")).permitAll()
-                                .requestMatchers("/api/v1/**").authenticated()
+
                                 .requestMatchers("/users/**", "/menu").authenticated()
                                 .requestMatchers("/cities/**").authenticated())
                 .formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/**").authenticated())
+                .httpBasic(Customizer.withDefaults())
+                .authorizeHttpRequests(auth -> auth.requestMatchers("/api/v1/**").authenticated())
                 .build();
     }
 

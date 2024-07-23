@@ -40,7 +40,7 @@
                 <tr>
                     <th>City</th>
                     <td >
-                        <a href="#" th:href="@{'/cities/' + ${city.id}}" th:text="${city.title}">Title</a>
+                        <a href="#" th:href="@{'/cities/' + ${storehouse.getCity().getId()}}" th:text="${storehouse.getCity().getTitle()}">Title</a>
                     </td>
                 </tr>
                 <tr>
