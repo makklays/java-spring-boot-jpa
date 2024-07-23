@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{app.title}"> Title </title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-6">
+            <h1 th:text="#{app.edit-product}">Edit product</h1>
+        </div>
+    </div>
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/welcome}">Home</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/menu}">Menu</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/products/list}" th:text="#{app.list-products}">List</a></li>
+            <li class="breadcrumb-item active" aria-current="page" th:text="#{app.edit-product}" >Edit product</li>
+        </ol>
+    </nav>
+
+    <form action="#" th:action="@{/products/update/{id}(id=${product.id})}" th:object="${product}" method="post">
+
+        <input type="hidden" name="productId" th:value="${product.Id}" />
+        <!--input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /-->
+
+        <div class="card">
+            <div class="card-body">
+
+                <div class="mb-3">
+                    <label for="title1" class="form-label">Title</label>
+                    <input type="text" class="form-control" id="title1" th:field="*{title}">
+                    <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" style="color:red;">Title error</span>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <input type="checkbox" th:field="*{is_dangerous}" class="form-control" id="is_dangerous1">
+                            <label for="is_dangerous1" class="form-label">Is dangerous</label>
+                            <div th:if="${#fields.hasErrors('is_dangerous')}" th:errors="*{is_dangerous}" style="color:red;">Is dangerous error</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <input type="checkbox" th:field="*{is_glass}" class="form-control" id="is_glass1">
+                            <label for="is_glass1" class="form-label">Is glass</label>
+                            <div th:if="${#fields.hasErrors('is_glass')}" th:errors="*{is_glass}" style="color:red;">Is glass error</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="text1" class="form-label">Description</label>
+                    <textarea rows="6" name="description" class="form-control" id="text1" th:field="*{description}"></textarea>
+                </div>
+
+            </div>
+        </div>
+
+        <br/>
+        <button type="submit" class="btn btn-primary" th:text="#{form.submit}">Submit</button>
+        <a href="#" th:href="@{/products/list}" th:text="#{app.back}" class="btn btn-secondary" style="margin-left:20px;"> Back</a>
+
+    </form>
+
+    <br/><br/>
+
+</div>
+</body>
+</html>
+

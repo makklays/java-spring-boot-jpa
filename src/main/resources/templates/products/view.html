@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{app.title}"> Title </title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-6">
+            <h1 th:text="#{app.view-product}">View product</h1>
+        </div>
+        <div class="col-md-6 align-self-center" style="text-align:right;">
+            <a href="#" th:href="@{/products/edit/1}" th:text="#{app.edit-product}" class="btn btn-primary"> Edit product</a>
+        </div>
+    </div>
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/welcome}">Home</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/menu}">Menu</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/products/list}" th:text="#{app.list-products}">List</a></li>
+            <li class="breadcrumb-item active" aria-current="page" th:text="#{app.view-product}" >View product</li>
+        </ol>
+    </nav>
+
+    <div class="card">
+        <div class="card-body">
+
+            <table class="table table-striped table-hover">
+                <tr>
+                    <th>ID</th>
+                    <td th:text="${product.Id}"></td>
+                </tr>
+                <tr>
+                    <th th:text="#{title}">Title</th>
+                    <td th:text="${product.title}"></td>
+                </tr>
+
+                <tr>
+                    <th th:text="#{weight}">Weight</th>
+                    <td th:text="${product.weight}"></td>
+                </tr>
+
+                <tr>
+                    <th th:text="#{is_dangerous}">Is dangerous</th>
+                    <td th:text="${product.is_dangerous}"></td>
+                </tr>
+                <tr>
+                    <th th:text="#{is_glass}">Is glass</th>
+                    <td th:text="${product.is_glass}"></td>
+                </tr>
+
+                <tr>
+                    <th th:text="#{description}">Description</th>
+                    <td th:text="${product.description}"></td>
+                </tr>
+
+                <tr>
+                    <th>Created</th>
+                    <td th:text="${product.createdAt}"></td>
+                </tr>
+                <tr>
+                    <th>Updated</th>
+                    <td th:text="${product.updatedAt}"></td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+
+    <br/><br/>
+
+    <a href="#" th:href="@{/products/list}" th:text="#{app.back}" class="btn btn-secondary"> Back</a>
+
+    <br/><br/>
+
+</div>
+</body>
+</html>
+

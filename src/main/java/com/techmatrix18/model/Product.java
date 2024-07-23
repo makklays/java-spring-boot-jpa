@@ -1,5 +1,6 @@
 package com.techmatrix18.model;
 
+import jakarta.validation.constraints.NotBlank;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -25,6 +26,7 @@ public class Product {
     private Long id;
 
     @Column(name = "title", length = 255)
+    @NotBlank
     private String title;
 
     @Column(name = "description", length = 500)
@@ -39,8 +41,8 @@ public class Product {
     @Column(name = "is_glass")
     private Integer isGlass; // 0 or 1
 
-    @Column(name = "category_id", insertable=false, updatable=false)
-    private Long categoryId;
+    //@Column(name = "category_id", insertable=false, updatable=false)
+    //private Long categoryId;
 
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
@@ -108,12 +110,12 @@ public class Product {
         this.isGlass = isGlass;
     }
 
-    public Long getCategoryId() {
-        return categoryId;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategoryId(Long categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public Timestamp getCreatedAt() {
@@ -136,12 +138,12 @@ public class Product {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Product product)) return false;
-        return getId().equals(product.getId()) && getTitle().equals(product.getTitle()) && getDescription().equals(product.getDescription()) && getWeight().equals(product.getWeight()) && getIsDangerous().equals(product.getIsDangerous()) && getIsGlass().equals(product.getIsGlass()) && getCategoryId().equals(product.getCategoryId()) && getCreatedAt().equals(product.getCreatedAt()) && getUpdatedAt().equals(product.getUpdatedAt());
+        return getId().equals(product.getId()) && getTitle().equals(product.getTitle()) && getDescription().equals(product.getDescription()) && getWeight().equals(product.getWeight()) && getIsDangerous().equals(product.getIsDangerous()) && getIsGlass().equals(product.getIsGlass()) && getCreatedAt().equals(product.getCreatedAt()) && getUpdatedAt().equals(product.getUpdatedAt());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getTitle(), getDescription(), getWeight(), getIsDangerous(), getIsGlass(), getCategoryId(), getCreatedAt(), getUpdatedAt());
+        return Objects.hash(getId(), getTitle(), getDescription(), getWeight(), getIsDangerous(), getIsGlass(), getCreatedAt(), getUpdatedAt());
     }
 
     @Override
@@ -153,7 +155,6 @@ public class Product {
                 ", weight=" + weight +
                 ", isDangerous=" + isDangerous +
                 ", isGlass=" + isGlass +
-                ", categoryId=" + categoryId +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';

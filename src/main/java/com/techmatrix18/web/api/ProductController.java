@@ -38,20 +38,20 @@ public class ProductController {
     }
 
     @PostMapping(path = "/add")
-    public @ResponseBody String addProduct (@RequestParam String title, @RequestParam String description, @RequestParam Integer weight, @RequestParam Integer isDangerous, @RequestParam Integer isGlass, @RequestParam Long categoryId) {
+    public @ResponseBody String addProduct (@RequestParam String title, @RequestParam String description, @RequestParam Integer weight, @RequestParam Integer isDangerous, @RequestParam Integer isGlass) {
         Product p = new Product();
         p.setTitle(title);
         p.setDescription(description);
         p.setWeight(weight);
         p.setIsDangerous(isDangerous);
         p.setIsGlass(isGlass);
-        p.setCategoryId(categoryId);
+        //p.setCategoryId(categoryId);
         productService.addProduct(p);
         return "Saved";
     }
 
     @PatchMapping(path = "/update")
-    public @ResponseBody String updateProduct (@RequestParam Long productId, @RequestParam String title, @RequestParam String description, @RequestParam Integer weight, @RequestParam Integer isDangerous, @RequestParam Integer isGlass, @RequestParam Long categoryId) {
+    public @ResponseBody String updateProduct (@RequestParam Long productId, @RequestParam String title, @RequestParam String description, @RequestParam Integer weight, @RequestParam Integer isDangerous, @RequestParam Integer isGlass) {
         Product p = productService.getProductById(productId);
         if (p.getId() != null) {
             p.setTitle(title);
@@ -59,7 +59,7 @@ public class ProductController {
             p.setWeight(weight);
             p.setIsDangerous(isDangerous);
             p.setIsGlass(isGlass);
-            p.setCategoryId(categoryId);
+            //p.setCategoryId(categoryId);
             productService.updateProduct(p);
         }
         return "Updated";
