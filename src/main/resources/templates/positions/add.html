@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{app.title}"> Title </title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-6">
+            <h1 th:text="#{app.add-position}">Add position</h1>
+        </div>
+        <div class="col-md-6 align-self-center" style="text-align:right;">
+            <a href="#" th:href="@{/positions/add}" th:text="#{app.add-position}" class="btn btn-primary"> Add position</a>
+        </div>
+    </div>
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/welcome}">Home</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/menu}">Menu</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/positions/list}" th:text="#{app.list-positions}">List</a></li>
+            <li class="breadcrumb-item active" aria-current="page" th:text="#{app.add-position}" >Add position</li>
+        </ol>
+    </nav>
+
+    <form action="#" th:action="@{/positions/add-post}" th:object="${position}" method="post" >
+        <div class="card">
+            <div class="card-body">
+
+                <div class="mb-3">
+                    <label for="title1" class="form-label">Title</label>
+                    <input type="text" th:field="*{title}" class="form-control" id="title1">
+                    <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" style="color:red;">Title error</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="text1" class="form-label">Description</label>
+                    <textarea rows="6" name="description" class="form-control" id="text1"></textarea>
+                </div>
+
+            </div>
+        </div>
+
+        <br/>
+        <button type="submit" class="btn btn-primary" th:text="#{form.submit}">Submit</button>
+        <a href="#" th:href="@{/positions/list}" th:text="#{app.back}" class="btn btn-secondary" style="margin-left:20px;"> Back</a>
+
+    </form>
+
+    <br/><br/>
+
+</div>
+</body>
+</html>
+

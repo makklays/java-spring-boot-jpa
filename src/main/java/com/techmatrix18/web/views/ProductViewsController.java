@@ -41,10 +41,10 @@ public class ProductViewsController {
     }
 
     @GetMapping("/add")
-    public String add(Model model, Barco barco) {
+    public String add(Model model, Product product) {
         // cities
         //List<City> cities = cityService.getAllCities();
-        //model.addAttribute("cities", cities);
+        model.addAttribute("product", product);
 
         return "products/add";
     }

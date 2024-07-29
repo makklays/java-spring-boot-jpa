@@ -1,5 +1,6 @@
 package com.techmatrix18.model;
 
+import jakarta.validation.constraints.NotBlank;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -37,9 +38,11 @@ public class User {
     private Long Id;
 
     @Column(name = "firstname", length = 255)
+    @NotBlank
     private String firstname;
 
     @Column(name = "lastname", length = 255)
+    @NotBlank
     private String lastname;
 
     @Column(name = "email", unique = true, nullable = false, length = 200)

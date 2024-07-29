@@ -48,8 +48,8 @@
                     </td>
 
                     <td class="text-center" th:text="${product.weight}"></td>
-                    <td class="text-center" th:text="${product.is_dangerous}"></td>
-                    <td class="text-center" th:text="${product.is_glass}"></td>
+                    <td class="text-center" th:text="${product.isDangerous}"></td>
+                    <td class="text-center" th:text="${product.isGlass}"></td>
 
                     <td class="text-center" style="width:150px;">
                         <a href="#" th:href="@{'/products/' + ${product.id}}">view</a> |

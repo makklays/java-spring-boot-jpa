@@ -1,5 +1,6 @@
 package com.techmatrix18.web.views;
 
+import com.techmatrix18.model.Category;
 import com.techmatrix18.model.User;
 import com.techmatrix18.repository.UserRepository;
 import com.techmatrix18.service.PositionService;
@@ -20,6 +21,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -57,14 +59,94 @@ public class UserViewsController {
     }
 
     @GetMapping(path = "/users/list")
-    public ModelAndView viewUsers() {
-        ModelAndView mav = new ModelAndView("list");
+    public String listUsers(Model model) {
+        //ModelAndView mav = new ModelAndView("list");
         //mav.addObject("greeting", "GeeksForGeeks Welcomes you to Spring!");
-        mav.addObject("users", userService.getAllUsers());
-        return mav;
+        //mav.addObject("users", userService.getAllUsers());
+        model.addAttribute("users", userService.getAllUsers());
+        //return mav;
+
+        return "users/list";
     }
 
-    @GetMapping(path = "/users/list1")
+    @GetMapping("/users/add")
+    public String add(Model model, User user) {
+        // cities
+        //List<City> cities = cityService.getAllCities();
+        model.addAttribute("user", user);
+
+        return "users/add";
+    }
+
+    @PostMapping("/users/add-post")
+    public String addPost(Model model, @Valid User user, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "users/add";
+        }
+
+        userService.addUser(user);
+
+        return "redirect:/users/list";
+    }
+
+    @GetMapping("/users/edit/{userId}")
+    public String edit(HttpServletRequest request, HttpServletResponse response, @PathVariable Long userId, Model model) throws Exception {
+        User user = userService.getUserById(userId);
+        if (user.getId() != null) {
+            model.addAttribute("user", user);
+            logger.info("User found..");
+        } else {
+            model.addAttribute("user", null);
+            logger.warn("Error! User not found..");
+        }
+
+        // cities
+        //List<City> cities = cityService.getAllCities();
+        //model.addAttribute("cities", cities);
+
+        return "users/edit";
+    }
+
+    @PostMapping("/users/update/{id}")
+    public String editPost(@PathVariable("id") long id, @Valid User user, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            user.setId(id);
+            return "users/edit";
+        }
+
+        userService.updateUser(user);
+
+        return "redirect:/users/list";
+    }
+
+    @GetMapping("/users/delete/{userId}")
+    public void delete(HttpServletRequest request, HttpServletResponse response, @PathVariable Long userId) throws IOException {
+        User user = userService.getUserById(userId);
+        if (user.getId() != null) {
+            userService.deleteUser(userId);
+        }
+
+        response.sendRedirect("/users/list");
+    }
+
+    @GetMapping("/users/{userId}")
+    public String view(Model model, @PathVariable String userId) {
+        User user = userService.getUserById(Long.parseLong(userId));
+        if (user.getId() != null) {
+            model.addAttribute("user", user);
+            logger.info("User found..");
+        } else {
+            model.addAttribute("user", null);
+            logger.info("Error! User not found..");
+        }
+
+        return "users/view";
+    }
+
+
+    //------ old code -----------
+
+    /*@GetMapping(path = "/users/list1")
     public String list1(Model model) {
         //model.addAttribute("users", userService.getAllUsers());
         model.addAttribute("vv", "V-V-V");
@@ -133,6 +215,6 @@ public class UserViewsController {
     public String createUser(@RequestParam String firstname, @RequestParam String lastname) {
         System.out.printf("First name: %s; Last name: %s \n", firstname, lastname);
         return "redirect:/users";
-    }
+    }*/
 }
 

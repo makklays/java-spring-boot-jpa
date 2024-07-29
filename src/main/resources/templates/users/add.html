@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{app.title}"> Title </title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-6">
+            <h1 th:text="#{app.add-user}">Add user</h1>
+        </div>
+        <div class="col-md-6 align-self-center" style="text-align:right;">
+            <a href="#" th:href="@{/users/add}" th:text="#{app.add-user}" class="btn btn-primary"> Add user</a>
+        </div>
+    </div>
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/welcome}">Home</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/menu}">Menu</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/users/list}" th:text="#{app.list-users}">List</a></li>
+            <li class="breadcrumb-item active" aria-current="page" th:text="#{app.add-user}" >Add user</li>
+        </ol>
+    </nav>
+
+    <form action="#" th:action="@{/users/add-post}" th:object="${user}" method="post" >
+        <div class="card">
+            <div class="card-body">
+
+                <div class="mb-3">
+                    <label for="firstname1" class="form-label" th:text="#{firstname}">Firstname</label>
+                    <input type="text" th:field="*{firstname}" class="form-control" id="firstname1">
+                    <div th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}" style="color:red;">Firstname error</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="lastname1" class="form-label" th:text="#{lastname}">Lastname</label>
+                    <input type="text" th:field="*{lastname}" class="form-control" id="lastname1">
+                    <div th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}" style="color:red;">Lastname error</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="email1" class="form-label">E-mail</label>
+                    <input type="text" th:field="*{email}" class="form-control" id="email1">
+                    <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color:red;">Email error</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="password1" class="form-label" th:text="#{password}">Password</label>
+                    <input type="text" th:field="*{password}" class="form-control" id="password1">
+                    <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" style="color:red;">Password error</div>
+                </div>
+
+            </div>
+        </div>
+
+        <br/>
+        <button type="submit" class="btn btn-primary" th:text="#{form.submit}">Submit</button>
+        <a href="#" th:href="@{/users/list}" th:text="#{app.back}" class="btn btn-secondary" style="margin-left:20px;"> Back</a>
+
+    </form>
+
+    <br/><br/>
+
+</div>
+</body>
+</html>
+
