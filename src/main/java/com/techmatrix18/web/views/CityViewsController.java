@@ -2,6 +2,7 @@ package com.techmatrix18.web.views;
 
 import com.techmatrix18.model.City;
 import com.techmatrix18.service.CityService;
+import com.techmatrix18.service.StorehouseService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -24,9 +25,11 @@ public class CityViewsController implements WebMvcConfigurer {
     private static final Logger logger = LoggerFactory.getLogger(com.techmatrix18.web.api.UserController.class);
 
     private final CityService cityService;
+    private final StorehouseService storehouseService;
 
-    public CityViewsController(CityService cityService) {
+    public CityViewsController(CityService cityService, StorehouseService storehouseService) {
         this.cityService = cityService;
+        this.storehouseService = storehouseService;
     }
 
     @GetMapping("/list")
@@ -101,6 +104,8 @@ public class CityViewsController implements WebMvcConfigurer {
             model.addAttribute("city", null);
             logger.info("Error! City not found..");
         }
+
+        model.addAttribute("storehouses", storehouseService.getStorehousesByCityId(Long.parseLong(cityId)));
 
         return "cities/view";
     }

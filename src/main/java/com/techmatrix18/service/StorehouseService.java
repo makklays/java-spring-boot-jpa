@@ -14,6 +14,8 @@ public interface StorehouseService {
     List<Storehouse> getAllStorehouses();
     Storehouse getStorehouseById(Long id);
 
+    List<Storehouse> getStorehousesByCityId(Long id);
+
     boolean addStorehouse(Storehouse storehouse);
     boolean updateStorehouse(Storehouse storehouse);
     boolean deleteStorehouse(Long id);

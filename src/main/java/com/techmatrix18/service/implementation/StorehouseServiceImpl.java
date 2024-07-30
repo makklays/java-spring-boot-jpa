@@ -31,6 +31,12 @@ public class StorehouseServiceImpl implements StorehouseService {
     }
 
     @Override
+    public List<Storehouse> getStorehousesByCityId(Long id) {
+        return storehouseRepository.findByCityId(id);
+    }
+
+
+    @Override
     public Storehouse getStorehouseById(Long id) {
         return storehouseRepository.getById(id);
     }
