@@ -43,12 +43,33 @@
                 </div>
 
                 <div class="mb-3">
+                    <label for="position1" class="form-label">Position</label>
+                    <select name="position" class="form-control" id="position1">
+                        <option value="">---- Select position ----</option>
+                        <option th:each="position : ${positions}" th:value="${position.getId()}" th:text="${position.getTitle()}" th:selected="${position.getId()==user.position.getId()}"></option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="bio1" class="form-label">Bio</label>
+                    <textarea rows="6" name="bio" class="form-control" id="bio1" th:field="*{bio}"></textarea>
+                </div>
+
+                <div class="mb-3">
                     <label for="email1" class="form-label">E-mail</label>
                     <input type="text" class="form-control" id="email1" th:field="*{email}">
                     <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color:red;">Email error</span>
                 </div>
 
-
+                <div class="mb-3">
+                    <label for="role1" class="form-label">Role</label>
+                    <select name="roles" class="form-control" id="role1">
+                        <option value="">---- Select role ----</option>
+                        <option th:value="USER" th:text="#{role_user}" th:selected="${roles == USER}"></option>
+                        <option th:value="ADMIN" th:text="#{role_admin}" th:selected="${roles == ADMIN}"></option>
+                    </select>
+                    <div th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}" style="color:red;">Roles error</div>
+                </div>
 
 
             </div>

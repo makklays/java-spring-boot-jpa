@@ -39,6 +39,13 @@
                 </tr>
 
                 <tr>
+                    <th th:text="#{category}">Category</th>
+                    <td>
+                        <a href="#" th:href="@{'/categories/' + ${product.category.getId()}}" th:text="${product.category.getTitle()}">Title</a>
+                    </td>
+                </tr>
+
+                <tr>
                     <th th:text="#{weight}">Weight</th>
                     <td th:text="${product.weight}"></td>
                 </tr>

@@ -3,10 +3,7 @@ package com.techmatrix18.web.views;
 import com.techmatrix18.model.Barco;
 import com.techmatrix18.model.City;
 import com.techmatrix18.model.Product;
-import com.techmatrix18.service.BarcoService;
-import com.techmatrix18.service.CityService;
-import com.techmatrix18.service.ProductService;
-import com.techmatrix18.service.StorehouseService;
+import com.techmatrix18.service.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -27,10 +24,12 @@ public class ProductViewsController {
 
     private final ProductService productService;
     private final StorehouseService storehouseService;
+    private final CategoryService categoryService;
 
-    public ProductViewsController(ProductService productService, StorehouseService storehouseService) {
+    public ProductViewsController(ProductService productService, StorehouseService storehouseService, CategoryService categoryService) {
         this.productService = productService;
         this.storehouseService = storehouseService;
+        this.categoryService = categoryService;
     }
 
     @GetMapping("/list")
@@ -45,6 +44,8 @@ public class ProductViewsController {
         // cities
         //List<City> cities = cityService.getAllCities();
         model.addAttribute("product", product);
+
+        model.addAttribute("categories", categoryService.getAllCategories());
 
         return "products/add";
     }
@@ -67,13 +68,15 @@ public class ProductViewsController {
             model.addAttribute("product", product);
             logger.info("Product found..");
         } else {
-            model.addAttribute("barco", null);
+            model.addAttribute("product", null);
             logger.warn("Error! Product not found..");
         }
 
         // cities
         //List<City> cities = cityService.getAllCities();
         //model.addAttribute("cities", cities);
+
+        model.addAttribute("categories", categoryService.getAllCategories());
 
         return "products/edit";
     }

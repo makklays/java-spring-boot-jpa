@@ -46,12 +46,14 @@ public class User {
     private String lastname;
 
     @Column(name = "email", unique = true, nullable = false, length = 200)
+    @NotBlank
     private String email;
 
     @Column(name = "password", length = 255)
     private String password;
 
     @Column(name = "roles", length = 255)
+    @NotBlank
     private String roles;
 
     @Column(name = "bio", length = 500)
@@ -80,6 +82,7 @@ public class User {
 
     public User() {}
     public User(String firstname, String lastname, String email, String password, Long positionId) {}
+    //public User(String firstname, String lastname, String email, Long positionId, String roles, String bio) {}
 
     public Long getId() {
         return Id;

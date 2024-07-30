@@ -33,6 +33,7 @@
                     <th class="text-center" style="width:50px;" th:text="#{id}"/></th>
                     <th th:text="#{title}"></th>
 
+                    <th class="text-center" th:text="#{position}"></th>
                     <th class="text-center" th:text="#{weight}"></th>
                     <th class="text-center" th:text="#{is_dangerous}"></th>
                     <th class="text-center" th:text="#{is_glass}"></th>
@@ -47,6 +48,9 @@
                         <a href="#" th:href="@{'/products/' + ${product.id}}" th:text="${product.title}">Title</a>
                     </td>
 
+                    <td>
+                        <a href="#" th:href="@{'/categories/' + ${product.category.getId()}}" th:text="${product.category.getTitle()}">Title</a>
+                    </td>
                     <td class="text-center" th:text="${product.weight}"></td>
                     <td class="text-center" th:text="${product.isDangerous}"></td>
                     <td class="text-center" th:text="${product.isGlass}"></td>

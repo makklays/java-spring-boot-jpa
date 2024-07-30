@@ -38,6 +38,18 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="mb-3">
+                            <label for="category1" class="form-label">Category</label>
+                            <select name="category" class="form-control" id="category1" th:field="*{category}">
+                                <option value="">---- Select category ----</option>
+                                <option th:each="category : ${categories}" th:value="${category.getId()}" th:text="${category.getTitle()}"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="mb-3">
                             <label for="weight1" class="form-label">Weight, t</label>
                             <input type="text" th:field="*{weight}" class="form-control" id="weight1">
                             <div th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}" style="color:red;">Weight error</div>
@@ -50,7 +62,7 @@
                     <textarea rows="6" name="description" class="form-control" id="text1"></textarea>
                 </div>
 
-                <div class="row">
+                <!--div class="row">
                     <div class="col-md-6">
                         <div class="mb-3">
                             <input type="checkbox" th:field="${product.isDangerous}" class="form-control" id="is_dangerous1">
@@ -68,7 +80,7 @@
                             <div th:if="${#fields.hasErrors('isGlass')}" th:errors="*{isGlass}" style="color:red;">Is glass error</div>
                         </div>
                     </div>
-                </div>
+                </div-->
 
 
             </div>

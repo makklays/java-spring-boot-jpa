@@ -75,6 +75,8 @@ public class UserViewsController {
         //List<City> cities = cityService.getAllCities();
         model.addAttribute("user", user);
 
+        model.addAttribute("positions", positionService.getAllPositions());
+
         return "users/add";
     }
 
@@ -103,6 +105,8 @@ public class UserViewsController {
         // cities
         //List<City> cities = cityService.getAllCities();
         //model.addAttribute("cities", cities);
+
+        model.addAttribute("positions", positionService.getAllPositions());
 
         return "users/edit";
     }

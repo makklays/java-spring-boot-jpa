@@ -33,7 +33,11 @@
                     <th class="text-center" style="width:50px;" th:text="#{id}"/></th>
                     <th th:text="#{firstname}"></th>
                     <th th:text="#{lastname}"></th>
-                    <th>E-mail</th>
+
+                    <th th:text="#{position}">Position</th>
+
+                    <th class="text-center">E-mail</th>
+                    <th class="text-center" th:text="#{role}">Role</th>
 
                     <th class="text-center" th:text="#{page.actions}"></th>
                 </tr>
@@ -45,7 +49,13 @@
                         <a href="#" th:href="@{'/users/' + ${user.id}}" th:text="${user.firstname}">Title</a>
                     </td>
                     <td th:text="${user.lastname}"></td>
-                    <td th:text="${user.email}"></td>
+
+                    <td>
+                        <a href="#" th:href="@{'/positions/' + ${user.position.getId()}}" th:text="${user.position.getTitle()}">Title</a>
+                    </td>
+
+                    <td class="text-center" th:text="${user.email}"></td>
+                    <td class="text-center" th:text="${user.roles}"></td>
 
                     <td class="text-center" style="width:150px;">
                         <a href="#" th:href="@{'/users/' + ${user.id}}">view</a> |

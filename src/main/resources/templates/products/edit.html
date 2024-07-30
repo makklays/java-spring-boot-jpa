@@ -30,13 +30,44 @@
         <div class="card">
             <div class="card-body">
 
-                <div class="mb-3">
-                    <label for="title1" class="form-label">Title</label>
-                    <input type="text" class="form-control" id="title1" th:field="*{title}">
-                    <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" style="color:red;">Title error</span>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="mb-3">
+                            <label for="title1" class="form-label">Title</label>
+                            <input type="text" class="form-control" id="title1" th:field="*{title}">
+                            <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" style="color:red;">Title error</span>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="row">
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="category1" class="form-label">Category</label>
+                            <select name="category" class="form-control" id="category1">
+                                <option value="">---- Select category ----</option>
+                                <option th:each="category : ${categories}" th:value="${category.getId()}" th:text="${category.getTitle()}" th:selected="${category.getId()==product.category.getId()}"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="weight1" class="form-label">Weight, t</label>
+                            <input type="text" th:field="*{weight}" class="form-control" id="weight1">
+                            <div th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}" style="color:red;">Weight error</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="text1" class="form-label">Description</label>
+                    <textarea rows="6" name="description" class="form-control" id="text1" th:field="*{description}"></textarea>
+                </div>
+
+                <!--div class="row">
                     <div class="col-md-6">
                         <div class="mb-3">
                             <input type="checkbox" th:field="*{isDangerous}" class="form-control" id="is_dangerous1">
@@ -54,12 +85,7 @@
                             <div th:if="${#fields.hasErrors('isGlass')}" th:errors="*{isGlass}" style="color:red;">Is glass error</div>
                         </div>
                     </div>
-                </div>
-
-                <div class="mb-3">
-                    <label for="text1" class="form-label">Description</label>
-                    <textarea rows="6" name="description" class="form-control" id="text1" th:field="*{description}"></textarea>
-                </div>
+                </div-->
 
             </div>
         </div>

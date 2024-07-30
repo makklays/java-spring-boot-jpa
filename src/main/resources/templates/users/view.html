@@ -41,9 +41,27 @@
                     <th th:text="#{lastname}">Lastname</th>
                     <td th:text="${user.lastname}"></td>
                 </tr>
+
+                <tr>
+                    <th>Position</th>
+                    <td >
+                        <a href="#" th:href="@{'/positions/' + ${user.getPosition().getId()}}" th:text="${user.getPosition().getTitle()}">Title</a>
+                    </td>
+                </tr>
+
                 <tr>
                     <th>E-mail</th>
                     <td th:text="${user.email}"></td>
+                </tr>
+
+                <tr>
+                    <th>Roles</th>
+                    <td th:text="${user.roles}"></td>
+                </tr>
+
+                <tr>
+                    <th th:text="#{bio}">Bio</th>
+                    <td th:text="${user.bio}"></td>
                 </tr>
 
                 <tr>
