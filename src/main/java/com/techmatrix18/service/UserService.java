@@ -16,6 +16,8 @@ public interface UserService {
     List<User> getAllUsers();
     User getUserById(Long id);
 
+    List<User> getUsersByPositionId(Long positionId);
+
     List<User> findByFirstname(String firstname);
 
     boolean addUser(User user);

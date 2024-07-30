@@ -77,6 +77,12 @@ public class UserServiceImpl implements UserService /*, UserDetailsService*/ {
     }
 
     @Override
+    public List<User> getUsersByPositionId(Long positionId) {
+        List<User> obj = userRepository.findByPositionId(positionId);
+        return obj;
+    }
+
+    @Override
     public synchronized boolean addUser(User user) {
         // check email
         List<User> list = userRepository.findByEmail(user.getEmail());

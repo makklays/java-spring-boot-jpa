@@ -4,6 +4,7 @@ import com.techmatrix18.model.Category;
 import com.techmatrix18.model.Position;
 import com.techmatrix18.service.CategoryService;
 import com.techmatrix18.service.PositionService;
+import com.techmatrix18.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -26,9 +27,11 @@ public class PositionViewsController {
     private static final Logger logger = LoggerFactory.getLogger(com.techmatrix18.web.api.UserController.class);
 
     private final PositionService positionService;
+    private final UserService userService;
 
-    public PositionViewsController(PositionService positionService) {
+    public PositionViewsController(PositionService positionService, UserService userService) {
         this.positionService = positionService;
+        this.userService = userService;
     }
 
     @GetMapping("/list")
@@ -108,6 +111,8 @@ public class PositionViewsController {
             model.addAttribute("position", null);
             logger.info("Error! Position not found..");
         }
+
+        model.addAttribute("users", userService.getUsersByPositionId(Long.parseLong(positionId)));
 
         return "positions/view";
     }
