@@ -12,7 +12,7 @@ import java.util.List;
 public interface ProductRepository extends CrudRepository<Product, Long> {
     Product getById(Long id);
     List<Product> findByTitle(String title);
-    List<Product> findByCategoryId(Integer categoryId);
+    List<Product> findByCategoryId(Long categoryId);
 
     List<Product> findByWeight(Integer distance);
     //List<Product> findByWeightLess(Integer distance);

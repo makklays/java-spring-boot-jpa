@@ -1,5 +1,6 @@
 package com.techmatrix18.service.implementation;
 
+import com.techmatrix18.model.Category;
 import com.techmatrix18.model.Product;
 import com.techmatrix18.repository.ProductRepository;
 import com.techmatrix18.service.ProductService;
@@ -33,6 +34,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product getProductById(Long id) {
         return productRepository.getById(id);
+    }
+
+    @Override
+    public List<Product> getProductsByCategoryId(Long id) {
+        return productRepository.findByCategoryId(id);
     }
 
     @Override

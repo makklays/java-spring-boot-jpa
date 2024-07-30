@@ -28,9 +28,11 @@ public class CategoryViewsController {
     private static final Logger logger = LoggerFactory.getLogger(com.techmatrix18.web.api.UserController.class);
 
     private final CategoryService categoryService;
+    private final ProductService productService;
 
-    public CategoryViewsController(CategoryService categoryService) {
+    public CategoryViewsController(CategoryService categoryService, ProductService productService) {
         this.categoryService = categoryService;
+        this.productService = productService;
     }
 
     @GetMapping("/list")
@@ -110,6 +112,8 @@ public class CategoryViewsController {
             model.addAttribute("category", null);
             logger.info("Error! Category not found..");
         }
+
+        model.addAttribute("products", productService.getProductsByCategoryId(Long.parseLong(categoryId)));
 
         return "categories/view";
     }

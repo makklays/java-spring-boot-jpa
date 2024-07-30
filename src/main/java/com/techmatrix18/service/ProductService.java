@@ -12,6 +12,9 @@ import java.util.List;
 
 public interface ProductService {
     List<Product> getAllProducts();
+
+    List<Product> getProductsByCategoryId(Long id);
+
     Product getProductById(Long id);
 
     boolean addProduct(Product product);
