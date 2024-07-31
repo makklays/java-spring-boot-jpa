@@ -45,6 +45,12 @@ public class UserViewsController {
         this.positionService = positionService;
     }
 
+    @GetMapping("/welcome")
+    public String welcome(Model model) {
+        model.addAttribute("vv", "V-V-V");
+        return "welcome";
+    }
+
     @GetMapping("/menu")
     public String menu(Model model) {
         model.addAttribute("vv", "V-V-V");
