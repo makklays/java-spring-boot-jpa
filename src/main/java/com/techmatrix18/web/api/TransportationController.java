@@ -40,8 +40,8 @@ public class TransportationController {
     @PostMapping(path = "/add")
     public @ResponseBody String addTransportation (@RequestParam Long barcoId, @RequestParam Long storehouseId, @RequestParam Integer distance, @RequestParam Integer weight) {
         Transportation t = new Transportation();
-        t.setBarcoId(barcoId);
-        t.setStorehouseId(storehouseId);
+        //t.setBarco(barco);
+        //t.setStorehouse(storehouse);
         t.setDistance(distance);
         t.setWeight(weight);
         transportationService.addTransportation(t);
@@ -52,8 +52,8 @@ public class TransportationController {
     public @ResponseBody String updateTransportation (@RequestParam Long transportationId, @RequestParam Long barcoId, @RequestParam Long storehouseId, @RequestParam Integer distance, @RequestParam Integer weight) {
         Transportation t = transportationService.getTransportationById(transportationId);
         if (t.getId() != null) {
-            t.setBarcoId(barcoId);
-            t.setStorehouseId(storehouseId);
+            //t.setBarco(barco);
+            //t.setStorehouse(storehouse);
             t.setDistance(distance);
             t.setWeight(weight);
             transportationService.updateTransportation(t);

@@ -19,7 +19,7 @@ public class InvoiceTest {
         invoice.setId(1L);
         invoice.setTitle("#001-2024-02-26");
         invoice.setDescription("This is invoice");
-        invoice.setTransportationId(1L);
+        //invoice.setTransportationId(1L);
         invoice.setAmount(100.00f);
         invoice.setStatus("not_paid");
         invoice.setCreatedAt(timestamp);
@@ -41,7 +41,7 @@ public class InvoiceTest {
         invoice1.setId(1L);
         invoice1.setTitle("#001-2024-02-26");
         invoice1.setDescription("This is invoice");
-        invoice1.setTransportationId(1L);
+        //invoice1.setTransportationId(1L);
         invoice1.setAmount(100.00f);
         invoice1.setStatus("not_paid");
         invoice1.setCreatedAt(timestamp);
@@ -51,7 +51,7 @@ public class InvoiceTest {
         invoice2.setId(1L);
         invoice2.setTitle("#001-2024-02-26");
         invoice2.setDescription("This is invoice");
-        invoice2.setTransportationId(1L);
+        //invoice2.setTransportationId(1L);
         invoice2.setAmount(100.00f);
         invoice2.setStatus("not_paid");
         invoice2.setCreatedAt(timestamp);
@@ -61,7 +61,7 @@ public class InvoiceTest {
         invoice3.setId(2L);
         invoice3.setTitle("#002-2024-02-26");
         invoice3.setDescription("This is invoice2");
-        invoice3.setTransportationId(2L);
+        //invoice3.setTransportationId(2L);
         invoice3.setAmount(102.00f);
         invoice3.setStatus("paid");
         invoice3.setCreatedAt(timestamp);
@@ -82,7 +82,7 @@ public class InvoiceTest {
         invoice.setId(1L);
         invoice.setTitle("#001-2024-02-26");
         invoice.setDescription("This is invoice");
-        invoice.setTransportationId(1L);
+        //invoice.setTransportationId(1L);
         invoice.setAmount(100.00f);
         invoice.setStatus("not_paid");
         invoice.setCreatedAt(timestamp);

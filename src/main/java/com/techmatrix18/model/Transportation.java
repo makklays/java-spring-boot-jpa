@@ -1,5 +1,6 @@
 package com.techmatrix18.model;
 
+import jakarta.validation.constraints.NotBlank;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -24,15 +25,15 @@ public class Transportation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "barco_id", insertable=false, updatable=false)
-    private Long barcoId;
+    /*@Column(name = "barco_id", insertable=false, updatable=false)
+    private Long barcoId;*/
 
     @ManyToOne
     @JoinColumn(name = "barco_id", nullable = false)
     private Barco barco;
 
-    @Column(name = "storehouse_id", insertable=false, updatable=false)
-    private Long storehouseId;
+    /*@Column(name = "storehouse_id", insertable=false, updatable=false)
+    private Long storehouseId;*/
 
     @ManyToOne
     @JoinColumn(name = "storehouse_id", nullable = false)
@@ -66,20 +67,20 @@ public class Transportation {
         this.id = id;
     }
 
-    public Long getBarcoId() {
-        return barcoId;
+    public Barco getBarco() {
+        return this.barco;
     }
 
-    public void setBarcoId(Long barcoId) {
-        this.barcoId = barcoId;
+    public void setBarco(Barco barco) {
+        this.barco = barco;
     }
 
-    public Long getStorehouseId() {
-        return storehouseId;
+    public Storehouse getStorehouse() {
+        return this.storehouse;
     }
 
-    public void setStorehouseId(Long storehouseId) {
-        this.storehouseId = storehouseId;
+    public void setStorehouse(Storehouse storehouse) {
+        this.storehouse = storehouse;
     }
 
     public Integer getDistance() {
@@ -118,20 +119,20 @@ public class Transportation {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Transportation that)) return false;
-        return getId().equals(that.getId()) && getBarcoId().equals(that.getBarcoId()) && getStorehouseId().equals(that.getStorehouseId()) && getDistance().equals(that.getDistance()) && getWeight().equals(that.getWeight()) && getCreatedAt().equals(that.getCreatedAt()) && getUpdatedAt().equals(that.getUpdatedAt());
+        return getId().equals(that.getId()) && getBarco().equals(that.getBarco()) && getStorehouse().equals(that.getStorehouse()) && invoices.equals(that.invoices) && getDistance().equals(that.getDistance()) && getWeight().equals(that.getWeight()) && getCreatedAt().equals(that.getCreatedAt()) && getUpdatedAt().equals(that.getUpdatedAt());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getBarcoId(), getStorehouseId(), getDistance(), getWeight(), getCreatedAt(), getUpdatedAt());
+        return Objects.hash(getId(), getBarco(), getStorehouse(), getDistance(), getWeight(), getCreatedAt(), getUpdatedAt());
     }
 
     @Override
     public String toString() {
         return "Transportation{" +
                 "id=" + id +
-                ", barcoId=" + barcoId +
-                ", storehouseId=" + storehouseId +
+                ", barco=" + barco +
+                ", storehouse=" + storehouse +
                 ", distance=" + distance +
                 ", weight=" + weight +
                 ", createdAt=" + createdAt +

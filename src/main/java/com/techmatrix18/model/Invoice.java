@@ -29,8 +29,8 @@ public class Invoice {
     @Column(name = "description", length = 500)
     private String description; // kg and km at description
 
-    @Column(name = "transportation_id", insertable=false, updatable=false)
-    private Long transportationId;
+    /*@Column(name = "transportation_id", insertable=false, updatable=false)
+    private Long transportationId;*/
 
     @ManyToOne
     @JoinColumn(name="transportation_id")
@@ -76,12 +76,12 @@ public class Invoice {
         this.description = description;
     }
 
-    public Long getTransportationId() {
-        return transportationId;
+    public Transportation getTransportation() {
+        return this.transportation;
     }
 
-    public void setTransportationId(Long transportationId) {
-        this.transportationId = transportationId;
+    public void setTransportation(Transportation transportation) {
+        this.transportation = transportation;
     }
 
     public Float getAmount() {
@@ -116,12 +116,12 @@ public class Invoice {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Invoice invoice)) return false;
-        return getId().equals(invoice.getId()) && getTitle().equals(invoice.getTitle()) && getDescription().equals(invoice.getDescription()) && getTransportationId().equals(invoice.getTransportationId()) && getAmount().equals(invoice.getAmount()) && getCreatedAt().equals(invoice.getCreatedAt()) && getUpdatedAt().equals(invoice.getUpdatedAt());
+        return getId().equals(invoice.getId()) && getTitle().equals(invoice.getTitle()) && getDescription().equals(invoice.getDescription()) && getTransportation().equals(invoice.getTransportation()) && getAmount().equals(invoice.getAmount()) && getCreatedAt().equals(invoice.getCreatedAt()) && getUpdatedAt().equals(invoice.getUpdatedAt());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getTitle(), getDescription(), getTransportationId(), getAmount(), getCreatedAt(), getUpdatedAt());
+        return Objects.hash(getId(), getTitle(), getDescription(), getTransportation(), getAmount(), getCreatedAt(), getUpdatedAt());
     }
 
     @Override
@@ -130,7 +130,7 @@ public class Invoice {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
-                ", transportationId=" + transportationId +
+                ", transportation=" + transportation +
                 ", amount=" + amount +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +

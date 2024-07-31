@@ -1,5 +1,6 @@
 package com.techmatrix18.service.implementation;
 
+import com.techmatrix18.model.Storehouse;
 import com.techmatrix18.model.Transportation;
 import com.techmatrix18.repository.TransportationRepository;
 import com.techmatrix18.service.TransportationService;
@@ -37,13 +38,10 @@ public class TransportationServiceImpl implements TransportationService {
 
     @Override
     public synchronized boolean addTransportation(Transportation transportation) {
-        // check email
-        Transportation tra = transportationRepository.getById(transportation.getId());
-        if (tra.getId() != null) {
+        Transportation st = transportationRepository.save(transportation);
+        if (!st.getBarco().getTitle().isEmpty()) {
             return false;
         } else {
-            // add
-            transportationRepository.save(transportation);
             return true;
         }
     }

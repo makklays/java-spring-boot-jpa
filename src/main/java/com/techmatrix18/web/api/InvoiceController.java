@@ -43,7 +43,7 @@ public class InvoiceController {
         Invoice i = new Invoice();
         i.setTitle(title);
         i.setDescription(description);
-        i.setTransportationId(transportationId);
+        //i.setTransportationId(transportationId);
         i.setAmount(amount);
         i.setStatus(status);
         invoiceService.addInvoice(i);
@@ -56,7 +56,7 @@ public class InvoiceController {
         if (i.getId() != null) {
             i.setTitle(title);
             i.setDescription(description);
-            i.setTransportationId(transportationId);
+            //i.setTransportationId(transportationId);
             i.setAmount(amount);
             i.setStatus(status);
             invoiceService.updateInvoice(i);

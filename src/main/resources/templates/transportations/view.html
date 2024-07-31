@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{app.title}"> Title </title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-6">
+            <h1 th:text="#{app.view-transportation}">View transportation</h1>
+        </div>
+        <div class="col-md-6 align-self-center" style="text-align:right;">
+            <a href="#" th:href="@{'/transportations/edit/' + @{transportation.id}}" th:text="#{app.edit-transportation}" class="btn btn-primary"> Edit transportation</a>
+        </div>
+    </div>
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/welcome}">Home</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/menu}">Menu</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/transportations/list}" th:text="#{app.list-transportations}">List</a></li>
+            <li class="breadcrumb-item active" aria-current="page" th:text="#{app.view-transportation}" >View transportation</li>
+        </ol>
+    </nav>
+
+    <div class="card">
+        <div class="card-body">
+
+            <table class="table table-striped table-hover">
+                <tr>
+                    <th>ID</th>
+                    <td th:text="${transportation.Id}"></td>
+                </tr>
+                <tr>
+                    <th th:text="#{barco}">Barco</th>
+                    <td>
+                        <a href="#" th:href="@{'/barcos/' + ${transportation.barco.id}}" th:text="${transportation.barco.title}">Barco</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th th:text="#{storehouse}">Storehouse</th>
+                    <td>
+                        <a href="#" th:href="@{'/storehouses/' + ${transportation.getStorehouse().getId()}}" th:text="${transportation.getStorehouse().getTitle()}">Storehouse</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th th:text="#{weight}">Weight</th>
+                    <td th:text="${transportation.weight}"></td>
+                </tr>
+                <tr>
+                    <th th:text="#{distance}">Distance</th>
+                    <td th:text="${transportation.distance}"></td>
+                </tr>
+
+                <tr>
+                    <th>Created</th>
+                    <td th:text="${transportation.createdAt}"></td>
+                </tr>
+                <tr>
+                    <th>Updated</th>
+                    <td th:text="${transportation.updatedAt}"></td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+
+    <br/><br/>
+
+    <a href="#" th:href="@{/transportations/list}" th:text="#{app.back}" class="btn btn-secondary"> Back</a>
+
+    <br/><br/>
+
+</div>
+</body>
+</html>
+

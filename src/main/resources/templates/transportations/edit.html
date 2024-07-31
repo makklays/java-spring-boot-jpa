@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{app.title}"> Title </title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-6">
+            <h1 th:text="#{app.edit-transportation}">Edit transportation</h1>
+        </div>
+    </div>
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/welcome}">Home</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/menu}">Menu</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/transportations/list}" th:text="#{app.list-transportations}">List</a></li>
+            <li class="breadcrumb-item active" aria-current="page" th:text="#{app.edit-transportation}" >Edit transportation</li>
+        </ol>
+    </nav>
+
+    <form action="#" th:action="@{/transportations/update/{id}(id=${transportation.id})}" th:object="${transportation}" method="post">
+
+        <div class="card">
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="barco1" class="form-label">Barco</label>
+                            <select name="barco" class="form-control" id="barco1" th:field="*{barco}">
+                                <option value="">---- Select barco ----</option>
+                                <option th:each="barco : ${barcos}" th:value="${barco.getId()}" th:text="${barco.getTitle()}" th:selected="${barco.getId()==transportation.barco.getId()}"></option>
+                            </select>
+                            <div th:if="${#fields.hasErrors('barco')}" th:errors="*{barco}" style="color:red;">Barco error</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="storehouse1" class="form-label">Go to Storehouse</label>
+                            <select name="storehouse" class="form-control" id="storehouse1" th:field="*{storehouse}">
+                                <option value="">---- Select storehouse ----</option>
+                                <option th:each="storehouse : ${storehouses}" th:value="${storehouse.getId()}" th:text="${storehouse.getTitle()}" th:selected="${storehouse.getId()==transportation.storehouse.getId()}"></option>
+                            </select>
+                            <div th:if="${#fields.hasErrors('storehouse')}" th:errors="*{storehouse}" style="color:red;">Storehouse error</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="weight1" class="form-label">Weight, t</label>
+                            <input type="text" th:field="*{weight}" class="form-control" id="weight1">
+                            <div th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}" style="color:red;">Weight error</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="distance1" class="form-label">Distance, km</label>
+                            <input type="text" th:field="*{distance}" class="form-control" id="distance1">
+                            <div th:if="${#fields.hasErrors('distance')}" th:errors="*{distance}" style="color:red;">Distance error</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <br/>
+        <button type="submit" class="btn btn-primary" th:text="#{form.submit}">Submit</button>
+        <a href="#" th:href="@{/transportations/list}" th:text="#{app.back}" class="btn btn-secondary" style="margin-left:20px;"> Back</a>
+
+    </form>
+
+    <br/><br/>
+
+</div>
+</body>
+</html>
+

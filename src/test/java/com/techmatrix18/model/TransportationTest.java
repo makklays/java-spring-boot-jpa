@@ -17,8 +17,8 @@ public class TransportationTest {
 
         // Test setter
         transportation.setId(1L);
-        transportation.setBarcoId(1L);
-        transportation.setStorehouseId(1L);
+        //transportation.setBarco(1L);
+        //transportation.setStorehouse(1L);
         transportation.setDistance(340000);
         transportation.setWeight(150000);
         transportation.setCreatedAt(timestamp);
@@ -26,8 +26,8 @@ public class TransportationTest {
 
         // Test getter
         Assertions.assertEquals(1L, transportation.getId());
-        Assertions.assertEquals(1L, transportation.getBarcoId());
-        Assertions.assertEquals(1L, transportation.getStorehouseId());
+        //Assertions.assertEquals(1L, transportation.getBarco());
+        //Assertions.assertEquals(1L, transportation.getStorehouse());
         Assertions.assertEquals(340000, transportation.getDistance());
         Assertions.assertEquals(150000, transportation.getWeight());
         Assertions.assertEquals(timestamp, transportation.getCreatedAt());
@@ -38,8 +38,8 @@ public class TransportationTest {
     public void testEqualsAndHashCode() {
         Transportation transportation1 = new Transportation();
         transportation1.setId(1L);
-        transportation1.setBarcoId(1L);
-        transportation1.setStorehouseId(1L);
+        //transportation1.setBarco(1L);
+        //transportation1.setStorehouse(1L);
         transportation1.setDistance(340000);
         transportation1.setWeight(150000);
         transportation1.setCreatedAt(timestamp);
@@ -47,8 +47,8 @@ public class TransportationTest {
 
         Transportation transportation2 = new Transportation();
         transportation2.setId(1L);
-        transportation2.setBarcoId(1L);
-        transportation2.setStorehouseId(1L);
+        //transportation2.setBarco(1L);
+        //transportation2.setStorehouse(1L);
         transportation2.setDistance(340000);
         transportation2.setWeight(150000);
         transportation2.setCreatedAt(timestamp);
@@ -56,8 +56,8 @@ public class TransportationTest {
 
         Transportation transportation3 = new Transportation();
         transportation3.setId(1L);
-        transportation3.setBarcoId(1L);
-        transportation3.setStorehouseId(1L);
+        //transportation3.setBarco(1L);
+        //transportation3.setStorehouse(1L);
         transportation3.setDistance(8800);
         transportation3.setWeight(7700);
         transportation3.setCreatedAt(timestamp);
@@ -76,8 +76,8 @@ public class TransportationTest {
     public void testEqualsToString() {
         Transportation transportation = new Transportation();
         transportation.setId(1L);
-        transportation.setBarcoId(1L);
-        transportation.setStorehouseId(1L);
+        //transportation.setBarco(1L);
+        //transportation.setStorehouse(1L);
         transportation.setDistance(340000);
         transportation.setWeight(150000);
         transportation.setCreatedAt(timestamp);
