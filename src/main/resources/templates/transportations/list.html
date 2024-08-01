@@ -12,6 +12,7 @@
             <h1 th:text="#{app.list-transportations}">List of transportations</h1>
         </div>
         <div class="col-md-6 align-self-center" style="text-align:right;">
+            <a href="#" th:href="@{/invoices/add}" th:text="#{app.add-invoice}" class="btn btn-primary"> Add invoice</a>
             <a href="#" th:href="@{/transportations/add}" th:text="#{app.add-transportation}" class="btn btn-primary"> Add transportation</a>
         </div>
     </div>

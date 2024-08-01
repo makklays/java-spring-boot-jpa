@@ -12,6 +12,7 @@
             <h1 th:text="#{app.list-cities}">List of cities</h1>
         </div>
         <div class="col-md-6 align-self-center" style="text-align:right;">
+            <a href="#" th:href="@{/storehouses/add}" th:text="#{app.add-storehouse}" class="btn btn-primary"> Add storehouse</a>
             <a href="#" th:href="@{/cities/add}" th:text="#{app.add-city}" class="btn btn-primary"> Add city</a>
         </div>
     </div>
