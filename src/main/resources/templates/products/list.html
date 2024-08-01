@@ -12,6 +12,7 @@
             <h1 th:text="#{app.list-products}">List of products</h1>
         </div>
         <div class="col-md-6 align-self-center" style="text-align:right;">
+            <a href="#" th:href="@{/categories/add}" th:text="#{app.add-category}" class="btn btn-primary"> Add category</a>
             <a href="#" th:href="@{/products/add}" th:text="#{app.add-product}" class="btn btn-primary"> Add product</a>
         </div>
     </div>
