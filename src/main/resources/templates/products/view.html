@@ -52,11 +52,11 @@
 
                 <tr>
                     <th th:text="#{is_dangerous}">Is dangerous</th>
-                    <td th:text="${product.isDangerous}"></td>
+                    <td th:text="${product.isDangerous != null ? 'true' : 'false'}"></td>
                 </tr>
                 <tr>
                     <th th:text="#{is_glass}">Is glass</th>
-                    <td th:text="${product.isGlass}"></td>
+                    <td th:text="${product.isGlass != null ? 'true' : 'false'}"></td>
                 </tr>
 
                 <tr>

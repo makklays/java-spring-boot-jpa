@@ -36,10 +36,10 @@ public class Product {
     private Integer weight;
 
     @Column(name = "is_dangerous")
-    private boolean isDangerous; // 0 or 1
+    private Boolean isDangerous; // 0 or 1
 
     @Column(name = "is_glass")
-    private boolean isGlass; // 0 or 1
+    private Boolean isGlass; // 0 or 1
 
     //@Column(name = "category_id", insertable=false, updatable=false)
     //private Long categoryId;
@@ -94,7 +94,7 @@ public class Product {
         this.weight = weight;
     }
 
-    public boolean getIsDangerous() {
+    public Boolean getIsDangerous() {
         return isDangerous;
     }
 
@@ -102,7 +102,7 @@ public class Product {
         this.isDangerous = isDangerous;
     }
 
-    public boolean getIsGlass() {
+    public Boolean getIsGlass() {
         return isGlass;
     }
 

@@ -34,7 +34,7 @@
                     <div class="col-md-12">
                         <div class="mb-3">
                             <label for="title1" class="form-label">Title</label>
-                            <input type="text" class="form-control" id="title1" th:field="*{title}">
+                            <input type="text" name="title" class="form-control" id="title1" th:field="*{title}">
                             <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" style="color:red;">Title error</span>
                         </div>
                     </div>
@@ -70,7 +70,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3">
-                            <input type="checkbox" th:field="*{isDangerous}" id="is_dangerous1">
+                            <input type="checkbox" name="isDangerous" th:checked="*{isDangerous}"  id="is_dangerous1">
                             <label for="is_dangerous1" class="form-label">Is dangerous</label>
                             <div th:if="${#fields.hasErrors('isDangerous')}" th:errors="*{isDangerous}" style="color:red;">Is dangerous error</div>
                         </div>
@@ -80,7 +80,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3">
-                            <input type="checkbox" th:field="*{isGlass}"  id="is_glass1">
+                            <input type="checkbox" name="isGlass" th:checked="*{isGlass}"  id="is_glass1">
                             <label for="is_glass1" class="form-label">Is glass</label>
                             <div th:if="${#fields.hasErrors('isGlass')}" th:errors="*{isGlass}" style="color:red;">Is glass error</div>
                         </div>

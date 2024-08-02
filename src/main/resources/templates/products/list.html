@@ -53,8 +53,8 @@
                         <a href="#" th:href="@{'/categories/' + ${product.category.getId()}}" th:text="${product.category.getTitle()}">Title</a>
                     </td>
                     <td class="text-center" th:text="${product.weight}"></td>
-                    <td class="text-center" th:text="${product.isDangerous}"></td>
-                    <td class="text-center" th:text="${product.isGlass}"></td>
+                    <td class="text-center" th:text="${product.getIsDangerous() != null ? 'true' : 'false'}"></td>
+                    <td class="text-center" th:text="${product.getIsGlass() != null ? 'true' : 'false'}"></td>
 
                     <td class="text-center" style="width:150px;">
                         <a href="#" th:href="@{'/products/' + ${product.id}}">view</a> |
