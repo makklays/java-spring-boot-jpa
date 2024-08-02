@@ -63,6 +63,12 @@ public class UserServiceImpl implements UserService /*, UserDetailsService*/ {
     }
 
     @Override
+    public List<User> getUsersByRole(String role) {
+        List<User> obj = userRepository.findByRoles(role);
+        return obj;
+    }
+
+    @Override
     public List<User> getUsersByEmail(String email) {
         List<User> obj = userRepository.findByEmail(email);
         return obj;

@@ -6,6 +6,7 @@ import com.techmatrix18.service.PositionService;
 import com.techmatrix18.service.UserService;
 import com.techmatrix18.service.implementation.PositionServiceImpl;
 import com.techmatrix18.service.implementation.UserServiceImpl;
+import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,12 +49,18 @@ public class UserController {
     }
 
     @GetMapping(path = "/all")
-    public List<User> getUsers() throws ValidationException {
-        List<User> list = userService.getAllUsers();
-        if (list != null) {
+    public List<User> getUsers(HttpServletRequest request) throws ValidationException {
+        String role = request.getParameter("role");
+        if (!role.isEmpty()) {
+            List<User> list = userService.getUsersByRole(role);
             return list;
         } else {
-            return null; // ? algun json
+            List<User> list = userService.getAllUsers();
+            if (list != null) {
+                return list;
+            } else {
+                return null; // ? algun json
+            }
         }
     }
 
