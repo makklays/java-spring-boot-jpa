@@ -46,12 +46,10 @@ public class PositionServiceImpl implements PositionService {
     }
 
     @Override
-    public boolean updatePosition(Position position) {
+    public void updatePosition(Position position) {
         Position pos = positionRepository.save(position);
         if (!pos.getTitle().isEmpty()) {
-            return true;
         } else {
-            return false;
         }
     }
 

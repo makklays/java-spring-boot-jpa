@@ -38,7 +38,7 @@ public class ProductController {
     }
 
     @PostMapping(path = "/add")
-    public @ResponseBody String addProduct (@RequestParam String title, @RequestParam String description, @RequestParam Integer weight, @RequestParam Integer isDangerous, @RequestParam Integer isGlass) {
+    public @ResponseBody String addProduct (@RequestParam String title, @RequestParam String description, @RequestParam Integer weight, @RequestParam boolean isDangerous, @RequestParam boolean isGlass) {
         Product p = new Product();
         p.setTitle(title);
         p.setDescription(description);
@@ -51,7 +51,7 @@ public class ProductController {
     }
 
     @PatchMapping(path = "/update")
-    public @ResponseBody String updateProduct (@RequestParam Long productId, @RequestParam String title, @RequestParam String description, @RequestParam Integer weight, @RequestParam Integer isDangerous, @RequestParam Integer isGlass) {
+    public @ResponseBody String updateProduct (@RequestParam Long productId, @RequestParam String title, @RequestParam String description, @RequestParam Integer weight, @RequestParam boolean isDangerous, @RequestParam boolean isGlass) {
         Product p = productService.getProductById(productId);
         if (p.getId() != null) {
             p.setTitle(title);

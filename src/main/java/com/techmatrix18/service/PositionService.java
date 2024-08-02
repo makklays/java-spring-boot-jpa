@@ -15,7 +15,7 @@ public interface PositionService {
     Position getPositionById(Long id);
 
     boolean addPosition(Position position);
-    boolean updatePosition(Position position);
+    void updatePosition(Position position);
     boolean deletePosition(Long id);
 }
 

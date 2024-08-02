@@ -62,13 +62,12 @@ public class ProductViewsController {
     }
 
     @GetMapping("/edit/{productId}")
-    public String edit(HttpServletRequest request, HttpServletResponse response, @PathVariable Long productId, Model model) throws Exception {
+    public String edit( @PathVariable Long productId, Model model){
         Product product = productService.getProductById(productId);
         if (product.getId() != null) {
             model.addAttribute("product", product);
             logger.info("Product found..");
         } else {
-            model.addAttribute("product", null);
             logger.warn("Error! Product not found..");
         }
 

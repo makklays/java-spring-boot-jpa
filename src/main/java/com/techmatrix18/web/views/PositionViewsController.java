@@ -62,7 +62,7 @@ public class PositionViewsController {
     }
 
     @GetMapping("/edit/{positionId}")
-    public String edit(HttpServletRequest request, HttpServletResponse response, @PathVariable Long positionId, Model model) throws Exception {
+    public String edit(@PathVariable Long positionId, Model model){
         Position position = positionService.getPositionById(positionId);
         if (position.getId() != null) {
             model.addAttribute("position", position);
@@ -72,9 +72,6 @@ public class PositionViewsController {
             logger.warn("Error! Position not found..");
         }
 
-        // cities
-        //List<City> cities = cityService.getAllCities();
-        //model.addAttribute("cities", cities);
 
         return "positions/edit";
     }

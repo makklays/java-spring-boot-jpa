@@ -34,8 +34,8 @@ public class Position {
     @Column(name = "description", length = 500)
     private String description;
 
-    @OneToMany(cascade = CascadeType.ALL) // fetch = FetchType.LAZY, mappedBy = "position",
-    @JoinColumn(name = "position_id") // , insertable = false, updatable = false
+    @OneToMany // fetch = FetchType.LAZY, mappedBy = "position",
+    //@JoinColumn(name = "position_id") // , insertable = false, updatable = false
     private Set<User> users; // = new HashSet<User>();
 
     @CreationTimestamp

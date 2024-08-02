@@ -62,10 +62,10 @@
                     <textarea rows="6" name="description" class="form-control" id="text1"></textarea>
                 </div>
 
-                <!--div class="row">
+                <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3">
-                            <input type="checkbox" th:field="${product.isDangerous}" class="form-control" id="is_dangerous1">
+                            <input type="checkbox" th:field="*{isDangerous}" id="is_dangerous1">
                             <label for="is_dangerous1" class="form-label">Is dangerous</label>
                             <div th:if="${#fields.hasErrors('isDangerous')}" th:errors="*{isDangerous}" style="color:red;">Is dangerous error</div>
                         </div>
@@ -75,12 +75,12 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3">
-                            <input type="checkbox" th:field="*{isGlass}" class="form-control" id="is_glass1">
+                            <input type="checkbox" th:field="*{isGlass}"  id="is_glass1">
                             <label for="is_glass1" class="form-label">Is glass</label>
                             <div th:if="${#fields.hasErrors('isGlass')}" th:errors="*{isGlass}" style="color:red;">Is glass error</div>
                         </div>
                     </div>
-                </div-->
+                </div>
 
 
             </div>

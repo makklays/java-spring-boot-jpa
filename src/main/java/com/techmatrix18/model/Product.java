@@ -36,10 +36,10 @@ public class Product {
     private Integer weight;
 
     @Column(name = "is_dangerous")
-    private Integer isDangerous; // 0 or 1
+    private boolean isDangerous; // 0 or 1
 
     @Column(name = "is_glass")
-    private Integer isGlass; // 0 or 1
+    private boolean isGlass; // 0 or 1
 
     //@Column(name = "category_id", insertable=false, updatable=false)
     //private Long categoryId;
@@ -94,19 +94,19 @@ public class Product {
         this.weight = weight;
     }
 
-    public Integer getIsDangerous() {
+    public boolean getIsDangerous() {
         return isDangerous;
     }
 
-    public void setIsDangerous(Integer isDangerous) {
+    public void setIsDangerous(boolean isDangerous) {
         this.isDangerous = isDangerous;
     }
 
-    public Integer getIsGlass() {
+    public boolean getIsGlass() {
         return isGlass;
     }
 
-    public void setIsGlass(Integer isGlass) {
+    public void setIsGlass(boolean isGlass) {
         this.isGlass = isGlass;
     }
 
@@ -134,16 +134,40 @@ public class Product {
         this.updatedAt = updatedAt;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Product product)) return false;
-        return getId().equals(product.getId()) && getTitle().equals(product.getTitle()) && getDescription().equals(product.getDescription()) && getWeight().equals(product.getWeight()) && getIsDangerous().equals(product.getIsDangerous()) && getIsGlass().equals(product.getIsGlass()) && getCreatedAt().equals(product.getCreatedAt()) && getUpdatedAt().equals(product.getUpdatedAt());
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Product product = (Product) o;
+
+        if (isDangerous != product.isDangerous) return false;
+        if (isGlass != product.isGlass) return false;
+        if (!Objects.equals(id, product.id)) return false;
+        if (!Objects.equals(title, product.title)) return false;
+        if (!Objects.equals(description, product.description)) return false;
+        if (!Objects.equals(weight, product.weight)) return false;
+        if (!Objects.equals(category, product.category)) return false;
+        if (!Objects.equals(barcoProducts, product.barcoProducts))
+            return false;
+        if (!Objects.equals(createdAt, product.createdAt)) return false;
+        return Objects.equals(updatedAt, product.updatedAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getTitle(), getDescription(), getWeight(), getIsDangerous(), getIsGlass(), getCreatedAt(), getUpdatedAt());
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (title != null ? title.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (weight != null ? weight.hashCode() : 0);
+        result = 31 * result + (isDangerous ? 1 : 0);
+        result = 31 * result + (isGlass ? 1 : 0);
+        result = 31 * result + (category != null ? category.hashCode() : 0);
+        result = 31 * result + (barcoProducts != null ? barcoProducts.hashCode() : 0);
+        result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);
+        result = 31 * result + (updatedAt != null ? updatedAt.hashCode() : 0);
+        return result;
     }
 
     @Override

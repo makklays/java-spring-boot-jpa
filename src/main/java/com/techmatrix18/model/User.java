@@ -63,7 +63,7 @@ public class User {
     private Long positionId;*/
 
     @ManyToOne
-    @JoinColumn(name = "position_id") //, nullable = false)
+    @JoinColumn(unique = true) //, nullable = false)
     private Position position;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL) // name="user_id", referencedColumnName="userId"
