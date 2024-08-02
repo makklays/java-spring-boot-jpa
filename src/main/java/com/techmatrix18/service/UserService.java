@@ -19,6 +19,8 @@ public interface UserService {
     List<User> getUsersByPositionId(Long positionId);
 
     List<User> findByFirstname(String firstname);
+    User getUserByEmailAndPassword(String email, String Password);
+    List<User> getUsersByEmail(String email);
 
     boolean addUser(User user);
     boolean updateUser(User user);

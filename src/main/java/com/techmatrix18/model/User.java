@@ -50,6 +50,7 @@ public class User {
     private String email;
 
     @Column(name = "password", length = 255)
+    @NotBlank
     private String password;
 
     @Column(name = "roles", length = 255)

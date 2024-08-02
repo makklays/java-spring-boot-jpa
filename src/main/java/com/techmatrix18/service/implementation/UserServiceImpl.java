@@ -57,6 +57,18 @@ public class UserServiceImpl implements UserService /*, UserDetailsService*/ {
     }
 
     @Override
+    public User getUserByEmailAndPassword(String email, String password) {
+        User obj = userRepository.findByEmailAndPassword(email, password);
+        return obj;
+    }
+
+    @Override
+    public List<User> getUsersByEmail(String email) {
+        List<User> obj = userRepository.findByEmail(email);
+        return obj;
+    }
+
+    @Override
     public List<User> getAllUsers() {
         List<User> list = new ArrayList<>();
         userRepository.findAll().forEach(e -> list.add(e));
