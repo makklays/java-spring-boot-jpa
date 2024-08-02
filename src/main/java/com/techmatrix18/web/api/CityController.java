@@ -34,7 +34,7 @@ public class CityController {
         return request.getQueryString();
     }
 
-    @GetMapping(path = "/list")
+    @GetMapping(path = "/all")
     public List<City> getCities() throws ValidationException {
         return cityService.getAllCities();
     }

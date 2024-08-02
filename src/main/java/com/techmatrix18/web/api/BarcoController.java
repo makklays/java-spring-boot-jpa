@@ -50,8 +50,8 @@ public class BarcoController {
     @GetMapping(path = "/all")
     @ResponseStatus(HttpStatus.OK)
     public List<Barco> getBarcos() throws ValidationException {
-        //return barcoService.getAllBarcos();
-        return BARCOS;
+        return barcoService.getAllBarcos();
+        //return BARCOS;
     }
 
     @GetMapping(path = "/{id}")
