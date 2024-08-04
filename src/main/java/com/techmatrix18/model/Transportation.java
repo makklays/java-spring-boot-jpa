@@ -119,7 +119,7 @@ public class Transportation {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Transportation that)) return false;
-        return getId().equals(that.getId()) && getBarco().equals(that.getBarco()) && getStorehouse().equals(that.getStorehouse()) && invoices.equals(that.invoices) && getDistance().equals(that.getDistance()) && getWeight().equals(that.getWeight()) && getCreatedAt().equals(that.getCreatedAt()) && getUpdatedAt().equals(that.getUpdatedAt());
+        return getId().equals(that.getId()) && getBarco().equals(that.getBarco()) && getStorehouse().equals(that.getStorehouse()) && getDistance().equals(that.getDistance()) && getWeight().equals(that.getWeight()) && getCreatedAt().equals(that.getCreatedAt()) && getUpdatedAt().equals(that.getUpdatedAt());
     }
 
     @Override

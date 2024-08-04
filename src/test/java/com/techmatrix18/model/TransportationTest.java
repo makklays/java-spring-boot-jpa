@@ -36,10 +36,25 @@ public class TransportationTest {
 
     @Test
     public void testEqualsAndHashCode() {
+        Barco barco = new Barco();
+        barco.setId(1L);
+        barco.setTitle("TUAPSE");
+        barco.setYear(2022);
+        barco.setSpeedometer(2000);
+
+        City city = new City();
+        city.setId(1L);
+        city.setTitle("City 1");
+
+        Storehouse storehouse = new Storehouse();
+        storehouse.setId(1L);
+        storehouse.setTitle("Storehouse 1");
+        storehouse.setCity(city);
+
         Transportation transportation1 = new Transportation();
         transportation1.setId(1L);
-        //transportation1.setBarco(1L);
-        //transportation1.setStorehouse(1L);
+        transportation1.setBarco(barco);
+        transportation1.setStorehouse(storehouse);
         transportation1.setDistance(340000);
         transportation1.setWeight(150000);
         transportation1.setCreatedAt(timestamp);
@@ -47,8 +62,8 @@ public class TransportationTest {
 
         Transportation transportation2 = new Transportation();
         transportation2.setId(1L);
-        //transportation2.setBarco(1L);
-        //transportation2.setStorehouse(1L);
+        transportation2.setBarco(barco);
+        transportation2.setStorehouse(storehouse);
         transportation2.setDistance(340000);
         transportation2.setWeight(150000);
         transportation2.setCreatedAt(timestamp);
@@ -56,8 +71,8 @@ public class TransportationTest {
 
         Transportation transportation3 = new Transportation();
         transportation3.setId(1L);
-        //transportation3.setBarco(1L);
-        //transportation3.setStorehouse(1L);
+        transportation3.setBarco(barco);
+        transportation3.setStorehouse(storehouse);
         transportation3.setDistance(8800);
         transportation3.setWeight(7700);
         transportation3.setCreatedAt(timestamp);
@@ -74,6 +89,21 @@ public class TransportationTest {
 
     @Test
     public void testEqualsToString() {
+        Barco barco = new Barco();
+        barco.setId(1L);
+        barco.setTitle("TUAPSE");
+        barco.setYear(2022);
+        barco.setSpeedometer(2000);
+
+        City city = new City();
+        city.setId(1L);
+        city.setTitle("City 1");
+
+        Storehouse storehouse = new Storehouse();
+        storehouse.setId(1L);
+        storehouse.setTitle("Storehouse 1");
+        storehouse.setCity(city);
+
         Transportation transportation = new Transportation();
         transportation.setId(1L);
         //transportation.setBarco(1L);
@@ -84,13 +114,13 @@ public class TransportationTest {
         transportation.setUpdatedAt(timestamp);
 
         String ExpectedToString = "Transportation{" +
-                "id=1L" +
-                ", barcoId=1L" +
-                ", storehouseId=1L" +
+                "id=1" +
+                ", barco=null" +
+                ", storehouse=null" +
                 ", distance=340000" +
                 ", weight=150000" +
-                ", createdAt=2024-02-16 12:00:00.0000000" +
-                ", updatedAt=2024-02-16 12:00:00.0000000" +
+                ", createdAt=2024-02-16 12:00:00.0" +
+                ", updatedAt=2024-02-16 12:00:00.0" +
                 "}";
 
         Assertions.assertEquals(ExpectedToString, transportation.toString());

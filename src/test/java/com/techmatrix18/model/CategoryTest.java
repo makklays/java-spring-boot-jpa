@@ -72,11 +72,11 @@ public class CategoryTest {
         category.setUpdatedAt(timestamp);
 
         String ExpectedToString = "Category{" +
-                "id=1L" +
+                "id=1" +
                 ", title='Category'" +
                 ", description='This is description category'" +
-                ", createdAt=2024-02-16 12:00:00.0000000" +
-                ", updatedAt=2024-02-16 12:00:00.0000000" +
+                ", createdAt=2024-02-16 12:00:00.0" +
+                ", updatedAt=2024-02-16 12:00:00.0" +
                 "}";
 
         Assertions.assertEquals(ExpectedToString, category.toString());

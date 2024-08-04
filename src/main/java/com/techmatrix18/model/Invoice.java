@@ -121,7 +121,7 @@ public class Invoice {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getTitle(), getDescription(), getTransportation(), getAmount(), getCreatedAt(), getUpdatedAt());
+        return Objects.hash(getId(), getTitle(), getDescription(), getTransportation(), getAmount(), getStatus(), getCreatedAt(), getUpdatedAt());
     }
 
     @Override
@@ -132,6 +132,7 @@ public class Invoice {
                 ", description='" + description + '\'' +
                 ", transportation=" + transportation +
                 ", amount=" + amount +
+                ", status=" + status +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';

@@ -71,12 +71,12 @@ public class BarcoUserTest {
         barcoUser.setCreatedAt(timestamp);
         barcoUser.setUpdatedAt(timestamp);
 
-        String ExpectedToString = "Barco{" +
-                "id=1L" +
-                ", barcoId=1L" +
-                ", userId=1L" +
-                ", createdAt=2024-02-16 12:00:00.0000000" +
-                ", updatedAt=2024-02-16 12:00:00.0000000" +
+        String ExpectedToString = "BarcoUser{" +
+                "id=1" +
+                ", barcoId=1" +
+                ", userId=1" +
+                ", createdAt=2024-02-16 12:00:00.0" +
+                ", updatedAt=2024-02-16 12:00:00.0" +
                 "}";
 
         Assertions.assertEquals(ExpectedToString, barcoUser.toString());

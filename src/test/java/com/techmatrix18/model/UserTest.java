@@ -18,18 +18,19 @@ public class UserTest {
         // test setters
         user.setId(1L);
         user.setFirstname("First");
-        user.setFirstname("Last");
+        user.setLastname("Last");
         user.setEmail("f.last@hotmail.com");
         user.setPassword("password");
         user.setBio("This is my bio");
         //user.setPositionId(1L);
+        user.setRoles("USER");
         user.setCreatedAt(timestamp);
         user.setUpdatedAt(timestamp);
 
         // test getters
         Assertions.assertEquals(1L, user.getId());
-        Assertions.assertEquals("first", user.getFirstname());
-        Assertions.assertEquals("last", user.getLastname());
+        Assertions.assertEquals("First", user.getFirstname());
+        Assertions.assertEquals("Last", user.getLastname());
         Assertions.assertEquals("f.last@hotmail.com", user.getEmail());
         Assertions.assertEquals("password", user.getPassword());
         Assertions.assertEquals("This is my bio", user.getBio());
@@ -40,36 +41,43 @@ public class UserTest {
 
     @Test
     public void testEqualsAndHashCode() {
+        Position position = new Position();
+        position.setId(1L);
+        position.setTitle("Position 1");
+
         User user1 = new User();
         user1.setId(1L);
         user1.setFirstname("First");
-        user1.setFirstname("Last");
+        user1.setLastname("Last");
         user1.setEmail("f.last@hotmail.com");
         user1.setPassword("password");
         user1.setBio("This is my bio");
-        //user1.setPositionId(1L);
+        user1.setRoles("USER");
+        user1.setPosition(position);
         user1.setCreatedAt(timestamp);
         user1.setUpdatedAt(timestamp);
 
         User user2 = new User();
         user2.setId(1L);
         user2.setFirstname("First");
-        user2.setFirstname("Last");
+        user2.setLastname("Last");
         user2.setEmail("f.last@hotmail.com");
         user2.setPassword("password");
         user2.setBio("This is my bio");
-        //user2.setPositionId(1L);
+        user2.setRoles("USER");
+        user2.setPosition(position);
         user2.setCreatedAt(timestamp);
         user2.setUpdatedAt(timestamp);
 
         User user3 = new User();
         user3.setId(1L);
         user3.setFirstname("Name");
-        user3.setFirstname("Surname");
+        user3.setLastname("Surname");
         user3.setEmail("name.surname@hot.com");
         user3.setPassword("2222222");
         user3.setBio("This is your bio");
-       // user3.setPositionId(2L);
+        user3.setRoles("USER");
+        user3.setPosition(position);
         user3.setCreatedAt(timestamp);
         user3.setUpdatedAt(timestamp);
 
@@ -84,27 +92,33 @@ public class UserTest {
 
     @Test
     public void testEqualsToString() {
+        Position position = new Position();
+        position.setId(1L);
+        position.setTitle("Position 1");
+
         User user = new User();
         user.setId(1L);
         user.setFirstname("First");
-        user.setFirstname("Last");
+        user.setLastname("Last");
         user.setEmail("f.last@hotmail.com");
         user.setPassword("password");
         user.setBio("This is my bio");
-        //user.setPositionId(1L);
+        user.setRoles("USER");
+        user.setPosition(position);
         user.setCreatedAt(timestamp);
         user.setUpdatedAt(timestamp);
 
         String ExpectedString = "User{" +
-                "Id=1L" +
+                "Id=1" +
                 ", firstname='First'" +
                 ", lastname='Last'" +
                 ", email='f.last@hotmail.com'" +
                 ", password='password'" +
                 ", bio='This is my bio'" +
-                ", positionId=1L" +
-                ", createdAt='2024-02-16 12:00:00.0000000'" +
-                ", updatedAt='2024-02-16 12:00:00.0000000'" +
+                ", roles='USER'" +
+                ", position=Position{id=1, title='Position 1', description='null', createdAt=null, updatedAt=null}" +
+                ", createdAt=2024-02-16 12:00:00.0" +
+                ", updatedAt=2024-02-16 12:00:00.0" +
                 "}";
 
         Assertions.assertEquals(ExpectedString, user.toString());

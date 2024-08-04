@@ -17,7 +17,7 @@ public class StorehouseTest {
 
         // Test setter
         storehouse.setId(1L);
-        storehouse.setCityId(1L);
+        //storehouse.setCityId(1L);
         storehouse.setTitle("Storehouse 1");
         storehouse.setDescription("This is Storehouse1");
         storehouse.setCreatedAt(timestamp);
@@ -25,7 +25,7 @@ public class StorehouseTest {
 
         // Test getter
         Assertions.assertEquals(1L, storehouse.getId());
-        Assertions.assertEquals(1L, storehouse.getCityId());
+        //Assertions.assertEquals(1L, storehouse.getCityId());
         Assertions.assertEquals("Storehouse 1", storehouse.getTitle());
         Assertions.assertEquals("This is Storehouse1", storehouse.getDescription());
         Assertions.assertEquals(timestamp, storehouse.getCreatedAt());
@@ -36,7 +36,7 @@ public class StorehouseTest {
     public void testEqualsAndHashCode() {
         Storehouse storehouse1 = new Storehouse();
         storehouse1.setId(1L);
-        storehouse1.setCityId(1L);
+        //storehouse1.setCityId(1L);
         storehouse1.setTitle("Storehouse 1");
         storehouse1.setDescription("This is Storehouse1");
         storehouse1.setCreatedAt(timestamp);
@@ -44,7 +44,7 @@ public class StorehouseTest {
 
         Storehouse storehouse2 = new Storehouse();
         storehouse2.setId(1L);
-        storehouse2.setCityId(1L);
+        //storehouse2.setCityId(1L);
         storehouse2.setTitle("Storehouse 1");
         storehouse2.setDescription("This is Storehouse1");
         storehouse2.setCreatedAt(timestamp);
@@ -52,7 +52,7 @@ public class StorehouseTest {
 
         Storehouse storehouse3 = new Storehouse();
         storehouse3.setId(2L);
-        storehouse3.setCityId(2L);
+        //storehouse3.setCityId(2L);
         storehouse3.setTitle("Storehouse 2");
         storehouse3.setDescription("This is Storehouse2");
         storehouse3.setCreatedAt(timestamp);
@@ -71,19 +71,19 @@ public class StorehouseTest {
     public void testEqualsToString() {
         Storehouse storehouse = new Storehouse();
         storehouse.setId(1L);
-        storehouse.setCityId(1L);
+        //storehouse.setCityId(1L);
         storehouse.setTitle("Storehouse 1");
         storehouse.setDescription("This is Storehouse1");
         storehouse.setCreatedAt(timestamp);
         storehouse.setUpdatedAt(timestamp);
 
-        String ExpectedToString = "Driver{" +
-                "id=1L" +
-                ", cityId=1L" +
+        String ExpectedToString = "StoreHouse{" +
+                "id=1" +
+                //", cityId=1L" +
                 ", title='Storehouse 1'" +
                 ", description='This is Storehouse1'" +
-                ", createdAt=2024-02-16 12:00:00.0000000" +
-                ", updatedAt=2024-02-16 12:00:00.0000000" +
+                ", createdAt=2024-02-16 12:00:00.0" +
+                ", updatedAt=2024-02-16 12:00:00.0" +
                 "}";
 
         Assertions.assertEquals(ExpectedToString, storehouse.toString());

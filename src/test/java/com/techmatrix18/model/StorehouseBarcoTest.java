@@ -71,12 +71,12 @@ public class StorehouseBarcoTest {
         storehouseBarco.setCreatedAt(timestamp);
         storehouseBarco.setUpdatedAt(timestamp);
 
-        String ExpectedToString = "Driver{" +
-                "id=1L" +
-                ", storehouseId=1L" +
-                ", barcoId=1L" +
-                ", createdAt=2024-02-16 12:00:00.0000000" +
-                ", updatedAt=2024-02-16 12:00:00.0000000" +
+        String ExpectedToString = "StorehouseBarco{" +
+                "id=1" +
+                ", storehouseId=1" +
+                ", barcoId=1" +
+                ", createdAt=2024-02-16 12:00:00.0" +
+                ", updatedAt=2024-02-16 12:00:00.0" +
                 "}";
 
         Assertions.assertEquals(ExpectedToString, storehouseBarco.toString());
