@@ -6,6 +6,10 @@ import com.techmatrix18.repository.ProductRepository;
 import com.techmatrix18.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +23,9 @@ import java.util.List;
 
 @Service
 public class ProductServiceImpl implements ProductService {
+
+    Pageable firstPageWithTwoElements = PageRequest.of(0, 2, Sort.by("title").ascending());
+
     @Lazy
     @Autowired
     private ProductRepository productRepository;
@@ -70,6 +77,13 @@ public class ProductServiceImpl implements ProductService {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public Page<Product> getAllProductsSortedByTitle() {
+        Page<Product> allProductsSortedByTitle = productRepository.findAll(this.firstPageWithTwoElements);
+
+        return allProductsSortedByTitle;
     }
 }
 

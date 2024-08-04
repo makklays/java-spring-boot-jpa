@@ -5,6 +5,7 @@ import com.techmatrix18.repository.ProductRepository;
 import com.techmatrix18.service.ProductService;
 import com.techmatrix18.service.implementation.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.bind.ValidationException;
@@ -30,6 +31,11 @@ public class ProductController {
     @GetMapping(path = "/test")
     public String getTest() throws ValidationException {
         return "Test";
+    }
+
+    @GetMapping(path = "/page-sort")
+    public Page<Product> getSort() throws ValidationException {
+        return productService.getAllProductsSortedByTitle();
     }
 
     @GetMapping(path = "/all")

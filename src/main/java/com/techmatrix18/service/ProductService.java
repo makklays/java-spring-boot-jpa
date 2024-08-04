@@ -1,6 +1,9 @@
 package com.techmatrix18.service;
 
 import com.techmatrix18.model.Product;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import java.util.List;
 
 /**
@@ -20,4 +23,6 @@ public interface ProductService {
     boolean addProduct(Product product);
     boolean updateProduct(Product product);
     boolean deleteProduct(Long id);
+
+    Page<Product> getAllProductsSortedByTitle();
 }
