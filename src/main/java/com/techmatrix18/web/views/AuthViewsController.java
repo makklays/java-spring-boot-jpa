@@ -27,7 +27,7 @@ public class AuthViewsController {
         this.positionService = positionService;
     }
 
-    @GetMapping("/my-login")
+    @GetMapping("/login")
     public String login(Model model, User user) {
         model.addAttribute("user", user);
         model.addAttribute("positions", positionService.getAllPositions());
@@ -35,11 +35,11 @@ public class AuthViewsController {
         return "auth/login";
     }
 
-    @PostMapping("/my-login-post")
+    @PostMapping("/login")
     public String loginPost(HttpServletRequest request, Model model, @Valid User user, BindingResult bindingResult) {
-        //if (bindingResult.hasErrors()) {
-        //    return "auth/login";
-        //}
+        if (bindingResult.hasErrors()) {
+            return "auth/login";
+        }
 
         String email = request.getParameter("email");
         String password = request.getParameter("password");

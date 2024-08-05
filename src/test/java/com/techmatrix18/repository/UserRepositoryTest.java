@@ -54,7 +54,7 @@ public class UserRepositoryTest {
 
     @Test
     public void printUsersByEmail() {
-        List<User> list = userRepository.findByEmail("shivm@gmail.com");
+        User list = userRepository.findByEmail("shivm@gmail.com");
 
         System.out.println("List of users by email: " + list);
     }

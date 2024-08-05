@@ -20,7 +20,7 @@ public interface UserService {
 
     List<User> findByFirstname(String firstname);
     User getUserByEmailAndPassword(String email, String Password);
-    List<User> getUsersByEmail(String email);
+    User getUsersByEmail(String email);
     List<User> getUsersByRole(String role);
 
     boolean addUser(User user);

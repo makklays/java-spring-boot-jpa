@@ -69,8 +69,8 @@ public class UserServiceImpl implements UserService /*, UserDetailsService*/ {
     }
 
     @Override
-    public List<User> getUsersByEmail(String email) {
-        List<User> obj = userRepository.findByEmail(email);
+    public User getUsersByEmail(String email) {
+        User obj = userRepository.findByEmail(email);
         return obj;
     }
 
@@ -103,12 +103,12 @@ public class UserServiceImpl implements UserService /*, UserDetailsService*/ {
     @Override
     public synchronized boolean addUser(User user) {
         // check email
-        List<User> list = userRepository.findByEmail(user.getEmail());
-        if (list.size() > 0) {
+        User u = userRepository.findByEmail(user.getEmail());
+        if (u == null) {
             return false;
         } else {
             // add
-            userRepository.save(user);
+            userRepository.save(u);
             return true;
         }
     }

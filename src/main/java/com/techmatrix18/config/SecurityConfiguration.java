@@ -28,15 +28,13 @@ public class SecurityConfiguration {
 
     @Bean
     public UserDetailsService userDetailsService(PasswordEncoder encoder) {
-        UserDetails admin = User.builder().username("admin").password(encoder.encode("admin")).roles("ADMIN").build();
-        UserDetails user = User.builder().username("user").password(encoder.encode("user")).roles("USER").build();
-        UserDetails alex41 = User.builder().username("alex41").password(encoder.encode("alex41")).roles("ADMIN", "USER").build();
+        return new CustomUserDetailsService();
 
-        //UserDetails admin = User.builder().username("admin").password(encoder.encode("admin")).build();
-        //UserDetails user = User.builder().username("user").password(encoder.encode("user")).build();
-        //UserDetails alex41 = User.builder().username("alex41").password(encoder.encode("alex41")).build();
+        //UserDetails admin = User.builder().username("admin").password(encoder.encode("admin")).roles("ADMIN").build();
+        //UserDetails user = User.builder().username("user").password(encoder.encode("user")).roles("USER").build();
+        //UserDetails alex41 = User.builder().username("alex41").password(encoder.encode("alex41")).roles("ADMIN", "USER").build();
 
-        return new InMemoryUserDetailsManager(admin, user, alex41);
+        //return new InMemoryUserDetailsManager(admin, user, alex41);
     }
 
     @Bean
@@ -53,9 +51,15 @@ public class SecurityConfiguration {
                                 .requestMatchers(new AntPathRequestMatcher("/*.{css,js}")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/*.{ico,png,svg,webapp}")).permitAll()
 
+                                .requestMatchers("/my-registr").permitAll()
+
                                 .requestMatchers("/users/**", "/menu").authenticated()
                                 .requestMatchers("/cities/**").authenticated())
-                .formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
+                //.formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .permitAll()
+                )
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/**").authenticated())
                 .httpBasic(Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/api/v1/**").authenticated())
