@@ -31,5 +31,12 @@ public enum RoleEnum {
                 .map(permission -> new SimpleGrantedAuthority(permission.getPermission()))
                 .collect(Collectors.toSet());
     }
+
+    @Override
+    public String toString() {
+        return "RoleEnum{" +
+                "permissions='"+ permissions + "'" +
+                "}";
+    }
 }
 

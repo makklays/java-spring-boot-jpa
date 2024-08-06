@@ -20,4 +20,12 @@ public enum PermissionEnum {
     public String getPermission() {
         return permission;
     }
+
+    @Override
+    public String toString() {
+        return "PermissionEnum{" +
+                "permission='"+ permission + "'" +
+                "}";
+    }
 }
+
