@@ -1,4 +1,4 @@
-package com.techmatrix18.service.implementation;
+package com.techmatrix18.service.impl;
 
 import com.techmatrix18.model.Category;
 import com.techmatrix18.repository.CategoryRepository;

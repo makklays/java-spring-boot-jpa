@@ -21,11 +21,11 @@ public interface UserService {
     List<User> findByFirstname(String firstname);
     User getUserByEmailAndPassword(String email, String Password);
     User getUsersByEmail(String email);
-    List<User> getUsersByRole(String role);
+    List<User> getUsersByRole(Role role);
 
-    boolean addUser(User user);
-    boolean updateUser(User user);
-    boolean deleteUser(Long id);
+    void addUser(User user);
+    void updateUser(User user);
+    void deleteUser(Long id);
 
     Page<User> findPaginated(int pageNo, int pageSize);
 }

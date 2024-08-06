@@ -1,11 +1,7 @@
 package com.techmatrix18.web.api;
 
 import com.techmatrix18.model.Position;
-import com.techmatrix18.repository.PositionRepository;
 import com.techmatrix18.service.PositionService;
-import com.techmatrix18.service.ProductService;
-import com.techmatrix18.service.implementation.PositionServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.bind.ValidationException;

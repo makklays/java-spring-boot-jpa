@@ -1,15 +1,13 @@
 package com.techmatrix18.web.api;
 
+import com.techmatrix18.model.Role;
 import com.techmatrix18.model.User;
-import com.techmatrix18.repository.UserRepository;
 import com.techmatrix18.service.PositionService;
+import com.techmatrix18.service.RoleService;
 import com.techmatrix18.service.UserService;
-import com.techmatrix18.service.implementation.PositionServiceImpl;
-import com.techmatrix18.service.implementation.UserServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.*;
 
@@ -32,10 +30,12 @@ public class UserController {
 
     private final UserService userService;
     private final PositionService positionService;
+    private final RoleService roleService;
 
-    public UserController(UserService userService, PositionService positionService) {
+    public UserController(UserService userService, PositionService positionService, RoleService roleService) {
         this.userService = userService;
         this.positionService = positionService;
+        this.roleService = roleService;
     }
 
     @GetMapping(path = "/test")
@@ -50,17 +50,12 @@ public class UserController {
 
     @GetMapping(path = "/all")
     public List<User> getUsers(HttpServletRequest request) throws ValidationException {
-        String role = request.getParameter("role");
-        if (!role.isEmpty()) {
-            List<User> list = userService.getUsersByRole(role);
-            return list;
+        String roleParam = request.getParameter("role");
+        Role role = roleService.getRoleByName(roleParam);
+        if (role!=null) {
+            return userService.getUsersByRole(role);
         } else {
-            List<User> list = userService.getAllUsers();
-            if (list != null) {
-                return list;
-            } else {
-                return null; // ? algun json
-            }
+            return userService.getAllUsers();
         }
     }
 

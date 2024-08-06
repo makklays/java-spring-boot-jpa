@@ -1,11 +1,7 @@
 package com.techmatrix18.web.api;
 
 import com.techmatrix18.model.Barco;
-import com.techmatrix18.repository.BarcoRepository;
 import com.techmatrix18.service.BarcoService;
-import com.techmatrix18.service.CategoryService;
-import com.techmatrix18.service.implementation.BarcoServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 

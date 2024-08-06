@@ -1,21 +1,28 @@
 package com.techmatrix18.model;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.NotBlank;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.sql.Timestamp;
-import java.util.Collection;
 import java.util.Objects;
 import java.util.List;
+import java.util.Set;
 
-//import javax.persistence.*;
-import jakarta.persistence.*;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import static javax.persistence.GenerationType.IDENTITY;
+import jakarta.persistence.ManyToMany;
 
 /**
  * Simple JavaBean domain that represents a User
@@ -27,19 +34,11 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "users")
-public class User implements UserDetails {
+public class User {
+
     @Id
-    /*@SequenceGenerator(
-            name = "users_seq",
-            sequenceName = "users_seq",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "users_seq"
-    )*/
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
     @Column(name = "firstname", length = 255)
     @NotBlank
@@ -57,15 +56,12 @@ public class User implements UserDetails {
     @NotBlank
     private String password;
 
-    @Column(name = "roles", length = 255)
-    @NotBlank
-    private String roles;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinColumn(nullable = false)
+    private Set<Role> roles;
 
     @Column(name = "bio", length = 500)
     private String bio;
-
-    /*@Column(name = "position_id", insertable=true, updatable=true)
-    private Long positionId;*/
 
     @ManyToOne
     @JoinColumn(unique = true) //, nullable = false)
@@ -86,15 +82,13 @@ public class User implements UserDetails {
     private Timestamp updatedAt;
 
     public User() {}
-    public User(String firstname, String lastname, String email, String password, Long positionId) {}
-    //public User(String firstname, String lastname, String email, Long positionId, String roles, String bio) {}
-
-    public Long getId() {
-        return Id;
-    }
 
     public void setId(Long id) {
-        Id = id;
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getFirstname() {
@@ -121,46 +115,12 @@ public class User implements UserDetails {
         this.email = email;
     }
 
-    //----- implements methods from UserDetails -----
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        String userRoles = this.getRoles();
-        Collection<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(userRoles);
-        return authorities;
-    }
-
-    public String getPassword() {
-        return this.password;
-    }
-
-    @Override
-    public String getUsername() {
-        return this.email;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
-    //-----------------------------------------------
-
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public @NotBlank String getPassword() {
+        return password;
     }
 
     public String getBio() {
@@ -171,9 +131,13 @@ public class User implements UserDetails {
         this.bio = bio;
     }
 
-    public String getRoles() { return roles; }
+    public Set<Role> getRoles() {
+        return roles;
+    }
 
-    public void setRoles(String roles) { this.roles = roles; }
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
 
     public Position getPosition() {
         return position;
@@ -202,19 +166,32 @@ public class User implements UserDetails {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof User user)) return false;
-        return getId().equals(user.getId()) && getFirstname().equals(user.getFirstname()) && getLastname().equals(user.getLastname()) && getEmail().equals(user.getEmail()) && getPassword().equals(user.getPassword()) && getBio().equals(user.getBio()) && getRoles().equals(user.getRoles()) && getPosition().equals(user.getPosition()) && getCreatedAt().equals(user.getCreatedAt()) && getUpdatedAt().equals(user.getUpdatedAt());
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+        return Objects.equals(id, user.id) && Objects.equals(firstname, user.firstname) && Objects.equals(lastname, user.lastname) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(roles, user.roles) && Objects.equals(bio, user.bio) && Objects.equals(position, user.position) && Objects.equals(barcoUsers, user.barcoUsers) && Objects.equals(createdAt, user.createdAt) && Objects.equals(updatedAt, user.updatedAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getFirstname(), getLastname(), getEmail(), getPassword(), getBio(), getRoles(), getPosition(), getCreatedAt(), getUpdatedAt());
+        int result = Objects.hashCode(id);
+        result = 31 * result + Objects.hashCode(firstname);
+        result = 31 * result + Objects.hashCode(lastname);
+        result = 31 * result + Objects.hashCode(email);
+        result = 31 * result + Objects.hashCode(password);
+        result = 31 * result + Objects.hashCode(roles);
+        result = 31 * result + Objects.hashCode(bio);
+        result = 31 * result + Objects.hashCode(position);
+        result = 31 * result + Objects.hashCode(barcoUsers);
+        result = 31 * result + Objects.hashCode(createdAt);
+        result = 31 * result + Objects.hashCode(updatedAt);
+        return result;
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "Id=" + Id +
+                "Id=" + id +
                 ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
                 ", email='" + email + '\'' +

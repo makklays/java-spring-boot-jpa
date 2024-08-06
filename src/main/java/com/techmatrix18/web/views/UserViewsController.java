@@ -1,28 +1,20 @@
 package com.techmatrix18.web.views;
 
-import com.techmatrix18.model.Category;
 import com.techmatrix18.model.User;
-import com.techmatrix18.repository.UserRepository;
 import com.techmatrix18.service.PositionService;
 import com.techmatrix18.service.UserService;
-import com.techmatrix18.service.implementation.PositionServiceImpl;
-import com.techmatrix18.service.implementation.UserServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
-import java.util.*;
 
 /**
  * Simple controller for User
@@ -48,7 +40,7 @@ public class UserViewsController {
     @GetMapping("/welcome")
     public String welcome(Model model) {
         model.addAttribute("vv", "V-V-V");
-        return "welcome";
+        return "index";
     }
 
     @GetMapping("/menu")
@@ -120,7 +112,6 @@ public class UserViewsController {
     @PostMapping("/users/update/{id}")
     public String editPost(@PathVariable("id") long id, @Valid User user, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            user.setId(id);
             return "users/edit";
         }
 

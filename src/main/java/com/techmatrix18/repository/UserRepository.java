@@ -1,5 +1,6 @@
 package com.techmatrix18.repository;
 
+import com.techmatrix18.model.Role;
 import com.techmatrix18.model.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -7,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
@@ -20,7 +22,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     User findByEmailAndPassword(String email, String password);
 
     User findByEmail(String email);
-    List<User> findByRoles(String role);
+    List<User> findByRoles(Role roles);
 
     //Page<User> findAll(Pageable pageable);
 }

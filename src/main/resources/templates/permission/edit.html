@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Permission</title>
+</head>
+<body>
+<h1>Edit Permission</h1>
+<form th:action="@{/permission/update}" method="post">
+    <input type="hidden" name="id" th:value="${permission.id}"/>
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" th:value="${permission.name}"/>
+    </div>
+    <button type="submit">Save</button>
+</form>
+<a href="/permission/list">Back to list</a>
+</body>
+</html>

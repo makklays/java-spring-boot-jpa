@@ -1,35 +1,83 @@
 package com.techmatrix18.model;
 
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-
+import jakarta.persistence.*;
+import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 
-/**
- * Simple JavaBean domain that represents a Role
- *
- * @author Alexander Kuziv
- * @version 1.0
- */
+@Entity
+@Table(name = "roles")
+public class Role {
 
-public enum Role {
-    USER(Set.of(Permission.USER_READ)),
-    ADMIN(Set.of(Permission.USER_READ, Permission.USER_WRITE));
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    private final Set<Permission> permissions;
+    private String name;
 
-    Role(Set<Permission> permissions) {
-        this.permissions = permissions;
+    @ManyToMany(mappedBy = "roles")
+    private Set<User> users;
+
+    @ManyToMany
+    @JoinTable(
+            name = "role_permissions",
+            joinColumns = @JoinColumn(name = "role_id"),
+            inverseJoinColumns = @JoinColumn(name = "permission_id")
+    )
+    private Set<Permission> permissions;
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 
     public Set<Permission> getPermissions() {
         return permissions;
     }
 
-    public Set<SimpleGrantedAuthority> getAuthorities(){
-        return getPermissions().stream()
-                .map(permission -> new SimpleGrantedAuthority(permission.getPermission()))
-                .collect(Collectors.toSet());
+    public void setPermissions(Set<Permission> permissions) {
+        this.permissions = permissions;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Role role = (Role) o;
+        return Objects.equals(id, role.id) && Objects.equals(name, role.name) && Objects.equals(users, role.users) && Objects.equals(permissions, role.permissions);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hashCode(id);
+        result = 31 * result + Objects.hashCode(name);
+        result = 31 * result + Objects.hashCode(users);
+        result = 31 * result + Objects.hashCode(permissions);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Role{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", users=" + users +
+                ", permissions=" + permissions +
+                '}';
     }
 }
-

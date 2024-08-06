@@ -1,4 +1,4 @@
-package com.techmatrix18.service.implementation;
+package com.techmatrix18.service.impl;
 
 import com.techmatrix18.model.Storehouse;
 import com.techmatrix18.repository.StorehouseRepository;

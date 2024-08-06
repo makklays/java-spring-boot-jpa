@@ -1,40 +1,36 @@
 package com.techmatrix18.config;
 
+import com.techmatrix18.service.impl.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractAuthenticationFilterConfigurer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity(securedEnabled = true)
 public class SecurityConfiguration {
+
+
+    private final CustomUserDetailsService userDetailsService;
+
+    public SecurityConfiguration(CustomUserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    public UserDetailsService userDetailsService(PasswordEncoder encoder) {
-        return new CustomUserDetailsService();
-
-        //UserDetails admin = User.builder().username("admin").password(encoder.encode("admin")).roles("ADMIN").build();
-        //UserDetails user = User.builder().username("user").password(encoder.encode("user")).roles("USER").build();
-        //UserDetails alex41 = User.builder().username("alex41").password(encoder.encode("alex41")).roles("ADMIN", "USER").build();
-
-        //return new InMemoryUserDetailsManager(admin, user, alex41);
     }
 
     @Bean
@@ -50,14 +46,15 @@ public class SecurityConfiguration {
                                 .requestMatchers(new AntPathRequestMatcher("/js/**")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/*.{css,js}")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/*.{ico,png,svg,webapp}")).permitAll()
-
                                 .requestMatchers("/my-registr").permitAll()
-
-                                .requestMatchers("/users/**", "/menu").authenticated()
-                                .requestMatchers("/cities/**").authenticated())
-                //.formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
+                                .requestMatchers("/users/**").hasAnyAuthority("ROLE_ADMIN")
+                                .requestMatchers("/cities/**", "/menu").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER"))
                 .formLogin(form -> form
                         .loginPage("/login")
+                        .permitAll()
+                )
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
                         .permitAll()
                 )
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/**").authenticated())
@@ -65,152 +62,6 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/api/v1/**").authenticated())
                 .build();
     }
-
-    /*public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
-    }*/
-
-    //---- old realization ----
-    /*@Bean
-    public InMemoryUserDetailsManager userDetailsService_old() {
-        UserDetails user = User.withUsername("user")
-                .password("user") // passwordEncoder().encode("user")
-                .roles("USER")
-                //.authorities(Role.USER.getAuthorities())
-                .build();
-        UserDetails admin = User.withUsername("admin")
-                .password("admin") // passwordEncoder().encode("admin")
-                .roles("ADMIN")
-                //.authorities(Role.ADMIN.getAuthorities())
-                .build();
-        return new InMemoryUserDetailsManager(user, admin);
-    }
-
-    @Bean
-    public SecurityFilterChain filterChain_old(HttpSecurity http) throws Exception {
-
-        http
-                .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/api/v1/**").hasAnyRole("USER", "ADMIN")
-                        .anyRequest().authenticated()
-                )
-                .formLogin(form -> form
-                        .loginPage("/login")
-                        .permitAll()
-                )
-                .logout(logout -> logout
-                        .permitAll());
-
-        /*http
-                //.csrf()
-                //.disable()
-                .authorizeRequests()
-                .antMatchers("/admin/**")
-                .hasRole("ADMIN")
-                .antMatchers("/anonymous*")
-                .anonymous()
-                .antMatchers("/login*")
-                .permitAll()
-                .anyRequest()
-                .authenticated()
-                .and()
-                // ...
-                .and()
-                .formLogin()
-                .loginPage("/login.html")
-                .loginProcessingUrl("/perform_login")
-                .defaultSuccessUrl("/homepage.html", true)
-                .failureUrl("/login.html?error=true")
-                .failureHandler(authenticationFailureHandler())
-                .and()
-                .logout()
-                .logoutUrl("/perform_logout")
-                .deleteCookies("JSESSIONID")
-                .logoutSuccessHandler(logoutSuccessHandler());
-
-                //.csrf().disable();
-                //.authorizeRequests()
-                //.antMatchers("/").permitAll()
-                ////.antMatchers(HttpMethod.GET, "/api/**").hasAnyRole(Role.ADMIN.name(), Role.USER.name())
-                ////.antMatchers(HttpMethod.POST, "/api/**").hasRole(Role.ADMIN.name())
-                ////.antMatchers(HttpMethod.DELETE, "/api/**").hasRole(Role.ADMIN.name())
-                //.antMatchers(HttpMethod.GET, "/api/**").hasAuthority(Permission.DEVELOPERS_READ.getPermission())
-                //.antMatchers(HttpMethod.POST, "/api/**").hasAuthority(Permission.DEVELOPERS_WRITE.getPermission())
-                //.antMatchers(HttpMethod.DELETE, "/api/**").hasAuthority(Permission.DEVELOPERS_WRITE.getPermission())
-                //.anyRequest()
-                //.authenticated()
-                //.and()
-                //.httpBasic();
-
-        return http.build();
-    }*/
-
-    /*@Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/images/**", "/js/**", "/webjars/**");
-    }*/
-
-    /*@Override
-    protected void configure(HttpSecurity http) throws Exception {
-        // super.configure(http);
-
-        // my setting with roles
-        http
-            .csrf().disable()
-            .authorizeRequests()
-            .antMatchers("/").permitAll()
-            //.antMatchers(HttpMethod.GET, "/api/**").hasAnyRole(Role.ADMIN.name(), Role.USER.name())
-            //.antMatchers(HttpMethod.POST, "/api/**").hasRole(Role.ADMIN.name())
-            //.antMatchers(HttpMethod.DELETE, "/api/**").hasRole(Role.ADMIN.name())
-            .antMatchers(HttpMethod.GET, "/api/**").hasAuthority(Permission.DEVELOPERS_READ.getPermission())
-            .antMatchers(HttpMethod.POST, "/api/**").hasAuthority(Permission.DEVELOPERS_WRITE.getPermission())
-            .antMatchers(HttpMethod.DELETE, "/api/**").hasAuthority(Permission.DEVELOPERS_WRITE.getPermission())
-            .anyRequest()
-            .authenticated()
-            .and()
-            .httpBasic();
-    }*/
-
-    /*@Bean
-    protected UserDetailsService UserDetailsService() {
-
-        /*User user = User.withDefaultPasswordEncoder()
-                .username("user")
-                .password("password")
-                .roles("user")
-                .build();
-        System.out.println(user.getPassword());*/
-
-        /*return new InMemoryUserDetailsManager(
-            User.withDefaultPasswordEncoder()
-                    .username("user")
-                    .password(new BCryptPasswordEncoder(12).encode("user"))
-                    //.roles("USER")
-                    .authorities(Role.USER.getAuthorities())
-                    .build(),
-            User.withDefaultPasswordEncoder()
-                    .username("admin")
-                    .password(new BCryptPasswordEncoder(12).encode("admin"))
-                    //.roles("USER","ADMIN")
-                    .authorities(Role.ADMIN.getAuthorities())
-                    .build()
-        );*/
-
-        /*return new InMemoryUserDetailsManager(
-            User.builder()
-                    .username("admin")
-                    .password(passwordEncoder().encode("admin"))
-                    //.roles(Role.ADMIN.name())
-                    .authorities(Role.ADMIN.getAuthorities())
-                    .build(),
-            User.builder()
-                    .username("user")
-                    .password(passwordEncoder().encode("user"))
-                    //.roles(Role.USER.name())
-                    .authorities(Role.USER.getAuthorities())
-                    .build()
-        );
-    }*/
 
 }
 

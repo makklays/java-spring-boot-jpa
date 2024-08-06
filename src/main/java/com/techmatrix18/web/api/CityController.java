@@ -1,12 +1,8 @@
 package com.techmatrix18.web.api;
 
 import com.techmatrix18.model.City;
-import com.techmatrix18.repository.CityRepository;
 import com.techmatrix18.service.CityService;
-import com.techmatrix18.service.InvoiceService;
-import com.techmatrix18.service.implementation.CityServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.bind.ValidationException;

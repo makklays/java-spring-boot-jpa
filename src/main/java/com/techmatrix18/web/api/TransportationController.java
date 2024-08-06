@@ -1,10 +1,7 @@
 package com.techmatrix18.web.api;
 
 import com.techmatrix18.model.Transportation;
-import com.techmatrix18.repository.TransportationRepository;
 import com.techmatrix18.service.TransportationService;
-import com.techmatrix18.service.implementation.TransportationServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.bind.ValidationException;

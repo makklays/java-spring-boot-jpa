@@ -1,11 +1,8 @@
 package com.techmatrix18.web.api;
 
 import com.techmatrix18.model.Storehouse;
-import com.techmatrix18.repository.StorehouseRepository;
 import com.techmatrix18.service.StorehouseService;
-import com.techmatrix18.service.implementation.StorehouseServiceImpl;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

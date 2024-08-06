@@ -10,8 +10,8 @@ spring:
     #validation-query: select 1
     # MySQL
     url: jdbc:mysql://localhost:3306/storehouse_db
-    username: admin
-    password: admin
+    username: root
+    password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     show-sql: true
