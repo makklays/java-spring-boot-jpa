@@ -25,3 +25,17 @@ package com.techmatrix18.model;
 //        @Scope('prototype') // области видимости бинов:
 //
 
+// Старый способ:
+/*List<Integer> list = Arrays.asList(1,2,3,4,5,6,7);
+int sum = 0;
+for(Integer n : list) {
+int x = n * n;
+sum = sum + x;
+}
+System.out.println(sum);*/
+
+// Новый способ:
+/*List<Integer> list = Arrays.asList(1,2,3,4,5,6,7);
+int sum = list.stream().map(x -> x*x).reduce((x,y) -> x + y).get();
+System.out.println(sum);*/
+
