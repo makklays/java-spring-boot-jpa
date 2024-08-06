@@ -25,6 +25,10 @@ package com.techmatrix18.model;
 //        @Scope('prototype') // области видимости бинов:
 //
 
+// (арг1, арг2...) -> { тело }
+//
+// (тип1 арг1, тип2 арг2...) -> { тело }
+
 // Старый способ:
 /*List<Integer> list = Arrays.asList(1,2,3,4,5,6,7);
 int sum = 0;
