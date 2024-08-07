@@ -1,3 +1,4 @@
+
 -- Insert Admin Role (if not exists)
 INSERT INTO roles (name) VALUES ('ADMIN') ON DUPLICATE KEY UPDATE name = name;
 
@@ -9,3 +10,4 @@ INSERT INTO users_roles (users_id, roles_id)
 SELECT u.id, r.id
 FROM users u, roles r
 WHERE u.email = 'admin' AND r.name = 'ADMIN';
+

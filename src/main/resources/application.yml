@@ -55,8 +55,13 @@ spring:
     allow-bean-definition-overriding: true
   # FlyWay
   flyway:
-    enabled: true
+    url: jdbc:mysql://localhost:3306/storehouse_db
+    user: admin
+    password: admin
+    #driver-class-name: com.mysql.cj.jdbc.Driver
+    #enabled: true
     locations: classpath:db.migration
+    #baselineOnMigrate: true
 logging:
   #level:
     #com.concretepage: INFO
