@@ -259,6 +259,7 @@
                     <user>admin</user>
                     <password>admin</password>
                     <url>jdbc:mysql://localhost:3306/storehouse_db</url>
+                    <locations>classpath:db/migration</locations>
                 </configuration>
             </plugin>
         </plugins>
