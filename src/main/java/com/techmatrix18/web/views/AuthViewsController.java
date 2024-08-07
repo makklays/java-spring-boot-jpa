@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.Set;
+
 @Controller
 public class AuthViewsController {
     private static final Logger logger = LoggerFactory.getLogger(com.techmatrix18.web.api.UserController.class);
@@ -77,23 +79,17 @@ public class AuthViewsController {
     }
 
     @PostMapping("/my-registr-post")
-    public String registrPost(Model model, User user, BindingResult bindingResult) {
+    public String registrPost(User user, BindingResult bindingResult) {
         //if (bindingResult.hasErrors()) {
         //    return "auth/registr";
         //}
 
-        Role role = new Role();
-        role.setName("ROLE_USER");
-        roleService.createRole(role);
-
-        String password = user.getPassword();
-
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        String result = encoder.encode(password);
-
+        String result = encoder.encode(user.getPassword());
+        user.setRoles(Set.of(roleService.getRoleByName("ROLE_USER")));
         user.setPassword(result);
         userService.addUser(user);
 
-        return "redirect:/my-login";
+        return "redirect:/login";
     }
 }
