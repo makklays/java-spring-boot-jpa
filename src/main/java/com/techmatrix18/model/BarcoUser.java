@@ -23,15 +23,15 @@ public class BarcoUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "barco_id", insertable=false, updatable=false)
-    private Long barcoId;
+    /*@Column(name = "barco_id", insertable=false, updatable=false)
+    private Long barcoId;*/
 
     @ManyToOne
     @JoinColumn(name="barco_id")
     private Barco barco;
 
-    @Column(name = "user_id", insertable=false, updatable=false)
-    private Long userId;
+    /*@Column(name = "user_id", insertable=false, updatable=false)
+    private Long userId;*/
 
     @ManyToOne
     @JoinColumn(name="user_id")
@@ -55,20 +55,20 @@ public class BarcoUser {
         this.id = id;
     }
 
-    public Long getBarcoId() {
-        return barcoId;
+    public Barco getBarco() {
+        return this.barco;
     }
 
-    public void setBarcoId(Long barcoId) {
-        this.barcoId = barcoId;
+    public void setBarco(Barco barco) {
+        this.barco = barco;
     }
 
-    public Long getUserId() {
-        return userId;
+    public User getUser() {
+        return this.user;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Timestamp getCreatedAt() {
@@ -91,20 +91,20 @@ public class BarcoUser {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof BarcoUser barcoDriver)) return false;
-        return getId().equals(barcoDriver.getId()) && getBarcoId().equals(barcoDriver.getBarcoId()) && getUserId().equals(barcoDriver.getUserId()) && getCreatedAt().equals(barcoDriver.getCreatedAt()) && getUpdatedAt().equals(barcoDriver.getUpdatedAt());
+        return getId().equals(barcoDriver.getId()) && getBarco().equals(barcoDriver.getBarco()) && getUser().equals(barcoDriver.getUser()) && getCreatedAt().equals(barcoDriver.getCreatedAt()) && getUpdatedAt().equals(barcoDriver.getUpdatedAt());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getBarcoId(), getUserId(), getCreatedAt(), getUpdatedAt());
+        return Objects.hash(getId(), getBarco(), getUser(), getCreatedAt(), getUpdatedAt());
     }
 
     @Override
     public String toString() {
         return "BarcoUser{" +
                 "id=" + id +
-                ", barcoId=" + barcoId +
-                ", userId=" + userId +
+                ", barco=" + barco +
+                ", user=" + user +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';

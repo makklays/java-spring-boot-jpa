@@ -23,7 +23,7 @@ public class UserTest {
         user.setPassword("password");
         user.setBio("This is my bio");
         //user.setPositionId(1L);
-        user.setRoles("USER");
+        //user.setRoles("ROLE_USER");
         user.setCreatedAt(timestamp);
         user.setUpdatedAt(timestamp);
 
@@ -52,7 +52,7 @@ public class UserTest {
         user1.setEmail("f.last@hotmail.com");
         user1.setPassword("password");
         user1.setBio("This is my bio");
-        user1.setRoles("USER");
+        //user1.setRoles("ROLE_USER");
         user1.setPosition(position);
         user1.setCreatedAt(timestamp);
         user1.setUpdatedAt(timestamp);
@@ -64,7 +64,7 @@ public class UserTest {
         user2.setEmail("f.last@hotmail.com");
         user2.setPassword("password");
         user2.setBio("This is my bio");
-        user2.setRoles("USER");
+        //user2.setRoles("ROLE_USER");
         user2.setPosition(position);
         user2.setCreatedAt(timestamp);
         user2.setUpdatedAt(timestamp);
@@ -76,7 +76,7 @@ public class UserTest {
         user3.setEmail("name.surname@hot.com");
         user3.setPassword("2222222");
         user3.setBio("This is your bio");
-        user3.setRoles("USER");
+        //user3.setRoles("ROLE_USER");
         user3.setPosition(position);
         user3.setCreatedAt(timestamp);
         user3.setUpdatedAt(timestamp);
@@ -103,7 +103,7 @@ public class UserTest {
         user.setEmail("f.last@hotmail.com");
         user.setPassword("password");
         user.setBio("This is my bio");
-        user.setRoles("USER");
+        //user.setRoles("ROLE_USER");
         user.setPosition(position);
         user.setCreatedAt(timestamp);
         user.setUpdatedAt(timestamp);
@@ -115,7 +115,7 @@ public class UserTest {
                 ", email='f.last@hotmail.com'" +
                 ", password='password'" +
                 ", bio='This is my bio'" +
-                ", roles='USER'" +
+                //", roles='ROLE_USER'" +
                 ", position=Position{id=1, title='Position 1', description='null', createdAt=null, updatedAt=null}" +
                 ", createdAt=2024-02-16 12:00:00.0" +
                 ", updatedAt=2024-02-16 12:00:00.0" +
