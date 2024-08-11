@@ -12,7 +12,7 @@
             <h1 th:text="#{app.welcome}">Welcome!</h1>
         </div>
         <div  class="col-md-6 align-self-center" style="text-align:right;">
-            <a th:href="@{/my-login}">Login</a> | <a th:href="@{/my-registr}">Registration</a>
+            <a th:href="@{/login}">Login</a> | <a th:href="@{/my-registr}">Registration</a>
             <!-- Display user information if logged in -->
             <div th:if="${username != null}">
                 <p>Hello, <span th:text="${username}"></span>!</p>
