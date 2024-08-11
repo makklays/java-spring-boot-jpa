@@ -1,154 +1,188 @@
 -- Change Set 202408081200-1
--- Author: Vitalii
+-- Author: Vitalii, Alexander ))
+
+-- 1
 create table barco_products
 (
-    barco_id   bigint,
-    created_at datetime(6),
     id         bigint not null auto_increment,
+    barco_id   bigint,
     product_id bigint,
+    created_at datetime(6),
     updated_at datetime(6),
     primary key (id)
 ) engine = InnoDB;
+
+-- 2
 create table barco_users
 (
-    barco_id   bigint,
-    created_at datetime(6),
     id         bigint not null auto_increment,
-    updated_at datetime(6),
+    barco_id   bigint,
     user_id    bigint,
+    created_at datetime(6),
+    updated_at datetime(6),
     primary key (id)
 ) engine = InnoDB;
+
+-- 3
 create table barcos
 (
+    id          bigint not null auto_increment,
+    title       varchar(255),
+    description varchar(500),
     speedometer integer,
     weight      integer,
     year        integer,
     created_at  datetime(6),
-    id          bigint not null auto_increment,
     updated_at  datetime(6),
-    description varchar(500),
-    title       varchar(255),
     primary key (id)
 ) engine = InnoDB;
+
+-- 4
 create table categories
 (
-    created_at  datetime(6),
     id          bigint not null auto_increment,
-    updated_at  datetime(6),
-    description varchar(500),
     title       varchar(255),
+    description varchar(500),
+    created_at  datetime(6),
+    updated_at  datetime(6),
     primary key (id)
 ) engine = InnoDB;
+
+-- 5
 create table cities
 (
-    created_at  datetime(6),
     id          bigint not null auto_increment,
-    updated_at  datetime(6),
-    description varchar(500),
     title       varchar(255),
+    description varchar(500),
+    created_at  datetime(6),
+    updated_at  datetime(6),
     primary key (id)
 ) engine = InnoDB;
+
+-- 6
 create table invoices
 (
-    amount            float(23),
-    created_at        datetime(6),
     id                bigint not null auto_increment,
-    transportation_id bigint,
-    updated_at        datetime(6),
-    description       varchar(500),
-    status            varchar(255),
     title             varchar(255),
+    description       varchar(500),
+    amount            float(23),
+    transportation_id bigint,
+    status            varchar(255),
+    created_at        datetime(6),
+    updated_at        datetime(6),
     primary key (id)
 ) engine = InnoDB;
+
+-- 7
 create table permission
 (
     id   bigint not null auto_increment,
     name varchar(255),
     primary key (id)
 ) engine = InnoDB;
+
+-- 8
 create table positions
 (
-    created_at  datetime(6),
     id          bigint not null auto_increment,
-    updated_at  datetime(6),
-    description varchar(500),
     title       varchar(255),
+    description varchar(500),
+    created_at  datetime(6),
+    updated_at  datetime(6),
     primary key (id)
 ) engine = InnoDB;
+
+-- 9
 create table positions_users
 (
     position_id bigint not null,
     user_id    bigint not null,
     primary key (position_id, user_id)
 ) engine = InnoDB;
+
+-- 10
 create table products
 (
+    id           bigint not null auto_increment,
+    title        varchar(255),
+    description  varchar(500),
+    category_id  bigint not null,
     is_dangerous bit,
     is_glass     bit,
     weight       integer,
-    category_id  bigint not null,
     created_at   datetime(6),
-    id           bigint not null auto_increment,
     updated_at   datetime(6),
-    description  varchar(500),
-    title        varchar(255),
     primary key (id)
 ) engine = InnoDB;
+
+-- 11
 create table role_permissions
 (
-    permission_id bigint not null,
     role_id       bigint not null,
+    permission_id bigint not null,
     primary key (permission_id, role_id)
 ) engine = InnoDB;
+
+-- 12
 create table roles
 (
     id   bigint not null auto_increment,
     name varchar(255),
     primary key (id)
 ) engine = InnoDB;
+
+-- 13
 create table storehouse_barcos
 (
-    barco_id      bigint,
-    created_at    datetime(6),
     id            bigint not null auto_increment,
     storehouse_id bigint,
+    barco_id      bigint,
+    created_at    datetime(6),
     updated_at    datetime(6),
     primary key (id)
 ) engine = InnoDB;
+
+-- 14
 create table storehouses
 (
+    id          bigint not null auto_increment,
+    title       varchar(255),
+    description varchar(500),
     city_id     bigint not null,
     created_at  datetime(6),
-    id          bigint not null auto_increment,
     updated_at  datetime(6),
-    description varchar(500),
-    title       varchar(255),
     primary key (id)
 ) engine = InnoDB;
+
+-- 15
 create table transportations
 (
+    id            bigint not null auto_increment,
+    barco_id      bigint not null,
+    storehouse_id bigint not null,
     distance      integer,
     weight        integer,
-    barco_id      bigint not null,
     created_at    datetime(6),
-    id            bigint not null auto_increment,
-    storehouse_id bigint not null,
     updated_at    datetime(6),
     primary key (id)
 ) engine = InnoDB;
+
+-- 16
 create table users
 (
-    created_at  datetime(6),
     id          bigint       not null auto_increment,
-    position_id bigint,
-    updated_at  datetime(6),
-    email       varchar(200) not null,
-    bio         varchar(500),
     firstname   varchar(255),
     lastname    varchar(255),
     password    varchar(255),
+    position_id bigint,
+    email       varchar(200) not null,
+    bio         varchar(500),
+    created_at  datetime(6),
+    updated_at  datetime(6),
     primary key (id)
 ) engine = InnoDB;
+
+-- 17
 create table users_roles
 (
     id          bigint       not null auto_increment,
@@ -158,6 +192,8 @@ create table users_roles
     updated_at  datetime(6),
     primary key (id)
 ) engine = InnoDB;
+
+--
 alter table positions_users
     add constraint UK_nln1fmqn4mge4upux0q11xw7p unique (user_id);
 alter table users
@@ -200,3 +236,4 @@ alter table users_roles
     add constraint FKa62j07k5mhgifpp955h37ponj foreign key (role_id) references roles (id);
 alter table users_roles
     add constraint FKml90kef4w2jy7oxyqv742tsfc foreign key (user_id) references users (id);
+

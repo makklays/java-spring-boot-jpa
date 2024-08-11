@@ -185,14 +185,15 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "Id=" + id +
+                "id=" + id +
                 ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", userRoles=" + userRoles +
                 ", bio='" + bio + '\'' +
-                ", userRoles='" + userRoles + '\'' +
                 ", position=" + position +
+                ", barcoUsers=" + barcoUsers +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';
