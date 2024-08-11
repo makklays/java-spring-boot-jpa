@@ -183,11 +183,11 @@ create table users
 ) engine = InnoDB;
 
 -- 17
-create table users_roles
+create table user_roles
 (
     id          bigint       not null auto_increment,
-    role_id     bigint not null,
     user_id     bigint not null,
+    role_id     bigint not null,
     created_at  datetime(6),
     updated_at  datetime(6),
     primary key (id)
@@ -232,8 +232,8 @@ alter table transportations
     add constraint FK7o4mcemf5linqftvwqueq302d foreign key (storehouse_id) references storehouses (id);
 alter table users
     add constraint FK6ph6xiiydudp6umjf2xckbbmi foreign key (position_id) references positions (id);
-alter table users_roles
+alter table user_roles
     add constraint FKa62j07k5mhgifpp955h37ponj foreign key (role_id) references roles (id);
-alter table users_roles
+alter table user_roles
     add constraint FKml90kef4w2jy7oxyqv742tsfc foreign key (user_id) references users (id);
 

@@ -16,7 +16,7 @@ import java.util.Objects;
  */
 
 @Entity
-@Table(name = "users_roles")
+@Table(name = "user_roles")
 public class UserRole {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

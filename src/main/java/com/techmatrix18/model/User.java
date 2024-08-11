@@ -52,7 +52,7 @@ public class User {
 
     //@OneToMany(mappedBy = "users")
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
-    private Set<UserRole> userRoles;
+    private List<UserRole> userRoles;
 
     @Column(name = "bio", length = 500)
     private String bio;
@@ -125,11 +125,11 @@ public class User {
         this.bio = bio;
     }
 
-    public Set<UserRole> getUserRoles() {
+    public List<UserRole> getUserRoles() {
         return userRoles;
     }
 
-    public void setUserRoles(Set<UserRole> userRoles) {
+    public void setUserRoles(List<UserRole> userRoles) {
         this.userRoles = userRoles;
     }
 

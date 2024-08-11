@@ -13,7 +13,7 @@ INSERT INTO roles (name) VALUES ('ROLE_USER') ON DUPLICATE KEY UPDATE name = nam
 INSERT INTO users (email, password) VALUES ('admin', '$2a$12$sL/ppYTnUBDV47MZnTypJetXJ3JuZDDr.LchUSwfl8PzH2xHd1Tvm');
 
 -- Associate Admin User with Admin Role
-INSERT INTO users_roles (user_id, role_id) VALUES (
+INSERT INTO user_roles (user_id, role_id) VALUES (
     (SELECT u.id FROM users u WHERE u.email = 'admin'), (SELECT r.id FROM roles r WHERE r.name = 'ROLE_ADMIN')
 );
 
