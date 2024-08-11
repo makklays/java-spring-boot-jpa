@@ -86,7 +86,7 @@ public class AuthViewsController {
 
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String result = encoder.encode(user.getPassword());
-        user.setRoles(Set.of(roleService.getRoleByName("ROLE_USER")));
+        //user.setUserRoles(Set.of(userRoleService.getRoleByName("ROLE_USER")));
         user.setPassword(result);
         userService.addUser(user);
 

@@ -1,16 +1,13 @@
 package com.techmatrix18.service.impl;
 
-import com.techmatrix18.model.Role;
 import com.techmatrix18.model.User;
 import com.techmatrix18.repository.UserRepository;
 import com.techmatrix18.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
+
 import java.util.List;
 
 /**
@@ -39,13 +36,13 @@ public class UserServiceImpl implements UserService /*, UserDetailsService*/ {
         return userRepository.findByEmailAndPassword(email, password);
     }
 
-    @Override
-    public List<User> getUsersByRole(Role role) {
-        return userRepository.findByRoles(role);
-    }
+    /*@Override
+    public User getUserByUserRoleId(Long userRoleId) {
+        return userRepository.findByUserRoles(userRoleId);
+    }*/
 
     @Override
-    public User getUsersByEmail(String email) {
+    public User getUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 

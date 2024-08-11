@@ -151,9 +151,12 @@ create table users
 ) engine = InnoDB;
 create table users_roles
 (
-    role_id bigint not null,
-    user_id bigint not null,
-    primary key (role_id, user_id)
+    id          bigint       not null auto_increment,
+    role_id     bigint not null,
+    user_id     bigint not null,
+    created_at  datetime(6),
+    updated_at  datetime(6),
+    primary key (id)
 ) engine = InnoDB;
 alter table positions_users
     add constraint UK_nln1fmqn4mge4upux0q11xw7p unique (user_id);

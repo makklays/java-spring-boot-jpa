@@ -22,7 +22,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     User findByEmailAndPassword(String email, String password);
 
     User findByEmail(String email);
-    List<User> findByRoles(Role roles);
+    //User findByUserRoles(Long userRoleId);
 
     //Page<User> findAll(Pageable pageable);
 }

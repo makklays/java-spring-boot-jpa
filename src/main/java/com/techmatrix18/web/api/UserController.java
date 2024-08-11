@@ -53,7 +53,8 @@ public class UserController {
         String roleParam = request.getParameter("role");
         Role role = roleService.getRoleByName(roleParam);
         if (role!=null) {
-            return userService.getUsersByRole(role);
+            //return userService.getUserByUserRoleId(userRoleId);
+            return null;
         } else {
             return userService.getAllUsers();
         }

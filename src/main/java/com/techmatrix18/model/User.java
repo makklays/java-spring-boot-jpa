@@ -42,14 +42,17 @@ public class User {
     @NotBlank
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    //@JoinColumn(nullable = false)
+    /*@ManyToMany
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-    private Set<Role> roles;
+    private Set<Role> roles;*/
+
+    //@OneToMany(mappedBy = "users")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<UserRole> userRoles;
 
     @Column(name = "bio", length = 500)
     private String bio;
@@ -122,12 +125,12 @@ public class User {
         this.bio = bio;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
+    public Set<UserRole> getUserRoles() {
+        return userRoles;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setUserRoles(Set<UserRole> userRoles) {
+        this.userRoles = userRoles;
     }
 
     public Position getPosition() {
@@ -160,7 +163,7 @@ public class User {
         if (o == null || getClass() != o.getClass()) return false;
 
         User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(firstname, user.firstname) && Objects.equals(lastname, user.lastname) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(roles, user.roles) && Objects.equals(bio, user.bio) && Objects.equals(position, user.position) && Objects.equals(barcoUsers, user.barcoUsers) && Objects.equals(createdAt, user.createdAt) && Objects.equals(updatedAt, user.updatedAt);
+        return Objects.equals(id, user.id) && Objects.equals(firstname, user.firstname) && Objects.equals(lastname, user.lastname) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(userRoles, user.userRoles) && Objects.equals(bio, user.bio) && Objects.equals(position, user.position) && Objects.equals(barcoUsers, user.barcoUsers) && Objects.equals(createdAt, user.createdAt) && Objects.equals(updatedAt, user.updatedAt);
     }
 
     @Override
@@ -170,7 +173,7 @@ public class User {
         result = 31 * result + Objects.hashCode(lastname);
         result = 31 * result + Objects.hashCode(email);
         result = 31 * result + Objects.hashCode(password);
-        result = 31 * result + Objects.hashCode(roles);
+        result = 31 * result + Objects.hashCode(userRoles);
         result = 31 * result + Objects.hashCode(bio);
         result = 31 * result + Objects.hashCode(position);
         result = 31 * result + Objects.hashCode(barcoUsers);
@@ -188,7 +191,7 @@ public class User {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", bio='" + bio + '\'' +
-                ", roles='" + roles + '\'' +
+                ", userRoles='" + userRoles + '\'' +
                 ", position=" + position +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +

@@ -91,5 +91,16 @@ public class UserRole {
     public int hashCode() {
         return Objects.hash(getId(), getUser(), getRole(), getCreatedAt(), getUpdatedAt());
     }
+
+    @Override
+    public String toString() {
+        return "UserRole{" +
+                "id=" + id +
+                ", user=" + user +
+                ", role=" + role +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                '}';
+    }
 }
 

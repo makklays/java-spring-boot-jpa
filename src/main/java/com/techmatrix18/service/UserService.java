@@ -20,8 +20,10 @@ public interface UserService {
 
     List<User> findByFirstname(String firstname);
     User getUserByEmailAndPassword(String email, String Password);
-    User getUsersByEmail(String email);
-    List<User> getUsersByRole(Role role);
+
+    //User getUserByUserRoleId(Long userRoleId);
+
+    User getUserByEmail(String email);
 
     void addUser(User user);
     void updateUser(User user);

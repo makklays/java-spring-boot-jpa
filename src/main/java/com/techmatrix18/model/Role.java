@@ -14,8 +14,11 @@ public class Role {
 
     private String name;
 
-    @ManyToMany(mappedBy = "roles")
-    private Set<User> users;
+    /*@ManyToMany(mappedBy = "roles")
+    private Set<User> users;*/
+
+    @OneToMany(mappedBy = "role")
+    Set<UserRole> userRoles;
 
     @ManyToMany
     @JoinTable(
@@ -37,12 +40,12 @@ public class Role {
         this.name = name;
     }
 
-    public Set<User> getUsers() {
-        return users;
+    public Set<UserRole> getUserRoles() {
+        return userRoles;
     }
 
-    public void setUsers(Set<User> users) {
-        this.users = users;
+    public void setUserRoles(Set<UserRole> userRoles) {
+        this.userRoles = userRoles;
     }
 
     public Set<Permission> getPermissions() {
@@ -59,14 +62,14 @@ public class Role {
         if (o == null || getClass() != o.getClass()) return false;
 
         Role role = (Role) o;
-        return Objects.equals(id, role.id) && Objects.equals(name, role.name) && Objects.equals(users, role.users) && Objects.equals(permissions, role.permissions);
+        return Objects.equals(id, role.id) && Objects.equals(name, role.name) && Objects.equals(userRoles, role.userRoles) && Objects.equals(permissions, role.permissions);
     }
 
     @Override
     public int hashCode() {
         int result = Objects.hashCode(id);
         result = 31 * result + Objects.hashCode(name);
-        result = 31 * result + Objects.hashCode(users);
+        result = 31 * result + Objects.hashCode(userRoles);
         result = 31 * result + Objects.hashCode(permissions);
         return result;
     }
@@ -76,7 +79,7 @@ public class Role {
         return "Role{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", users=" + users +
+                ", userRoles=" + userRoles +
                 ", permissions=" + permissions +
                 '}';
     }

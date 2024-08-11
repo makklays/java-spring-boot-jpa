@@ -36,10 +36,12 @@ public class CustomUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("Not found: " + email);
         }
 
-        logger.info("User has roles: ", user.getRoles().stream().toArray());
+        User user1 = userRepository.findByEmail("admin");
+        logger.info("User: " + user1.toString());
+        logger.info("User roles --> " + user1.getUserRoles().toString() + "<--");
 
-        Set<SimpleGrantedAuthority> authorities = user.getRoles().stream()
-                .map(role -> new SimpleGrantedAuthority(role.getName()))
+        Set<SimpleGrantedAuthority> authorities = user.getUserRoles().stream()
+                .map(userRole -> new SimpleGrantedAuthority(userRole.getRole().getName()) )
                 .collect(Collectors.toSet());
 
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities);
