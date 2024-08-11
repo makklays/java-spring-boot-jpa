@@ -141,6 +141,14 @@ public class User {
         this.position = position;
     }
 
+    public List<BarcoUser> getBarcoUsers() {
+        return barcoUsers;
+    }
+
+    public void setBarcoUsers(List<BarcoUser> barcoUsers) {
+        this.barcoUsers = barcoUsers;
+    }
+
     public Timestamp getCreatedAt() {
         return createdAt;
     }

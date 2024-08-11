@@ -17,3 +17,8 @@ INSERT INTO users_roles (user_id, role_id) VALUES (
     (SELECT u.id FROM users u WHERE u.email = 'admin'), (SELECT r.id FROM roles r WHERE r.name = 'ROLE_ADMIN')
 );
 
+--
+INSERT INTO barcos (title, description, `year`, `weight`, `speedometer`) VALUES ("TUAPSE", "Description for bacro TUAPSE", "1905", "100100", "87000");
+
+INSERT INTO barco_users (barco_id, user_id) VALUES (1, 1);
+
