@@ -36,9 +36,9 @@ public class CustomUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("Not found: " + email);
         }
 
-        User user1 = userRepository.findByEmail("admin");
-        logger.info("User: " + user1.toString());
-        logger.info("User roles --> " + user1.getUserRoles().toString() + "<--");
+        //User user1 = userRepository.findByEmail("admin");
+        //logger.info("User: " + user1.toString());
+        //logger.info("User roles --> " + user1.getUserRoles().toString() + "<--");
 
         Set<SimpleGrantedAuthority> authorities = user.getUserRoles().stream()
                 .map(userRole -> new SimpleGrantedAuthority(userRole.getRole().getName()) )

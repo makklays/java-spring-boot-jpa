@@ -1,5 +1,6 @@
 package com.techmatrix18.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import org.hibernate.annotations.CreationTimestamp;
@@ -51,7 +52,8 @@ public class User {
     private Set<Role> roles;*/
 
     //@OneToMany(mappedBy = "users")
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<UserRole> userRoles;
 
     @Column(name = "bio", length = 500)
