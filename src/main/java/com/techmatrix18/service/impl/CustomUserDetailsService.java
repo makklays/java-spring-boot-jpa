@@ -30,15 +30,19 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
+        logger.info("E-mail: " + email);
+
         User user = userRepository.findByEmail(email);
+        logger.info("User: " + user);
+
         if (user == null) {
             logger.info("User not found: {0}", email);
             throw new UsernameNotFoundException("Not found: " + email);
         }
 
-        //User user1 = userRepository.findByEmail("admin");
-        //logger.info("User: " + user1.toString());
-        //logger.info("User roles --> " + user1.getUserRoles().toString() + "<--");
+        User user1 = userRepository.findByEmail("admin");
+        logger.info("User: " + user1);
+        logger.info("User roles --> " + user1.getUserRoles() + "<--");
 
         Set<SimpleGrantedAuthority> authorities = user.getUserRoles().stream()
                 .map(userRole -> new SimpleGrantedAuthority(userRole.getRole().getName()) )
