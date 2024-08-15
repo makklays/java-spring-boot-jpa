@@ -1,30 +1,39 @@
 package com.techmatrix18.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+
+import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
 @Table(name = "roles")
-public class Role {
+public class Role implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
+    @NotNull
+    @Column(name = "name", length = 255, nullable = false, unique = true)
     private String name;
 
-    /*@ManyToMany(mappedBy = "roles")
-    private Set<User> users;*/
-
-    @OneToMany(mappedBy = "role")
-    Set<UserRole> userRoles;
+    @ManyToMany(mappedBy = "roles")
+    @JsonIgnoreProperties(value = { "roles", "permissions" }, allowSetters = true)
+    private Set<User> users = new HashSet<>();
 
     @ManyToMany
     @JoinTable(
             name = "role_permissions",
-            joinColumns = @JoinColumn(name = "role_id"),
-            inverseJoinColumns = @JoinColumn(name = "permission_id")
+            joinColumns = @JoinColumn(name = "role_id" , referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "permission_id", referencedColumnName = "name")
     )
     private Set<Permission> permissions;
 
@@ -40,12 +49,12 @@ public class Role {
         this.name = name;
     }
 
-    public Set<UserRole> getUserRoles() {
-        return userRoles;
+    public Set<User> getUsers() {
+        return users;
     }
 
-    public void setUserRoles(Set<UserRole> userRoles) {
-        this.userRoles = userRoles;
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 
     public Set<Permission> getPermissions() {
@@ -59,27 +68,21 @@ public class Role {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Role role = (Role) o;
-        return Objects.equals(id, role.id) && Objects.equals(name, role.name) && Objects.equals(userRoles, role.userRoles) && Objects.equals(permissions, role.permissions);
+        if (!(o instanceof Role role)) return false;
+        return Objects.equals(getId(), role.getId()) && Objects.equals(getName(), role.getName())  && Objects.equals(getPermissions(), role.getPermissions());
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hashCode(id);
-        result = 31 * result + Objects.hashCode(name);
-        result = 31 * result + Objects.hashCode(userRoles);
-        result = 31 * result + Objects.hashCode(permissions);
-        return result;
+        return Objects.hash(getId(), getName(), getPermissions());
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "Role{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", userRoles=" + userRoles +
                 ", permissions=" + permissions +
                 '}';
     }

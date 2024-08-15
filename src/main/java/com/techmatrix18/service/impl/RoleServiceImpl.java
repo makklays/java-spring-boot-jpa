@@ -3,6 +3,7 @@ package com.techmatrix18.service.impl;
 import com.techmatrix18.model.Role;
 import com.techmatrix18.repository.RoleRepository;
 import com.techmatrix18.service.RoleService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

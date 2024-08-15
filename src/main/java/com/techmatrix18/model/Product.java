@@ -6,6 +6,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 //import javax.persistence.*;
 import jakarta.persistence.*;
+
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
@@ -20,7 +22,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "products")
-public class Product {
+public class Product implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -47,10 +49,6 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product", cascade = CascadeType.ALL)
-    //@JoinColumn(name = "product_id", insertable = false, updatable = false)
-    private List<BarcoProduct> barcoProducts;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
@@ -149,8 +147,6 @@ public class Product {
         if (!Objects.equals(description, product.description)) return false;
         if (!Objects.equals(weight, product.weight)) return false;
         if (!Objects.equals(category, product.category)) return false;
-        if (!Objects.equals(barcoProducts, product.barcoProducts))
-            return false;
         if (!Objects.equals(createdAt, product.createdAt)) return false;
         return Objects.equals(updatedAt, product.updatedAt);
     }
@@ -164,7 +160,6 @@ public class Product {
         result = 31 * result + (isDangerous ? 1 : 0);
         result = 31 * result + (isGlass ? 1 : 0);
         result = 31 * result + (category != null ? category.hashCode() : 0);
-        result = 31 * result + (barcoProducts != null ? barcoProducts.hashCode() : 0);
         result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);
         result = 31 * result + (updatedAt != null ? updatedAt.hashCode() : 0);
         return result;

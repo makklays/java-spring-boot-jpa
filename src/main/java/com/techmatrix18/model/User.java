@@ -1,12 +1,14 @@
 package com.techmatrix18.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import java.sql.Timestamp;
+import java.io.Serializable;
+import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.List;
 import java.util.Set;
@@ -21,10 +23,13 @@ import java.util.Set;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "firstname", length = 255)
@@ -43,18 +48,16 @@ public class User {
     @NotBlank
     private String password;
 
-    /*@ManyToMany
+    @ManyToMany
     @JoinTable(
-            name = "users_roles",
+            name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-    private Set<Role> roles;*/
+    @JsonIgnoreProperties(value = { "users" }, allowSetters = true)
+    private Set<Role> roles = new HashSet<>();
 
-    //@OneToMany(mappedBy = "users")
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private List<UserRole> userRoles;
+
 
     @Column(name = "bio", length = 500)
     private String bio;
@@ -63,19 +66,18 @@ public class User {
     @JoinColumn(unique = true) //, nullable = false)
     private Position position;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL) // name="user_id", referencedColumnName="userId"
-    //@JoinColumn(name = "user_id", insertable = false, updatable = false)
-    private List<BarcoUser> barcoUsers;
+    @OneToMany(mappedBy = "user")
+    private List<Barco> barcos;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at")
-    private Timestamp createdAt;
+    private Instant createdAt;
 
     @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "updated_at")
-    private Timestamp updatedAt;
+    private Instant updatedAt;
 
     public User() {}
 
@@ -127,12 +129,12 @@ public class User {
         this.bio = bio;
     }
 
-    public List<UserRole> getUserRoles() {
-        return userRoles;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setUserRoles(List<UserRole> userRoles) {
-        this.userRoles = userRoles;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     public Position getPosition() {
@@ -143,55 +145,43 @@ public class User {
         this.position = position;
     }
 
-    public List<BarcoUser> getBarcoUsers() {
-        return barcoUsers;
+    public List<Barco> getBarcos() {
+        return barcos;
     }
 
-    public void setBarcoUsers(List<BarcoUser> barcoUsers) {
-        this.barcoUsers = barcoUsers;
+    public void setBarcos(List<Barco> barcos) {
+        this.barcos = barcos;
     }
 
-    public Timestamp getCreatedAt() {
+    public Instant getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
+    public void setCreatedAt(Instant createdAt) {
         this.createdAt = createdAt;
     }
 
-    public Timestamp getUpdatedAt() {
+    public Instant getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Timestamp updatedAt) {
+    public void setUpdatedAt(Instant updatedAt) {
         this.updatedAt = updatedAt;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(firstname, user.firstname) && Objects.equals(lastname, user.lastname) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(userRoles, user.userRoles) && Objects.equals(bio, user.bio) && Objects.equals(position, user.position) && Objects.equals(barcoUsers, user.barcoUsers) && Objects.equals(createdAt, user.createdAt) && Objects.equals(updatedAt, user.updatedAt);
+        if (!(o instanceof User user)) return false;
+        return Objects.equals(getId(), user.getId()) && Objects.equals(getFirstname(), user.getFirstname()) && Objects.equals(getLastname(), user.getLastname()) && Objects.equals(getEmail(), user.getEmail()) && Objects.equals(getPassword(), user.getPassword()) && Objects.equals(getRoles(), user.getRoles()) && Objects.equals(getBio(), user.getBio()) && Objects.equals(getPosition(), user.getPosition()) && Objects.equals(getBarcos(), user.getBarcos()) && Objects.equals(getCreatedAt(), user.getCreatedAt()) && Objects.equals(getUpdatedAt(), user.getUpdatedAt());
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hashCode(id);
-        result = 31 * result + Objects.hashCode(firstname);
-        result = 31 * result + Objects.hashCode(lastname);
-        result = 31 * result + Objects.hashCode(email);
-        result = 31 * result + Objects.hashCode(password);
-        result = 31 * result + Objects.hashCode(userRoles);
-        result = 31 * result + Objects.hashCode(bio);
-        result = 31 * result + Objects.hashCode(position);
-        result = 31 * result + Objects.hashCode(barcoUsers);
-        result = 31 * result + Objects.hashCode(createdAt);
-        result = 31 * result + Objects.hashCode(updatedAt);
-        return result;
+        return Objects.hash(getId(), getFirstname(), getLastname(), getEmail(), getPassword(), getRoles(), getBio(), getPosition(), getBarcos(), getCreatedAt(), getUpdatedAt());
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "User{" +
@@ -200,10 +190,10 @@ public class User {
                 ", lastname='" + lastname + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", userRoles=" + userRoles +
+                ", roles=" + getRoles() +
                 ", bio='" + bio + '\'' +
                 ", position=" + position +
-                ", barcoUsers=" + barcoUsers +
+                ", barcos=" + barcos +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';

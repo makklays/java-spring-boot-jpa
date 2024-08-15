@@ -47,6 +47,7 @@ public class AuthViewsController {
     public String login() {
         return "auth/login";
     }
+
     @GetMapping("/user-details")
     public String login(Model model, User user) {
         model.addAttribute("user", user);
@@ -54,21 +55,6 @@ public class AuthViewsController {
 
         return "auth/login";
     }
-
-//    @PostMapping("/login")
-//    public String loginPost(HttpServletRequest request, Model model, @Valid User user, BindingResult bindingResult) {
-//        if (bindingResult.hasErrors()) {
-//            return "auth/login";
-//        }
-//
-//        String email = request.getParameter("email");
-//        String password = request.getParameter("password");
-//
-//        userService.getUserByEmailAndPassword(email, password);
-//        //userService.getUsersByEmail(email);
-//
-//        return "redirect:/menu";
-//    }
 
     @GetMapping("/my-registr")
     public String registr(Model model, User user) {

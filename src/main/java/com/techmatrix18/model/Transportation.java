@@ -6,6 +6,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 //import javax.persistence.*;
 import jakarta.persistence.*;
+
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
@@ -20,7 +22,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "transportations")
-public class Transportation {
+public class Transportation implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -5,6 +5,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.*;
+
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
@@ -19,7 +21,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "storehouses")
-public class Storehouse {
+public class Storehouse implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,10 +29,6 @@ public class Storehouse {
     @ManyToOne
     @JoinColumn(name = "city_id", nullable = false)
     private City city;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "storehouse", cascade = CascadeType.ALL)
-    //@JoinColumn(name = "storehouse_id", insertable = false, updatable = false)
-    private List<StorehouseBarco> storehouseBarcos;
 
     @Column(name = "title", length = 255)
     @NotBlank
@@ -114,8 +112,6 @@ public class Storehouse {
 
         if (!Objects.equals(id, that.id)) return false;
         if (!Objects.equals(city, that.city)) return false;
-        if (!Objects.equals(storehouseBarcos, that.storehouseBarcos))
-            return false;
         if (!Objects.equals(title, that.title)) return false;
         if (!Objects.equals(description, that.description)) return false;
         if (!Objects.equals(createdAt, that.createdAt)) return false;
@@ -126,7 +122,6 @@ public class Storehouse {
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (city != null ? city.hashCode() : 0);
-        result = 31 * result + (storehouseBarcos != null ? storehouseBarcos.hashCode() : 0);
         result = 31 * result + (title != null ? title.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);

@@ -49,7 +49,7 @@ public class UserController {
     }
 
     @GetMapping(path = "/all")
-    public List<User> getUsers(HttpServletRequest request) throws ValidationException {
+    public List<User> getUsers(HttpServletRequest request) {
         String roleParam = request.getParameter("role");
         Role role = roleService.getRoleByName(roleParam);
         if (role!=null) {
@@ -106,5 +106,6 @@ public class UserController {
         }
         return "Deleted";
     }
+
 }
 
