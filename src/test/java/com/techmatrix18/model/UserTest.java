@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Timestamp;
+import java.time.Instant;
 import java.time.LocalDateTime;
 
 public class UserTest {
@@ -24,8 +25,8 @@ public class UserTest {
         user.setBio("This is my bio");
         //user.setPositionId(1L);
         //user.setRoles("ROLE_USER");
-        user.setCreatedAt(timestamp);
-        user.setUpdatedAt(timestamp);
+        user.setCreatedAt(Instant.now());
+        user.setUpdatedAt(Instant.now());
 
         // test getters
         Assertions.assertEquals(1L, user.getId());
@@ -54,8 +55,8 @@ public class UserTest {
         user1.setBio("This is my bio");
         //user1.setRoles("ROLE_USER");
         user1.setPosition(position);
-        user1.setCreatedAt(timestamp);
-        user1.setUpdatedAt(timestamp);
+        user1.setCreatedAt(Instant.now());
+        user1.setUpdatedAt(Instant.now());
 
         User user2 = new User();
         user2.setId(1L);
@@ -66,8 +67,8 @@ public class UserTest {
         user2.setBio("This is my bio");
         //user2.setRoles("ROLE_USER");
         user2.setPosition(position);
-        user2.setCreatedAt(timestamp);
-        user2.setUpdatedAt(timestamp);
+        user2.setCreatedAt(Instant.now());
+        user2.setUpdatedAt(Instant.now());
 
         User user3 = new User();
         user3.setId(1L);
@@ -78,8 +79,8 @@ public class UserTest {
         user3.setBio("This is your bio");
         //user3.setRoles("ROLE_USER");
         user3.setPosition(position);
-        user3.setCreatedAt(timestamp);
-        user3.setUpdatedAt(timestamp);
+        user3.setCreatedAt(Instant.now());
+        user3.setUpdatedAt(Instant.now());
 
         // Test equals
         Assertions.assertEquals(user1, user2);
@@ -105,8 +106,8 @@ public class UserTest {
         user.setBio("This is my bio");
         //user.setRoles("ROLE_USER");
         user.setPosition(position);
-        user.setCreatedAt(timestamp);
-        user.setUpdatedAt(timestamp);
+        user.setCreatedAt(Instant.now());
+        user.setUpdatedAt(Instant.now());
 
         String ExpectedString = "User{" +
                 "Id=1" +
