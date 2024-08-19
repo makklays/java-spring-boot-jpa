@@ -12,7 +12,7 @@ import java.util.List;
 public interface StorehouseRepository extends CrudRepository<Storehouse, Long> {
     Storehouse getById(Long id);
     List<Storehouse> findByTitle(String title);
-    List<Storehouse> findByCityId(Integer cityId);
+    List<Storehouse> findByCityId(Long cityId);
 
     Page<Storehouse> findAll(Pageable pageable);
 }

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{app.title}"> Title </title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-6">
+            <h1 th:text="#{app.view-storehouse}">View storehouse</h1>
+        </div>
+        <div class="col-md-6 align-self-center" style="text-align:right;">
+            <a href="#" th:href="@{/storehouses/edit/1}" th:text="#{app.edit-storehouse}" class="btn btn-primary"> Edit storehouse</a>
+        </div>
+    </div>
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/welcome}">Home</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/menu}">Menu</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/storehouses/list}" th:text="#{app.list-storehouses}">List</a></li>
+            <li class="breadcrumb-item active" aria-current="page" th:text="#{app.view-storehouse}" >View storehouse</li>
+        </ol>
+    </nav>
+
+    <div class="card">
+        <div class="card-body">
+
+            <table class="table table-striped table-hover">
+                <tr>
+                    <th>ID</th>
+                    <td th:text="${storehouse.Id}"></td>
+                </tr>
+                <tr>
+                    <th>Title</th>
+                    <td th:text="${storehouse.title}"></td>
+                </tr>
+                <tr>
+                    <th>City</th>
+                    <td >
+                        <a href="#" th:href="@{'/cities/' + ${storehouse.getCity().getId()}}" th:text="${storehouse.getCity().getTitle()}">Title</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td th:text="${storehouse.description}"></td>
+                </tr>
+                <tr>
+                    <th>Created</th>
+                    <td th:text="${storehouse.createdAt}"></td>
+                </tr>
+                <tr>
+                    <th>Updated</th>
+                    <td th:text="${storehouse.updatedAt}"></td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+
+    <br/><br/>
+
+    <div class="card">
+        <div class="card-body">
+
+            <h3>Barcos</h3>
+
+            111111
+
+        </div>
+    </div>
+
+    <br/><br/>
+
+    <a href="#" th:href="@{/storehouses/list}" th:text="#{app.back}" class="btn btn-secondary"> Back</a>
+
+    <br/><br/>
+
+</div>
+</body>
+</html>
+

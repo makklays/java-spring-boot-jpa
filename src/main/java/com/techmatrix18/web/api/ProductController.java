@@ -1,10 +1,8 @@
 package com.techmatrix18.web.api;
 
-import com.techmatrix18.model.City;
 import com.techmatrix18.model.Product;
-import com.techmatrix18.repository.ProductRepository;
-import com.techmatrix18.service.implementation.ProductImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.techmatrix18.service.ProductService;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.bind.ValidationException;
@@ -21,14 +19,20 @@ import java.util.List;
 @RequestMapping("/api/v1/products")
 public class ProductController {
 
-    @Autowired
-    private ProductRepository productRepository;
-    @Autowired
-    private ProductImpl productService;
+    private final ProductService productService;
+
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
 
     @GetMapping(path = "/test")
     public String getTest() throws ValidationException {
         return "Test";
+    }
+
+    @GetMapping(path = "/page-sort")
+    public Page<Product> getSort() throws ValidationException {
+        return productService.getAllProductsSortedByTitle();
     }
 
     @GetMapping(path = "/all")
@@ -37,20 +41,20 @@ public class ProductController {
     }
 
     @PostMapping(path = "/add")
-    public @ResponseBody String addProduct (@RequestParam String title, @RequestParam String description, @RequestParam Integer weight, @RequestParam Integer isDangerous, @RequestParam Integer isGlass, @RequestParam Long categoryId) {
+    public @ResponseBody String addProduct (@RequestParam String title, @RequestParam String description, @RequestParam Integer weight, @RequestParam boolean isDangerous, @RequestParam boolean isGlass) {
         Product p = new Product();
         p.setTitle(title);
         p.setDescription(description);
         p.setWeight(weight);
         p.setIsDangerous(isDangerous);
         p.setIsGlass(isGlass);
-        p.setCategoryId(categoryId);
+        //p.setCategoryId(categoryId);
         productService.addProduct(p);
         return "Saved";
     }
 
     @PatchMapping(path = "/update")
-    public @ResponseBody String updateProduct (@RequestParam Long productId, @RequestParam String title, @RequestParam String description, @RequestParam Integer weight, @RequestParam Integer isDangerous, @RequestParam Integer isGlass, @RequestParam Long categoryId) {
+    public @ResponseBody String updateProduct (@RequestParam Long productId, @RequestParam String title, @RequestParam String description, @RequestParam Integer weight, @RequestParam boolean isDangerous, @RequestParam boolean isGlass) {
         Product p = productService.getProductById(productId);
         if (p.getId() != null) {
             p.setTitle(title);
@@ -58,7 +62,7 @@ public class ProductController {
             p.setWeight(weight);
             p.setIsDangerous(isDangerous);
             p.setIsGlass(isGlass);
-            p.setCategoryId(categoryId);
+            //p.setCategoryId(categoryId);
             productService.updateProduct(p);
         }
         return "Updated";

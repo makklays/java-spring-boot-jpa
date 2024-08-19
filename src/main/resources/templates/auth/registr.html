@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{app.title}"> Title </title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-6">
+            <h1 th:text="#{app.registr}">Registration</h1>
+        </div>
+        <div class="col-md-6 align-self-center" style="text-align:right;">
+            <!--a href="#" th:href="@{/barcos/add}" th:text="#{app.add-barco}" class="btn btn-primary"> Add barco</a-->
+        </div>
+    </div>
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/welcome}">Home</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/my-registr}">Registration</a></li>
+        </ol>
+    </nav>
+
+    <form action="#" th:action="@{/my-registr-post}" th:object="${user}" method="post" >
+        <div class="card">
+            <div class="card-body" style="background-color:#e7e7e7;">
+
+                <input type="hidden" name="roles" value="USER" />
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="firstname1" class="form-label required">Firstname <span style="color:red;">*</span></label>
+                                    <input type="text" th:field="*{firstname}" class="form-control" id="firstname1">
+                                    <div th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}" style="color:red;">Firstname error</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="lastname1" class="form-label required">Lastname <span style="color:red;">*</span></label>
+                                    <input type="text" th:field="*{lastname}" class="form-control" id="lastname1">
+                                    <div th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}" style="color:red;">Lastname error</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label for="position1" class="form-label">Position <span style="color:red;">*</span></label>
+                                    <select name="position" class="form-control" id="position1" th:field="*{position}">
+                                        <option value="">---- Select position ----</option>
+                                        <option th:each="position : ${positions}" th:value="${position.getId()}" th:text="${position.getTitle()}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label for="bio1" class="form-label">Bio</label>
+                                    <textarea rows="4" name="bio" class="form-control" id="bio1"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label for="email1" class="form-label required">E-mail <span style="color:red;">*</span></label>
+                                    <input type="text" th:field="*{email}" class="form-control" id="email1">
+                                    <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color:red;">E-mail error</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label for="password1" class="form-label required">Password <span style="color:red;">*</span></label>
+                                    <input type="password" th:field="*{password}" class="form-control" id="password1">
+                                    <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" style="color:red;">Password error</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label for="confirm_password1" class="form-label">Confirm password</label>
+                                    <input type="password" name="confirm_password" class="form-control" id="confirm_password1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <img src="../static/imgs/barco.png" class="img img-fluid" width="1000" th:src="@{/imgs/barco.png}" alt="planeta-java" />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <br/>
+        <button type="submit" class="btn btn-primary" th:text="#{registr}">Submit</button>
+
+    </form>
+
+    <br/><br/>
+
+</div>
+</body>
+</html>
+

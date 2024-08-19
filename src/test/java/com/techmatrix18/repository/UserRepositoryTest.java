@@ -54,7 +54,7 @@ public class UserRepositoryTest {
 
     @Test
     public void printUsersByEmail() {
-        List<User> list = userRepository.findByEmail("shivm@gmail.com");
+        User list = userRepository.findByEmail("shivm@gmail.com");
 
         System.out.println("List of users by email: " + list);
     }
@@ -76,13 +76,13 @@ public class UserRepositoryTest {
 
     @Test
     public void findAllSorting() {
-        Pageable sortByTitle = PageRequest.of(
+        Pageable sortByFirstname = PageRequest.of(
                 0,
                 2,
-                Sort.by("title").descending().and(Sort.by("created_at").descending())
+                Sort.by("firstname").descending().and(Sort.by("createdAt").descending())
         );
 
-        List<User> list = userRepository.findAll(sortByTitle).getContent();
+        List<User> list = userRepository.findAll(sortByFirstname).getContent();
 
         System.out.println("List of users (sorting): " + list);
     }

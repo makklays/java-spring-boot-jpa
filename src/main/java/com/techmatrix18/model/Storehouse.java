@@ -1,10 +1,12 @@
 package com.techmatrix18.model;
 
+import jakarta.validation.constraints.NotBlank;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-//import javax.persistence.*;
 import jakarta.persistence.*;
+
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
@@ -19,23 +21,17 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "storehouses")
-public class Storehouse {
+public class Storehouse implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "city_id", insertable=false, updatable=false)
-    private Long cityId;
 
     @ManyToOne
     @JoinColumn(name = "city_id", nullable = false)
     private City city;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "storehouse", cascade = CascadeType.ALL)
-    //@JoinColumn(name = "storehouse_id", insertable = false, updatable = false)
-    private List<StorehouseBarco> storehouseBarcos;
-
     @Column(name = "title", length = 255)
+    @NotBlank
     private String title;
 
     @Column(name = "description", length = 500)
@@ -59,13 +55,13 @@ public class Storehouse {
         this.id = id;
     }
 
-    public Long getCityId() {
-        return cityId;
-    }
-
-    public void setCityId(Long cityId) {
-        this.cityId = cityId;
-    }
+//    public Long getCityId() {
+//        return cityId;
+//    }
+//
+//    public void setCityId(Long cityId) {
+//        this.cityId = cityId;
+//    }
 
     public String getTitle() {
         return title;
@@ -99,28 +95,50 @@ public class Storehouse {
         this.updatedAt = updatedAt;
     }
 
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Storehouse that)) return false;
-        return getId().equals(that.getId()) && getCityId().equals(that.getCityId()) && getTitle().equals(that.getTitle()) && getDescription().equals(that.getDescription()) && getCreatedAt().equals(that.getCreatedAt()) && getUpdatedAt().equals(that.getUpdatedAt());
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Storehouse that = (Storehouse) o;
+
+        if (!Objects.equals(id, that.id)) return false;
+        if (!Objects.equals(city, that.city)) return false;
+        if (!Objects.equals(title, that.title)) return false;
+        if (!Objects.equals(description, that.description)) return false;
+        if (!Objects.equals(createdAt, that.createdAt)) return false;
+        return Objects.equals(updatedAt, that.updatedAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getCityId(), getTitle(), getDescription(), getCreatedAt(), getUpdatedAt());
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (city != null ? city.hashCode() : 0);
+        result = 31 * result + (title != null ? title.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);
+        result = 31 * result + (updatedAt != null ? updatedAt.hashCode() : 0);
+        return result;
     }
 
     @Override
     public String toString() {
         return "StoreHouse{" +
                 "id=" + id +
-                ", cityId=" + cityId +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';
     }
+
 }
 

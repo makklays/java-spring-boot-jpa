@@ -1,49 +1,66 @@
 
 spring:
-  # SPRING SECURITY by Login/Password
-  security:
-    user:
-      name: admin
-      password: admin
+  application:
+      name: storehouse
   datasource:
+    #continue-on-error: false
+    generate-unique-name: false
+    #test-while-idle: true
+    #time-between-eviction-runs-millis: 30000
+    #validation-query: select 1
     # MySQL
-    mysql:
-      url: jdbc:mysql://localhost:3306/currency_rest
-      username: admin
-      password: admin
-      driver-class-name: com.mysql.jdbc.Driver
-    # H2 DB
-    h2:
-      url: jdbc:h2:file:C:/temp/test
-      username: admin
-      password: admin
-      driver-class-name: org.h2.Driver
-    # Oracle
-    oracle:
-      url: jdbc:oracle:thin:@localhost:1521:orcl
-      username: dbuser
-      password: dbpass
-      driver-class-name: oracle.jdbc.OracleDriver
-    # SQL Server
-    mssql:
-      url: jdbc:sqlserver://localhost;databaseName=springbootdb
-      username: dbuser
-      password: dbpass
-      driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
-    hikari:
-      connection-timeout: 30000
-      maximum-pool-size: 10
-      minimum-idle: 5
-      idle-timeout: 600000
-      max-lifetime: 1800000
-      pool-name: collection-pool
-    tomcat:
-      validation-query: SELECT 1
-      validation-interval: 30000
-      test-on-borrow: true
-      remove-abandoned: true
-      remove-abandoned-timeout: 480
-      test-while-idle: true
-      time-between-eviction-runs-millis: 60000
-      log-validation-errors: true
-      log-abandoned: true
+    url: jdbc:mysql://localhost:3306/storehouse_db
+    username: admin
+    password: admin
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    database: default
+    generate-ddl: false
+    properties:
+      connection:
+        #characterEncoding: utf-8
+        #CharSet: utf-8
+        #useUnicode: true
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        ddl-auto: none
+        show_sql: true
+        format_sql: true
+        #default_schema: dbo
+        #jdbc:
+        #  time_zone: UTC
+  # Teamleaf - use
+  thymeleaf:
+    check-template-location: true
+    prefix: classpath:/templates/  #this is the main
+    suffix: .html
+    mode: HTML
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
+    cache: false
+  # JSP - don't use
+  #mvc:
+  #  view:
+  #    prefix: /WEB-INF/jsp/
+  #    suffix: .jsp
+  # Messages
+  messages:
+    basename: messages
+    encoding: UTF-8
+  main:
+    allow-bean-definition-overriding: true
+  # FlyWay
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baselineOnMigrate: true
+    validateOnMigrate: true
+logging:
+  #level:
+    #com.concretepage: INFO
+  #file:
+  #path:
+

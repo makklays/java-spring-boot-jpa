@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{app.title}"> Title </title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-6">
+            <h1 th:text="#{app.view-barco}">View barco</h1>
+        </div>
+        <div class="col-md-6 align-self-center" style="text-align:right;">
+            <a href="#" th:href="@{/barcos/edit/1}" th:text="#{app.edit-barco}" class="btn btn-primary"> Edit barco</a>
+        </div>
+    </div>
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/welcome}">Home</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/menu}">Menu</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/barcos/list}" th:text="#{app.list-barcos}">List</a></li>
+            <li class="breadcrumb-item active" aria-current="page" th:text="#{app.view-barco}" >View barco</li>
+        </ol>
+    </nav>
+
+    <div class="card">
+        <div class="card-body">
+
+            <table class="table table-striped table-hover">
+                <tr>
+                    <th>ID</th>
+                    <td th:text="${barco.Id}"></td>
+                </tr>
+                <tr>
+                    <th th:text="#{title}">Title</th>
+                    <td th:text="${barco.title}"></td>
+                </tr>
+                <tr>
+                    <th th:text="#{year}">Year</th>
+                    <td th:text="${barco.year}"></td>
+                </tr>
+                <tr>
+                    <th th:text="#{weight}">Weight</th>
+                    <td th:text="${barco.weight}"></td>
+                </tr>
+                <tr>
+                    <th th:text="#{speedometer}">Speedometer</th>
+                    <td th:text="${barco.speedometer}"></td>
+                </tr>
+
+                <tr>
+                    <th th:text="#{description}">Description</th>
+                    <td th:text="${barco.description}"></td>
+                </tr>
+
+                <tr>
+                    <th>Created</th>
+                    <td th:text="${barco.createdAt}"></td>
+                </tr>
+                <tr>
+                    <th>Updated</th>
+                    <td th:text="${barco.updatedAt}"></td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+
+    <br/><br/>
+
+    <div class="card">
+        <div class="card-body">
+
+            <h3>Users</h3>
+
+            111111111
+
+        </div>
+    </div>
+
+    <br/><br/>
+
+    <a href="#" th:href="@{/barcos/list}" th:text="#{app.back}" class="btn btn-secondary"> Back</a>
+
+    <br/><br/>
+
+</div>
+</body>
+</html>
+

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{app.title}"> Title </title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-6">
+            <h1 th:text="#{app.add-invoice}">Add invoice</h1>
+        </div>
+        <div class="col-md-6 align-self-center" style="text-align:right;">
+            <!--a href="#" th:href="@{/invoices/add}" th:text="#{app.add-invoice}" class="btn btn-primary"> Add invoice</a-->
+        </div>
+    </div>
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/welcome}">Home</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/menu}">Menu</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/invoices/list}" th:text="#{app.list-invoices}">List</a></li>
+            <li class="breadcrumb-item active" aria-current="page" th:text="#{app.add-invoice}" >Add invoice</li>
+        </ol>
+    </nav>
+
+    <form action="#" th:action="@{/invoices/add-post}" th:object="${invoice}" method="POST" >
+        <div class="card">
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="mb-3">
+                            <label for="title1" class="form-label" th:text="#{title}">Title</label>
+                            <input type="text" th:field="*{title}" class="form-control" id="title1">
+                            <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" style="color:red;">Title error</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="transportation1" class="form-label" th:text="#{transportation}">Transportations</label>
+                            <select name="transportation" class="form-control" id="transportation1" th:field="*{transportation}">
+                                <option value="">---- Select transportation ----</option>
+                                <option th:each="transportation : ${transportations}" th:value="${transportation.getId()}" th:text="${transportation.getBarco().getTitle()+' - '+transportation.getStorehouse().getTitle()}"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="mb-3">
+                            <label for="text1" class="form-label" th:text="#{description}">Description</label>
+                            <textarea rows="6" name="description" class="form-control" id="text1"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="amount1" class="form-label" th:text="#{amount}">Amount</label>
+                            <input type="text" th:field="*{amount}" class="form-control" id="amount1">
+                            <div th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}" style="color:red;">Amount error</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="status1" class="form-label" th:text="#{status}">Status</label>
+                            <select name="status" class="form-control" id="status1">
+                                <option value="">---- Select status ----</option>
+                                <option th:value="paid" th:text="#{status_paid}"></option>
+                                <option th:value="not_paid" th:text="#{status_not_paid}"></option>
+                                <option th:value="canceled" th:text="#{status_canceled}"></option>
+                            </select>
+                            <div th:if="${#fields.hasErrors('status')}" th:errors="*{status}" style="color:red;">Status error</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <br/>
+        <button type="submit" class="btn btn-primary" th:text="#{form.submit}">Submit</button>
+        <a href="#" th:href="@{/invoices/list}" th:text="#{app.back}" class="btn btn-secondary" style="margin-left:20px;"> Back</a>
+
+    </form>
+
+    <br/><br/>
+
+</div>
+</body>
+</html>
+

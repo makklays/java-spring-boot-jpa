@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{app.title}"> Title </title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-6">
+            <h1 th:text="#{login}">Login</h1>
+        </div>
+        <div class="col-md-6 align-self-center" style="text-align:right;">
+            <!--a href="#" th:href="@{/barcos/add}" th:text="#{app.add-barco}" class="btn btn-primary"> Add barco</a-->
+        </div>
+    </div>
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/welcome}">Home</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/my-login}">Login</a></li>
+        </ol>
+    </nav>
+
+    <form action="#" th:action="@{/login}" method="post" >
+        <div class="card">
+            <div class="card-body" style="background-color:#ecf9f4;">
+
+                <div class="row">
+                    <div class="col-md-6" style="margin-top:150px;">
+                        <div class="row">
+                            <div class="col-md-8" style="margin-left:100px;">
+                                <div class="mb-3">
+                                    <label for="username" class="form-label">E-mail <span style="color:red;">*</span></label>
+                                    <input type="text" name="username" class="form-control" id="username">
+<!--                                    <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color:red;">E-mail error</div>-->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-8" style="margin-left:100px;">
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Password <span style="color:red;">*</span></label>
+                                    <input type="password" name="password" class="form-control" id="password">
+<!--                                    <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" style="color:red;">Password error</div>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <img src="../../static/imgs/login.png" class="img img-fluid" style="width:100%;" th:src="@{/imgs/login.png}" alt="planeta-java" />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <br/>
+        <button type="submit" class="btn btn-primary" th:text="#{login}">Submit</button>
+
+    </form>
+
+    <br/><br/>
+
+</div>
+</body>
+</html>
+

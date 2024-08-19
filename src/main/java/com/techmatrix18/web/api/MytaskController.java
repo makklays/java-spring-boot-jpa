@@ -1,18 +1,16 @@
 package com.techmatrix18.web.api;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Simple controller for Mytask
+ * Simple REST controller for Mytask
  *
  * @author Alexander Kuziv
  * @version 1.0
  */
 
-@Controller
+@RestController
 @RequestMapping("/mytask")
 public class MytaskController {
 
@@ -23,24 +21,13 @@ public class MytaskController {
     }
 
     @GetMapping("/list")
-    public String viewMytasks(Model model) {
-        model.addAttribute("mytasks", mytaskService.getMytasks());
-        return "mytask.index";
-    }
-
-    @PostMapping("/list")
-    public String searchMytasks() {
-        model.addAttribute("mytasks", mytaskService.getMytasks());
-        return "mytask.index";
-    }
-
-    @PostMapping("/addBook")
-    public RedirectView addBook(@ModelAttribute("book") Book book, RedirectAttributes redirectAttributes) {
-        final RedirectView redirectView = new RedirectView("/book/addBook", true);
-        Book savedBook = bookService.addBook(book);
-        redirectAttributes.addFlashAttribute("savedBook", savedBook);
-        redirectAttributes.addFlashAttribute("addBookSuccess", true);
-        return redirectView;
+    public List<User> getUsers() throws ValidationException {
+        List<User> list = mytaskService.getAllTasks();
+        if (list != null) {
+            return list;
+        } else {
+            return null; // ? algun json
+        }
     }*/
 }
 

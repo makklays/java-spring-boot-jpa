@@ -10,13 +10,15 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+//@EnableTransactionManagement
 @SpringBootApplication //(scanBasePackages = "com.techmatrix18.config", exclude = {jpaConfig.class })
 //@PropertySource(value = { "classpath:application.properties" })
 //@ComponentScan("com.techmatrix18.repository")
-@ComponentScan(basePackages = { "com.techmatrix18.repository", "com.techmatrix18.service", "com.techmatrix18.web.api" })
-@EntityScan("com.techmatrix18.model")
-@EnableJpaRepositories("com.techmatrix18.repository")
+//@ComponentScan(basePackages = { "com.techmatrix18.repository", "com.techmatrix18.service", "com.techmatrix18.web.api" })
+//@EntityScan("com.techmatrix18.model")
+//@EnableJpaRepositories("com.techmatrix18.repository")
 public class StorehouseApplication {
 
     private static final Logger logger = LoggerFactory.getLogger(StorehouseApplication.class);

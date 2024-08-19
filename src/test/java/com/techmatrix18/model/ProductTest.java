@@ -35,6 +35,8 @@ public class ProductTest {
         Product product1 = new Product();
         product1.setId(1L);
         product1.setTitle("Product1");
+        product1.setIsDangerous(false);
+        product1.setIsGlass(false);
         product1.setDescription("This is product1");
         product1.setCreatedAt(timestamp);
         product1.setUpdatedAt(timestamp);
@@ -42,12 +44,16 @@ public class ProductTest {
         Product product2 = new Product();
         product2.setId(1L);
         product2.setTitle("Product1");
+        product2.setIsDangerous(false);
+        product2.setIsGlass(false);
         product2.setDescription("This is product1");
         product2.setCreatedAt(timestamp);
         product2.setUpdatedAt(timestamp);
 
         Product product3 = new Product();
         product3.setId(2L);
+        product3.setIsDangerous(false);
+        product3.setIsGlass(false);
         product3.setTitle("Product2");
         product3.setDescription("This is product2");
         product3.setCreatedAt(timestamp);
@@ -68,15 +74,20 @@ public class ProductTest {
         product.setId(1L);
         product.setTitle("Product1");
         product.setDescription("This is product1");
+        product.setIsDangerous(false);
+        product.setIsGlass(false);
         product.setCreatedAt(timestamp);
         product.setUpdatedAt(timestamp);
 
-        String ExpectedToString = "Driver{" +
-                "id=1L" +
+        String ExpectedToString = "Product{" +
+                "id=1" +
                 ", title='Product1'" +
                 ", description='This is product1'" +
-                ", createdAt=2024-02-16 12:00:00.0000000" +
-                ", updatedAt=2024-02-16 12:00:00.0000000" +
+                ", weight=null" +
+                ", isDangerous=false" +
+                ", isGlass=false" +
+                ", createdAt=2024-02-16 12:00:00.0" +
+                ", updatedAt=2024-02-16 12:00:00.0" +
                 "}";
 
         Assertions.assertEquals(ExpectedToString, product.toString());

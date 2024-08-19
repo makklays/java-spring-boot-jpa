@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{app.title}"> Title </title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-6">
+            <h1 th:text="#{app.add-barco}">Add barco</h1>
+        </div>
+        <div class="col-md-6 align-self-center" style="text-align:right;">
+            <!--a href="#" th:href="@{/barcos/add}" th:text="#{app.add-barco}" class="btn btn-primary"> Add barco</a-->
+        </div>
+    </div>
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/welcome}">Home</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/menu}">Menu</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/barcos/list}" th:text="#{app.list-barcos}">List</a></li>
+            <li class="breadcrumb-item active" aria-current="page" th:text="#{app.add-barco}" >Add barco</li>
+        </ol>
+    </nav>
+
+    <form action="#" th:action="@{/barcos/add-post}" th:object="${barco}" method="post" >
+        <div class="card">
+            <div class="card-body">
+
+                <div class="mb-3">
+                    <label for="title1" class="form-label">Title</label>
+                    <input type="text" th:field="*{title}" class="form-control" id="title1">
+                    <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" style="color:red;">Title error</div>
+                    <!--div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div-->
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="year1" class="form-label">Year</label>
+                            <input type="text" th:field="*{year}" class="form-control" id="year1">
+                            <div th:if="${#fields.hasErrors('year')}" th:errors="*{year}" style="color:red;">Year error</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="weight1" class="form-label">Weight, t</label>
+                            <input type="text" th:field="*{weight}" class="form-control" id="weight1">
+                            <div th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}" style="color:red;">Weight error</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="speedometer1" class="form-label">Speedometer, km</label>
+                            <input type="text" th:field="*{speedometer}" class="form-control" id="speedometer1">
+                            <div th:if="${#fields.hasErrors('speedometer')}" th:errors="*{speedometer}" style="color:red;">Speedometer error</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="text1" class="form-label">Description</label>
+                    <textarea rows="6" name="description" class="form-control" id="text1"></textarea>
+                </div>
+
+            </div>
+        </div>
+
+        <br/>
+        <button type="submit" class="btn btn-primary" th:text="#{form.submit}">Submit</button>
+        <a href="#" th:href="@{/barcos/list}" th:text="#{app.back}" class="btn btn-secondary" style="margin-left:20px;"> Back</a>
+
+    </form>
+
+    <br/><br/>
+
+</div>
+</body>
+</html>
+

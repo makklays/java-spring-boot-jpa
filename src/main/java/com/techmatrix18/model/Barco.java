@@ -1,10 +1,13 @@
 package com.techmatrix18.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.validation.constraints.NotBlank;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-//import javax.persistence.*;
 import jakarta.persistence.*;
+
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
@@ -19,12 +22,16 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "barcos")
-public class Barco {
+public class Barco implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "title", length = 255)
+    @NotBlank
     private String title;
 
     @Column(name = "description", length = 500)
@@ -39,17 +46,9 @@ public class Barco {
     @Column(name = "speedometer")
     private Integer speedometer; // km
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "barco", cascade = CascadeType.ALL)
-    //@JoinColumn(name = "barco_id", insertable = false, updatable = false)
-    private List<StorehouseBarco> storehouseBarcos;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "barco", cascade = CascadeType.ALL)
-    //@JoinColumn(name = "barco_id", insertable = false, updatable = false)
-    private List<BarcoProduct> barcoProducts;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "barco", cascade = CascadeType.ALL)
-    //@JoinColumn(name = "barco_id", insertable = false, updatable = false)
-    private List<BarcoUser> barcoUsers;
+    @ManyToOne
+    @JsonIgnore
+    private User user;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
@@ -128,18 +127,38 @@ public class Barco {
         this.updatedAt = updatedAt;
     }
 
+    public User getuser() {
+        return user;
+    }
+
+    public void setuser(User user) {
+        this.user = user;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Barco barco)) return false;
-        return getId().equals(barco.getId()) && getTitle().equals(barco.getTitle()) && getDescription().equals(barco.getDescription()) && getYear().equals(barco.getYear()) && getWeight().equals(barco.getWeight()) && getSpeedometer().equals(barco.getSpeedometer()) && getCreatedAt().equals(barco.getCreatedAt()) && getUpdatedAt().equals(barco.getUpdatedAt());
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Barco barco = (Barco) o;
+        return Objects.equals(id, barco.id) && Objects.equals(title, barco.title) && Objects.equals(description, barco.description) && Objects.equals(year, barco.year) && Objects.equals(weight, barco.weight) && Objects.equals(speedometer, barco.speedometer)  && Objects.equals(user, barco.user) && Objects.equals(createdAt, barco.createdAt) && Objects.equals(updatedAt, barco.updatedAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getTitle(), getDescription(), getYear(), getWeight(), getSpeedometer(), getCreatedAt(), getUpdatedAt());
+        int result = Objects.hashCode(id);
+        result = 31 * result + Objects.hashCode(title);
+        result = 31 * result + Objects.hashCode(description);
+        result = 31 * result + Objects.hashCode(year);
+        result = 31 * result + Objects.hashCode(weight);
+        result = 31 * result + Objects.hashCode(speedometer);
+        result = 31 * result + Objects.hashCode(user);
+        result = 31 * result + Objects.hashCode(createdAt);
+        result = 31 * result + Objects.hashCode(updatedAt);
+        return result;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "Barco{" +

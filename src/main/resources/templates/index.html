@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{app.title}"> Title </title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-6">
+            <h1 th:text="#{app.welcome}">Welcome!</h1>
+        </div>
+        <div  class="col-md-6 align-self-center" style="text-align:right;">
+            <a th:href="@{/login}">Login</a> | <a th:href="@{/my-registr}">Registration</a>
+            <!-- Display user information if logged in -->
+            <div th:if="${username != null}">
+                <p>Hello, <span th:text="${username}"></span>!</p>
+                <a href="/logout">Logout</a>
+            </div>
+            <div th:if="${username == null}">
+                <a href="/login">Login</a>
+            </div>
+        </div>
+
+    </div>
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/welcome}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/welcome}" th:text="#{app.welcome}" >Welcome</a></li>
+        </ol>
+    </nav>
+
+    <div class="card">
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-md-12">WELCOME!</div>
+            </div>
+
+            <hr/>
+
+            <a th:href="@{/menu}">Menu</a> <br/>
+
+        </div>
+    </div>
+
+    <br/><br/>
+
+</div>
+</body>
+</html>
+

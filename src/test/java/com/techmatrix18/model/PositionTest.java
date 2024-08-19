@@ -71,12 +71,12 @@ public class PositionTest {
         position.setCreatedAt(timestamp);
         position.setUpdatedAt(timestamp);
 
-        String ExpectedToString = "Driver{" +
-                "id=1L" +
+        String ExpectedToString = "Position{" +
+                "id=1" +
                 ", title='Driver'" +
                 ", description='This is driver'" +
-                ", createdAt=2024-02-16 12:00:00.0000000" +
-                ", updatedAt=2024-02-16 12:00:00.0000000" +
+                ", createdAt=2024-02-16 12:00:00.0" +
+                ", updatedAt=2024-02-16 12:00:00.0" +
                 "}";
 
         Assertions.assertEquals(ExpectedToString, position.toString());

@@ -1,10 +1,9 @@
 package com.techmatrix18.web.api;
 
-import com.techmatrix18.model.City;
 import com.techmatrix18.model.Storehouse;
-import com.techmatrix18.repository.StorehouseRepository;
-import com.techmatrix18.service.implementation.StorehouseImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.techmatrix18.service.StorehouseService;
+import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.bind.ValidationException;
@@ -22,10 +21,11 @@ import java.util.List;
 @RequestMapping("/api/v1/storehouses")
 public class StorehouseController {
 
-    @Autowired
-    private StorehouseRepository storehouseRepository;
-    @Autowired
-    private StorehouseImpl storehouseService;
+    private final StorehouseService storehouseService;
+
+    public StorehouseController(StorehouseService storehouseService) {
+        this.storehouseService = storehouseService;
+    }
 
     @GetMapping(path = "/test")
     public String getTest() throws ValidationException {
@@ -37,35 +37,34 @@ public class StorehouseController {
         return storehouseService.getAllStorehouses();
     }
 
-    @PostMapping(path = "/add")
-    public @ResponseBody String addStorehouse (@RequestParam Long cityId, @RequestParam String title, @RequestParam String description) {
-        Storehouse s = new Storehouse();
-        s.setCityId(cityId);
-        s.setTitle(title);
-        s.setDescription(description);
-        storehouseService.addStorehouse(s);
-        return "Saved";
+    @PostMapping(path = "/add", produces = "application/json;charset=UTF-8")
+    public ResponseEntity<Storehouse> addStorehouse (@Valid @RequestBody Storehouse storehouse) {
+       if (storehouse.getId() != null) {
+           return ResponseEntity.badRequest().build();
+       }
+        storehouseService.addStorehouse(storehouse);
+        return ResponseEntity.ok(storehouse);
     }
 
-    @PatchMapping(path = "/update")
+    @PatchMapping(path = "/update", produces = "application/json;charset=UTF-8")
     public @ResponseBody String updateStorehouse (@RequestParam Long storehouseId, @RequestParam Long cityId, @RequestParam String title, @RequestParam String description) {
         Storehouse s = storehouseService.getStorehouseById(storehouseId);
         if (s.getId() != null) {
-            s.setCityId(cityId);
+          //  s.setCityId(cityId);
             s.setTitle(title);
             s.setDescription(description);
             storehouseService.updateStorehouse(s);
         }
-        return "Updated";
+        return "{\"status\": \"success\", \"message\": \"City updated successfully!\"}";
     }
 
-    @DeleteMapping(path = "/delete/{storehouseId:\\\\d+}")
+    @DeleteMapping(path = "/delete/{storehouseId}", produces = "application/json;charset=UTF-8")
     public @ResponseBody String deleteStorehouse (@PathVariable Long storehouseId) {
         Storehouse s = storehouseService.getStorehouseById(storehouseId);
         if (s.getId() != null) {
             storehouseService.deleteStorehouse(storehouseId);
         }
-        return "Deleted";
+        return "{\"status\": \"success\", \"message\": \"City deleted successfully!\"}";
     }
 }
 

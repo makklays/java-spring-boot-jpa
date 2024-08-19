@@ -1,10 +1,13 @@
 package com.techmatrix18.model;
 
+import jakarta.validation.constraints.NotBlank;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 //import javax.persistence.*;
 import jakarta.persistence.*;
+
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.List;
@@ -21,19 +24,20 @@ import java.util.Set;
 
 @Entity
 @Table(name = "positions")
-public class Position {
+public class Position implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "title", length = 255)
+    @NotBlank
     private String title;
 
     @Column(name = "description", length = 500)
     private String description;
 
-    @OneToMany(cascade = CascadeType.ALL) // fetch = FetchType.LAZY, mappedBy = "position",
-    @JoinColumn(name = "position_id") // , insertable = false, updatable = false
+    @OneToMany // fetch = FetchType.LAZY, mappedBy = "position",
+    //@JoinColumn(name = "position_id") // , insertable = false, updatable = false
     private Set<User> users; // = new HashSet<User>();
 
     @CreationTimestamp

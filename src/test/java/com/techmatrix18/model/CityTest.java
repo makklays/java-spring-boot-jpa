@@ -72,11 +72,11 @@ public class CityTest {
         city.setUpdatedAt(timestamp);
 
         String ExpectedToString = "City{" +
-                "id=1L" +
+                "id=1" +
                 ", title='Valencia'" +
                 ", description='This is Valencia'" +
-                ", createdAt=2024-02-16 12:00:00.0000000" +
-                ", updatedAt=2024-02-16 12:00:00.0000000" +
+                ", createdAt=2024-02-16 12:00:00.0" +
+                ", updatedAt=2024-02-16 12:00:00.0" +
                 "}";
 
         Assertions.assertEquals(ExpectedToString, city.toString());

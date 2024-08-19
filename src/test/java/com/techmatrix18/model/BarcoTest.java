@@ -90,14 +90,14 @@ public class BarcoTest {
         barco.setUpdatedAt(timestamp);
 
         String ExpectedToString = "Barco{" +
-                "id=1L" +
+                "id=1" +
                 ", title='BestBarco'" +
                 ", description='This is best and fastly Barco'" +
                 ", year=2022" +
                 ", weight=21000" +
                 ", speedometer=250000" +
-                ", createdAt=2024-02-16 12:00:00.0000000" +
-                ", updatedAt=2024-02-16 12:00:00.0000000" +
+                ", createdAt=2024-02-16 12:00:00.0" +
+                ", updatedAt=2024-02-16 12:00:00.0" +
                 "}";
 
         Assertions.assertEquals(ExpectedToString, barco.toString());

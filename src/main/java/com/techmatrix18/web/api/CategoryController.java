@@ -1,9 +1,7 @@
 package com.techmatrix18.web.api;
 
 import com.techmatrix18.model.Category;
-import com.techmatrix18.repository.CategoryRepository;
-import com.techmatrix18.service.implementation.CategoryImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.techmatrix18.service.CategoryService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.bind.ValidationException;
@@ -20,10 +18,11 @@ import java.util.List;
 @RequestMapping("/api/v1/categories")
 public class CategoryController {
 
-    @Autowired
-    private CategoryRepository categoryRepository;
-    @Autowired
-    private CategoryImpl categoryService;
+    private final CategoryService categoryService;
+
+    public CategoryController(CategoryService categoryService) {
+        this.categoryService = categoryService;
+    }
 
     @GetMapping(path = "/all")
     public List<Category> getCategories() throws ValidationException {

@@ -1,9 +1,7 @@
 package com.techmatrix18.web.api;
 
 import com.techmatrix18.model.Transportation;
-import com.techmatrix18.repository.TransportationRepository;
-import com.techmatrix18.service.implementation.TransportationImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.techmatrix18.service.TransportationService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.bind.ValidationException;
@@ -20,10 +18,11 @@ import java.util.List;
 @RequestMapping("/api/v1/transportations")
 public class TransportationController {
 
-    @Autowired
-    private TransportationRepository transportationRepository;
-    @Autowired
-    private TransportationImpl transportationService;
+    private final TransportationService transportationService;
+
+    public TransportationController(TransportationService transportationService) {
+        this.transportationService = transportationService;
+    }
 
     @GetMapping(path = "/test")
     public String getTest() throws ValidationException {
@@ -38,8 +37,8 @@ public class TransportationController {
     @PostMapping(path = "/add")
     public @ResponseBody String addTransportation (@RequestParam Long barcoId, @RequestParam Long storehouseId, @RequestParam Integer distance, @RequestParam Integer weight) {
         Transportation t = new Transportation();
-        t.setBarcoId(barcoId);
-        t.setStorehouseId(storehouseId);
+        //t.setBarco(barco);
+        //t.setStorehouse(storehouse);
         t.setDistance(distance);
         t.setWeight(weight);
         transportationService.addTransportation(t);
@@ -50,8 +49,8 @@ public class TransportationController {
     public @ResponseBody String updateTransportation (@RequestParam Long transportationId, @RequestParam Long barcoId, @RequestParam Long storehouseId, @RequestParam Integer distance, @RequestParam Integer weight) {
         Transportation t = transportationService.getTransportationById(transportationId);
         if (t.getId() != null) {
-            t.setBarcoId(barcoId);
-            t.setStorehouseId(storehouseId);
+            //t.setBarco(barco);
+            //t.setStorehouse(storehouse);
             t.setDistance(distance);
             t.setWeight(weight);
             transportationService.updateTransportation(t);

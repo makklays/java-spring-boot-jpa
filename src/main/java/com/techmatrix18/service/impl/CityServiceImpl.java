@@ -1,0 +1,69 @@
+package com.techmatrix18.service.impl;
+
+import com.techmatrix18.model.City;
+import com.techmatrix18.repository.CityRepository;
+import com.techmatrix18.service.CityService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Service;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Implementation of {@link CityService} interface.
+ *
+ * @author Alexander Kuziv
+ * @version 1.0
+ */
+
+@Service
+public class CityServiceImpl implements CityService {
+    @Lazy
+    @Autowired
+    private CityRepository cityRepository;
+
+    @Override
+    public List<City> getAllCities() {
+        List<City> list = new ArrayList<>();
+        cityRepository.findAll().forEach(list::add);
+
+        return list;
+    }
+
+    @Override
+    public City getCityById(Long id) {
+        return cityRepository.getById(id);
+    }
+
+    @Override
+    public boolean addCity(City city) {
+        City c = cityRepository.save(city);
+        if (!c.getTitle().isEmpty()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean updateCity(City city) {
+        City c = cityRepository.save(city);
+        if (!c.getTitle().isEmpty()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean deleteCity(Long id) {
+        City city = cityRepository.getById(id);
+        if (!city.getTitle().isEmpty()) {
+            cityRepository.delete(city);
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
