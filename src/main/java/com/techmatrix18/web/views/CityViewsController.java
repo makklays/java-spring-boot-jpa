@@ -1,5 +1,6 @@
 package com.techmatrix18.web.views;
 
+import com.techmatrix18.model.Category;
 import com.techmatrix18.model.City;
 import com.techmatrix18.service.CityService;
 import com.techmatrix18.service.StorehouseService;
@@ -39,21 +40,19 @@ public class CityViewsController implements WebMvcConfigurer {
         return "cities/list";
     }
 
+    @GetMapping("/add")
+    public String add(Model model, City city) {
+        model.addAttribute("city", city);
+
+        return "cities/add";
+    }
+
     @PostMapping("/add-post")
-    public String addPost(HttpServletRequest request, HttpServletResponse response, BindingResult bindingResult) throws Exception {
+    public String addPost(Model model, @Valid City city, BindingResult bindingResult) throws Exception {
         if (bindingResult.hasErrors()) {
             return "cities/add";
         }
-
-        String title = request.getParameter("title");
-        String description = request.getParameter("description");
-
-        City city = new City();
-        city.setTitle(title);
-        city.setDescription(description);
         cityService.addCity(city);
-
-        System.out.printf("First name: %s; Last name: %s \n", title, description);
 
         return "redirect:/cities/list";
     }
