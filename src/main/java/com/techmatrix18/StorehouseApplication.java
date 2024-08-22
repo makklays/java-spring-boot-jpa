@@ -12,6 +12,9 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import java.util.Arrays;
+import java.util.List;
+
 //@EnableTransactionManagement
 @SpringBootApplication //(scanBasePackages = "com.techmatrix18.config", exclude = {jpaConfig.class })
 //@PropertySource(value = { "classpath:application.properties" })
@@ -24,6 +27,18 @@ public class StorehouseApplication {
     private static final Logger logger = LoggerFactory.getLogger(StorehouseApplication.class);
 
     public static void main(String[] args) {
+        /*String[] pigs = new String[5];
+        pigs[0] = "Настройщик Нафнаф";
+        pigs[1] = "Строитель Нуфнуф";
+        pigs[2] = "Директор Хрюхрю";
+
+        System.out.println(Arrays.toString(pigs));
+
+        List<String> arrList = Arrays.asList(pigs);
+
+        System.out.println(arrList.toString());
+        System.out.println(Arrays.toString(arrList.toArray()));*/
+
         SpringApplication.run(StorehouseApplication.class, args);
     }
 

@@ -59,7 +59,13 @@
         </div>
 
         <br/>
-        <button type="submit" class="btn btn-primary" th:text="#{login}">Submit</button>
+
+        <div class="row">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-primary" th:text="#{login}">Submit</button>
+                <a th:href="@{/my-registr}" style="margin-left:20px;" >Registration</a>
+            </div>
+        </div>
 
     </form>
 

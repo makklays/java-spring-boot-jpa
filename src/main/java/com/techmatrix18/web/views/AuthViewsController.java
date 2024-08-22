@@ -65,10 +65,11 @@ public class AuthViewsController {
     }
 
     @PostMapping("/my-registr-post")
-    public String registrPost(User user, BindingResult bindingResult) {
-        //if (bindingResult.hasErrors()) {
-        //    return "auth/registr";
-        //}
+    public String registrPost(@Valid User user, Model model, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("positions", positionService.getAllPositions());
+            return "auth/registr";
+        }
 
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String result = encoder.encode(user.getPassword());
