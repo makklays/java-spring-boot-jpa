@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Controller
@@ -65,17 +66,33 @@ public class AuthViewsController {
     }
 
     @PostMapping("/my-registr-post")
-    public String registrPost(@Valid User user, Model model, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
+    public String registrPost(User user, Model model, BindingResult bindingResult) {
+        /*if (bindingResult.hasErrors()) {
+            logger.info("Have errors.....");
+            model.addAttribute("user", user);
             model.addAttribute("positions", positionService.getAllPositions());
             return "auth/registr";
-        }
+        }*/
 
+        logger.info("aaaaaaaaaaaaaaa.....");
+
+        // role - permissions ?
+        Role role = roleService.getRoleByName("ROLE_USER");
+        logger.info("aaaaaaaaaaaaaaa Role: " + role);
+
+        // add role
+        Set<Role> roles = new HashSet<>();
+        roles.add(role);
+
+        // add password
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String result = encoder.encode(user.getPassword());
-        //user.setUserRoles(Set.of(userRoleService.getRoleByName("ROLE_USER")));
+
         user.setPassword(result);
-        userService.addUser(user);
+        //user.setRoles(roles);
+        //userService.addUser(user);
+
+        logger.info("aaaaaaaaaaaaaaa User: " + user);
 
         return "redirect:/login";
     }
