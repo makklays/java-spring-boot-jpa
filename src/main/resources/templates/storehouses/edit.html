@@ -22,7 +22,7 @@
         </ol>
     </nav>
 
-    <form action="#" th:action="@{/storehouses/update/{id}(id=${storehouse.id})}" th:object="${storehouse}" method="post">
+    <form action="#" th:action="@{/storehouses/update/{id}(id=${storehouse.id})}" th:object="${storehouse}" method="post" enctype="multipart/form-data">
 
         <input type="hidden" name="storehouseId" th:value="${storehouse.Id}" />
         <!--input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /-->
@@ -47,6 +47,14 @@
                 <div class="mb-3">
                     <label for="text1" class="form-label">Description</label>
                     <textarea rows="6" name="description" class="form-control" id="text1" th:field="*{description}"></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <div th:if="${storehouse.photo}">
+                        <img src="/imgs/storehouses/${storehouse.photo}" class="img img-fluid" alt="photo storehouse" style="width:300px;" />
+                    </div>
+                    <label for="photo1" class="form-label">Photo</label>
+                    <input type="file" class="form-control" id="photo1" th:field="*{photo}">
                 </div>
 
             </div>

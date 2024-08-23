@@ -37,6 +37,9 @@ public class Storehouse implements Serializable {
     @Column(name = "description", length = 500)
     private String description;
 
+    @Column(name = "photo", length = 500)
+    private String photo;
+
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at")
@@ -79,6 +82,10 @@ public class Storehouse implements Serializable {
         this.description = description;
     }
 
+    public String getPhoto() { return photo; }
+
+    public void setPhoto(String photo) { this.photo = photo; }
+
     public Timestamp getCreatedAt() {
         return createdAt;
     }
@@ -114,6 +121,7 @@ public class Storehouse implements Serializable {
         if (!Objects.equals(city, that.city)) return false;
         if (!Objects.equals(title, that.title)) return false;
         if (!Objects.equals(description, that.description)) return false;
+        if (!Objects.equals(photo, that.photo)) return false;
         if (!Objects.equals(createdAt, that.createdAt)) return false;
         return Objects.equals(updatedAt, that.updatedAt);
     }
@@ -124,6 +132,7 @@ public class Storehouse implements Serializable {
         result = 31 * result + (city != null ? city.hashCode() : 0);
         result = 31 * result + (title != null ? title.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (photo != null ? photo.hashCode() : 0);
         result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);
         result = 31 * result + (updatedAt != null ? updatedAt.hashCode() : 0);
         return result;
@@ -135,6 +144,7 @@ public class Storehouse implements Serializable {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
+                ", photo='" + photo + '\'' +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';
