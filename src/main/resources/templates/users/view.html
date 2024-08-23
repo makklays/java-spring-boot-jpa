@@ -12,7 +12,7 @@
             <h1 th:text="#{app.view-user}">View user</h1>
         </div>
         <div class="col-md-6 align-self-center" style="text-align:right;">
-            <a href="#" th:href="@{/users/edit/1}" th:text="#{app.edit-user}" class="btn btn-primary"> Edit user</a>
+            <a href="#" th:href="@{/users/edit/${user.Id}}" th:text="#{app.edit-user}" class="btn btn-primary"> Edit user</a>
         </div>
     </div>
 
@@ -44,9 +44,10 @@
 
                 <tr>
                     <th>Position</th>
-                    <td >
-                        <a href="#" th:href="@{'/positions/' + ${user.getPosition().getId()}}" th:text="${user.getPosition().getTitle()}">Title</a>
+                    <td th:if="${user.getPosition()} != null">
+                        <a href="#" th:href="@{'/positions/' + ${user.position.id}}" th:text="${user.position.title}">Title</a>
                     </td>
+                    <td th:else> - </td>
                 </tr>
 
                 <tr>
@@ -56,21 +57,22 @@
 
                 <tr>
                     <th>Roles</th>
-                    <td th:text="${user.roles}"></td>
+                    <!--td th:text="${user.getRoles().stream().map(role -> role.getName()).collect(Collectors.toList())}"></td-->
+                    <td th:text="${user.roles}" ></td>
                 </tr>
 
                 <tr>
                     <th th:text="#{bio}">Bio</th>
-                    <td th:text="${user.bio}"></td>
+                    <td th:text="!${user.bio.isEmpty()}? ${user.bio} : '-'"></td>
                 </tr>
 
                 <tr>
                     <th>Created</th>
-                    <td th:text="${user.createdAt}"></td>
+                    <td th:text="${user.createdAt} ? ${#dates.format(user.createdAt, 'dd-MM-yyyy HH:mm')} : '-'"></td>
                 </tr>
                 <tr>
                     <th>Updated</th>
-                    <td th:text="${user.updatedAt}"></td>
+                    <td th:text="${user.updatedAt} ? ${#dates.format(user.updatedAt, 'dd-MM-yyyy HH:mm')} : '-'"></td>
                 </tr>
             </table>
 

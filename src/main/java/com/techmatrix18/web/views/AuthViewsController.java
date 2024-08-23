@@ -1,5 +1,6 @@
 package com.techmatrix18.web.views;
 
+import com.techmatrix18.model.Position;
 import com.techmatrix18.model.Role;
 import com.techmatrix18.model.User;
 import com.techmatrix18.service.PositionService;
@@ -17,6 +18,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -58,15 +60,23 @@ public class AuthViewsController {
     @GetMapping("/signup")
     public String registr(Model model, User user) {
         model.addAttribute("user", user);
-        model.addAttribute("positions", positionService.getAllPositions());
+        List<Position> positions = positionService.getAllPositions();
+        model.addAttribute("positions", positions);
 
+        logger.info("Positions: {}", positions);
         return "auth/registr";
     }
 
     @PostMapping("/signup")
-    public String registrPost(@Valid User user, BindingResult bindingResult) {
+    public String registrPost(@Valid User user, /*Model model,*/ BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             logger.info("Have errors.....");
+
+            //model.addAttribute("user", user);
+            //List<Position> positions = positionService.getAllPositions();
+            //model.addAttribute("positions", positions);
+            //logger.info("Positions: {}", positions);
+
             return "auth/registr";
         }
 

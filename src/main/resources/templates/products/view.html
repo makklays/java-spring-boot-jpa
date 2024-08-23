@@ -66,11 +66,11 @@
 
                 <tr>
                     <th>Created</th>
-                    <td th:text="${product.createdAt}"></td>
+                    <td th:text="${product.createdAt} ? ${#dates.format(product.createdAt, 'dd-MM-yyyy HH:mm')} : '-'"></td>
                 </tr>
                 <tr>
                     <th>Updated</th>
-                    <td th:text="${product.updatedAt}"></td>
+                    <td th:text="${product.updatedAt} ? ${#dates.format(product.updatedAt, 'dd-MM-yyyy HH:mm')} : '-'"></td>
                 </tr>
             </table>
 

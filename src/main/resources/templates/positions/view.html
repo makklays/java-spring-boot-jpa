@@ -45,11 +45,11 @@
 
                 <tr>
                     <th>Created</th>
-                    <td th:text="${position.createdAt}"></td>
+                    <td th:text="${position.createdAt} ? ${#dates.format(position.createdAt, 'dd-MM-yyyy HH:mm')} : '-'"></td>
                 </tr>
                 <tr>
                     <th>Updated</th>
-                    <td th:text="${position.updatedAt}"></td>
+                    <td th:text="${position.updatedAt} ? ${#dates.format(position.updatedAt, 'dd-MM-yyyy HH:mm')} : '-'"></td>
                 </tr>
             </table>
 

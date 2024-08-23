@@ -49,11 +49,11 @@
                 </tr>
                 <tr>
                     <th>Created</th>
-                    <td th:text="${storehouse.createdAt}"></td>
+                    <td th:text="${storehouse.createdAt} ? ${#dates.format(storehouse.createdAt, 'dd-MM-yyyy HH:mm')} : '-'"></td>
                 </tr>
                 <tr>
                     <th>Updated</th>
-                    <td th:text="${storehouse.updatedAt}"></td>
+                    <td th:text="${storehouse.updatedAt} ? ${#dates.format(storehouse.updatedAt, 'dd-MM-yyyy HH:mm')} : '-'"></td>
                 </tr>
             </table>
 

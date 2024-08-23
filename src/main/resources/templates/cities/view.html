@@ -43,11 +43,11 @@
                 </tr>
                 <tr>
                     <th>Created</th>
-                    <td th:text="${city.createdAt}"></td>
+                    <td th:text="${city.createdAt} ? ${#dates.format(city.createdAt, 'dd-MM-yyyy HH:mm')} : '-'"></td>
                 </tr>
                 <tr>
                     <th>Updated</th>
-                    <td th:text="${city.updatedAt}"></td>
+                    <td th:text="${city.updatedAt} ? ${#dates.format(city.updatedAt, 'dd-MM-yyyy HH:mm')} : '-'"></td>
                 </tr>
             </table>
 

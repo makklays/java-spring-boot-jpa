@@ -12,10 +12,12 @@
             <h1 th:text="#{app.menu}">Menu</h1>
         </div>
         <div class="col-md-6 align-self-center" style="text-align:right;">
-            <a sec:authorize="isAnonymous()" th:href="@{/login}">Login</a> | <a sec:authorize="isAnonymous()" th:href="@{/my-registr}">Registration</a>
+            <div sec:authorize="isAnonymous()">
+                <a th:href="@{/login}">Login</a> | <a th:href="@{/my-registr}">Registration</a>
+            </div>
             <!-- Display user information if logged in -->
             <div sec:authorize="isAuthenticated()">
-                <p>Hello, <span th:text="${username}"></span>!</p>
+                <p>Hello, <span th:text="${#authentication.principal.username}"></span>!</p>
                 <a href="/logout">Logout</a>
             </div>
         </div>
