@@ -47,7 +47,7 @@
                     <td th:if="${user.getPosition()} != null">
                         <a href="#" th:href="@{'/positions/' + ${user.position.id}}" th:text="${user.position.title}">Title</a>
                     </td>
-                    <td th:else> - </td>
+                    <td th:unless="${user.getPosition()} != null"> - </td>
                 </tr>
 
                 <tr>
