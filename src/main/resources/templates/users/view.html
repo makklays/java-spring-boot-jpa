@@ -58,7 +58,7 @@
                 <tr>
                     <th>Roles</th>
                     <!--td th:text="${user.getRoles().stream().map(role -> role.getName()).collect(Collectors.toList())}"></td-->
-                    <td th:text="${user.roles}" ></td>
+                    <td th:text="${user.getAuthorities()}" ></td>
                 </tr>
 
                 <tr>

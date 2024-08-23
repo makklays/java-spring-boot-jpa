@@ -51,7 +51,12 @@
                     <td th:text="${user.lastname}"></td>
 
                     <td>
-                        <a th:if="${user.position!=null}" href="#" th:href="@{'/positions/' + ${user.position.getId()}}" th:text="${user.position.getTitle()}">Title</a>
+                        <!-- if -->
+                        <div th:if="${user.getPosition()} != null">
+                            <a href="#" th:href="@{'/positions/' + ${user.position.getId()}}" th:text="${user.position.getTitle()}">Title</a>
+                        </div>
+                        <!-- else -->
+                        <div th:unless="${user.getPosition()} != null">-</div>
                     </td>
 
                     <td class="text-center" th:text="${user.email}"></td>
