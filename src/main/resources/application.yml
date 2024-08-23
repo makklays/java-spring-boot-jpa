@@ -42,11 +42,9 @@ spring:
       content-type: text/html
     cache: false
   # JSP - don't use
-  #mvc:
-  #  view:
-  #    prefix: /WEB-INF/jsp/
-  #    suffix: .jsp
-  # Messages
+  mvc:
+    throw-exception-if-no-handler-found: true
+    throw-no-handler-found: true
   messages:
     basename: messages
     encoding: UTF-8
@@ -59,8 +57,11 @@ spring:
     baselineOnMigrate: true
     validateOnMigrate: true
 logging:
-  #level:
-    #com.concretepage: INFO
-  #file:
-  #path:
+  level:
+    ROOT: INFO
 
+server:
+  error:
+    include-message: always
+    whitelabel:
+      enabled: false

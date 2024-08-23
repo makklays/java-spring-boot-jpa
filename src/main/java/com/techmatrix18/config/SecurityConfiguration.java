@@ -4,7 +4,6 @@ import com.techmatrix18.service.impl.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -46,16 +45,19 @@ public class SecurityConfiguration {
                                 .requestMatchers(new AntPathRequestMatcher("/js/**")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/*.{css,js}")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/*.{ico,png,svg,webapp}")).permitAll()
-                                .requestMatchers("/my-registr").permitAll()
-                                .requestMatchers("/users/**").hasAnyAuthority("ROLE_ADMIN")
+                                .requestMatchers("/signup").permitAll()
+                                .requestMatchers("/users/**").authenticated()
                                 .requestMatchers("/cities/**", "/menu").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER"))
                 .formLogin(form -> form
                         .loginPage("/login")
                         .permitAll()
+                        .defaultSuccessUrl("/")
                 )
                 .logout(logout -> logout
-                        .logoutUrl("/logout")
                         .permitAll()
+                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                        .invalidateHttpSession(true)
+                        .logoutSuccessUrl("/login")
                 )
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/**").authenticated())
                 .httpBasic(Customizer.withDefaults())

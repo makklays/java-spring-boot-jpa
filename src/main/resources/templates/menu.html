@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <title th:text="#{app.title}"> Title </title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
@@ -12,9 +12,9 @@
             <h1 th:text="#{app.menu}">Menu</h1>
         </div>
         <div class="col-md-6 align-self-center" style="text-align:right;">
-            <a th:href="@{/login}">Login</a> | <a th:href="@{/my-registr}">Registration</a>
+            <a sec:authorize="isAnonymous()" th:href="@{/login}">Login</a> | <a sec:authorize="isAnonymous()" th:href="@{/my-registr}">Registration</a>
             <!-- Display user information if logged in -->
-            <div th:if="${username != null}">
+            <div sec:authorize="isAuthenticated()">
                 <p>Hello, <span th:text="${username}"></span>!</p>
                 <a href="/logout">Logout</a>
             </div>
@@ -42,8 +42,8 @@
             <a th:href="@{/products/list}" th:text="#{app.products}">Products</a> <br/>
             <a th:href="@{/categories/list}" th:text="#{app.categories}">Categories</a> <br/>
             <br/>
-            <a th:href="@{/users/list}" th:text="#{app.users}">Users</a> <br/>
-            <a th:href="@{/positions/list}" th:text="#{app.positions}">Positions</a> <br/>
+            <a sec:authorize-expr="hasAnyAuthority('READ')" th:href="@{/users/list}" th:text="#{app.users}">Users</a> <br/>
+            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/positions/list}" th:text="#{app.positions}">Positions</a> <br/>
             <br/>
             <a th:href="@{/transportations/list}" th:text="#{app.transportations}">Transportations</a> <br/>
             <a th:href="@{/invoices/list}" th:text="#{app.invoices}">Invoices</a> <br/>
