@@ -46,12 +46,8 @@
                     <label for="position1" class="form-label">Position</label>
                     <select name="position" class="form-control" id="position1">
                         <option value="">---- Select position ----</option>
-                        <div th:if="${user.position} != null">
-                            <option th:each="position : ${positions}" th:value="${position.getId()}" th:text="${position.getTitle()}" th:selected="${position.getId()==user.position.getId()}"></option>
-                        </div>
-                        <div th:unless="${user.position} != null">
-                            <option th:each="position : ${positions}" th:value="${position.getId()}" th:text="${position.getTitle()}"></option>
-                        </div>
+                        <option th:each="position : ${positions}" th:value="${position.getId()}" th:if="${user.position} != null" th:text="${position.getTitle()}" th:selected="${position.getId()==user.position.getId()}"></option>
+                        <option th:each="position : ${positions}" th:value="${position.getId()}" th:unless="${user.position} != null" th:text="${position.getTitle()}"></option>
                     </select>
                 </div>
 
