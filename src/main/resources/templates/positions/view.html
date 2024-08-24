@@ -81,12 +81,18 @@
                     <td>
                         <a href="#" th:href="@{'/users/' + ${user.id}}" th:text="${user.firstname}+' '+${user.lastname}">Title</a>
                     </td>
-                    <td>
+
+                    <!--td>
                         <a href="#" th:href="@{'/positions/' + ${user.position.getId()}}" th:text="${user.position.getTitle()}">Title</a>
+                    </td-->
+
+                    <td th:if="${user.getPosition()} != null">
+                        <a href="#" th:href="@{'/positions/' + ${user.position.id}}" th:text="${user.position.title}">Title</a>
                     </td>
+                    <td th:unless="${user.getPosition()} != null"> - </td>
 
                     <td class="text-center" th:text="${user.email}"></td>
-                    <td class="text-center" th:text="${user.roles}"></td>
+                    <td class="text-center" th:text="${user.getAuthorities()}"></td>
                 </tr>
                 </tbody>
             </table>
