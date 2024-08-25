@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title th:text="#{app.title}">Role List</title>
+    <title th:text="#{app.title}">Permission List</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
 </head>
 <body>
@@ -9,11 +9,11 @@
 
     <div class="row">
         <div class="col-md-6">
-            <h1 th:text="#{app.list-roles}">List of Roles</h1>
+            <h1 th:text="#{app.list-permissions}">List of Permission</h1>
         </div>
         <div class="col-md-6 align-self-center" style="text-align:right;">
-            <a href="#" th:href="@{/permissions/add}" th:text="#{app.add-permission}" class="btn btn-primary"> Add permission</a>
             <a href="#" th:href="@{/roles/add}" th:text="#{app.add-role}" class="btn btn-primary"> Add role</a>
+            <a href="#" th:href="@{/permissions/add}" th:text="#{app.add-permission}" class="btn btn-primary"> Add permission</a>
         </div>
     </div>
 
@@ -21,7 +21,7 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a th:href="@{/welcome}">Home</a></li>
             <li class="breadcrumb-item"><a th:href="@{/menu}">Menu</a></li>
-            <li class="breadcrumb-item active" aria-current="page" th:text="#{app.list-roles}" >List of roles</li>
+            <li class="breadcrumb-item active" aria-current="page" th:text="#{app.list-permissions}" >List of permissions</li>
         </ol>
     </nav>
 
@@ -34,24 +34,18 @@
                         <th class="text-center" style="width:50px;" th:text="#{id}">ID</th>
                         <th class="text-left" th:text="#{title}">Title</th>
 
-                        <th class="text-left" th:text="#{permissions}">Permissions</th>
-
                         <th class="text-center" th:text="#{page.actions}"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="role : ${roles}">
-                        <td th:text="${role.id}"></td>
-                        <td th:text="${role.name}"></td>
+                    <tr th:each="permission : ${permissions}">
+                        <td class="text-center" th:text="${permission.id}"></td>
+                        <td th:text="${permission.name}"></td>
 
-                        <td>
-                            <div th:each="permission : ${role.permissions}" th:text="${permission.name}"></div>
-                        </td>
-
-                        <td class="text-center" style="width:150px;">
-                            <a href="#" th:href="@{'/roles/' + ${role.id}}">view</a> |
-                            <a href="#" th:href="@{/roles/edit/{id}(id=${role.id})}">edit</a> |
-                            <a href="#" th:href="@{/roles/delete/{id}(id=${role.id})}">delete</a>
+                        <td class="text-center">
+                            <a href="#" th:href="@{'/permissions/' + ${permission.id}}">view</a> |
+                            <a href="#" th:href="@{/permissions/edit/{id}(id=${permission.id})}">edit</a> |
+                            <a href="#" th:href="@{/permissions/delete/{id}(id=${permission.id})}" onclick="return confirm('Are you sure?');">delete</a>
                         </td>
                     </tr>
                 </tbody>
@@ -63,4 +57,3 @@
 </div>
 </body>
 </html>
-

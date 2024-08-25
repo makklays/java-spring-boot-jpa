@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{app.title}">Permission List</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-6">
+            <h1 th:text="#{app.edit-permission}">Edit permissions</h1>
+        </div>
+    </div>
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/welcome}">Home</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/menu}">Menu</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/permissions/list}" th:text="#{app.list-permissions}">List</a></li>
+            <li class="breadcrumb-item active" aria-current="page" th:text="#{app.edit-permission}" >Edit permission</li>
+        </ol>
+    </nav>
+
+    <form th:action="@{/permissions/update}" method="post">
+
+        <div class="card">
+            <div class="card-body">
+
+                <input type="hidden" name="id" th:value="${permission.id}"/>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="name" class="form-label" th:text="#{title}">Title:</label>
+                            <input type="text" id="name" name="name" th:value="${permission.name}" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <br/>
+        <button type="submit" class="btn btn-primary" th:text="#{form.submit}">Save</button>
+        <a href="#" th:href="@{/permissions/list}" th:text="#{app.back}" class="btn btn-secondary" style="margin-left:20px;"> Back</a>
+
+    </form>
+
+    <br/><br/>
+
+</div>
+</body>
+</html>
+

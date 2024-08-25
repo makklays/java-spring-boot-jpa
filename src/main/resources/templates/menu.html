@@ -46,7 +46,7 @@
             <br/>
             <a sec:authorize-expr="hasAnyAuthority('READ')" th:href="@{/users/list}" th:text="#{app.users}">Users</a> <br/>
             <a sec:authorize-expr="hasAnyAuthority('READ')" th:href="@{/roles/list}" th:text="#{app.roles}">Roles</a> <br/>
-            <a sec:authorize-expr="hasAnyAuthority('READ')" th:href="@{/permisions/list}" th:text="#{app.permisions}">Permisions</a> <br/>
+            <a sec:authorize-expr="hasAnyAuthority('READ')" th:href="@{/permissions/list}" th:text="#{app.permissions}">Permissions</a> <br/>
             <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/positions/list}" th:text="#{app.positions}">Positions</a> <br/>
             <br/>
             <a th:href="@{/transportations/list}" th:text="#{app.transportations}">Transportations</a> <br/>
