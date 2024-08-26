@@ -3,13 +3,14 @@
 <head>
     <title th:text="#{app.title}"> Title </title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/fontawesome-free-6.6.0-web/css/all.min.css}"/>
 </head>
 <body>
 <div class="container">
 
     <div class="row">
         <div class="col-md-6">
-            <h1 th:text="#{app.edit-user}">Edit user</h1>
+            <h1><i class="fa-solid fa-users"></i> Edit user</h1>
         </div>
     </div>
 
@@ -44,7 +45,7 @@
 
                 <div class="mb-3">
                     <label for="position1" class="form-label">Position</label>
-                    <select name="position" class="form-control" id="position1">
+                    <select name="position_id" class="form-control" id="position1">
                         <option value="">---- Select position ----</option>
                         <option th:each="position : ${positions}" th:value="${position.getId()}" th:if="${user.position} != null" th:text="${position.getTitle()}" th:selected="${position.getId()==user.position.getId()}"></option>
                         <option th:each="position : ${positions}" th:value="${position.getId()}" th:unless="${user.position} != null" th:text="${position.getTitle()}"></option>
@@ -63,15 +64,22 @@
                 </div>
 
                 <div class="mb-3">
+                    <div th:text="${user.getRoles()}"></div>
                     <label for="role1" class="form-label">Role</label>
-                    <select name="roles" class="form-control" id="role1">
-                        <option value="">---- Select role ----</option>
-                        <option th:value="USER" th:text="#{role_user}" th:selected="${roles == USER}"></option>
-                        <option th:value="ADMIN" th:text="#{role_admin}" th:selected="${roles == ADMIN}"></option>
+                    <select name="role_name" class="form-control" id="role1">
+                        <option th:each="role : ${roles}" th:value="${role.name}" th:text="${role.name}" th:selected="${role.name == user.getRoles().contains(role.name)}"></option>
                     </select>
-                    <div th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}" style="color:red;">Roles error</div>
                 </div>
 
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <input type="checkbox" name="isBlocked" th:checked="*{isBlocked}" id="is_blocked1" >
+                            <label for="is_blocked1" class="form-label">Blocked</label>
+                            <div th:if="${#fields.hasErrors('isBlocked')}" th:errors="*{isBlocked}" style="color:red;">Is blocked error</div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
         </div>

@@ -45,7 +45,7 @@
             <a th:href="@{/products/list}" th:text="#{app.products}">Products</a> <br/>
             <a th:href="@{/categories/list}" th:text="#{app.categories}">Categories</a> <br/>
             <br/>
-            <a sec:authorize-expr="hasAnyAuthority('READ')" th:href="@{/users/list}" th:text="#{app.users}">Users</a> <br/>
+            <a sec:authorize-expr="hasAnyAuthority('READ')" th:href="@{/users/list}"><i class="fa-solid fa-user"></i> Users</a> <br/>
             <a sec:authorize-expr="hasAnyAuthority('READ')" th:href="@{/roles/list}"><i class="fa-solid fa-flag-checkered"></i> Roles</a> <br/>
             <a sec:authorize-expr="hasAnyAuthority('READ')" th:href="@{/permissions/list}" th:text="#{app.permissions}">Permissions</a> <br/>
             <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/positions/list}" th:text="#{app.positions}">Positions</a> <br/>

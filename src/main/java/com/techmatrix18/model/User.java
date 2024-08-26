@@ -71,6 +71,9 @@ public class User implements UserDetails, Serializable {
     @OneToMany(mappedBy = "user")
     private List<Barco> barcos;
 
+    @Column(name="is_blocked")
+    private boolean isBlocked;
+
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at")
@@ -156,6 +159,10 @@ public class User implements UserDetails, Serializable {
         this.barcos = barcos;
     }
 
+    public boolean getIsBlocked() { return isBlocked; }
+
+    public void setIsBlocked(boolean blocked) { isBlocked = blocked; }
+
     public Instant getCreatedAt() {
         return createdAt;
     }
@@ -186,8 +193,6 @@ public class User implements UserDetails, Serializable {
         return getEmail();
     }
 
-
-
     @Override
     public boolean isAccountNonExpired() {
         return true;
@@ -212,12 +217,12 @@ public class User implements UserDetails, Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof User user)) return false;
-        return Objects.equals(getId(), user.getId()) && Objects.equals(getFirstname(), user.getFirstname()) && Objects.equals(getLastname(), user.getLastname()) && Objects.equals(getEmail(), user.getEmail()) && Objects.equals(getPassword(), user.getPassword()) && Objects.equals(getRoles(), user.getRoles()) && Objects.equals(getBio(), user.getBio()) && Objects.equals(getPosition(), user.getPosition()) && Objects.equals(getBarcos(), user.getBarcos()) && Objects.equals(getCreatedAt(), user.getCreatedAt()) && Objects.equals(getUpdatedAt(), user.getUpdatedAt());
+        return isBlocked == user.isBlocked && getId().equals(user.getId()) && getFirstname().equals(user.getFirstname()) && getLastname().equals(user.getLastname()) && getEmail().equals(user.getEmail()) && getPassword().equals(user.getPassword()) && getRoles().equals(user.getRoles()) && getBio().equals(user.getBio()) && getPosition().equals(user.getPosition()) && getBarcos().equals(user.getBarcos()) && getCreatedAt().equals(user.getCreatedAt()) && getUpdatedAt().equals(user.getUpdatedAt());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getFirstname(), getLastname(), getEmail(), getPassword(), getRoles(), getBio(), getPosition(), getBarcos(), getCreatedAt(), getUpdatedAt());
+        return Objects.hash(getId(), getFirstname(), getLastname(), getEmail(), getPassword(), getRoles(), getBio(), getPosition(), getBarcos(), isBlocked, getCreatedAt(), getUpdatedAt());
     }
 
     // prettier-ignore
@@ -229,10 +234,11 @@ public class User implements UserDetails, Serializable {
                 ", lastname='" + lastname + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", roles=" + getRoles() +
+                ", roles=" + roles +
                 ", bio='" + bio + '\'' +
                 ", position=" + position +
                 ", barcos=" + barcos +
+                ", isBlocked=" + isBlocked +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';

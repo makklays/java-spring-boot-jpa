@@ -1,7 +1,10 @@
 package com.techmatrix18.web.views;
 
+import com.techmatrix18.model.Position;
+import com.techmatrix18.model.Role;
 import com.techmatrix18.model.User;
 import com.techmatrix18.service.PositionService;
+import com.techmatrix18.service.RoleService;
 import com.techmatrix18.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -15,6 +18,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Simple controller for User
@@ -31,10 +36,12 @@ public class UserViewsController {
 
     private final UserService userService;
     private final PositionService positionService;
+    private final RoleService roleService;
 
-    public UserViewsController(UserService userService, PositionService positionService) {
+    public UserViewsController(UserService userService, PositionService positionService, RoleService roleService) {
         this.userService = userService;
         this.positionService = positionService;
+        this.roleService = roleService;
     }
 
     @GetMapping("/welcome")
@@ -105,15 +112,49 @@ public class UserViewsController {
         //model.addAttribute("cities", cities);
 
         model.addAttribute("positions", positionService.getAllPositions());
+        model.addAttribute("roles", roleService.getAllRoles());
 
         return "users/edit";
     }
 
     @PostMapping("/users/update/{id}")
-    public String editPost(@PathVariable("id") long id, @Valid User user, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
+    public String editPost(@PathVariable("id") long id, HttpServletRequest request, /*BindingResult bindingResult,*/ Model model) {
+        /*if (bindingResult.hasErrors()) {
             return "users/edit";
-        }
+        }*/
+
+        User user = userService.getUserById(id);
+
+        // firstname
+        String firstname = request.getParameter("firstname");
+        user.setFirstname(firstname);
+
+        // lastname
+        String lastname = request.getParameter("lastname");
+        user.setLastname(lastname);
+
+        // bio
+        String bio = request.getParameter("bio");
+        user.setBio(bio);
+
+        // position
+        String positionId = request.getParameter("position_id");
+        Position position = positionService.getPositionById(Long.parseLong(positionId));
+        user.setPosition(position);
+
+        // email
+        String email = request.getParameter("email");
+        user.setBio(email);
+
+        // role
+        String roleName = request.getParameter("role_name");
+        Role role = roleService.getRoleByName(roleName);
+
+        Set<Role> roles = new HashSet<>();
+        roles.add(role);
+        user.setRoles(roles);
+
+        logger.info("User {}", user);
 
         userService.updateUser(user);
 
