@@ -24,7 +24,7 @@
 
     <form action="#" th:action="@{/users/update/{id}(id=${user.id})}" th:object="${user}" method="post">
 
-        <input type="hidden" name="userId" th:value="${user.Id}" />
+        <input type="hidden" name="id"  th:field="*{id}"/>
         <!--input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /-->
 
         <div class="card">
@@ -63,12 +63,21 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="role1" class="form-label">Role</label>
-                    <select name="roles" class="form-control" id="role1">
-                        <option value="">---- Select role ----</option>
-                        <option th:value="USER" th:text="#{role_user}" th:selected="${roles == USER}"></option>
-                        <option th:value="ADMIN" th:text="#{role_admin}" th:selected="${roles == ADMIN}"></option>
-                    </select>
+                    <label for="role" class="form-label">Role</label>
+                    <div th:each="role : ${roles}" id="role">
+                        <label>
+                            <input th:type="checkbox" th:field="*{roles}" th:value="${role.getId()}" th:text="${role.getName()}" th:selected="${user.getRoles().contains(role)}">
+                        </label>
+                    </div>
+
+
+
+<!--                        <div class="form-check-->
+<!--                    <select name="roles" class="form-control" id="role1">-->
+<!--                        <option value="">&#45;&#45;&#45;&#45; Select role &#45;&#45;&#45;&#45;</option>-->
+<!--                        <option th:each="role : ${roles}" th:value="${role.getId()}" th:text="${role.getName()}" th:selected="${role.getId()==user.rol.getId()}"></option>-->
+<!--                        <option th:each="position : ${positions}" th:value="${position.getId()}" th:unless="${user.position} != null" th:text="${position.getTitle()}"></option>-->
+<!--                    </select>-->
                     <div th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}" style="color:red;">Roles error</div>
                 </div>
 

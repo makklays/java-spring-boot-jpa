@@ -2,6 +2,7 @@ package com.techmatrix18.web.views;
 
 import com.techmatrix18.model.User;
 import com.techmatrix18.service.PositionService;
+import com.techmatrix18.service.RoleService;
 import com.techmatrix18.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -31,10 +32,11 @@ public class UserViewsController {
 
     private final UserService userService;
     private final PositionService positionService;
-
-    public UserViewsController(UserService userService, PositionService positionService) {
+    private final RoleService roleService;
+    public UserViewsController(UserService userService, PositionService positionService, RoleService roleService) {
         this.userService = userService;
         this.positionService = positionService;
+        this.roleService = roleService;
     }
 
     @GetMapping("/welcome")
@@ -90,7 +92,7 @@ public class UserViewsController {
     }
 
     @GetMapping("/users/edit/{userId}")
-    public String edit(HttpServletRequest request, HttpServletResponse response, @PathVariable Long userId, Model model) throws Exception {
+    public String edit(@PathVariable Long userId, Model model) throws Exception {
         User user = userService.getUserById(userId);
         if (user.getId() != null) {
             model.addAttribute("user", user);
@@ -105,6 +107,7 @@ public class UserViewsController {
         //model.addAttribute("cities", cities);
 
         model.addAttribute("positions", positionService.getAllPositions());
+        model.addAttribute("roles", roleService.getAllRoles());
 
         return "users/edit";
     }
@@ -112,6 +115,11 @@ public class UserViewsController {
     @PostMapping("/users/update/{id}")
     public String editPost(@PathVariable("id") long id, @Valid User user, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
+            if (user.getPassword()==null) {
+                user.setPassword(userService.getUserById(id).getPassword());
+                userService.updateUser(user);
+                return "redirect:/users/list";
+            }
             return "users/edit";
         }
 

@@ -22,12 +22,12 @@
         </ol>
     </nav>
 
-    <form action="#" th:action="@{/roles/update}" method="post">
+    <form action="#" th:action="@{/roles/save}" th:object="${role}" method="post">
+
+        <input type="hidden" name="id" th:value="${role.getId()}" th:field="*{id}"/>
 
         <div class="card">
             <div class="card-body">
-
-                <input type="hidden" name="id" th:value="${role.id}"/>
 
                 <div class="row">
                     <div class="col-md-6">
@@ -43,7 +43,7 @@
                         <div class="mb-3">
                             <label class="form-label" th:text="#{permissions}">Permissions:</label>
                             <div th:each="permission : ${permissions}" >
-                                <input th:id="${permission.id}" type="checkbox" name="permissions" th:value="${permission.id}" th:checked="${role.permissions.contains(permission)}"/>
+                                <input th:id="${permission.id}" type="checkbox" name="permissions" th:field="*{permissions}" th:value="${permission.id}" th:checked="${role.permissions.contains(permission)}"/>
                                 <label th:for="${permission.id}" th:text="${permission.name}"></label>
                                 <div th:if="${#fields.hasErrors('permissions')}" th:errors="*{permissions}" style="color:red;">Is permissions error</div>
                             </div>
