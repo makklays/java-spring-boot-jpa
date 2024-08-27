@@ -97,7 +97,7 @@ public class UserViewsController {
     }
 
     @GetMapping("/users/edit/{userId}")
-    public String edit(HttpServletRequest request, HttpServletResponse response, @PathVariable Long userId, Model model) throws Exception {
+    public String edit(@PathVariable Long userId, Model model) throws Exception {
         User user = userService.getUserById(userId);
         if (user.getId() != null) {
             model.addAttribute("user", user);
@@ -119,7 +119,14 @@ public class UserViewsController {
 
     @PostMapping("/users/update/{id}")
     public String editPost(@PathVariable("id") long id, HttpServletRequest request, /*BindingResult bindingResult,*/ Model model) {
-        /*if (bindingResult.hasErrors()) {
+        /*
+        public String editPost(@PathVariable("id") long id, @Valid User user, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            if (user.getPassword()==null) {
+                user.setPassword(userService.getUserById(id).getPassword());
+                userService.updateUser(user);
+                return "redirect:/users/list";
+            }
             return "users/edit";
         }*/
 

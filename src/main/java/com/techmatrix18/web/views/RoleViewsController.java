@@ -1,14 +1,22 @@
 package com.techmatrix18.web.views;
 
+import com.techmatrix18.model.Permission;
 import com.techmatrix18.model.Role;
 import com.techmatrix18.model.Storehouse;
 import com.techmatrix18.repository.PermissionRepository;
 import com.techmatrix18.repository.RoleRepository;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/roles")
@@ -39,10 +47,8 @@ public class RoleViewsController {
         return "roles/edit";
     }
 
-    @PostMapping("/update")
-    public String updateRole(@ModelAttribute Role role, @RequestParam Long permissions) {
-        // Update permissions
-        role.setPermissions(permissionRepository.findAllById(permissions));
+    @PostMapping("/save")
+    public String saveRole(@Valid Role role) {
         roleRepository.save(role);
         return "redirect:/roles/list";
     }
@@ -54,12 +60,6 @@ public class RoleViewsController {
         return "roles/add";
     }
 
-    @PostMapping("/add")
-    public String addRole(@ModelAttribute Role role, @RequestParam Long permissions) {
-        role.setPermissions(permissionRepository.findAllById(permissions));
-        roleRepository.save(role);
-        return "redirect:/roles/list";
-    }
 
     @GetMapping("/delete/{id}")
     public String deleteRole(@PathVariable Long id) {

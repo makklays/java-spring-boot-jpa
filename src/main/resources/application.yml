@@ -59,6 +59,8 @@ spring:
 logging:
   level:
     ROOT: INFO
+    com:
+      techmatrix18: DEBUG
 
 server:
   error:

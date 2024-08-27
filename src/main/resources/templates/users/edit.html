@@ -25,7 +25,7 @@
 
     <form action="#" th:action="@{/users/update/{id}(id=${user.id})}" th:object="${user}" method="post">
 
-        <input type="hidden" name="userId" th:value="${user.Id}" />
+        <input type="hidden" name="id"  th:field="*{id}"/>
         <!--input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /-->
 
         <div class="card">
@@ -64,11 +64,23 @@
                 </div>
 
                 <div class="mb-3">
+
+                    <!-- v1 -->
                     <div th:text="${user.getRoles()}"></div>
                     <label for="role1" class="form-label">Role</label>
                     <select name="role_name" class="form-control" id="role1">
                         <option th:each="role : ${roles}" th:value="${role.name}" th:text="${role.name}" th:selected="${role.name == user.getRoles().contains(role.name)}"></option>
                     </select>
+
+                    <!-- v2 -->
+                    <!--<label for="role" class="form-label">Role</label>
+                    <div th:each="role : ${roles}" id="role">
+                        <label>
+                            <input th:type="checkbox" th:field="*{roles}" th:value="${role.getId()}" th:text="${role.getName()}" th:selected="${user.getRoles().contains(role)}">
+                        </label>
+                    </div>-->
+
+                    <div th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}" style="color:red;">Roles error</div>
                 </div>
 
                 <div class="row">

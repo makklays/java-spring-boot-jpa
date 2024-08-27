@@ -71,12 +71,6 @@ public class AuthViewsController {
     public String registrPost(@Valid User user, /*Model model,*/ BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             logger.info("Have errors.....");
-
-            //model.addAttribute("user", user);
-            //List<Position> positions = positionService.getAllPositions();
-            //model.addAttribute("positions", positions);
-            //logger.info("Positions: {}", positions);
-
             return "auth/registr";
         }
 
@@ -84,7 +78,6 @@ public class AuthViewsController {
         // role - permissions ?
         Role role = roleService.getRoleByName("ROLE_USER");
         logger.info("Role: {}", role);
-
 
 
         // add password
@@ -97,6 +90,6 @@ public class AuthViewsController {
 
         logger.info("User: {}", user);
 
-        return "/login";
+        return "redirect:/login";
     }
 }
