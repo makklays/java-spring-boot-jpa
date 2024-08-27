@@ -5,13 +5,17 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Simple JavaBean domain that represents a User
@@ -23,7 +27,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "users")
-public class User implements Serializable {
+public class User implements UserDetails, Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -57,8 +61,6 @@ public class User implements Serializable {
     @JsonIgnoreProperties(value = { "users" }, allowSetters = true)
     private Set<Role> roles = new HashSet<>();
 
-
-
     @Column(name = "bio", length = 500)
     private String bio;
 
@@ -68,6 +70,9 @@ public class User implements Serializable {
 
     @OneToMany(mappedBy = "user")
     private List<Barco> barcos;
+
+    @Column(name="is_blocked")
+    private boolean isBlocked;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
@@ -117,7 +122,8 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public @NotBlank String getPassword() {
+    @Override
+    public String getPassword() {
         return password;
     }
 
@@ -153,6 +159,10 @@ public class User implements Serializable {
         this.barcos = barcos;
     }
 
+    public boolean getIsBlocked() { return isBlocked; }
+
+    public void setIsBlocked(boolean blocked) { isBlocked = blocked; }
+
     public Instant getCreatedAt() {
         return createdAt;
     }
@@ -170,15 +180,49 @@ public class User implements Serializable {
     }
 
     @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return roles
+                .stream()
+                .map(Role::getAuthorities)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public String getUsername() {
+        return getEmail();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof User user)) return false;
-        return Objects.equals(getId(), user.getId()) && Objects.equals(getFirstname(), user.getFirstname()) && Objects.equals(getLastname(), user.getLastname()) && Objects.equals(getEmail(), user.getEmail()) && Objects.equals(getPassword(), user.getPassword()) && Objects.equals(getRoles(), user.getRoles()) && Objects.equals(getBio(), user.getBio()) && Objects.equals(getPosition(), user.getPosition()) && Objects.equals(getBarcos(), user.getBarcos()) && Objects.equals(getCreatedAt(), user.getCreatedAt()) && Objects.equals(getUpdatedAt(), user.getUpdatedAt());
+        return isBlocked == user.isBlocked && getId().equals(user.getId()) && getFirstname().equals(user.getFirstname()) && getLastname().equals(user.getLastname()) && getEmail().equals(user.getEmail()) && getPassword().equals(user.getPassword()) && getRoles().equals(user.getRoles()) && getBio().equals(user.getBio()) && getPosition().equals(user.getPosition()) && getBarcos().equals(user.getBarcos()) && getCreatedAt().equals(user.getCreatedAt()) && getUpdatedAt().equals(user.getUpdatedAt());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getFirstname(), getLastname(), getEmail(), getPassword(), getRoles(), getBio(), getPosition(), getBarcos(), getCreatedAt(), getUpdatedAt());
+        return Objects.hash(getId(), getFirstname(), getLastname(), getEmail(), getPassword(), getRoles(), getBio(), getPosition(), getBarcos(), isBlocked, getCreatedAt(), getUpdatedAt());
     }
 
     // prettier-ignore
@@ -190,10 +234,11 @@ public class User implements Serializable {
                 ", lastname='" + lastname + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", roles=" + getRoles() +
+                ", roles=" + roles +
                 ", bio='" + bio + '\'' +
                 ", position=" + position +
                 ", barcos=" + barcos +
+                ", isBlocked=" + isBlocked +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';

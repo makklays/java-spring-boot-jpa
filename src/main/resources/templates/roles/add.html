@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{app.title}"> Title </title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-6">
+            <h1 th:text="#{app.add-product}">Add role</h1>
+        </div>
+        <div class="col-md-6 align-self-center" style="text-align:right;">
+            <!--a href="#" th:href="@{/products/add}" th:text="#{app.add-product}" class="btn btn-primary"> Add product</a-->
+        </div>
+    </div>
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/welcome}">Home</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/menu}">Menu</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/roles/list}" th:text="#{app.list-roles}">List</a></li>
+            <li class="breadcrumb-item active" aria-current="page" th:text="#{app.add-role}" >Add role</li>
+        </ol>
+    </nav>
+
+    <form action="#" th:action="@{/roles/save}" th:object="${role}" method="post" >
+
+        <div class="card">
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="mb-3">
+                            <label for="title1" class="form-label">Title</label>
+                            <input type="text" th:field="*{name}" class="form-control" id="title1">
+                            <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color:red;">Title error</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="mb-3">
+                            <label class="form-label" th:text="#{permissions}">Permissions:</label>
+                            <div th:each="permission : ${permissions}" >
+                                <input th:id="${permission.id}" type="checkbox" name="permissions" th:value="${permission.id}" />
+                                <label th:for="${permission.id}" th:text="${permission.name}"></label>
+                                <div th:if="${#fields.hasErrors('permissions')}" th:errors="*{permissions}" style="color:red;">Is permissions error</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <br/>
+        <button type="submit" class="btn btn-primary" th:text="#{form.submit}">Submit</button>
+        <a href="#" th:href="@{/roles/list}" th:text="#{app.back}" class="btn btn-secondary" style="margin-left:20px;"> Back</a>
+
+    </form>
+
+    <br/><br/>
+
+</div>
+</body>
+</html>
+

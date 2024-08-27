@@ -1,5 +1,6 @@
 package com.techmatrix18.web.views;
 
+import com.techmatrix18.model.Position;
 import com.techmatrix18.model.Role;
 import com.techmatrix18.model.User;
 import com.techmatrix18.service.PositionService;
@@ -16,8 +17,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -56,25 +57,38 @@ public class AuthViewsController {
         return "auth/login";
     }
 
-    @GetMapping("/my-registr")
+    @GetMapping("/signup")
     public String registr(Model model, User user) {
         model.addAttribute("user", user);
-        model.addAttribute("positions", positionService.getAllPositions());
+        List<Position> positions = positionService.getAllPositions();
+        model.addAttribute("positions", positions);
 
+        logger.info("Positions: {}", positions);
         return "auth/registr";
     }
 
-    @PostMapping("/my-registr-post")
-    public String registrPost(User user, BindingResult bindingResult) {
-        //if (bindingResult.hasErrors()) {
-        //    return "auth/registr";
-        //}
+    @PostMapping("/signup")
+    public String registrPost(@Valid User user, /*Model model,*/ BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            logger.info("Have errors.....");
+            return "auth/registr";
+        }
 
+
+        // role - permissions ?
+        Role role = roleService.getRoleByName("ROLE_USER");
+        logger.info("Role: {}", role);
+
+
+        // add password
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String result = encoder.encode(user.getPassword());
-        //user.setUserRoles(Set.of(userRoleService.getRoleByName("ROLE_USER")));
+
         user.setPassword(result);
+        user.setRoles(Set.of(role));
         userService.addUser(user);
+
+        logger.info("User: {}", user);
 
         return "redirect:/login";
     }

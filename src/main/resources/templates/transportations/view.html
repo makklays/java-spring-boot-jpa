@@ -56,11 +56,11 @@
 
                 <tr>
                     <th>Created</th>
-                    <td th:text="${transportation.createdAt}"></td>
+                    <td th:text="${transportation.createdAt} ? ${#dates.format(transportation.createdAt, 'dd-MM-yyyy HH:mm')} : '-'"></td>
                 </tr>
                 <tr>
                     <th>Updated</th>
-                    <td th:text="${transportation.updatedAt}"></td>
+                    <td th:text="${transportation.updatedAt} ? ${#dates.format(transportation.updatedAt, 'dd-MM-yyyy HH:mm')} : '-'"></td>
                 </tr>
             </table>
 

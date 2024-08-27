@@ -57,11 +57,11 @@
 
                 <tr>
                     <th>Created</th>
-                    <td th:text="${barco.createdAt}"></td>
+                    <td th:text="${barco.createdAt} ? ${#dates.format(barco.createdAt, 'dd-MM-yyyy HH:mm')} : '-'"></td>
                 </tr>
                 <tr>
                     <th>Updated</th>
-                    <td th:text="${barco.updatedAt}"></td>
+                    <td th:text="${barco.updatedAt} ? ${#dates.format(barco.updatedAt, 'dd-MM-yyyy HH:mm')} : '-'"></td>
                 </tr>
             </table>
 

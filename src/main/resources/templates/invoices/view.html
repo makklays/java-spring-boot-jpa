@@ -53,11 +53,11 @@
 
                 <tr>
                     <th>Created</th>
-                    <td th:text="${invoice.createdAt}"></td>
+                    <td th:text="${invoice.createdAt} ? ${#dates.format(invoice.createdAt, 'dd-MM-yyyy HH:mm')} : '-'"></td>
                 </tr>
                 <tr>
                     <th>Updated</th>
-                    <td th:text="${invoice.updatedAt}"></td>
+                    <td th:text="${invoice.updatedAt} ? ${#dates.format(invoice.updatedAt, 'dd-MM-yyyy HH:mm')} : '-'"></td>
                 </tr>
             </table>
 

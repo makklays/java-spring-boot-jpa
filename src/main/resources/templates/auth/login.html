@@ -19,7 +19,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a th:href="@{/welcome}">Home</a></li>
-            <li class="breadcrumb-item"><a th:href="@{/my-login}">Login</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/login}">Login</a></li>
         </ol>
     </nav>
 
@@ -59,7 +59,13 @@
         </div>
 
         <br/>
-        <button type="submit" class="btn btn-primary" th:text="#{login}">Submit</button>
+
+        <div class="row">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-primary" th:text="#{login}">Submit</button>
+                <a th:href="@{/signup}" style="margin-left:20px;" th:text="#{app.registr}">Registration</a>
+            </div>
+        </div>
 
     </form>
 

@@ -45,11 +45,11 @@
 
                 <tr>
                     <th>Created</th>
-                    <td th:text="${category.createdAt}"></td>
+                    <td th:text="${category.createdAt} ? ${#dates.format(category.createdAt, 'dd-MM-yyyy HH:mm')} : '-'"></td>
                 </tr>
                 <tr>
                     <th>Updated</th>
-                    <td th:text="${category.updatedAt}"></td>
+                    <td th:text="${category.updatedAt} ? ${#dates.format(category.updatedAt, 'dd-MM-yyyy HH:mm')} : '-'"></td>
                 </tr>
             </table>
 

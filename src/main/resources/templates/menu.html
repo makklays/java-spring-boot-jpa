@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <title th:text="#{app.title}"> Title </title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/fontawesome-free-6.6.0-web/css/all.min.css}"/>
 </head>
 <body>
 <div class="container">
@@ -12,10 +13,12 @@
             <h1 th:text="#{app.menu}">Menu</h1>
         </div>
         <div class="col-md-6 align-self-center" style="text-align:right;">
-            <a th:href="@{/login}">Login</a> | <a th:href="@{/my-registr}">Registration</a>
+            <div sec:authorize="isAnonymous()">
+                <a th:href="@{/login}">Login</a> | <a th:href="@{/my-registr}">Registration</a>
+            </div>
             <!-- Display user information if logged in -->
-            <div th:if="${username != null}">
-                <p>Hello, <span th:text="${username}"></span>!</p>
+            <div sec:authorize="isAuthenticated()">
+                <p>Hello, <span th:text="${#authentication.principal.username}"></span>!</p>
                 <a href="/logout">Logout</a>
             </div>
         </div>
@@ -36,14 +39,16 @@
             <hr/>
 
             <a th:href="@{/cities/list}" th:text="#{app.cities}">Cities</a> <br/>
-            <a th:href="@{/storehouses/list}" th:text="#{app.storehouses}">Storehouses</a> <br/>
-            <a th:href="@{/barcos/list}" th:text="#{app.barcos}">Los Barcos</a> <br/>
+            <a th:href="@{/storehouses/list}" ><i class="fa-solid fa-landmark-flag"></i> Storehouses</a> <br/>
+            <a th:href="@{/barcos/list}" ><i class="fa-solid fa-ship"></i> Los Barcos</a> <br/>
             <br/>
             <a th:href="@{/products/list}" th:text="#{app.products}">Products</a> <br/>
             <a th:href="@{/categories/list}" th:text="#{app.categories}">Categories</a> <br/>
             <br/>
-            <a th:href="@{/users/list}" th:text="#{app.users}">Users</a> <br/>
-            <a th:href="@{/positions/list}" th:text="#{app.positions}">Positions</a> <br/>
+            <a sec:authorize-expr="hasAnyAuthority('READ')" th:href="@{/users/list}"><i class="fa-solid fa-user"></i> Users</a> <br/>
+            <a sec:authorize-expr="hasAnyAuthority('READ')" th:href="@{/roles/list}"><i class="fa-solid fa-flag-checkered"></i> Roles</a> <br/>
+            <a sec:authorize-expr="hasAnyAuthority('READ')" th:href="@{/permissions/list}" th:text="#{app.permissions}">Permissions</a> <br/>
+            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/positions/list}" th:text="#{app.positions}">Positions</a> <br/>
             <br/>
             <a th:href="@{/transportations/list}" th:text="#{app.transportations}">Transportations</a> <br/>
             <a th:href="@{/invoices/list}" th:text="#{app.invoices}">Invoices</a> <br/>

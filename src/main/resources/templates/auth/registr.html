@@ -23,11 +23,10 @@
         </ol>
     </nav>
 
-    <form action="#" th:action="@{/my-registr-post}" th:object="${user}" method="post" >
+    <form th:action="@{/signup}" th:object="${user}" method="post">
+
         <div class="card">
             <div class="card-body" style="background-color:#e7e7e7;">
-
-                <input type="hidden" name="roles" value="USER" />
 
                 <div class="row">
                     <div class="col-md-6">
@@ -107,7 +106,12 @@
         </div>
 
         <br/>
-        <button type="submit" class="btn btn-primary" th:text="#{registr}">Submit</button>
+        <div class="row">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-primary" th:text="#{registr}">Submit</button>
+                <a th:href="@{/login}" style="margin-left:20px;" th:text="#{login}">Login</a>
+            </div>
+        </div>
 
     </form>
 

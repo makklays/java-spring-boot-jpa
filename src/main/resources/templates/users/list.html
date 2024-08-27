@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <title th:text="#{app.title}"> Title </title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/fontawesome-free-6.6.0-web/css/all.min.css}"/>
 </head>
 <body>
 <div class="container">
 
     <div class="row">
         <div class="col-md-6">
-            <h1 th:text="#{app.list-users}">List of users</h1>
+            <h1><i class="fa-solid fa-users"></i> List of users</h1>
         </div>
         <div class="col-md-6 align-self-center" style="text-align:right;">
-            <a href="#" th:href="@{/users/add}" th:text="#{app.add-user}" class="btn btn-primary"> Add users</a>
+            <a sec:authorize-expr="hasAnyAuthority('CREATE')" href="#" th:href="@{/users/add}" th:text="#{app.add-user}" class="btn btn-primary"> Add users</a>
         </div>
     </div>
 
@@ -39,6 +40,8 @@
                     <th class="text-center">E-mail</th>
                     <th class="text-center" th:text="#{role}">Role</th>
 
+                    <th class="text-center">Blocked</th>
+
                     <th class="text-center" th:text="#{page.actions}"></th>
                 </tr>
                 </thead>
@@ -51,16 +54,23 @@
                     <td th:text="${user.lastname}"></td>
 
                     <td>
-                        <a href="#" th:href="@{'/positions/' + ${user.position.getId()}}" th:text="${user.position.getTitle()}">Title</a>
+                        <!-- if -->
+                        <div th:if="${user.getPosition()} != null">
+                            <a href="#" th:href="@{'/positions/' + ${user.position.getId()}}" th:text="${user.position.getTitle()}">Title</a>
+                        </div>
+                        <!-- else -->
+                        <div th:unless="${user.getPosition()} != null">-</div>
                     </td>
 
                     <td class="text-center" th:text="${user.email}"></td>
-                    <td class="text-center" th:text="${user.roles}"></td>
+                    <td class="text-center" th:text="${user.getAuthorities()}"></td>
 
-                    <td class="text-center" style="width:150px;">
+                    <td class="text-center" th:text="${user.isBlocked}"></td>
+
+                    <td  class="text-center" style="width:150px;">
                         <a href="#" th:href="@{'/users/' + ${user.id}}">view</a> |
-                        <a href="#" th:href="@{'/users/edit/' + ${user.id}}">edit</a> |
-                        <a href="#" th:href="@{'/users/delete/' + ${user.id}}">delete</a>
+                        <a sec:authorize-expr="hasRole('ADMIN') and hasAnyAuthority('CREATE','WRITE','UPDATE')" href="#" th:href="@{'/users/edit/' + ${user.id}}">edit</a> |
+                        <a sec:authorize-expr="hasRole('ADMIN') and hasAnyAuthority('DELETE')" href="#" th:href="@{'/users/delete/' + ${user.id}}">delete</a>
                     </td>
                 </tr>
                 </tbody>

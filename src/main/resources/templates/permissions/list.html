@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{app.title}">Permission List</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-6">
+            <h1 th:text="#{app.list-permissions}">List of Permission</h1>
+        </div>
+        <div class="col-md-6 align-self-center" style="text-align:right;">
+            <a href="#" th:href="@{/roles/add}" th:text="#{app.add-role}" class="btn btn-primary"> Add role</a>
+            <a href="#" th:href="@{/permissions/add}" th:text="#{app.add-permission}" class="btn btn-primary"> Add permission</a>
+        </div>
+    </div>
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/welcome}">Home</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/menu}">Menu</a></li>
+            <li class="breadcrumb-item active" aria-current="page" th:text="#{app.list-permissions}" >List of permissions</li>
+        </ol>
+    </nav>
+
+    <div class="card">
+        <div class="card-body">
+
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th class="text-center" style="width:50px;" th:text="#{id}">ID</th>
+                        <th class="text-left" th:text="#{title}">Title</th>
+
+                        <th class="text-center" th:text="#{page.actions}"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="permission : ${permissions}">
+                        <td class="text-center" th:text="${permission.id}"></td>
+                        <td th:text="${permission.name}"></td>
+
+                        <td class="text-center">
+                            <a href="#" th:href="@{'/permissions/' + ${permission.id}}">view</a> |
+                            <a href="#" th:href="@{/permissions/edit/{id}(id=${permission.id})}">edit</a> |
+                            <a href="#" th:href="@{/permissions/delete/{id}(id=${permission.id})}" onclick="return confirm('Are you sure?');">delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
