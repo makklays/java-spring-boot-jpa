@@ -4,8 +4,10 @@ import com.techmatrix18.model.City;
 import com.techmatrix18.model.Storehouse;
 import com.techmatrix18.service.CityService;
 import com.techmatrix18.service.StorehouseService;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +19,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 @Controller
@@ -81,11 +87,38 @@ public class StorehouseViewsController {
     }
 
     @PostMapping("/update/{id}")
-    public String editPost(@PathVariable("id") long id, @Valid Storehouse storehouse, BindingResult bindingResult, Model model) {
+    public String editPost(@PathVariable("id") long id, HttpServletRequest request, @Valid Storehouse storehouse, BindingResult bindingResult, Model model) throws ServletException, IOException {
         if (bindingResult.hasErrors()) {
             storehouse.setId(id);
             return "storehouses/edit";
         }
+
+        //-----------
+        // upload file
+        Part part = request.getPart("photo1");
+
+        //get the InputStream to store the file somewhere
+        InputStream fileInputStream = part.getInputStream();
+        //
+        String fileName = part.getSubmittedFileName();
+        //
+        File fileToSave = new File("/home/alexander/IdeaProjects/spring-jpa-boot-data-security/src/main/resources/static/uploads/" + fileName);
+
+        logger.info("FileInputStream: {}", fileInputStream);
+        logger.info("FileToSave: {}", fileToSave.toPath());
+        logger.info("Photo: {}", fileName);
+
+        Files.copy(fileInputStream, fileToSave.toPath(), StandardCopyOption.REPLACE_EXISTING);
+        storehouse.setPhoto(fileName);
+        //Files.copy(fileInputStream, fileToSave.toPath(), StandardCopyOption.REPLACE_EXISTING);
+        //get the URL of the uploaded file
+        //String fileUrl = "http://localhost:8080/uploaded-files/" + part.getSubmittedFileName();
+        //create output HTML that uses the
+        //response.getOutputStream().println("<p><a href=\"" + fileUrl + "\">" + fileUrl + "</a></p>");
+
+        String cityId = request.getParameter("city_id");
+        City city = cityService.getCityById(Long.parseLong(cityId));
+        storehouse.setCity(city);
 
         storehouseService.updateStorehouse(storehouse);
 

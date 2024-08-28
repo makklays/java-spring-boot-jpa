@@ -3,11 +3,14 @@ package com.techmatrix18.web.views;
 import com.techmatrix18.model.Position;
 import com.techmatrix18.model.Role;
 import com.techmatrix18.model.User;
+//import com.techmatrix18.service.FileService;
 import com.techmatrix18.service.PositionService;
 import com.techmatrix18.service.RoleService;
 import com.techmatrix18.service.UserService;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,8 +21,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.HashSet;
 import java.util.Set;
+
+import java.io.*;
 
 /**
  * Simple controller for User
@@ -37,11 +44,13 @@ public class UserViewsController {
     private final UserService userService;
     private final PositionService positionService;
     private final RoleService roleService;
+    /*private final FileService fileService;*/
 
-    public UserViewsController(UserService userService, PositionService positionService, RoleService roleService) {
+    public UserViewsController(UserService userService, PositionService positionService, RoleService roleService/*, FileService fileService*/) {
         this.userService = userService;
         this.positionService = positionService;
         this.roleService = roleService;
+        /*this.fileService = fileService;*/
     }
 
     @GetMapping("/welcome")
@@ -114,11 +123,13 @@ public class UserViewsController {
         model.addAttribute("positions", positionService.getAllPositions());
         model.addAttribute("roles", roleService.getAllRoles());
 
+        //model.addAttribute("files", fileService.);
+
         return "users/edit";
     }
 
     @PostMapping("/users/update/{id}")
-    public String editPost(@PathVariable("id") long id, HttpServletRequest request, /*BindingResult bindingResult,*/ Model model) {
+    public String editPost(@PathVariable("id") long id, HttpServletRequest request, /*BindingResult bindingResult,*/ Model model) throws ServletException, IOException {
         /*
         public String editPost(@PathVariable("id") long id, @Valid User user, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
@@ -130,8 +141,8 @@ public class UserViewsController {
             return "users/edit";
         }*/
 
+        //-----------
         User user = userService.getUserById(id);
-
         // firstname
         String firstname = request.getParameter("firstname");
         user.setFirstname(firstname);
