@@ -4,13 +4,14 @@
 <head>
     <title th:text="#{app.title}"> Title </title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/fontawesome-free-6.6.0-web/css/all.min.css}"/>
 </head>
 <body>
 <div class="container">
 
     <div class="row">
         <div class="col-md-6">
-            <h1 th:text="#{app.welcome}">Welcome!</h1>
+            <h1><i class="fa-solid fa-flag-checkered"></i> Welcome!</h1>
         </div>
         <div class="col-md-6 align-self-center" style="text-align:right;">
             <div sec:authorize="isAnonymous()">
@@ -19,7 +20,7 @@
             </div>
             <!-- Display user information if logged in -->
             <div sec:authorize="isAuthenticated()">
-                    <p>Hello, <span th:text="${#authentication.principal.username}"></span>!</p>
+                    <p><i class="fa-solid fa-user"></i> Hello, <span th:text="${#authentication.principal.username}"></span>!</p>
                     <a href="/logout">Logout</a>
             </div>
         </div>
@@ -29,7 +30,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a th:href="@{/welcome}">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/welcome}" th:text="#{app.welcome}">Welcome</a>
+            <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/welcome}"><i class="fa-solid fa-flag-checkered"></i> Welcome</a>
             </li>
         </ol>
     </nav>
@@ -38,12 +39,12 @@
         <div class="card-body">
 
             <div class="row">
-                <div class="col-md-12">WELCOME!</div>
+                <div class="col-md-12"><i class="fa-solid fa-flag-checkered"></i> WELCOME!</div>
             </div>
 
             <hr/>
 
-            <a th:href="@{/menu}">Menu</a> <br/>
+            <a th:href="@{/menu}"><i class="fa-solid fa-bars"></i> Menu</a> <br/>
 
         </div>
     </div>

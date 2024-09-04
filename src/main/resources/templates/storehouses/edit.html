@@ -3,13 +3,14 @@
 <head>
     <title th:text="#{app.title}"> Title </title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/fontawesome-free-6.6.0-web/css/all.min.css}"/>
 </head>
 <body>
 <div class="container">
 
     <div class="row">
         <div class="col-md-6">
-            <h1 th:text="#{app.edit-storehouse}">Edit storehouse</h1>
+            <h1><i class="fa-solid fa-landmark-flag"></i> Edit storehouse</h1>
         </div>
     </div>
 
@@ -42,19 +43,22 @@
                         <option value="">---- Select option ----</option>
                         <option th:each="city : ${cities}" th:value="${city.getId()}" th:text="${city.getTitle()}" th:selected="${city.getId()==storehouse.city.getId()}"></option>
                     </select>
+                    <span th:if="${#fields.hasErrors('city')}" th:errors="*{city}" style="color:red;">Title error</span>
                 </div>
 
                 <div class="mb-3">
                     <label for="text1" class="form-label">Description</label>
                     <textarea rows="6" name="description" class="form-control" id="text1" th:field="*{description}"></textarea>
+                    <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}" style="color:red;">Title error</span>
                 </div>
 
                 <div class="mb-3">
                     <div th:if="${storehouse.photo}">
-                        <img src="/imgs/storehouses/${storehouse.photo}" class="img img-fluid" alt="photo storehouse" style="width:300px;" />
+                        <img th:src="@{'/uploads/'+${storehouse.photo}}" class="img img-fluid" alt="photo storehouse" style="width:300px;" />
                     </div>
                     <label for="photo1" class="form-label">Photo</label>
-                    <input type="file" class="form-control" id="photo1" th:field="*{photo}">
+                    <input type="file" class="form-control" id="photo1" name="photo1">
+                    <span th:if="${#fields.hasErrors('photo')}" th:errors="*{photo}" style="color:red;">Title error</span>
                 </div>
 
             </div>

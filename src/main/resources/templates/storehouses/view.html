@@ -3,13 +3,14 @@
 <head>
     <title th:text="#{app.title}"> Title </title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/fontawesome-free-6.6.0-web/css/all.min.css}"/>
 </head>
 <body>
 <div class="container">
 
     <div class="row">
         <div class="col-md-6">
-            <h1 th:text="#{app.view-storehouse}">View storehouse</h1>
+            <h1><i class="fa-solid fa-landmark-flag"></i> View storehouse</h1>
         </div>
         <div class="col-md-6 align-self-center" style="text-align:right;">
             <a href="#" th:href="@{/storehouses/edit/{id}(id=${storehouse.id})}" th:text="#{app.edit-storehouse}" class="btn btn-primary"> Edit storehouse</a>
@@ -52,9 +53,9 @@
                     <th>Photo</th>
                     <td>
                         <div th:if="${storehouse.photo}">
-                            <img src="/imgs/storehouses/${storehouse.photo}" class="img img-fluid" alt="photo storehouse" style="width:300px;" />
+                            <img th:src="@{'/uploads/'+${storehouse.photo}}" class="img img-fluid" alt="photo storehouse" style="width:300px;" />
                         </div>
-                        <div th:else>-</div>
+                        <div th:unless="${storehouse.photo}">-</div>
                     </td>
                 </tr>
 

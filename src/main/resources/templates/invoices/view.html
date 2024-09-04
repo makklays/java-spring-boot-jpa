@@ -3,16 +3,17 @@
 <head>
     <title th:text="#{app.title}"> Title </title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/fontawesome-free-6.6.0-web/css/all.min.css}"/>
 </head>
 <body>
 <div class="container">
 
     <div class="row">
         <div class="col-md-6">
-            <h1 th:text="#{app.view-invoice}">View invoice</h1>
+            <h1><i class="fa-solid fa-file-invoice-dollar"></i> View invoice</h1>
         </div>
         <div class="col-md-6 align-self-center" style="text-align:right;">
-            <a href="#" th:href="@{/invoices/edit/1}" th:text="#{app.edit-invoice}" class="btn btn-primary"> Edit invoice</a>
+            <a href="#" th:href="@{/invoices/edit/{id}(id=${invoice.id})}" th:text="#{app.edit-invoice}" class="btn btn-primary"> Edit invoice</a>
         </div>
     </div>
 
@@ -69,7 +70,7 @@
     <div class="card">
         <div class="card-body">
 
-            <h3>Storehouses</h3>
+            <h3><i class="fa-solid fa-landmark-flag"></i> Storehouses</h3>
 
             ///
 

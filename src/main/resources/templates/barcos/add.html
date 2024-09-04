@@ -3,13 +3,14 @@
 <head>
     <title th:text="#{app.title}"> Title </title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/fontawesome-free-6.6.0-web/css/all.min.css}"/>
 </head>
 <body>
 <div class="container">
 
     <div class="row">
         <div class="col-md-6">
-            <h1 th:text="#{app.add-barco}">Add barco</h1>
+            <h1><i class="fa-solid fa-ship"></i> Add barco</h1>
         </div>
         <div class="col-md-6 align-self-center" style="text-align:right;">
             <!--a href="#" th:href="@{/barcos/add}" th:text="#{app.add-barco}" class="btn btn-primary"> Add barco</a-->
@@ -19,7 +20,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a th:href="@{/welcome}">Home</a></li>
-            <li class="breadcrumb-item"><a th:href="@{/menu}">Menu</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/menu}"><i class="fa-solid fa-bars"></i> Menu</a></li>
             <li class="breadcrumb-item"><a th:href="@{/barcos/list}" th:text="#{app.list-barcos}">List</a></li>
             <li class="breadcrumb-item active" aria-current="page" th:text="#{app.add-barco}" >Add barco</li>
         </ol>

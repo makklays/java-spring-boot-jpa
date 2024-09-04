@@ -3,16 +3,17 @@
 <head>
     <title th:text="#{app.title}"> Title </title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/fontawesome-free-6.6.0-web/css/all.min.css}"/>
 </head>
 <body>
 <div class="container">
 
     <div class="row">
         <div class="col-md-6">
-            <h1 th:text="#{app.view-city}">View city</h1>
+            <h1><i class="fa-solid fa-house-flood-water-circle-arrow-right"></i> View city</h1>
         </div>
         <div class="col-md-6 align-self-center" style="text-align:right;">
-            <a href="#" th:href="@{/cities/edit/1}" th:text="#{app.edit-city}" class="btn btn-primary"> Edit city</a>
+            <a href="#" th:href="@{/cities/edit/{id}(id=${city.id})}" th:text="#{app.edit-city}" class="btn btn-primary"> Edit city</a>
         </div>
     </div>
 
@@ -59,7 +60,7 @@
     <div class="card">
         <div class="card-body">
 
-            <h3>Storehouses</h3>
+            <h3><i class="fa-solid fa-landmark-flag"></i> Storehouses</h3>
 
             <table class="table table-striped table-hover">
                 <thead>
