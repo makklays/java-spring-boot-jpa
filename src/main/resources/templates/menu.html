@@ -18,7 +18,7 @@
             </div>
             <!-- Display user information if logged in -->
             <div sec:authorize="isAuthenticated()">
-                <p>Hello, <span th:text="${#authentication.principal.username}"></span>!</p>
+                <p><i class="fa-solid fa-user"></i> Hello, <span th:text="${#authentication.principal.username}"></span>!</p>
                 <a href="/logout">Logout</a>
             </div>
         </div>
