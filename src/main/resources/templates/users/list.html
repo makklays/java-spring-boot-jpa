@@ -57,6 +57,7 @@
                         <!-- if -->
                         <div th:if="${user.getPosition()} != null">
                             <a href="#" th:href="@{'/positions/' + ${user.position.getId()}}" th:text="${user.position.getTitle()}">Title</a>
+
                         </div>
                         <!-- else -->
                         <div th:unless="${user.getPosition()} != null">-</div>
