@@ -6,7 +6,7 @@ Crear la programa con varios entidades y las relaciónes entre ellas.
 
 Entidades: Usuarios, Puestos, Ciudades, Almacén, Barcos, Categorías, Productos, Transportes, Facturas.
 
-Utilizar: JAVA, JPA, Hibernate, Logback, Spring Boot, Spring Rest, H2, MySQL, Spring Data, Spring Security.
+Utilizar: JAVA, JPA, Hibernate, Logback, Spring Boot, Spring Rest, H2, MySQL, Spring Data, Spring Security, Thymeleaf.
 
 Crear REST API (con metodos POST, GET, PUT, PATCH, DELETE, OPTION).
 
