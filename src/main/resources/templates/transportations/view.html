@@ -3,13 +3,14 @@
 <head>
     <title th:text="#{app.title}"> Title </title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/fontawesome-free-6.6.0-web/css/all.min.css}"/>
 </head>
 <body>
 <div class="container">
 
     <div class="row">
         <div class="col-md-6">
-            <h1 th:text="#{app.view-transportation}">View transportation</h1>
+            <h1><i class="fa-solid fa-signs-post"></i> View transportation</h1>
         </div>
         <div class="col-md-6 align-self-center" style="text-align:right;">
             <a href="#" th:href="@{'/transportations/edit/' + @{transportation.id}}" th:text="#{app.edit-transportation}" class="btn btn-primary"> Edit transportation</a>

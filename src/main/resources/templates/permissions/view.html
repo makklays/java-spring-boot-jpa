@@ -3,13 +3,14 @@
 <head>
     <title th:text="#{app.title}"> Title </title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/fontawesome-free-6.6.0-web/css/all.min.css}"/>
 </head>
 <body>
 <div class="container">
 
     <div class="row">
         <div class="col-md-6">
-            <h1 th:text="#{app.view-permission}">View permission</h1>
+            <h1><i class="fa-solid fa-drum"></i> View permission</h1>
         </div>
         <div class="col-md-6 align-self-center" style="text-align:right;">
             <a href="#" th:href="@{/permissions/edit/{id}(id=${permission.id})}" th:text="#{app.edit-permission}" class="btn btn-primary"> Edit permission</a>
@@ -44,7 +45,7 @@
 
     <br/><br/>
 
-    <a href="#" th:href="@{/roles/list}" th:text="#{app.back}" class="btn btn-secondary"> Back</a>
+    <a href="#" th:href="@{/permissions/list}" th:text="#{app.back}" class="btn btn-secondary" style="margin-left:20px;"> Back</a>
 
     <br/><br/>
 

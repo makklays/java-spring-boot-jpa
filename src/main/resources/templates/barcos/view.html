@@ -3,23 +3,24 @@
 <head>
     <title th:text="#{app.title}"> Title </title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/fontawesome-free-6.6.0-web/css/all.min.css}"/>
 </head>
 <body>
 <div class="container">
 
     <div class="row">
         <div class="col-md-6">
-            <h1 th:text="#{app.view-barco}">View barco</h1>
+            <h1><i class="fa-solid fa-ship"></i> View barco</h1>
         </div>
         <div class="col-md-6 align-self-center" style="text-align:right;">
-            <a href="#" th:href="@{/barcos/edit/1}" th:text="#{app.edit-barco}" class="btn btn-primary"> Edit barco</a>
+            <a href="#" th:href="@{/barcos/edit/{id}(id=${barco.id})}" th:text="#{app.edit-barco}" class="btn btn-primary"> Edit barco</a>
         </div>
     </div>
 
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a th:href="@{/welcome}">Home</a></li>
-            <li class="breadcrumb-item"><a th:href="@{/menu}">Menu</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/menu}"><i class="fa-solid fa-bars"></i> Menu</a></li>
             <li class="breadcrumb-item"><a th:href="@{/barcos/list}" th:text="#{app.list-barcos}">List</a></li>
             <li class="breadcrumb-item active" aria-current="page" th:text="#{app.view-barco}" >View barco</li>
         </ol>
@@ -73,7 +74,7 @@
     <div class="card">
         <div class="card-body">
 
-            <h3>Users</h3>
+            <h3><i class="fa-solid fa-users"></i> Users</h3>
 
             111111111
 

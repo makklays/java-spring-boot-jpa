@@ -10,7 +10,7 @@
 
     <div class="row">
         <div class="col-md-6">
-            <h1 th:text="#{app.menu}">Menu</h1>
+            <h1><i class="fa-solid fa-bars"></i> Menu</h1>
         </div>
         <div class="col-md-6 align-self-center" style="text-align:right;">
             <div sec:authorize="isAnonymous()">
@@ -27,31 +27,38 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a th:href="@{/welcome}">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/menu}" th:text="#{app.menu}" >Menu</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/menu}" ><i class="fa-solid fa-bars"></i> Menu</a></li>
         </ol>
     </nav>
 
     <div class="card">
         <div class="card-body">
 
-            <a th:href="@{/welcome}">Welcome</a> <br/>
+            <a th:href="@{/welcome}"><i class="fa-solid fa-flag-checkered"></i> Welcome</a> <br/>
 
             <hr/>
 
-            <a th:href="@{/cities/list}" th:text="#{app.cities}">Cities</a> <br/>
-            <a th:href="@{/storehouses/list}" ><i class="fa-solid fa-landmark-flag"></i> Storehouses</a> <br/>
-            <a th:href="@{/barcos/list}" ><i class="fa-solid fa-ship"></i> Los Barcos</a> <br/>
-            <br/>
-            <a th:href="@{/products/list}" th:text="#{app.products}">Products</a> <br/>
-            <a th:href="@{/categories/list}" th:text="#{app.categories}">Categories</a> <br/>
-            <br/>
-            <a sec:authorize-expr="hasAnyAuthority('READ')" th:href="@{/users/list}"><i class="fa-solid fa-user"></i> Users</a> <br/>
-            <a sec:authorize-expr="hasAnyAuthority('READ')" th:href="@{/roles/list}"><i class="fa-solid fa-flag-checkered"></i> Roles</a> <br/>
-            <a sec:authorize-expr="hasAnyAuthority('READ')" th:href="@{/permissions/list}" th:text="#{app.permissions}">Permissions</a> <br/>
-            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/positions/list}" th:text="#{app.positions}">Positions</a> <br/>
-            <br/>
-            <a th:href="@{/transportations/list}" th:text="#{app.transportations}">Transportations</a> <br/>
-            <a th:href="@{/invoices/list}" th:text="#{app.invoices}">Invoices</a> <br/>
+            <div class="row">
+                <div class="col-md-3">
+                    <a th:href="@{/cities/list}" ><i class="fa-solid fa-house-flood-water-circle-arrow-right"></i> Cities</a> <br/>
+                    <a th:href="@{/storehouses/list}" ><i class="fa-solid fa-landmark-flag"></i> Storehouses</a> <br/>
+                    <a th:href="@{/barcos/list}" ><i class="fa-solid fa-ship"></i> Los Barcos</a> <br/>
+                </div>
+                <div class="col-md-3">
+                    <a th:href="@{/products/list}" ><i class="fa-brands fa-product-hunt"></i> Products</a> <br/>
+                    <a th:href="@{/categories/list}" ><i class="fa-solid fa-cubes-stacked"></i> Categories</a> <br/>
+                </div>
+                <div class="col-md-3">
+                    <a sec:authorize-expr="hasAnyAuthority('READ')" th:href="@{/users/list}"><i class="fa-solid fa-users"></i> Users</a> <br/>
+                    <a sec:authorize-expr="hasAnyAuthority('READ')" th:href="@{/roles/list}"><i class="fa-regular fa-face-rolling-eyes"></i> Roles</a> <br/>
+                    <a sec:authorize-expr="hasAnyAuthority('READ')" th:href="@{/permissions/list}"><i class="fa-solid fa-drum"></i> Permissions</a> <br/>
+                    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/positions/list}"><i class="fa-solid fa-address-card"></i> Positions</a> <br/>
+                </div>
+                <div class="col-md-3">
+                    <a th:href="@{/transportations/list}" ><i class="fa-solid fa-signs-post"></i> Transportations</a> <br/>
+                    <a th:href="@{/invoices/list}" ><i class="fa-solid fa-file-invoice-dollar"></i> Invoices</a> <br/>
+                </div>
+            </div>
 
             <hr/>
 

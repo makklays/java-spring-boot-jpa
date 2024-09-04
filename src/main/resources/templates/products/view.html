@@ -3,16 +3,17 @@
 <head>
     <title th:text="#{app.title}"> Title </title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/fontawesome-free-6.6.0-web/css/all.min.css}"/>
 </head>
 <body>
 <div class="container">
 
     <div class="row">
         <div class="col-md-6">
-            <h1 th:text="#{app.view-product}">View product</h1>
+            <h1><i class="fa-brands fa-product-hunt"></i> View product</h1>
         </div>
         <div class="col-md-6 align-self-center" style="text-align:right;">
-            <a href="#" th:href="@{/products/edit/1}" th:text="#{app.edit-product}" class="btn btn-primary"> Edit product</a>
+            <a href="#" th:href="@{/products/edit/{id}(id=${product.id})}}" th:text="#{app.edit-product}" class="btn btn-primary"> Edit product</a>
         </div>
     </div>
 
