@@ -46,3 +46,6 @@ PS: This task create Alexander Kuziv for company TechMatrix18.com
 6. Crea los Controladores con Entidades y Repositories.
 7. Crea los Tests de integracion (para Controladores).
 
+##### Pantallas 
+
+pronto añadiré...  
