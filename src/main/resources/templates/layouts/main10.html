@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts/layout}" >
+<head>
+    <meta charset="UTF-8" />
+    <title th:replace="${title}">Storehouse</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/fontawesome-free-6.6.0-web/css/all.min.css}"/>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-2" layout:fragment="sidebar">
+            <h1>Sidebar</h1>
+            <a href="#">Login</a>
+        </div>
+        <article th:insert="${mainContent} ?: ~{}">
+            <h1>Page 1</h1>
+            <p>Main content of Page 1</p>
+        </article>
+        <div class="content">
+            <div layout:fragment="page_content"></div>
+        </div>
+
+        <!-- main10 content -->
+        <div class="col" layout:fragment="content">
+            <h1>Welcome to the Index page</h1>
+            <br>This content is replacing the content of the layout:fragment="content"<br>
+            placeholder in layout.html</p>
+        </div>
+    </div>
+</div>
+
+<th:block layout:fragment="scripts">
+    <script type="text/javascript">
+        $(function(){
+          $("#js-content").html("From Javascript").slideToggle();
+        });
+    </script>
+</th:block>
+</body>
+</html>
+
