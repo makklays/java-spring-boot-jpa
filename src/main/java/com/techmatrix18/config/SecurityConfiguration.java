@@ -72,12 +72,6 @@ public class SecurityConfiguration {
                 .build();
     }
 
-    /*@Bean(name = BeanIds.AUTHENTICATION_MANAGER)
-    //@Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManager();
-    }*/
-
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
