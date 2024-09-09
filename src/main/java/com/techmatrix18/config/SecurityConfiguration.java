@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -19,13 +20,11 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableMethodSecurity(securedEnabled = true)
 public class SecurityConfiguration {
 
-
     private final CustomUserDetailsService userDetailsService;
 
     public SecurityConfiguration(CustomUserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
-
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -40,12 +39,16 @@ public class SecurityConfiguration {
                 .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
                 .authorizeHttpRequests(auth ->
                         auth
+                                //.requestMatchers(new AntPathRequestMatcher("/auth")).permitAll()
+                                //.requestMatchers(new AntPathRequestMatcher("/api/v1/auth")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/uploads/**")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/uploads/**")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/imgs/**")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/css/**")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/js/**")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/*.{css,js}")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/*.{ico,png,jpg,svg,webapp}")).permitAll()
+                                .requestMatchers("/auth", "/api/v1/auth").permitAll()
                                 .requestMatchers("/signup").permitAll()
                                 .requestMatchers("/users/**").authenticated()
                                 .requestMatchers("/cities/**", "/menu").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER"))
@@ -65,6 +68,5 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/api/v1/**").authenticated())
                 .build();
     }
-
 }
 
