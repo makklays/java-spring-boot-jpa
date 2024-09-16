@@ -14,10 +14,11 @@ spring:
     password: admin
     driver-class-name: com.mysql.cj.jdbc.Driver
   session:
-    timeout: 60
+    timeout: 900
     store-type: "jdbc"
     jdbc:
-      table-name: "SESSIONS"
+      initialize-schema: always
+      table-name: "spring_session"
   jpa:
     show-sql: true
     database-platform: org.hibernate.dialect.MySQL5Dialect
