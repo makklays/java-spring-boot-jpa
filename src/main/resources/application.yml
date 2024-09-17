@@ -18,7 +18,7 @@ spring:
     store-type: "jdbc"
     jdbc:
       initialize-schema: always
-      table-name: "spring_session"
+      table-name: "SPRING_SESSION"
   jpa:
     show-sql: true
     database-platform: org.hibernate.dialect.MySQL5Dialect
@@ -65,6 +65,9 @@ spring:
 logging:
   level:
     ROOT: INFO
+    org:
+      springframework:
+        security: debug
     com:
       techmatrix18: DEBUG
 

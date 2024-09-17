@@ -1,4 +1,4 @@
-package com.techmatrix18.service.impl;
+package com.techmatrix18.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 @Service
-public class JwtServiceImpl {
+public class JwtTokenProvider {
 
     public static String SECRET = "550e5ac522f4e6e56a4cc54cde238b47d933215bfd4d44fa00b2c2ac574ab66d";
 

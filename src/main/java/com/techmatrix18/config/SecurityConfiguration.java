@@ -1,15 +1,11 @@
 package com.techmatrix18.config;
 
-import com.mysql.cj.protocol.x.XAuthenticationProvider;
-import com.techmatrix18.filter.JwtAuthFilter;
+import com.techmatrix18.security.filter.JwtAuthFilter;
 import com.techmatrix18.service.impl.CustomUserDetailsService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -29,10 +25,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableMethodSecurity(securedEnabled = true)
 public class SecurityConfiguration {
 
-    @Autowired
-    private JwtAuthFilter jwtAuthFilter;
+    private final JwtAuthFilter jwtAuthFilter;
 
-    @Autowired
     private final CustomUserDetailsService userDetailsService;
 
     public SecurityConfiguration(CustomUserDetailsService userDetailsService, JwtAuthFilter jwtAuthFilter) {
@@ -50,11 +44,16 @@ public class SecurityConfiguration {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                        .sessionFixation().migrateSession()
+                        .invalidSessionUrl("/session-invalid")
+                        .maximumSessions(1)
+                        .expiredUrl("/session-expired")
+                )
                 .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
                 .authorizeHttpRequests(auth ->
                         auth
-                                //.requestMatchers(new AntPathRequestMatcher("/auth")).permitAll()
-                                //.requestMatchers(new AntPathRequestMatcher("/api/v1/auth")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/uploads/**")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/uploads/**")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/imgs/**")).permitAll()
@@ -69,7 +68,7 @@ public class SecurityConfiguration {
                 .formLogin(form -> form
                         .loginPage("/login")
                         .permitAll()
-                        .defaultSuccessUrl("/")
+                        .defaultSuccessUrl("/", true)
                 )
                 .logout(logout -> logout
                         .permitAll()
@@ -80,26 +79,22 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/**").authenticated())
                 .httpBasic(Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/api/v1/**").authenticated())
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .authenticationProvider(authenticationProvider())
+
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
-        return config.getAuthenticationManager();
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
+        return configuration.getAuthenticationManager();
     }
 
     @Bean
-    public AuthenticationProvider authenticationProvider() throws Exception {
-        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-        daoAuthenticationProvider.setUserDetailsService(userDetailsService);
-        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
-
-        return daoAuthenticationProvider;
+    public DaoAuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(userDetailsService);
+        authProvider.setPasswordEncoder(passwordEncoder());
+        return authProvider;
     }
 }
 
