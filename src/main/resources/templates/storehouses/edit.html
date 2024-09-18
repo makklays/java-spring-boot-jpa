@@ -54,7 +54,7 @@
 
                 <div class="mb-3">
                     <div th:if="${storehouse.photo}">
-                        <img th:src="@{'/uploads/'+${storehouse.photo}}" class="img img-fluid" alt="photo storehouse" style="width:300px;" />
+                        <img th:src="@{'/uploads/'+${storehouse.photo}}" alt="photo storehouse" style="width:300px;" />
                     </div>
                     <label for="photo1" class="form-label">Photo</label>
                     <input type="file" class="form-control" id="photo1" name="photo1">

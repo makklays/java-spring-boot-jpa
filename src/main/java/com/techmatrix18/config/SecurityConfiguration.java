@@ -55,7 +55,6 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(auth ->
                         auth
                                 .requestMatchers(new AntPathRequestMatcher("/uploads/**")).permitAll()
-                                .requestMatchers(new AntPathRequestMatcher("/uploads/**")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/imgs/**")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/css/**")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/js/**")).permitAll()
