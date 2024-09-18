@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="~{layouts/main10.html}" >
-<head th:replace="layouts/fragments::html_head" />
+<head>
+    <title th:text="#{app.title}"> Title </title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/fontawesome-free-6.6.0-web/css/all.min.css}"/>
+</head>
 
 <body>
 <div class="container" layout:fragment="content">
@@ -20,7 +24,7 @@
         </ol>
     </nav>
 
-    <form action="#" th:action="@{/barcos/update/{id}(id=${barco.id})}" th:object="${barco}" method="post">
+    <form action="#" th:action="@{/barcos/update/{id}(id=${barco.id})}" th:object="${barco}" method="post" enctype="multipart/form-data">
 
         <input type="hidden" name="barcoId" th:value="${barco.Id}" />
         <!--input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /-->
@@ -61,6 +65,14 @@
                 <div class="mb-3">
                     <label for="text1" class="form-label">Description</label>
                     <textarea rows="6" name="description" class="form-control" id="text1" th:field="*{description}"></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <img th:if="${barco.photo}" th:src="'/uploads/barcos/'+${barco.photo}" alt="photo barco" style="width:300px;" />
+                    <br/><br/>
+                    <label for="photo1" class="form-label">Photo</label>
+                    <input type="file" class="form-control" id="photo1" name="photo1">
+                    <span th:if="${#fields.hasErrors('photo')}" th:errors="*{photo}" style="color:red;">Title error</span>
                 </div>
 
             </div>
