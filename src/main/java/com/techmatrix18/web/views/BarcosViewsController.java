@@ -1,13 +1,7 @@
 package com.techmatrix18.web.views;
 
-import com.techmatrix18.model.Barco;
-import com.techmatrix18.model.City;
-import com.techmatrix18.model.Storehouse;
-import com.techmatrix18.model.User;
-import com.techmatrix18.service.BarcoService;
-import com.techmatrix18.service.CityService;
-import com.techmatrix18.service.StorehouseService;
-import com.techmatrix18.service.UserService;
+import com.techmatrix18.model.*;
+import com.techmatrix18.service.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -15,6 +9,8 @@ import jakarta.servlet.http.Part;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -29,6 +25,7 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/barcos")
@@ -39,12 +36,14 @@ public class BarcosViewsController {
     private final StorehouseService storehouseService;
     private final CityService cityService;
     private final UserService userService;
+    private final BarcoUserService barcoUserService;
 
-    public BarcosViewsController(BarcoService barcoService, StorehouseService storehouseService, CityService cityService, UserService userService) {
+    public BarcosViewsController(BarcoService barcoService, StorehouseService storehouseService, CityService cityService, UserService userService, BarcoUserService barcoUserService) {
         this.barcoService = barcoService;
         this.storehouseService = storehouseService;
         this.cityService = cityService;
         this.userService = userService;
+        this.barcoUserService = barcoUserService;
     }
 
     @GetMapping("/list")
@@ -143,8 +142,9 @@ public class BarcosViewsController {
     public String view(Model model, @PathVariable String barcoId) {
         Barco barco = barcoService.getBarcoById(Long.parseLong(barcoId));
 
-        List<User> barcoUsers = null; // userService.getAllUsers();
+        List<BarcoUser> barcoUsers = barcoUserService.getAllBarcoUserByBarcoId( Long.parseLong(barcoId) );
 
+        //
         if (barco.getId() != null) {
             model.addAttribute("barco", barco);
             model.addAttribute("barco_users", barcoUsers);
@@ -155,6 +155,60 @@ public class BarcosViewsController {
         }
 
         return "barcos/view";
+    }
+
+    //----------- BarcoUser --------------------
+    @GetMapping("/assign-add-user/{barcoId}")
+    public String assignUser(Model model, @PathVariable String barcoId, BarcoUser barcoUser) {
+        // users
+        Barco barco = barcoService.getBarcoById(Long.parseLong(barcoId));
+        model.addAttribute("barco", barco);
+
+        List<User> users = userService.getAllUsers();
+        model.addAttribute("users", users);
+
+        return "barcos/assign-add-user";
+    }
+
+    @PostMapping("/assign-add-user-post/{barcoId}")
+    public String assignUserPost(Model model, HttpServletRequest request, @PathVariable String barcoId, @Valid BarcoUser barcoUser, BindingResult bindingResult) throws ServletException, IOException {
+        if (bindingResult.hasErrors()) {
+            return "barcos/assign-add-user";
+        }
+
+        // get auth_user_id from session
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = authentication.getName();
+        User authUser = userService.getUserByEmail(currentPrincipalName);
+
+        // get Barco
+        Barco barco = barcoService.getBarcoById(Long.parseLong(barcoId));
+
+        // add Barco and authUser
+        barcoUser.setBarco(barco);
+        barcoUser.setAssignUserId(authUser);
+
+        barcoUserService.addBarcoUser(barcoUser);
+
+        return "redirect:/barcos/assign-add-user/" + Long.parseLong(barcoId);
+    }
+
+    @GetMapping("/assign-view-user/{barcoUserId}")
+    public String assignViewUser(Model model, @PathVariable String barcoUserId, BarcoUser barcoUser) {
+        BarcoUser barcoUserOne = barcoUserService.getBarcoUserById(Long.parseLong(barcoUserId));
+        model.addAttribute("barco_user", barcoUserOne);
+
+        return "barcos/assign-view-user";
+    }
+
+    @GetMapping("/assign-delete-user/{barcoUserId}")
+    public void deleteBarcoUser(HttpServletRequest request, HttpServletResponse response, @PathVariable String barcoUserId) throws IOException {
+        BarcoUser barcoUser = barcoUserService.getBarcoUserById(Long.parseLong(barcoUserId));
+        if (barcoUser.getId() != null) {
+            barcoUserService.deleteBarcoUser(Long.parseLong(barcoUserId));
+        }
+
+        response.sendRedirect("/barcos/"+barcoUser.getBarco().getId());
     }
 }
 

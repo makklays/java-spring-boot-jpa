@@ -89,7 +89,7 @@
                     <h3><i class="fa-solid fa-users"></i> Users</h3>
                 </div>
                 <div class="col-md-6 align-self-center" style="text-align:right;">
-                    <a href="#" th:href="@{/barcos/add-user/{barco_id}(barco_id=${barco.id})}" th:text="#{app.add-user-on-barco}" class="btn btn-primary"> Anadir usuario en el barco</a>
+                    <a href="#" th:href="@{/barcos/assign-add-user/{barco_id}(barco_id=${barco.id})}" th:text="#{app.add-user-on-barco}" class="btn btn-primary"> Anadir usuario en el barco</a>
                 </div>
             </div>
 
@@ -104,24 +104,24 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="user : ${barco_users}">
-                            <td class="text-center" style="width:30px;" th:text="${user.Id}">Id</td>
+                        <tr th:each="barco_user : ${barco_users}">
+                            <td class="text-center" style="width:30px;" th:text="${barco_user.user.id}">Id</td>
                             <td>
-                                <a href="#" th:href="@{'/users/' + ${user.id}}" th:text="${user.firstname}+' '+${user.lastname}">Title</a>
+                                <a href="#" th:href="@{'/users/' + ${barco_user.user.id}}" th:text="${barco_user.user.firstname}+' '+${barco_user.user.lastname}">Title</a>
                             </td>
 
                             <td class="text-center" style="width:220px;">
                                 <!-- if -->
-                                <div th:if="${user.getPosition()} != null">
-                                    <a href="#" th:href="@{'/positions/' + ${user.position.getId()}}" th:text="${user.position.getTitle()}">Title</a>
+                                <div th:if="${barco_user.user.getPosition()} != null">
+                                    <a href="#" th:href="@{'/positions/' + ${barco_user.user.position.getId()}}" th:text="${barco_user.user.position.getTitle()}">Title</a>
                                 </div>
                                 <!-- else -->
-                                <div th:unless="${user.getPosition()} != null">-</div>
+                                <div th:unless="${barco_user.user.getPosition()} != null">-</div>
                             </td>
 
                             <td class="text-center" style="width:150px;">
-                                <a href="#" th:href="@{'/users/' + ${barco.id}}">view</a> |
-                                <a href="#" th:href="@{'/barcos/delete-user/' + ${barco.id} + '/' + ${user.id}}">delete</a>
+                                <a href="#" th:href="@{'/barcos/assign-view-user/' + ${barco_user.id}}">view</a> |
+                                <a href="#" th:href="@{'/barcos/assign-delete-user/' + ${barco_user.id}}">delete</a>
                             </td>
                         </tr>
                     </tbody>

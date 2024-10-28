@@ -53,6 +53,9 @@ public class Barco implements Serializable {
     @JsonIgnore
     private User user;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "barco", cascade = CascadeType.ALL)
+    private List<BarcoUser> barcoUsers;
+
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at")
