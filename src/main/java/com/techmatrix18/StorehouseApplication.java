@@ -12,6 +12,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
@@ -27,6 +28,10 @@ public class StorehouseApplication {
     private static final Logger logger = LoggerFactory.getLogger(StorehouseApplication.class);
 
     public static void main(String[] args) {
+
+        // LocalDate myObj = LocalDate.now();
+        // System.out.println(myObj);
+
         /*String[] pigs = new String[5];
         pigs[0] = "Настройщик Нафнаф";
         pigs[1] = "Строитель Нуфнуф";

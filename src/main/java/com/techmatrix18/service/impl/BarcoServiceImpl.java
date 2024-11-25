@@ -32,7 +32,7 @@ public class BarcoServiceImpl implements BarcoService {
 
     @Override
     public Barco getBarcoById(Long id) {
-        return barcoRepository.getById(id);
+        return barcoRepository.findById(id).get();
     }
 
     @Override

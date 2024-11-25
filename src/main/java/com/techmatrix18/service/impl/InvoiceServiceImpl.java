@@ -32,7 +32,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     @Override
     public Invoice getInvoiceById(Long id) {
-        return invoiceRepository.getById(id);
+        return invoiceRepository.findById(id).get();
     }
 
     @Override

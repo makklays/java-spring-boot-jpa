@@ -2,6 +2,7 @@ package com.techmatrix18.web.api;
 
 import com.techmatrix18.model.Category;
 import com.techmatrix18.service.CategoryService;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.bind.ValidationException;
@@ -24,12 +25,20 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
+    @GetMapping(path = "/view/{id}")
+    public Category getCategories(@PathVariable String id) throws ValidationException {
+        Long catId = Long.parseLong(id);
+
+        return categoryService.getCategoryById(catId);
+    }
+
     @GetMapping(path = "/all")
     public List<Category> getCategories() throws ValidationException {
         return categoryService.getAllCategories();
     }
 
     @PostMapping(path = "/add")
+    @Transactional(rollbackFor = Exception.class)
     public @ResponseBody String addCategory (@RequestParam String title, @RequestParam String description) {
         Category c = new Category();
         c.setTitle(title);

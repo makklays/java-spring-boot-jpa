@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Implementation of {@link StorehouseService} interface.
@@ -35,10 +36,9 @@ public class StorehouseServiceImpl implements StorehouseService {
         return storehouseRepository.findByCityId(id);
     }
 
-
     @Override
     public Storehouse getStorehouseById(Long id) {
-        return storehouseRepository.getById(id);
+        return storehouseRepository.findById(id).get();
     }
 
     @Override

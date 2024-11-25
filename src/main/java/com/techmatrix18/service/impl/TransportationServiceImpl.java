@@ -32,7 +32,7 @@ public class TransportationServiceImpl implements TransportationService {
 
     @Override
     public Transportation getTransportationById(Long transportationId) {
-        return transportationRepository.getById(transportationId);
+        return transportationRepository.findById(transportationId).get();
     }
 
     @Override

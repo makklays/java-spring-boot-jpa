@@ -32,7 +32,7 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public City getCityById(Long id) {
-        return cityRepository.getById(id);
+        return cityRepository.findById(id).get();
     }
 
     @Override

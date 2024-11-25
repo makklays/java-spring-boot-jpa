@@ -38,7 +38,7 @@ public class BarcoUserServiceImpl implements BarcoUserService {
     }
 
     @Override
-    public BarcoUser getBarcoUserById(Long id) { return barcoUserRepository.getById(id); }
+    public BarcoUser getBarcoUserById(Long id) { return barcoUserRepository.findById(id).get(); }
 
     @Override
     public List<BarcoUser> getAllBarcoUserByBarcoId(Long barcoId) { return barcoUserRepository.findByBarcoId(barcoId); }

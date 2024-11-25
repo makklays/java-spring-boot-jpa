@@ -51,10 +51,14 @@ public class BarcoController {
     }
 
     @GetMapping(path = "/{id}")
-    public Barco getById(@PathVariable Long id) {
-        return BARCOS.stream().filter(barco -> barco.getId().equals(id))
-                .findFirst()
-                .orElse(null);
+    @ResponseStatus(HttpStatus.OK)
+    public Barco getById(@PathVariable String id) {
+        //return BARCOS.stream().filter(barco -> barco.getId().equals(id))
+        //        .findFirst()
+        //        .orElse(null);
+        Long barcoId = Long.parseLong(id);
+
+        return barcoService.getBarcoById(barcoId);
     }
 
     @PostMapping
