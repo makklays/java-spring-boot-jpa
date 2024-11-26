@@ -55,8 +55,10 @@ public class InvoiceController {
         Invoice i = new Invoice();
         i.setTitle(title);
         i.setDescription(description);
-        Transportation tr = transportationService.getTransportationById(transportationId);
-        i.setTransportation(tr);
+        Optional<Transportation> tr = transportationService.getTransportationById(transportationId);
+        if (tr.isPresent()) {
+            i.setTransportation(tr.get());
+        }
         i.setAmount(amount);
         i.setStatus(status);
         if (invoiceService.addInvoice(i)) {
@@ -72,8 +74,10 @@ public class InvoiceController {
         if (i.isPresent()) {
             i.get().setTitle(title);
             i.get().setDescription(description);
-            Transportation tr = transportationService.getTransportationById(transportationId);
-            i.get().setTransportation(tr);
+            Optional<Transportation> tr = transportationService.getTransportationById(transportationId);
+            if (tr.isPresent()) {
+                i.get().setTransportation(tr.get());
+            }
             i.get().setAmount(amount);
             i.get().setStatus(status);
             if (invoiceService.updateInvoice(i.get())) {

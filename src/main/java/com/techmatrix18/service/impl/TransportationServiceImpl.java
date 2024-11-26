@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Implementation of {@link TransportationService} interface.
@@ -31,8 +32,8 @@ public class TransportationServiceImpl implements TransportationService {
     }
 
     @Override
-    public Transportation getTransportationById(Long transportationId) {
-        return transportationRepository.findById(transportationId).get();
+    public Optional<Transportation> getTransportationById(Long transportationId) {
+        return transportationRepository.findById(transportationId);
     }
 
     @Override

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.io.IOException;
+import java.util.Optional;
 
 /**
  * Simple controller for Transportation
@@ -70,9 +71,9 @@ public class TransportationViewsController {
 
     @GetMapping("/edit/{transportationId}")
     public String edit(HttpServletRequest request, HttpServletResponse response, @PathVariable Long transportationId, Model model) throws Exception {
-        Transportation transportation = transportationService.getTransportationById(transportationId);
-        if (transportation.getId() != null) {
-            model.addAttribute("transportation", transportation);
+        Optional<Transportation> transportation = transportationService.getTransportationById(transportationId);
+        if (transportation.isPresent()) {
+            model.addAttribute("transportation", transportation.get());
             logger.info("Transportation found..");
         } else {
             model.addAttribute("Transportation", null);
@@ -100,8 +101,8 @@ public class TransportationViewsController {
 
     @GetMapping("/delete/{transportationId}")
     public void delete(HttpServletRequest request, HttpServletResponse response, @PathVariable Long transportationId) throws IOException {
-        Transportation transportation = transportationService.getTransportationById(transportationId);
-        if (transportation.getId() != null) {
+        Optional<Transportation> transportation = transportationService.getTransportationById(transportationId);
+        if (transportation.isPresent()) {
             transportationService.deleteTransportation(transportationId);
         }
 
@@ -110,9 +111,9 @@ public class TransportationViewsController {
 
     @GetMapping("/{transportationId}")
     public String view(Model model, @PathVariable String transportationId) {
-        Transportation transportation = transportationService.getTransportationById(Long.parseLong(transportationId));
-        if (transportation.getId() != null) {
-            model.addAttribute("transportation", transportation);
+        Optional<Transportation> transportation = transportationService.getTransportationById(Long.parseLong(transportationId));
+        if (transportation.isPresent()) {
+            model.addAttribute("transportation", transportation.get());
             logger.info("Transportation found..");
         } else {
             model.addAttribute("transportation", null);
@@ -122,3 +123,4 @@ public class TransportationViewsController {
         return "transportations/view";
     }
 }
+
