@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.io.IOException;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/positions")
@@ -63,9 +64,9 @@ public class PositionViewsController {
 
     @GetMapping("/edit/{positionId}")
     public String edit(@PathVariable Long positionId, Model model){
-        Position position = positionService.getPositionById(positionId);
-        if (position.getId() != null) {
-            model.addAttribute("position", position);
+        Optional<Position> position = positionService.getPositionById(positionId);
+        if (position.get().getId() != null) {
+            model.addAttribute("position", position.get());
             logger.info("Position found..");
         } else {
             model.addAttribute("position", null);
@@ -90,8 +91,8 @@ public class PositionViewsController {
 
     @GetMapping("/delete/{positionId}")
     public void delete(HttpServletRequest request, HttpServletResponse response, @PathVariable Long positionId) throws IOException {
-        Position position = positionService.getPositionById(positionId);
-        if (position.getId() != null) {
+        Optional<Position> position = positionService.getPositionById(positionId);
+        if (position.get().getId() != null) {
             positionService.deletePosition(positionId);
         }
 
@@ -100,9 +101,9 @@ public class PositionViewsController {
 
     @GetMapping("/{positionId}")
     public String view(Model model, @PathVariable String positionId) {
-        Position position = positionService.getPositionById(Long.parseLong(positionId));
-        if (position.getId() != null) {
-            model.addAttribute("position", position);
+        Optional<Position> position = positionService.getPositionById(Long.parseLong(positionId));
+        if (position.get().getId() != null) {
+            model.addAttribute("position", position.get());
             logger.info("Position found..");
         } else {
             model.addAttribute("position", null);
@@ -114,3 +115,4 @@ public class PositionViewsController {
         return "positions/view";
     }
 }
+

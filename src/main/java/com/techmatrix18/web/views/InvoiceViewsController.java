@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;
 
 import java.io.IOException;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/invoices")
@@ -61,9 +62,9 @@ public class InvoiceViewsController {
 
     @GetMapping("/edit/{invoiceId}")
     public String edit(HttpServletRequest request, HttpServletResponse response, @PathVariable Long invoiceId, Model model) throws Exception {
-        Invoice invoice = invoiceService.getInvoiceById(invoiceId);
-        if (invoice.getId() != null) {
-            model.addAttribute("invoice", invoice);
+        Optional<Invoice> invoice = invoiceService.getInvoiceById(invoiceId);
+        if (invoice.isPresent()) {
+            model.addAttribute("invoice", invoice.get());
             logger.info("Invoice found..");
         } else {
             model.addAttribute("invoice", null);
@@ -90,8 +91,8 @@ public class InvoiceViewsController {
 
     @GetMapping("/delete/{invoiceId}")
     public void delete(HttpServletRequest request, HttpServletResponse response, @PathVariable Long invoiceId) throws IOException {
-        Invoice invoice = invoiceService.getInvoiceById(invoiceId);
-        if (invoice.getId() != null) {
+        Optional<Invoice> invoice = invoiceService.getInvoiceById(invoiceId);
+        if (invoice.isPresent()) {
             invoiceService.deleteInvoice(invoiceId);
         }
 
@@ -100,9 +101,9 @@ public class InvoiceViewsController {
 
     @GetMapping("/{invoiceId}")
     public String view(Model model, @PathVariable String invoiceId) {
-        Invoice invoice = invoiceService.getInvoiceById(Long.parseLong(invoiceId));
-        if (invoice.getId() != null) {
-            model.addAttribute("invoice", invoice);
+        Optional<Invoice> invoice = invoiceService.getInvoiceById(Long.parseLong(invoiceId));
+        if (invoice.isPresent()) {
+            model.addAttribute("invoice", invoice.get());
             logger.info("Invoice found..");
         } else {
             model.addAttribute("invoice", null);

@@ -1,11 +1,14 @@
 package com.techmatrix18.web.api;
 
 import com.techmatrix18.model.Invoice;
+import com.techmatrix18.model.Transportation;
 import com.techmatrix18.service.InvoiceService;
+import com.techmatrix18.service.TransportationService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.bind.ValidationException;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Simple controller for Invoice
@@ -19,9 +22,11 @@ import java.util.List;
 public class InvoiceController {
 
     private final InvoiceService invoiceService;
+    private final TransportationService transportationService;
 
-    public InvoiceController(InvoiceService invoiceService) {
+    public InvoiceController(InvoiceService invoiceService, TransportationService transportationService) {
         this.invoiceService = invoiceService;
+        this.transportationService = transportationService;
     }
 
     @GetMapping(path = "/test")
@@ -34,39 +39,65 @@ public class InvoiceController {
         return invoiceService.getAllInvoices();
     }
 
+    @GetMapping(path = "/{id}")
+    public Object getOneInvoice(@PathVariable String id) throws ValidationException {
+        Long invoiceId = Long.parseLong(id);
+        Optional<Invoice> invoice = invoiceService.getInvoiceById(invoiceId);
+        if (invoice.isPresent()) {
+            return invoice.get();
+        } else {
+            return "{\"status\": \"error\", \"message\": \"Didn't find invoice with ID=" + id + "\"}";
+        }
+    }
+
     @PostMapping(path = "/add")
     public @ResponseBody String addInvoice (@RequestParam String title, @RequestParam String description, @RequestParam Long transportationId, @RequestParam Float amount, @RequestParam String status) {
         Invoice i = new Invoice();
         i.setTitle(title);
         i.setDescription(description);
-        //i.setTransportationId(transportationId);
+        Transportation tr = transportationService.getTransportationById(transportationId);
+        i.setTransportation(tr);
         i.setAmount(amount);
         i.setStatus(status);
-        invoiceService.addInvoice(i);
-        return "Saved";
+        if (invoiceService.addInvoice(i)) {
+            return "{\"status\": \"success\", \"message\": \"Invoice added successfully!\"}";
+        } else {
+            return "{\"status\": \"error\", \"message\": \"Didn't add new invoice\"}";
+        }
     }
 
     @PatchMapping(path = "/update")
     public @ResponseBody String updateInvoice (@RequestParam Long invoiceId, @RequestParam String title, @RequestParam String description, @RequestParam Long transportationId, @RequestParam Float amount, @RequestParam String status) {
-        Invoice i = invoiceService.getInvoiceById(invoiceId);
-        if (i.getId() != null) {
-            i.setTitle(title);
-            i.setDescription(description);
-            //i.setTransportationId(transportationId);
-            i.setAmount(amount);
-            i.setStatus(status);
-            invoiceService.updateInvoice(i);
+        Optional<Invoice> i = invoiceService.getInvoiceById(invoiceId);
+        if (i.isPresent()) {
+            i.get().setTitle(title);
+            i.get().setDescription(description);
+            Transportation tr = transportationService.getTransportationById(transportationId);
+            i.get().setTransportation(tr);
+            i.get().setAmount(amount);
+            i.get().setStatus(status);
+            if (invoiceService.updateInvoice(i.get())) {
+                return "{\"status\": \"success\", \"message\": \"Invoice updated successfully!\"}";
+            } else {
+                return "{\"status\": \"error\", \"message\": \"Didn't update invoice\"}";
+            }
+        } else {
+            return "{\"status\": \"error\", \"message\": \"Didn't find invoice with ID=" + invoiceId + "\"}";
         }
-        return "Updated";
     }
 
-    @DeleteMapping(path = "/delete/{invoiceId:\\\\d+}")
+    @DeleteMapping(path = "/delete/{invoiceId}")
     public @ResponseBody String deleteInvoice (@PathVariable Long invoiceId) {
-        Invoice i = invoiceService.getInvoiceById(invoiceId);
-        if (i.getId() != null) {
-            invoiceService.deleteInvoice(invoiceId);
+        Optional<Invoice> i = invoiceService.getInvoiceById(invoiceId);
+        if (i.isPresent()) {
+            if (invoiceService.deleteInvoice(invoiceId)) {
+                return "{\"status\": \"success\", \"message\": \"Invoice deleted successfully!\"}";
+            } else {
+                return "{\"status\": \"error\", \"message\": \"Didn't delete invoice\"}";
+            }
+        } else {
+            return "{\"status\": \"error\", \"message\": \"Didn't find invoice with ID=" + invoiceId + "\"}";
         }
-        return "Deleted";
     }
 }
 
