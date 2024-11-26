@@ -25,6 +25,7 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Optional;
 
 import java.io.*;
 
@@ -157,8 +158,8 @@ public class UserViewsController {
 
         // position
         String positionId = request.getParameter("position_id");
-        Position position = positionService.getPositionById(Long.parseLong(positionId));
-        user.setPosition(position);
+        Optional<Position> position = positionService.getPositionById(Long.parseLong(positionId));
+        user.setPosition(position.get());
 
         // email
         String email = request.getParameter("email");

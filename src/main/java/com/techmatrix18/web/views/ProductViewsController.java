@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/products")
@@ -63,9 +64,9 @@ public class ProductViewsController {
 
     @GetMapping("/edit/{productId}")
     public String edit( @PathVariable Long productId, Model model){
-        Product product = productService.getProductById(productId);
-        if (product.getId() != null) {
-            model.addAttribute("product", product);
+        Optional<Product> product = productService.getProductById(productId);
+        if (product.isPresent()) {
+            model.addAttribute("product", product.get());
             logger.info("Product found..");
         } else {
             logger.warn("Error! Product not found..");
@@ -94,8 +95,8 @@ public class ProductViewsController {
 
     @GetMapping("/delete/{productId}")
     public void delete(HttpServletRequest request, HttpServletResponse response, @PathVariable Long productId) throws IOException {
-        Product product = productService.getProductById(productId);
-        if (product.getId() != null) {
+        Optional<Product> product = productService.getProductById(productId);
+        if (product.isPresent()) {
             productService.deleteProduct(productId);
         }
 
@@ -104,9 +105,9 @@ public class ProductViewsController {
 
     @GetMapping("/{productId}")
     public String view(Model model, @PathVariable String productId) {
-        Product product = productService.getProductById(Long.parseLong(productId));
-        if (product.getId() != null) {
-            model.addAttribute("product", product);
+        Optional<Product> product = productService.getProductById(Long.parseLong(productId));
+        if (product.isPresent()) {
+            model.addAttribute("product", product.get());
             logger.info("Product found..");
         } else {
             model.addAttribute("product", null);

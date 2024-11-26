@@ -2,6 +2,7 @@ package com.techmatrix18.service;
 
 import com.techmatrix18.model.*;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Service class for {@link com.techmatrix18.model.Position}
@@ -12,10 +13,10 @@ import java.util.List;
 
 public interface PositionService {
     List<Position> getAllPositions();
-    Position getPositionById(Long id);
+    Optional<Position> getPositionById(Long id);
 
     boolean addPosition(Position position);
-    void updatePosition(Position position);
+    boolean updatePosition(Position position);
     boolean deletePosition(Long id);
 }
 

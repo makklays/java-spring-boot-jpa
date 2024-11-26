@@ -70,9 +70,9 @@ public class StorehouseViewsController {
 
     @GetMapping("/edit/{storehouseId}")
     public String edit(HttpServletRequest request, HttpServletResponse response, @PathVariable Long storehouseId, Model model) throws Exception {
-        Storehouse storehouse = storehouseService.getStorehouseById(storehouseId);
-        if (storehouse.getId() != null) {
-            model.addAttribute("storehouse", storehouse);
+        Optional<Storehouse> storehouse = storehouseService.getStorehouseById(storehouseId);
+        if (storehouse.isPresent()) {
+            model.addAttribute("storehouse", storehouse.get());
             //model.addAttribute("city", cityService.getCityById(storehouse.getCityId()));
             logger.info("Storehouse found..");
         } else {
@@ -128,8 +128,8 @@ public class StorehouseViewsController {
 
     @GetMapping("/delete/{storehouseId}")
     public void delete(HttpServletRequest request, HttpServletResponse response, @PathVariable Long storehouseId) throws IOException {
-        Storehouse storehouse = storehouseService.getStorehouseById(storehouseId);
-        if (storehouse.getId() != null) {
+        Optional<Storehouse> storehouse = storehouseService.getStorehouseById(storehouseId);
+        if (storehouse.isPresent()) {
             storehouseService.deleteStorehouse(storehouseId);
         }
 
@@ -138,9 +138,9 @@ public class StorehouseViewsController {
 
     @GetMapping("/{storehouseId}")
     public String view(Model model, @PathVariable String storehouseId) {
-        Storehouse storehouse = storehouseService.getStorehouseById(Long.parseLong(storehouseId));
-        if (storehouse.getId() != null) {
-            model.addAttribute("storehouse", storehouse);
+        Optional<Storehouse> storehouse = storehouseService.getStorehouseById(Long.parseLong(storehouseId));
+        if (storehouse.isPresent()) {
+            model.addAttribute("storehouse", storehouse.get());
             //model.addAttribute("city", cityService.getCityById(storehouse.getCityId()));
             logger.info("Storehouse found..");
         } else {
@@ -151,3 +151,4 @@ public class StorehouseViewsController {
         return "storehouses/view";
     }
 }
+

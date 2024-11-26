@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Implementation of {@link InvoiceService} interface.
@@ -31,8 +32,8 @@ public class InvoiceServiceImpl implements InvoiceService {
     }
 
     @Override
-    public Invoice getInvoiceById(Long id) {
-        return invoiceRepository.findById(id).get();
+    public Optional<Invoice> getInvoiceById(Long id) {
+        return invoiceRepository.findById(id);
     }
 
     @Override

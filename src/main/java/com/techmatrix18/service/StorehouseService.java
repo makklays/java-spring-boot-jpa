@@ -13,7 +13,7 @@ import java.util.Optional;
 
 public interface StorehouseService {
     List<Storehouse> getAllStorehouses();
-    Storehouse getStorehouseById(Long id);
+    Optional<Storehouse> getStorehouseById(Long id);
 
     List<Storehouse> getStorehousesByCityId(Long id);
 

@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Implementation of {@link PositionService} interface.
@@ -31,8 +32,8 @@ public class PositionServiceImpl implements PositionService {
     }
 
     @Override
-    public Position getPositionById(Long id) {
-        return positionRepository.findById(id).get();
+    public Optional<Position> getPositionById(Long id) {
+        return positionRepository.findById(id);
     }
 
     @Override
@@ -46,10 +47,12 @@ public class PositionServiceImpl implements PositionService {
     }
 
     @Override
-    public void updatePosition(Position position) {
+    public boolean updatePosition(Position position) {
         Position pos = positionRepository.save(position);
         if (!pos.getTitle().isEmpty()) {
+            return true;
         } else {
+            return false;
         }
     }
 
