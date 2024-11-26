@@ -18,6 +18,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/cities")
@@ -59,9 +60,9 @@ public class CityViewsController implements WebMvcConfigurer {
 
     @GetMapping(path = "/edit/{cityId}")
     public String edit(Model model, @PathVariable Long cityId) throws IOException {
-        City city = cityService.getCityById(cityId);
-        if (city.getId() != null) {
-            model.addAttribute("city", city);
+        Optional<City> city = cityService.getCityById(cityId);
+        if (city.get().getId() != null) {
+            model.addAttribute("city", city.get());
             logger.info("City found..");
         } else {
             model.addAttribute("city", null);
@@ -85,8 +86,8 @@ public class CityViewsController implements WebMvcConfigurer {
 
     @GetMapping("/delete/{cityId}")
     public void delete(HttpServletRequest request, HttpServletResponse response, @PathVariable Long cityId) throws IOException {
-        City city = cityService.getCityById(cityId);
-        if (city.getId() != null) {
+        Optional<City> city = cityService.getCityById(cityId);
+        if (city.get().getId() != null) {
             cityService.deleteCity(cityId);
         }
 
@@ -95,8 +96,8 @@ public class CityViewsController implements WebMvcConfigurer {
 
     @GetMapping("/{cityId}")
     public String view(Model model, @PathVariable String cityId) {
-        City city = cityService.getCityById(Long.parseLong(cityId));
-        if (city.getId() != null) {
+        Optional<City> city = cityService.getCityById(Long.parseLong(cityId));
+        if (city.get().getId() != null) {
             model.addAttribute("city", city);
            logger.info("City found..");
         } else {
