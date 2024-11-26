@@ -25,6 +25,7 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/storehouses")
@@ -117,8 +118,8 @@ public class StorehouseViewsController {
         //response.getOutputStream().println("<p><a href=\"" + fileUrl + "\">" + fileUrl + "</a></p>");
 
         String cityId = request.getParameter("city_id");
-        City city = cityService.getCityById(Long.parseLong(cityId));
-        storehouse.setCity(city);
+        Optional<City> city = cityService.getCityById(Long.parseLong(cityId));
+        storehouse.setCity(city.get());
 
         storehouseService.updateStorehouse(storehouse);
 

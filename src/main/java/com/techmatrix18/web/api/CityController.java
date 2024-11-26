@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.xml.bind.ValidationException;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Simple controller for City
@@ -30,9 +31,20 @@ public class CityController {
         return request.getQueryString();
     }
 
-    @GetMapping(path = "/all")
+    @GetMapping(path = "/all", produces = "application/json;charset=UTF-8")
     public List<City> getCities() throws ValidationException {
         return cityService.getAllCities();
+    }
+
+    @GetMapping(path = "/{id}", produces = "application/json;charset=UTF-8")
+    public Object getOne(@PathVariable String id) throws ValidationException {
+        Long cityId = Long.parseLong(id);
+        Optional<City> city = cityService.getCityById(cityId);
+        if (city.isPresent()) {
+            return city.get();
+        } else {
+            return "{\"status\": \"error\", \"message\": \"Didn't find city with ID=" + id + "\"}";
+        }
     }
 
     @PostMapping(path = "/add", produces = "application/json;charset=UTF-8")
@@ -41,29 +53,32 @@ public class CityController {
         c.setTitle(title);
         c.setDescription(description);
         cityService.addCity(c);
+
         return "{\"status\": \"success\", \"message\": \"City saved successfully!\"}";
     }
 
     @PatchMapping(path = "/update", produces = "application/json;charset=UTF-8")
     public @ResponseBody String updateBarco (@RequestParam Long cityId, @RequestParam String title, @RequestParam String description) {
-        City c = cityService.getCityById(cityId);
-        if (c.getId() != null) {
-            c.setTitle(title);
-            c.setDescription(description);
-            cityService.updateCity(c);
+        Optional<City> c = cityService.getCityById(cityId);
+        if (c.isPresent()) {
+            c.get().setTitle(title);
+            c.get().setDescription(description);
+            cityService.updateCity(c.get());
+            return "{\"status\": \"success\", \"message\": \"City updated successfully!\"}";
+        } else {
+            return "{\"status\": \"error\", \"message\": \"Didn't find city with ID=" + cityId + "\"}";
         }
-        //return "Updated";
-        return "{\"status\": \"success\", \"message\": \"City updated successfully!\"}";
     }
 
     @DeleteMapping(path = "/delete/{cityId}", produces = "application/json;charset=UTF-8")
     public @ResponseBody String deleteCity (@PathVariable Long cityId) {
-        City c = cityService.getCityById(cityId);
-        if (c.getId() != null) {
+        Optional<City> c = cityService.getCityById(cityId);
+        if (c.isPresent()) {
             cityService.deleteCity(cityId);
+            return "{\"status\": \"success\", \"message\": \"City deleted successfully!\"}";
+        } else {
+            return "{\"status\": \"error\", \"message\": \"Didn't find city with ID=" + cityId + "\"}";
         }
-        //return "Deleted";
-        return "{\"status\": \"success\", \"message\": \"City deleted successfully!\"}";
     }
 }
 

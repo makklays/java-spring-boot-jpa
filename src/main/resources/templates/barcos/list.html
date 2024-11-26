@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="~{layouts/main10.html}" >
-<head th:replace="layouts/fragments::html_head" />
+<head>
+    <title th:text="#{app.title}"> Title </title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/fontawesome-free-6.6.0-web/css/all.min.css}"/>
+</head>
 
 <div class="container" layout:fragment="content">
 
@@ -34,6 +38,8 @@
                     <th class="text-center" th:text="#{weight}"></th>
                     <th class="text-center" th:text="#{speedometer}"></th>
 
+                    <th class="text-center" th:text="#{photo}"></th>
+
                     <th class="text-center" th:text="#{page.actions}"></th>
                 </tr>
                 </thead>
@@ -46,6 +52,8 @@
                     <td class="text-center" th:text="${barco.year}"></td>
                     <td class="text-center" th:text="${barco.weight}"></td>
                     <td class="text-center" th:text="${barco.speedometer}"></td>
+
+                    <td class="text-center" th:text="${barco.getPhoto() != null ? 'yes' : 'not'}"></td>
 
                     <td class="text-center" style="width:150px;">
                         <a href="#" th:href="@{'/barcos/' + ${barco.id}}">view</a> |

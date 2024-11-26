@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="~{layouts/main10.html}" >
+<head>
+    <title th:text="#{app.title}"> Title </title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/fontawesome-free-6.6.0-web/css/all.min.css}"/>
+</head>
+
+<body>
+<div class="container" layout:fragment="content">
+
+    <div class="row">
+        <div class="col-md-6">
+            <h1><i class="fa-solid fa-ship"></i> View barco</h1>
+        </div>
+        <div class="col-md-6 align-self-center" style="text-align:right;">
+            <a href="#" th:href="@{/barcos/edit/{id}(id=${barco_user.barco.id})}" th:text="#{app.edit-barco}" class="btn btn-primary"> Edit barco</a>
+        </div>
+    </div>
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/welcome}">Home</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/menu}"><i class="fa-solid fa-bars"></i> Menu</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/barcos/list}" th:text="#{app.list-barcos}">List</a></li>
+            <li class="breadcrumb-item active" aria-current="page" th:text="#{app.view-barco}" >View barco</li>
+        </ol>
+    </nav>
+
+    <div class="card">
+        <div class="card-body">
+
+            <table class="table table-striped table-hover">
+                <tr>
+                    <th>ID</th>
+                    <td th:text="${barco_user.barco.Id}"></td>
+                </tr>
+                <tr>
+                    <th th:text="#{title}">Title</th>
+                    <td th:text="${barco_user.barco.title}"></td>
+                </tr>
+                <tr>
+                    <th th:text="#{year}">Year</th>
+                    <td th:text="${barco_user.barco.year}"></td>
+                </tr>
+                <tr>
+                    <th th:text="#{weight}">Weight</th>
+                    <td th:text="${barco_user.barco.weight}"></td>
+                </tr>
+                <tr>
+                    <th th:text="#{speedometer}">Speedometer</th>
+                    <td th:text="${barco_user.barco.speedometer}"></td>
+                </tr>
+
+                <tr>
+                    <th th:text="#{description}">Description</th>
+                    <td th:text="${barco_user.barco.description}"></td>
+                </tr>
+
+                <tr>
+                    <th>Photo</th>
+                    <td>
+                        <img th:if="${barco_user.barco.photo}" th:src="'/uploads/barcos/'+${barco_user.barco.photo}" alt="photo barco" style="width:300px;" />
+                        <br/><br/>
+                        <div th:unless="${barco_user.barco.photo}">-</div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>Created</th>
+                    <td th:text="${barco_user.barco.createdAt} ? ${#dates.format(barco_user.barco.createdAt, 'dd-MM-yyyy HH:mm')} : '-'"></td>
+                </tr>
+                <tr>
+                    <th>Updated</th>
+                    <td th:text="${barco_user.barco.updatedAt} ? ${#dates.format(barco_user.barco.updatedAt, 'dd-MM-yyyy HH:mm')} : '-'"></td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+
+    <br/><br/>
+
+    <div class="card">
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-md-6" style="text-align:left;">
+                    <h3><i class="fa-solid fa-users"></i> User</h3>
+                </div>
+                <div class="col-md-6 align-self-center" style="text-align:right;"></div>
+            </div>
+
+            <table class="table table-striped table-hover">
+                <tr>
+                    <th>ID</th>
+                    <td th:text="${barco_user.user.Id}"></td>
+                </tr>
+                <tr>
+                    <th th:text="#{name}">Name</th>
+                    <td th:text="${barco_user.user.firstname} +' '+ ${barco_user.user.lastname}"></td>
+                </tr>
+                <tr>
+                    <th th:text="#{description}">Description</th>
+                    <td th:text="!${barco_user.description.isEmpty()} ? ${barco_user.description} : '-'"></td>
+                </tr>
+                <tr>
+                    <th th:text="#{user.position}">Position</th>
+                    <td th:if="${barco_user.user.position}">
+                        <a href="#" th:href="@{'/positions/' + ${barco_user.user.position.id}}" th:text="${barco_user.user.position.title}">Title</a>
+                    </td>
+                    <td th:unless="${barco_user.user.position}">-</td>
+                </tr>
+                <tr>
+                    <th th:text="#{user.email}">E-mail</th>
+                    <td th:if="${barco_user.user.email}">
+                        <a th:href="'mailto:'+${barco_user.user.email}" th:text="${barco_user.user.email}"></a>
+                    </td>
+                    <td th:unless="${barco_user.user.email}">-</td>
+                </tr>
+
+                <tr>
+                    <th th:text="#{bio}">Bio</th>
+                    <td th:text="!${barco_user.user.bio.isEmpty()}? ${barco_user.user.bio} : '-'"></td>
+                </tr>
+                <tr>
+                    <th th:text="#{blocked}">Blocked</th>
+                    <td th:text="${barco_user.user.isBlocked}"></td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+
+    <br/><br/>
+
+    <a href="#" th:href="@{/barcos/{id}(id=${barco_user.barco.id})}" th:text="#{app.back}" class="btn btn-secondary"> Back</a>
+
+    <br/><br/>
+
+</div>
+</body>
+</html>
+

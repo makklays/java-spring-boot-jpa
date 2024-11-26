@@ -90,6 +90,6 @@ public class AuthViewsController {
 
         logger.info("User: {}", user);
 
-        return "redirect:/login";
+        return "auth/login";
     }
 }

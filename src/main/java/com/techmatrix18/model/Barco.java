@@ -46,9 +46,15 @@ public class Barco implements Serializable {
     @Column(name = "speedometer")
     private Integer speedometer; // km
 
+    @Column(name = "photo", length = 500)
+    private String photo;
+
     @ManyToOne
     @JsonIgnore
     private User user;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "barco", cascade = CascadeType.ALL)
+    private List<BarcoUser> barcoUsers;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
@@ -111,6 +117,10 @@ public class Barco implements Serializable {
         this.speedometer = speedometer;
     }
 
+    public String getPhoto() { return photo; }
+
+    public void setPhoto(String photo) { this.photo = photo; }
+
     public Timestamp getCreatedAt() {
         return createdAt;
     }
@@ -138,24 +148,13 @@ public class Barco implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Barco barco = (Barco) o;
-        return Objects.equals(id, barco.id) && Objects.equals(title, barco.title) && Objects.equals(description, barco.description) && Objects.equals(year, barco.year) && Objects.equals(weight, barco.weight) && Objects.equals(speedometer, barco.speedometer)  && Objects.equals(user, barco.user) && Objects.equals(createdAt, barco.createdAt) && Objects.equals(updatedAt, barco.updatedAt);
+        if (!(o instanceof Barco barco)) return false;
+        return getId().equals(barco.getId()) && getTitle().equals(barco.getTitle()) && getDescription().equals(barco.getDescription()) && getYear().equals(barco.getYear()) && getWeight().equals(barco.getWeight()) && getSpeedometer().equals(barco.getSpeedometer()) && getPhoto().equals(barco.getPhoto()) && user.equals(barco.user) && getCreatedAt().equals(barco.getCreatedAt()) && getUpdatedAt().equals(barco.getUpdatedAt());
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hashCode(id);
-        result = 31 * result + Objects.hashCode(title);
-        result = 31 * result + Objects.hashCode(description);
-        result = 31 * result + Objects.hashCode(year);
-        result = 31 * result + Objects.hashCode(weight);
-        result = 31 * result + Objects.hashCode(speedometer);
-        result = 31 * result + Objects.hashCode(user);
-        result = 31 * result + Objects.hashCode(createdAt);
-        result = 31 * result + Objects.hashCode(updatedAt);
-        return result;
+        return Objects.hash(getId(), getTitle(), getDescription(), getYear(), getWeight(), getSpeedometer(), getPhoto(), user, getCreatedAt(), getUpdatedAt());
     }
 
     // prettier-ignore
@@ -168,6 +167,7 @@ public class Barco implements Serializable {
                 ", year=" + year +
                 ", weight=" + weight +
                 ", speedometer=" + speedometer +
+                ", photo=" + photo +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';

@@ -74,6 +74,9 @@ public class User implements UserDetails, Serializable {
     @Column(name="is_blocked")
     private boolean isBlocked;
 
+    @OneToOne(mappedBy = "user")
+    private BarcoUser barcoUser;
+
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at")

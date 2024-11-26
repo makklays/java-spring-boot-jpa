@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Implementation of {@link CityService} interface.
@@ -31,8 +32,8 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
-    public City getCityById(Long id) {
-        return cityRepository.getById(id);
+    public Optional<City> getCityById(Long id) {
+        return cityRepository.findById(id);
     }
 
     @Override

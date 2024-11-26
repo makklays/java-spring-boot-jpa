@@ -162,7 +162,7 @@ public class UserViewsController {
 
         // email
         String email = request.getParameter("email");
-        user.setBio(email);
+        user.setEmail(email);
 
         // role
         String roleName = request.getParameter("role_name");
