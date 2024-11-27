@@ -36,6 +36,7 @@ public class Role implements Serializable {
             joinColumns = @JoinColumn(name = "role_id" ),
             inverseJoinColumns = @JoinColumn(name = "permission_id")
     )
+    @JsonIgnoreProperties(value = { "roles" }, allowSetters = true)
     private Set<Permission> permissions;
 
     public Long getId() {

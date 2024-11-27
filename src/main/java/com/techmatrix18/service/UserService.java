@@ -25,9 +25,9 @@ public interface UserService {
 
     User getUserByEmail(String email);
 
-    void addUser(User user);
-    void updateUser(User user);
-    void deleteUser(Long id);
+    boolean addUser(User user);
+    boolean updateUser(User user);
+    boolean deleteUser(Long id);
 
     Page<User> findPaginated(int pageNo, int pageSize);
 }

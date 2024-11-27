@@ -1,5 +1,6 @@
 package com.techmatrix18.web.api;
 
+import com.techmatrix18.model.Position;
 import com.techmatrix18.model.Role;
 import com.techmatrix18.model.User;
 import com.techmatrix18.service.PositionService;
@@ -9,6 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.bind.ValidationException;
@@ -48,7 +50,7 @@ public class UserController {
         return "products";
     }
 
-    @GetMapping(path = "/all")
+    @GetMapping(path = "/all", produces = "application/json;charset=UTF-8")
     public List<User> getUsers(HttpServletRequest request) {
         String roleParam = request.getParameter("role");
         Role role = roleService.getRoleByName(roleParam);
@@ -60,23 +62,53 @@ public class UserController {
         }
     }
 
-    @PostMapping(path = "/add")
+    @GetMapping(path = "/{id}", produces = "application/json;charset=UTF-8")
+    public Object getOneUser(@PathVariable String id) {
+        Long userId = Long.parseLong(id);
+        User user = userService.getUserById(userId);
+        if (user != null) {
+            return user;
+        } else {
+            return "{\"status\": \"error\", \"message\": \"Didn't find user with ID=" + id + "\"}";
+        }
+    }
+
+    @GetMapping(path = "/page", produces = "application/json;charset=UTF-8")
+    public Object getPage(@RequestParam String pageNo, @RequestParam String pageSize) {
+        int pNo = Integer.parseInt(pageNo);
+        int pSize = Integer.parseInt(pageSize);
+
+        Page<User> users = userService.findPaginated(pNo, pSize);
+        if (users != null) {
+            return users;
+        } else {
+            return "{\"status\": \"error\", \"message\": \"Didn't find users with pageNo=" + pageNo + " and pageSize=" + pageSize + " \"}";
+        }
+    }
+
+    @PostMapping(path = "/add", produces = "application/json;charset=UTF-8")
     public @ResponseBody String addUser (@RequestParam String firstname, @RequestParam String lastname, @RequestParam String email, @RequestParam String password, @RequestParam String positionId) {
         User u = new User();
         u.setFirstname(firstname);
         u.setLastname(lastname);
         u.setEmail(email);
         u.setPassword(password);
-        //Long longPositionId = Long.parseLong(positionId);
-        //u.setPositionId(longPositionId);
 
-        System.out.println(u.toString());
+        // add position
+        Long longPositionId = Long.parseLong(positionId);
+        Optional<Position> position = positionService.getPositionById(longPositionId);
+        if (position.isPresent()) {
+            u.setPosition(position.get());
+        }
 
-        userService.addUser(u);
-        return "Saved";
+        if (userService.addUser(u)) {
+            return "{\"status\": \"success\", \"message\": \"User added successfully!\"}";
+        } else {
+            return "{\"status\": \"error\", \"message\": \"Didn't add user\"}";
+        }
     }
 
-    @PatchMapping(path = "/update")
+    @PatchMapping(path = "/update", produces = "application/json;charset=UTF-8")
     public @ResponseBody String updateUser (@RequestParam String userId, @RequestParam String firstname, @RequestParam String lastname, @RequestParam String email, @RequestParam String password, @RequestParam String positionId) {
         Long longUserId = Long.parseLong(userId);
         User u = userService.getUserById(longUserId);
@@ -85,27 +117,40 @@ public class UserController {
             u.setLastname(lastname);
             u.setEmail(email);
             u.setPassword(password);
-            //Long longPositionId = Long.parseLong(positionId);
-            //u.setPositionId(longPositionId);
-            userService.updateUser(u);
+
+            // add position
+            Long longPositionId = Long.parseLong(positionId);
+            Optional<Position> position = positionService.getPositionById(longPositionId);
+            if (position.isPresent()) {
+                u.setPosition(position.get());
+            }
+
+            if (userService.updateUser(u)) {
+                return "{\"status\": \"success\", \"message\": \"User updated successfully!\"}";
+            } else {
+                return "{\"status\": \"error\", \"message\": \"Didn't update user\"}";
+            }
+        } else {
+            return "{\"status\": \"error\", \"message\": \"Didn't find user with ID=" + userId + "\"}";
         }
-        return "Updated";
     }
 
-    @DeleteMapping(path = "/delete/{userId}")
-    public @ResponseBody String deleteUser (@PathVariable String userId) {
-        Long longUserId = Long.parseLong(userId);
-        User u = userService.getUserById(longUserId);
+    @DeleteMapping(path = "/delete/{id}", produces = "application/json;charset=UTF-8")
+    public @ResponseBody String deleteUser (@PathVariable String id) {
+        Long userId = Long.parseLong(id);
+        User u = userService.getUserById(userId);
 
         System.out.println("userId =====> " + u.getId());
 
         if (u.getId() != null) {
-            userService.deleteUser(longUserId);
+            if (userService.deleteUser(userId)) {
+                return "{\"status\": \"success\", \"message\": \"User deleted successfully!\"}";
+            } else {
+                return "{\"status\": \"error\", \"message\": \"Didn't delete user\"}";
+            }
         } else {
-            return "Hasn't userId = " + userId;
+            return "{\"status\": \"error\", \"message\": \"Didn't find user with ID=" + userId + "\"}";
         }
-        return "Deleted";
     }
-
 }
 
