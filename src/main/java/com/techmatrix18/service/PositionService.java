@@ -1,6 +1,8 @@
 package com.techmatrix18.service;
 
 import com.techmatrix18.model.*;
+import org.springframework.data.domain.Page;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -18,5 +20,7 @@ public interface PositionService {
     boolean addPosition(Position position);
     boolean updatePosition(Position position);
     boolean deletePosition(Long id);
+
+    Page<Position> findPaginated(int pageNo, int pageSize);
 }
 

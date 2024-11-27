@@ -2,6 +2,7 @@ package com.techmatrix18.web.api;
 
 import com.techmatrix18.model.Category;
 import com.techmatrix18.model.Product;
+import com.techmatrix18.model.Storehouse;
 import com.techmatrix18.service.CategoryService;
 import com.techmatrix18.service.ProductService;
 import org.springframework.data.domain.Page;
@@ -53,6 +54,19 @@ public class ProductController {
             return product.get();
         } else {
             return "{\"status\": \"error\", \"message\": \"Didn't find product with ID=" + id + "\"}";
+        }
+    }
+
+    @GetMapping(path = "/page", produces = "application/json;charset=UTF-8")
+    public Object getPage(@RequestParam String pageNo, @RequestParam String pageSize) {
+        int pNo = Integer.parseInt(pageNo);
+        int pSize = Integer.parseInt(pageSize);
+
+        Page<Product> products = productService.findPaginated(pNo, pSize);
+        if (products != null) {
+            return products;
+        } else {
+            return "{\"status\": \"error\", \"message\": \"Didn't find products with pageNo=" + pageNo + " and pageSize=" + pageSize + " \"}";
         }
     }
 

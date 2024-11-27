@@ -1,10 +1,14 @@
 package com.techmatrix18.service.impl;
 
 import com.techmatrix18.model.City;
+import com.techmatrix18.model.Invoice;
 import com.techmatrix18.repository.CityRepository;
 import com.techmatrix18.service.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
@@ -65,6 +69,12 @@ public class CityServiceImpl implements CityService {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public Page<City> findPaginated(int pageNo, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+        return cityRepository.findAll(pageable);
     }
 }
 

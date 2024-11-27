@@ -2,9 +2,11 @@ package com.techmatrix18.web.api;
 
 import com.techmatrix18.model.City;
 import com.techmatrix18.model.Storehouse;
+import com.techmatrix18.model.User;
 import com.techmatrix18.service.CityService;
 import com.techmatrix18.service.StorehouseService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,6 +52,19 @@ public class StorehouseController {
             return st.get();
         } else {
             return "{\"status\": \"error\", \"message\": \"Didn't find storehouse with ID=" + id + "\"}";
+        }
+    }
+
+    @GetMapping(path = "/page", produces = "application/json;charset=UTF-8")
+    public Object getPage(@RequestParam String pageNo, @RequestParam String pageSize) {
+        int pNo = Integer.parseInt(pageNo);
+        int pSize = Integer.parseInt(pageSize);
+
+        Page<Storehouse> storehouses = storehouseService.findPaginated(pNo, pSize);
+        if (storehouses != null) {
+            return storehouses;
+        } else {
+            return "{\"status\": \"error\", \"message\": \"Didn't find storehouses with pageNo=" + pageNo + " and pageSize=" + pageSize + " \"}";
         }
     }
 

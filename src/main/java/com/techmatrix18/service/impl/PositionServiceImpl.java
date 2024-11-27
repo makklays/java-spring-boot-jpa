@@ -1,10 +1,14 @@
 package com.techmatrix18.service.impl;
 
 import com.techmatrix18.model.Position;
+import com.techmatrix18.model.Product;
 import com.techmatrix18.repository.PositionRepository;
 import com.techmatrix18.service.PositionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
@@ -65,6 +69,12 @@ public class PositionServiceImpl implements PositionService {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public Page<Position> findPaginated(int pageNo, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+        return positionRepository.findAll(pageable);
     }
 }
 

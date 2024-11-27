@@ -1,6 +1,9 @@
 package com.techmatrix18.service;
 
 import com.techmatrix18.model.Barco;
+import com.techmatrix18.model.City;
+import org.springframework.data.domain.Page;
+
 import java.util.List;
 
 /**
@@ -18,4 +21,6 @@ public interface BarcoService {
     boolean addBarco(Barco barco);
     boolean updateBarco(Barco barco);
     boolean deleteBarco(Long id);
+
+    Page<Barco> findPaginated(int pageNo, int pageSize);
 }

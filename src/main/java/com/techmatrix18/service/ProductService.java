@@ -1,6 +1,7 @@
 package com.techmatrix18.service;
 
 import com.techmatrix18.model.Product;
+import com.techmatrix18.model.Storehouse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -26,4 +27,6 @@ public interface ProductService {
     boolean deleteProduct(Long id);
 
     Page<Product> getAllProductsSortedByTitle();
+
+    Page<Product> findPaginated(int pageNo, int pageSize);
 }

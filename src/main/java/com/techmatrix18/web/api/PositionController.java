@@ -1,7 +1,9 @@
 package com.techmatrix18.web.api;
 
 import com.techmatrix18.model.Position;
+import com.techmatrix18.model.Product;
 import com.techmatrix18.service.PositionService;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.bind.ValidationException;
@@ -43,6 +45,19 @@ public class PositionController {
             return position.get();
         } else {
             return "{\"status\": \"error\", \"message\": \"Didn't find position with ID=" + id + "\"}";
+        }
+    }
+
+    @GetMapping(path = "/page", produces = "application/json;charset=UTF-8")
+    public Object getPage(@RequestParam String pageNo, @RequestParam String pageSize) {
+        int pNo = Integer.parseInt(pageNo);
+        int pSize = Integer.parseInt(pageSize);
+
+        Page<Position> positions = positionService.findPaginated(pNo, pSize);
+        if (positions != null) {
+            return positions;
+        } else {
+            return "{\"status\": \"error\", \"message\": \"Didn't find positions with pageNo=" + pageNo + " and pageSize=" + pageSize + " \"}";
         }
     }
 

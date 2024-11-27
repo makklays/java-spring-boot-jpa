@@ -1,7 +1,9 @@
 package com.techmatrix18.web.api;
 
 import com.techmatrix18.model.Barco;
+import com.techmatrix18.model.Category;
 import com.techmatrix18.service.BarcoService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -70,6 +72,19 @@ public class BarcoController {
     @DeleteMapping(path="/{id}")
     public void barcoById(@PathVariable Long id) {
         this.BARCOS.removeIf(barco -> barco.getId().equals(id));
+    }
+
+    @GetMapping(path = "/page", produces = "application/json;charset=UTF-8")
+    public Object getPage(@RequestParam String pageNo, @RequestParam String pageSize) {
+        int pNo = Integer.parseInt(pageNo);
+        int pSize = Integer.parseInt(pageSize);
+
+        Page<Barco> barcos = barcoService.findPaginated(pNo, pSize);
+        if (barcos != null) {
+            return barcos;
+        } else {
+            return "{\"status\": \"error\", \"message\": \"Didn't find barcos with pageNo=" + pageNo + " and pageSize=" + pageSize + " \"}";
+        }
     }
 
     @PostMapping(path = "/add")

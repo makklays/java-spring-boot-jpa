@@ -1,8 +1,10 @@
 package com.techmatrix18.web.api;
 
 import com.techmatrix18.model.City;
+import com.techmatrix18.model.Invoice;
 import com.techmatrix18.service.CityService;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.bind.ValidationException;
@@ -44,6 +46,19 @@ public class CityController {
             return city.get();
         } else {
             return "{\"status\": \"error\", \"message\": \"Didn't find city with ID=" + id + "\"}";
+        }
+    }
+
+    @GetMapping(path = "/page", produces = "application/json;charset=UTF-8")
+    public Object getPage(@RequestParam String pageNo, @RequestParam String pageSize) {
+        int pNo = Integer.parseInt(pageNo);
+        int pSize = Integer.parseInt(pageSize);
+
+        Page<City> cities = cityService.findPaginated(pNo, pSize);
+        if (cities != null) {
+            return cities;
+        } else {
+            return "{\"status\": \"error\", \"message\": \"Didn't find cities with pageNo=" + pageNo + " and pageSize=" + pageSize + " \"}";
         }
     }
 

@@ -1,7 +1,9 @@
 package com.techmatrix18.web.api;
 
 import com.techmatrix18.model.Category;
+import com.techmatrix18.model.City;
 import com.techmatrix18.service.CategoryService;
+import org.springframework.data.domain.Page;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +27,7 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping(path = "/view/{id}")
+    @GetMapping(path = "/{id}")
     public Category getCategories(@PathVariable String id) throws ValidationException {
         Long catId = Long.parseLong(id);
 
@@ -35,6 +37,19 @@ public class CategoryController {
     @GetMapping(path = "/all")
     public List<Category> getCategories() throws ValidationException {
         return categoryService.getAllCategories();
+    }
+
+    @GetMapping(path = "/page", produces = "application/json;charset=UTF-8")
+    public Object getPage(@RequestParam String pageNo, @RequestParam String pageSize) {
+        int pNo = Integer.parseInt(pageNo);
+        int pSize = Integer.parseInt(pageSize);
+
+        Page<Category> categories = categoryService.findPaginated(pNo, pSize);
+        if (categories != null) {
+            return categories;
+        } else {
+            return "{\"status\": \"error\", \"message\": \"Didn't find categories with pageNo=" + pageNo + " and pageSize=" + pageSize + " \"}";
+        }
     }
 
     @PostMapping(path = "/add")
