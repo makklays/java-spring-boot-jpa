@@ -1,5 +1,6 @@
 package com.techmatrix18.web.api;
 
+import com.techmatrix18.model.Position;
 import com.techmatrix18.model.Role;
 import com.techmatrix18.model.User;
 import com.techmatrix18.service.PositionService;
@@ -92,10 +93,13 @@ public class UserController {
         u.setLastname(lastname);
         u.setEmail(email);
         u.setPassword(password);
-        //Long longPositionId = Long.parseLong(positionId);
-        //u.setPositionId(longPositionId);
 
-        System.out.println(u.toString());
+        // add position
+        Long longPositionId = Long.parseLong(positionId);
+        Optional<Position> position = positionService.getPositionById(longPositionId);
+        if (position.isPresent()) {
+            u.setPosition(position.get());
+        }
 
         if (userService.addUser(u)) {
             return "{\"status\": \"success\", \"message\": \"User added successfully!\"}";
@@ -113,8 +117,14 @@ public class UserController {
             u.setLastname(lastname);
             u.setEmail(email);
             u.setPassword(password);
-            //Long longPositionId = Long.parseLong(positionId);
-            //u.setPositionId(longPositionId);
+
+            // add position
+            Long longPositionId = Long.parseLong(positionId);
+            Optional<Position> position = positionService.getPositionById(longPositionId);
+            if (position.isPresent()) {
+                u.setPosition(position.get());
+            }
+
             if (userService.updateUser(u)) {
                 return "{\"status\": \"success\", \"message\": \"User updated successfully!\"}";
             } else {
