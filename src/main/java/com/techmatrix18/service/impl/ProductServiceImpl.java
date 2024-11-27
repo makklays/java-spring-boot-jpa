@@ -1,6 +1,7 @@
 package com.techmatrix18.service.impl;
 
 import com.techmatrix18.model.Product;
+import com.techmatrix18.model.Storehouse;
 import com.techmatrix18.repository.ProductRepository;
 import com.techmatrix18.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,6 +85,12 @@ public class ProductServiceImpl implements ProductService {
         Page<Product> allProductsSortedByTitle = productRepository.findAll(this.firstPageWithTwoElements);
 
         return allProductsSortedByTitle;
+    }
+
+    @Override
+    public Page<Product> findPaginated(int pageNo, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+        return productRepository.findAll(pageable);
     }
 }
 

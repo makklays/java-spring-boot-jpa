@@ -1,9 +1,11 @@
 package com.techmatrix18.web.api;
 
 import com.techmatrix18.model.Invoice;
+import com.techmatrix18.model.Position;
 import com.techmatrix18.model.Transportation;
 import com.techmatrix18.service.InvoiceService;
 import com.techmatrix18.service.TransportationService;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.bind.ValidationException;
@@ -47,6 +49,19 @@ public class InvoiceController {
             return invoice.get();
         } else {
             return "{\"status\": \"error\", \"message\": \"Didn't find invoice with ID=" + id + "\"}";
+        }
+    }
+
+    @GetMapping(path = "/page", produces = "application/json;charset=UTF-8")
+    public Object getPage(@RequestParam String pageNo, @RequestParam String pageSize) {
+        int pNo = Integer.parseInt(pageNo);
+        int pSize = Integer.parseInt(pageSize);
+
+        Page<Invoice> invoices = invoiceService.findPaginated(pNo, pSize);
+        if (invoices != null) {
+            return invoices;
+        } else {
+            return "{\"status\": \"error\", \"message\": \"Didn't find invoices with pageNo=" + pageNo + " and pageSize=" + pageSize + " \"}";
         }
     }
 

@@ -1,6 +1,9 @@
 package com.techmatrix18.service;
 
 import com.techmatrix18.model.Invoice;
+import com.techmatrix18.model.Position;
+import org.springframework.data.domain.Page;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -18,5 +21,7 @@ public interface InvoiceService {
     boolean addInvoice(Invoice invoice);
     boolean updateInvoice(Invoice invoice);
     boolean deleteInvoice(Long id);
+
+    Page<Invoice> findPaginated(int pageNo, int pageSize);
 }
 
