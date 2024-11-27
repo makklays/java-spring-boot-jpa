@@ -5,6 +5,9 @@ import com.techmatrix18.repository.StorehouseRepository;
 import com.techmatrix18.service.StorehouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
@@ -70,6 +73,12 @@ public class StorehouseServiceImpl implements StorehouseService {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public Page<Storehouse> findPaginated(int pageNo, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+        return storehouseRepository.findAll(pageable);
     }
 }
 
