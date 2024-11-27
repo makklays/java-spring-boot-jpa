@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Implementation of {@link UserService} interface.
@@ -55,7 +56,8 @@ public class UserServiceImpl implements UserService /*, UserDetailsService*/ {
 
     @Override
     public User getUserById(Long userId) {
-        return userRepository.findById(userId).get();
+        Optional<User> u = userRepository.findById(userId);
+        return u.orElse(null);
     }
 
     @Override
@@ -64,25 +66,36 @@ public class UserServiceImpl implements UserService /*, UserDetailsService*/ {
     }
 
     @Override
-    public void addUser(User user) {
+    public boolean addUser(User user) {
         if(userRepository.findByEmail(user.getEmail()) != null) {
             throw new IllegalArgumentException("User with this email already exists");
         }
-        userRepository.save(user);
+        User u = userRepository.save(user);
+        return u.getId() != null;
     }
 
     @Override
-    public void updateUser(User user) {
-        userRepository.save(user);
-    }
-
-    @Override
-    public void deleteUser(Long userId) {
-
-        if (userRepository.existsById(userId)) {
-            userRepository.deleteById(userId);
+    public boolean updateUser(User user) {
+        User u = userRepository.save(user);
+        if (u.getId() != null) {
+            return true;
         } else {
-            throw new IllegalArgumentException("User with this id doesn't exist");
+            return false;
+        }
+    }
+
+    @Override
+    public boolean deleteUser(Long userId) {
+        if (userRepository.existsById(userId)) {
+            User user = userRepository.getById(userId);
+            if (user.getId() != null) {
+                userRepository.delete(user);
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
         }
     }
 
