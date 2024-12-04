@@ -2,6 +2,8 @@ package com.techmatrix18.web.api;
 
 import com.techmatrix18.model.Currency;
 import com.techmatrix18.service.CurrencyService;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import javax.xml.bind.ValidationException;
@@ -118,16 +120,26 @@ public class CurrencyController {
 
         if (!response.body().isEmpty()) {
 
-            // response.body()
-            /*for(curr : response.body()) {
+            JSONArray jsonArray = new JSONArray(response.body());
+            for(Object myCurr: jsonArray) {
+                // If you want to get JSONObject
+                JSONObject myJSONObject = (JSONObject) myCurr;
+
+                // If you want to access JSONObject's values
+                int r030            = myJSONObject.getInt("r030");
+                String title        = myJSONObject.getString("txt");
+                float rate          = myJSONObject.getInt("rate");
+                String cc           = myJSONObject.getString("cc");
+                String exchangedate = myJSONObject.getString("exchangedate");
+
                 Currency c = new Currency();
-                c.setR030(curr.r030);
-                c.setTitle(curr.title);
-                c.setRate(curr.rate);
-                c.setCc(curr.cc);
-                c.setExchangedate(curr.exchangedate);
+                c.setR030(r030);
+                c.setTitle(title);
+                c.setRate(rate);
+                c.setCc(cc);
+                c.setExchangedate(exchangedate);
                 currencyService.addCurrency(c);
-            }*/
+            }
 
             return response.body();
         } else {

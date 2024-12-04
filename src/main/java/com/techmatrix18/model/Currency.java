@@ -23,7 +23,6 @@ public class Currency {
     private Long id;
 
     @Column(name = "r030", length = 255)
-    @NotBlank
     private Integer r030;
 
     @Column(name = "title", length = 255)
@@ -31,7 +30,6 @@ public class Currency {
     private String title;
 
     @Column(name = "rate", length = 255)
-    @NotBlank
     private Float rate;
 
     @Column(name = "cc", length = 255)
