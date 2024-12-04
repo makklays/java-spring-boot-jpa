@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{app.title}"> Title </title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/fontawesome-free-6.6.0-web/css/all.min.css}"/>
+</head>
+<body>
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-6">
+            <h1><i class="fa-solid fa-house-flood-water-circle-arrow-right"></i> List of currencies</h1>
+        </div>
+        <div class="col-md-6 align-self-center" style="text-align:right;">
+
+        </div>
+    </div>
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/welcome}">Home</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/menu}">Menu</a></li>
+            <li class="breadcrumb-item active" aria-current="page" th:text="#{app.list-currencies}" >List of currencies</li>
+        </ol>
+    </nav>
+
+    <div class="card">
+        <div class="card-body">
+
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th class="text-center" style="width:50px;" th:text="#{id}"/></th>
+                    <th th:text="#{title}"></th>
+                    <th class="text-center" th:text="#{page.actions}"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="currency : ${currencies}">
+                    <td class="text-center" style="width:30px;" th:text="${currency.Id}">Id</td>
+                    <td>
+                        <a href="#" th:href="@{'/currencies/' + ${currency.id}}" th:text="${currency.title}">Title</a>
+                    </td>
+
+                    <td class="text-center" style="width:150px;">
+                        <a href="#" th:href="@{'/currencies/' + ${currency.id}}">view</a> |
+                        <a href="#" th:href="@{'/currencies/edit/' + ${currency.id}}">edit</a> |
+                        <a href="#" th:href="@{'/currencies/delete/' + ${currency.id}}">delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <br/><br/>
+
+</div>
+</body>
+</html>
+
