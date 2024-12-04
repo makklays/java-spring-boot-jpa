@@ -1,7 +1,6 @@
 package com.techmatrix18.web.api;
 
 import com.techmatrix18.model.Invoice;
-import com.techmatrix18.model.Position;
 import com.techmatrix18.model.Transportation;
 import com.techmatrix18.service.InvoiceService;
 import com.techmatrix18.service.TransportationService;
@@ -9,6 +8,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.bind.ValidationException;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,7 +21,7 @@ import java.util.Optional;
  * Simple controller for Invoice
  *
  * @author Alexander Kuziv
- * @version 1.0
+ * @version 1.1
  */
 
 @RestController
@@ -116,6 +121,27 @@ public class InvoiceController {
             }
         } else {
             return "{\"status\": \"error\", \"message\": \"Didn't find invoice with ID=" + invoiceId + "\"}";
+        }
+    }
+
+    @GetMapping(path="/currencies-nbu/{date}")
+    public String getCurrencyFromNBU(@PathVariable String date) throws URISyntaxException, IOException, InterruptedException {
+        // https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?date=20241204&json
+
+        HttpRequest request = HttpRequest.newBuilder( new URI("https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?date="+date+"&json") ).build();
+        HttpClient client = HttpClient.newBuilder()
+                .version(HttpClient.Version.HTTP_1_1)
+                .build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        System.out.println(response.statusCode());
+        System.out.println(response.body());
+
+        if (!response.body().isEmpty()) {
+            return response.body();
+        } else {
+            return "{\"status\": \"error\", \"message\": \"Don't have values\"}";
         }
     }
 }
