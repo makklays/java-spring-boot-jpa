@@ -98,7 +98,7 @@ public class CityViewsController implements WebMvcConfigurer {
     public String view(Model model, @PathVariable String cityId) {
         Optional<City> city = cityService.getCityById(Long.parseLong(cityId));
         if (city.get().getId() != null) {
-            model.addAttribute("city", city);
+            model.addAttribute("city", city.get());
            logger.info("City found..");
         } else {
             model.addAttribute("city", null);

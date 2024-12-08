@@ -1,6 +1,7 @@
 package com.techmatrix18.service;
 
 import com.techmatrix18.model.Card;
+import com.techmatrix18.model.User;
 import org.springframework.data.domain.Page;
 import java.util.List;
 import java.util.Optional;
@@ -22,6 +23,8 @@ public interface CardService {
     boolean updateCard(Card card);
 
     boolean deleteCard(Long id);
+
+    User getUserByCardId(Long cardId);
 
     Page<Card> findPaginated(int pageNo, int pageSize);
 }

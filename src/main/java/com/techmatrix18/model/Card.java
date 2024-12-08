@@ -3,7 +3,7 @@ package com.techmatrix18.model;
 import jakarta.validation.constraints.NotBlank;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -30,23 +30,19 @@ public class Card implements Serializable {
     private String title;
 
     @Column(name = "number", length = 16)
-    @NotBlank
-    private int number;
+    private Long number;
 
     @Column(name = "type", length = 255) // Visa or MasterCard
     @NotBlank
     private String type;
 
     @Column(name = "month", length = 2)
-    @NotBlank
     private int month;
 
     @Column(name = "year", length = 4)
-    @NotBlank
     private int year;
 
     @Column(name = "cvv", length = 3)
-    @NotBlank
     private int cvv;
 
     @Column(name = "cc", length = 3)
@@ -86,11 +82,11 @@ public class Card implements Serializable {
         this.title = title;
     }
 
-    public int getNumber() {
+    public Long getNumber() {
         return number;
     }
 
-    public void setNumber(int number) {
+    public void setNumber(Long number) {
         this.number = number;
     }
 

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{app.title}"> Title </title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/fontawesome-free-6.6.0-web/css/all.min.css}"/>
+</head>
+<body>
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-6">
+            <h1><i class="fa-regular fa-credit-card"></i> View card</h1>
+        </div>
+        <div class="col-md-6 align-self-center" style="text-align:right;">
+            <a href="#" th:href="@{/cards/edit/{id}(id=${card.id})}" th:text="#{app.edit-card}" class="btn btn-primary"> Edit card</a>
+        </div>
+    </div>
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/welcome}">Home</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/menu}">Menu</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/cards/list}" th:text="#{app.list-cards}">List</a></li>
+            <li class="breadcrumb-item active" aria-current="page" th:text="#{app.view-card}" >View card</li>
+        </ol>
+    </nav>
+
+    <div class="card">
+        <div class="card-body">
+
+            <table class="table table-striped table-hover">
+                <tr>
+                    <th>ID</th>
+                    <td th:text="${card.id}"></td>
+                </tr>
+                <tr>
+                    <th>Title</th>
+                    <td th:text="${card.title}"></td>
+                </tr>
+                <tr>
+                    <th>Number of card</th>
+                    <td th:text="${card.number}"></td>
+                </tr>
+                <tr>
+                    <th>Type</th>
+                    <td th:text="${card.type}"></td>
+                </tr>
+
+                <tr>
+                    <th>Month</th>
+                    <td th:text="${card.month}"></td>
+                </tr>
+                <tr>
+                    <th>Year</th>
+                    <td th:text="${card.year}"></td>
+                </tr>
+                <tr>
+                    <th>CVV</th>
+                    <td th:text="${card.cvv}"></td>
+                </tr>
+
+                <tr>
+                    <th>Currency</th>
+                    <td th:text="${card.cc}"></td>
+                </tr>
+                <tr>
+                    <th>Amount</th>
+                    <td th:text="${card.amount}"></td>
+                </tr>
+
+                <tr>
+                    <th>Created</th>
+                    <td th:text="${card.createdAt} ? ${#dates.format(card.createdAt, 'dd-MM-yyyy HH:mm')} : '-'"></td>
+                </tr>
+                <tr>
+                    <th>Updated</th>
+                    <td th:text="${card.updatedAt} ? ${#dates.format(card.updatedAt, 'dd-MM-yyyy HH:mm')} : '-'"></td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+
+    <br/><br/>
+
+    <div class="card">
+        <div class="card-body">
+
+            <h3><i class="fa-solid fa-landmark-flag"></i> Users</h3>
+
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th class="text-center" style="width:50px;" th:text="#{id}"/></th>
+                        <th th:text="#{firstname}"></th>
+                        <th th:text="#{lastname}"></th>
+                        <th th:text="#{position}">Position</th>
+                        <th class="text-center">E-mail</th>
+                        <th class="text-center">Blocked</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-center" style="width:30px;" th:text="${user.Id}">Id</td>
+                        <td>
+                            <a href="#" th:href="@{'/users/' + ${user.id}}" th:text="${user.firstname}">Title</a>
+                        </td>
+                        <td th:text="${user.lastname}"></td>
+
+                        <td>
+                            <!-- if -->
+                            <div th:if="${user.getPosition()} != null">
+                                <a href="#" th:href="@{'/positions/' + ${user.position.getId()}}" th:text="${user.position.getTitle()}">Title</a>
+
+                            </div>
+                            <!-- else -->
+                            <div th:unless="${user.getPosition()} != null">-</div>
+                        </td>
+
+                        <td class="text-center" th:text="${user.email}"></td>
+                        <td class="text-center" th:text="${user.isBlocked}"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <br/><br/>
+
+    <a href="#" th:href="@{/cards/list}" th:text="#{app.back}" class="btn btn-secondary"> Back</a>
+
+    <br/><br/>
+
+</div>
+</body>
+</html>
+
