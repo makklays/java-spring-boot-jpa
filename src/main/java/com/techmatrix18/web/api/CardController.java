@@ -21,7 +21,7 @@ import java.util.Optional;
  */
 
 @RestController
-@RequestMapping("/api/v1/card")
+@RequestMapping("/api/v1/cards")
 public class CardController {
 
     private final CardService cardService;
@@ -62,14 +62,14 @@ public class CardController {
     }
 
     @PostMapping(path = "/add", produces = "application/json;charset=UTF-8")
-    public @ResponseBody String addCard (@RequestParam String title, @RequestParam int number, @RequestParam String cc, @RequestParam String month, @RequestParam String year, @RequestParam String cvv, @RequestParam String type, @RequestParam String amount, @RequestParam String userId) {
+    public @ResponseBody String addCard (@RequestParam String title, @RequestParam String number, @RequestParam String cc, @RequestParam String month, @RequestParam String year, @RequestParam String cvv, @RequestParam String type, @RequestParam String amount, @RequestParam String userId) {
         // user
         User user = userService.getUserById(Long.parseLong(userId));
 
         // card
         Card c = new Card();
         c.setTitle(title);
-        c.setNumber(number);
+        c.setNumber(Long.parseLong(number));
         c.setMonth(Integer.parseInt(month));
         c.setYear(Integer.parseInt(year));
         c.setCvv(Integer.parseInt(cvv));
@@ -83,7 +83,7 @@ public class CardController {
     }
 
     @PatchMapping(path = "/update", produces = "application/json;charset=UTF-8")
-    public @ResponseBody String updateCard (@RequestParam String cardId, @RequestParam String title, @RequestParam int number, @RequestParam String cc, @RequestParam String month, @RequestParam String year, @RequestParam String cvv, @RequestParam String type, @RequestParam String amount, @RequestParam String userId) {
+    public @ResponseBody String updateCard (@RequestParam String cardId, @RequestParam String title, @RequestParam String number, @RequestParam String cc, @RequestParam String month, @RequestParam String year, @RequestParam String cvv, @RequestParam String type, @RequestParam String amount, @RequestParam String userId) {
         Optional<Card> c = cardService.getCardById(Long.parseLong(cardId));
         if (c.isPresent()) {
 
@@ -92,7 +92,7 @@ public class CardController {
 
             // card
             c.get().setTitle(title);
-            c.get().setNumber(number);
+            c.get().setNumber(Long.parseLong(number));
             c.get().setMonth(Integer.parseInt(month));
             c.get().setYear(Integer.parseInt(year));
             c.get().setCvv(Integer.parseInt(cvv));

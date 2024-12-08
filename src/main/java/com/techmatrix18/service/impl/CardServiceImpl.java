@@ -1,6 +1,7 @@
 package com.techmatrix18.service.impl;
 
 import com.techmatrix18.model.Card;
+import com.techmatrix18.model.User;
 import com.techmatrix18.repository.CardRepository;
 import com.techmatrix18.service.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +71,13 @@ public class CardServiceImpl implements CardService {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public User getUserByCardId(Long cardId) {
+        Card card = cardRepository.getById(cardId);
+
+        return card.getUser();
     }
 
     @Override
