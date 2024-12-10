@@ -3,6 +3,7 @@ package com.techmatrix18.web.views;
 import com.techmatrix18.model.Card;
 import com.techmatrix18.model.City;
 import com.techmatrix18.service.CardService;
+import com.techmatrix18.service.CardTransactionService;
 import com.techmatrix18.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -39,10 +40,12 @@ public class CardViewsController implements WebMvcConfigurer {
 
     private final CardService cardService;
     private final UserService userService;
+    private final CardTransactionService cardTransactionService;
 
-    public CardViewsController(CardService cardService, UserService userService) {
+    public CardViewsController(CardService cardService, UserService userService, CardTransactionService cardTransactionService) {
         this.cardService = cardService;
         this.userService = userService;
+        this.cardTransactionService = cardTransactionService;
     }
 
     @GetMapping("/list")
@@ -121,6 +124,119 @@ public class CardViewsController implements WebMvcConfigurer {
         model.addAttribute("user", cardService.getUserByCardId(Long.parseLong(cardId)));
 
         return "cards/view";
+    }
+
+    /*********************** OPERATIONS *********************/
+    @GetMapping(path = "/{cardId}/add-money")
+    public String addMoney(Model model, @PathVariable Long cardId) throws IOException {
+        Optional<Card> card = cardService.getCardById(cardId);
+        if (card.get().getId() != null) {
+            model.addAttribute("card", card.get());
+            logger.info("Card found..");
+        } else {
+            model.addAttribute("card", null);
+            logger.warn("Error! Card not found..");
+        }
+
+        return "cards/add-money";
+    }
+
+    @PostMapping("/add-money-post")
+    public String addMoneyPost(HttpServletRequest request, HttpServletResponse response) {
+
+        String card_id = request.getParameter("card_id");
+        String number = request.getParameter("number");
+        String amount = request.getParameter("amount");
+
+        logger.info("Add money --> Number: " + number + " amount: " + amount);
+
+        // TODO: Add transaction
+
+        return "redirect:/cards/" + card_id;
+    }
+
+    @GetMapping(path = "/{cardId}/transfer")
+    public String transfer(Model model, @PathVariable Long cardId) throws IOException {
+        Optional<Card> card = cardService.getCardById(cardId);
+        if (card.get().getId() != null) {
+            model.addAttribute("card", card.get());
+            logger.info("Card found..");
+        } else {
+            model.addAttribute("card", null);
+            logger.warn("Error! Card not found..");
+        }
+
+        return "cards/transfer";
+    }
+
+    @PostMapping("/transfer-post")
+    public String addTransferPost(HttpServletRequest request, HttpServletResponse response) {
+
+        String card_id = request.getParameter("card_id");
+        String numberTo = request.getParameter("numberTo");
+        String amount = request.getParameter("amount");
+
+        logger.info("Transfer --> NumberTo: " + numberTo + " amount: " + amount);
+
+        // TODO: Add transaction
+
+        return "redirect:/cards/" + card_id;
+    }
+
+    @GetMapping(path = "/{cardId}/withdrawal")
+    public String withdrawal(Model model, @PathVariable Long cardId) throws IOException {
+        Optional<Card> card = cardService.getCardById(cardId);
+        if (card.get().getId() != null) {
+            model.addAttribute("card", card.get());
+            logger.info("Card found..");
+        } else {
+            model.addAttribute("card", null);
+            logger.warn("Error! Card not found..");
+        }
+
+        return "cards/withdrawal";
+    }
+
+    @PostMapping("/withdrawal-post")
+    public String addWithdrawalPost(HttpServletRequest request, HttpServletResponse response) {
+
+        String card_id = request.getParameter("card_id");
+        String numberTo = request.getParameter("numberTo");
+        String amount = request.getParameter("amount");
+
+        logger.info("Withdrawal --> NumberTo: " + numberTo + " amount: " + amount);
+
+        // TODO: Add transaction
+
+        return "redirect:/cards/" + card_id;
+    }
+
+    @GetMapping(path = "/{cardId}/payment")
+    public String payment(Model model, @PathVariable Long cardId) throws IOException {
+        Optional<Card> card = cardService.getCardById(cardId);
+        if (card.get().getId() != null) {
+            model.addAttribute("card", card.get());
+            logger.info("Card found..");
+        } else {
+            model.addAttribute("card", null);
+            logger.warn("Error! Card not found..");
+        }
+
+        return "cards/payment";
+    }
+
+    @PostMapping("/payment-post")
+    public String addPaymentPost(HttpServletRequest request, HttpServletResponse response) {
+
+        String card_id = request.getParameter("card_id");
+        String numberTo = request.getParameter("numberTo");
+        String amount = request.getParameter("amount");
+
+        logger.info("Payment --> NumberTo: " + numberTo + " amount: " + amount);
+
+        // TODO: Add transaction
+
+        return "redirect:/cards/" + card_id;
     }
 }
 

@@ -12,7 +12,9 @@ public interface CardTransactionRepository extends JpaRepository<CardTransaction
 
     CardTransaction getById(Long id);
 
-    List<CardTransaction> findByTitle(String title);
+    List<CardTransaction> findByNumber(Long number);
+
+    List<CardTransaction> findByNumberTo(String numberTo);
 
     Page<CardTransaction> findAll(Pageable pageable);
 }
