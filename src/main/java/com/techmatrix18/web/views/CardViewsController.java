@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -228,15 +229,17 @@ public class CardViewsController implements WebMvcConfigurer {
     @PostMapping("/payment-post")
     public String addPaymentPost(HttpServletRequest request, HttpServletResponse response) {
 
-        String card_id = request.getParameter("card_id");
+        String cardId = request.getParameter("cardId");
         String numberTo = request.getParameter("numberTo");
         String amount = request.getParameter("amount");
+        String purpose = request.getParameter("purpose");
 
         logger.info("Payment --> NumberTo: " + numberTo + " amount: " + amount);
 
-        // TODO: Add transaction
+        // Add transaction
+        cardService.sendMoneyFromCardToCard(cardId, numberTo, BigDecimal.valueOf(Long.parseLong(amount)), purpose);
 
-        return "redirect:/cards/" + card_id;
+        return "redirect:/cards/" + cardId;
     }
 }
 
