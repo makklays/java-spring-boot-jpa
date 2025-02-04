@@ -269,10 +269,42 @@
             <artifactId>spring-boot-starter-oauth2-client</artifactId>
         </dependency>
 
+        <!-- SOAP wsdl -->
+        <dependency>
+            <groupId>jakarta.xml.ws</groupId>
+            <artifactId>jakarta.xml.ws-api</artifactId>
+            <version>4.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.ws</groupId>
+            <artifactId>jaxws-rt</artifactId>
+            <version>4.0.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.ws</groupId>
+            <artifactId>jaxws-ri</artifactId>
+            <version>4.0.3</version>
+            <type>pom</type>
+        </dependency>
+
     </dependencies>
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>com.sun.xml.ws</groupId>
+                <artifactId>jaxws-maven-plugin</artifactId>
+                <version>3.0.2</version>
+                <configuration>
+                    <wsdlUrls>
+                        <wsdlUrl>http://localhost:8888/ws/barco?wsdl</wsdlUrl>
+                    </wsdlUrls>
+                    <keep>true</keep>
+                    <packageName>com.baeldung.soap.ws.client.generated</packageName>
+                    <sourceDestDir>src/main/java</sourceDestDir>
+                </configuration>
+            </plugin>
+
             <!--plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

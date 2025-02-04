@@ -241,5 +241,14 @@ public class CardViewsController implements WebMvcConfigurer {
 
         return "redirect:/cards/" + cardId;
     }
+
+    @PostMapping("/list-buy")
+    public String list_buy(HttpServletRequest request, HttpServletResponse response) {
+
+        logger.info("Page: lis of buy");
+        logger.info("Bla-blabla I'm doing SOAP service");
+
+        return "List of buy";
+    }
 }
 
