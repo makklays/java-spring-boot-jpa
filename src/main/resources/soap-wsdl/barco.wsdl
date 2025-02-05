@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions targetNamespace="http://server.ws.soap.baeldung.com/" name="BarcoServiceImpl">
+    <types>
+        <xsd:schema>
+            <xsd:import namespace="http://server.ws.soap.baeldung.com/" schemaLocation="http://localhost:8080/ws/barco?xsd=1"></xsd:import>
+        </xsd:schema>
+    </types>
+    <message name="findByTitle">
+        <part name="arg0" type="xsd:string"></part>
+    </message>
+    <message name="findByTitleResponse">
+        <part name="return" type="tns:barco"></part>
+    </message>
+    <portType name="BarcoService">
+        <operation name="findByTitle">
+            <input wsam:Action="http://server.ws.soap.baeldung.com/BarcoService/findByTitleRequest" message="tns:findByTitle"></input>
+            <output wsam:Action="http://server.ws.soap.baeldung.com/BarcoService/findByTitleResponse" message="tns:findByTitleResponse"></output>
+        </operation>
+    </portType>
+    <binding name="BarcoServiceImplPortBinding" type="tns:BarcoService">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc"></soap:binding>
+        <operation name="findByTitle">
+            <soap:operation soapAction=""></soap:operation>
+            <input>
+                <soap:body use="literal" namespace="http://server.ws.soap.baeldung.com/"></soap:body>
+            </input>
+            <output>
+                <soap:body use="literal" namespace="http://server.ws.soap.baeldung.com/"></soap:body>
+            </output>
+        </operation>
+    </binding>
+    <service name="BarcoServiceImpl">
+        <port name="BarcoServiceImplPort" binding="tns:BarcoServiceImplPortBinding">
+            <soap:address location="http://localhost:8080/ws/barco"></soap:address>
+        </port>
+    </service>
+</definitions>
+

@@ -54,6 +54,8 @@ public class SecurityConfiguration {
                 .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
                 .authorizeHttpRequests(auth ->
                         auth
+                                .requestMatchers(new AntPathRequestMatcher("/soap-wsdl/**")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/soap-xsd/**")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/uploads/**")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/imgs/**")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/css/**")).permitAll()
@@ -61,6 +63,7 @@ public class SecurityConfiguration {
                                 .requestMatchers(new AntPathRequestMatcher("/*.{css,js}")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/*.{ico,png,jpg,svg,webapp}")).permitAll()
                                 .requestMatchers("/auth", "/api/v1/auth").permitAll()
+                                .requestMatchers("/soap-wsdl/**", "/soap-xsd/**").permitAll()
                                 .requestMatchers("/signup").permitAll()
                                 .requestMatchers("/users/**").authenticated()
                                 .requestMatchers("/cities/**", "/menu").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER"))
