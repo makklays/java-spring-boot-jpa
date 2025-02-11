@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions targetNamespace="http://server.ws.soap.baeldung.com/" name="BarcoServiceImpl">
+<definitions targetNamespace="http://server.ws.soap.baeldung.com/" name="BarcoServiceImpl" xmlns:soap=""
+             xmlns:wsam="http://www.w3.org/1999/xhtml" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <types>
         <xsd:schema>
             <xsd:import namespace="http://server.ws.soap.baeldung.com/" schemaLocation="http://localhost:8080/soap-xsd/barco.xsd"></xsd:import>
