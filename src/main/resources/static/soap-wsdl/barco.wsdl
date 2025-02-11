@@ -2,7 +2,7 @@
 <definitions targetNamespace="http://server.ws.soap.baeldung.com/" name="BarcoServiceImpl">
     <types>
         <xsd:schema>
-            <xsd:import namespace="http://server.ws.soap.baeldung.com/" schemaLocation="http://localhost:8080/ws/barco?xsd=1"></xsd:import>
+            <xsd:import namespace="http://server.ws.soap.baeldung.com/" schemaLocation="http://localhost:8080/soap-xsd/barco.xsd"></xsd:import>
         </xsd:schema>
     </types>
     <message name="findByTitle">
@@ -31,7 +31,7 @@
     </binding>
     <service name="BarcoServiceImpl">
         <port name="BarcoServiceImplPort" binding="tns:BarcoServiceImplPortBinding">
-            <soap:address location="http://localhost:8080/ws/barco"></soap:address>
+            <soap:address location="http://localhost:8080/soap-wsdl/barco.wsdl"></soap:address>
         </port>
     </service>
 </definitions>

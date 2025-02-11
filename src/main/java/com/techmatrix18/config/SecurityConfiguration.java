@@ -4,6 +4,7 @@ import com.techmatrix18.security.filter.JwtAuthFilter;
 import com.techmatrix18.service.impl.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.CacheControl;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
@@ -19,6 +20,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+
+import java.time.Duration;
 
 @Configuration
 @EnableWebSecurity
@@ -63,7 +67,6 @@ public class SecurityConfiguration {
                                 .requestMatchers(new AntPathRequestMatcher("/*.{css,js}")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/*.{ico,png,jpg,svg,webapp}")).permitAll()
                                 .requestMatchers("/auth", "/api/v1/auth").permitAll()
-                                .requestMatchers("/soap-wsdl/**", "/soap-xsd/**").permitAll()
                                 .requestMatchers("/signup").permitAll()
                                 .requestMatchers("/users/**").authenticated()
                                 .requestMatchers("/cities/**", "/menu").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER"))
