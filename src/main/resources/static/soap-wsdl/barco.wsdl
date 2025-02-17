@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions targetNamespace="http://server.ws.soap.baeldung.com/" name="BarcoServiceImpl" xmlns:soap=""
-             xmlns:wsam="http://www.w3.org/1999/xhtml" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<definitions targetNamespace="http://server.ws.soap.techmatrix18.com/" name="BarcoServiceImpl" >
     <types>
         <xsd:schema>
-            <xsd:import namespace="http://server.ws.soap.baeldung.com/" schemaLocation="http://localhost:8080/soap-xsd/barco.xsd"></xsd:import>
+            <xsd:import namespace="http://server.ws.soap.techmatrix18.com/" schemaLocation="http://localhost:8080/soap-xsd/barco.xsd"></xsd:import>
         </xsd:schema>
     </types>
     <message name="findByTitle">
@@ -14,8 +13,8 @@
     </message>
     <portType name="BarcoService">
         <operation name="findByTitle">
-            <input wsam:Action="http://server.ws.soap.baeldung.com/BarcoService/findByTitleRequest" message="tns:findByTitle"></input>
-            <output wsam:Action="http://server.ws.soap.baeldung.com/BarcoService/findByTitleResponse" message="tns:findByTitleResponse"></output>
+            <input wsam:Action="http://server.ws.soap.techmatrix18.com/BarcoService/findByTitleRequest" message="tns:findByTitle"></input>
+            <output wsam:Action="http://server.ws.soap.techmatrix18.com/BarcoService/findByTitleResponse" message="tns:findByTitleResponse"></output>
         </operation>
     </portType>
     <binding name="BarcoServiceImplPortBinding" type="tns:BarcoService">
@@ -23,16 +22,16 @@
         <operation name="findByTitle">
             <soap:operation soapAction=""></soap:operation>
             <input>
-                <soap:body use="literal" namespace="http://server.ws.soap.baeldung.com/"></soap:body>
+                <soap:body use="literal" namespace="http://server.ws.soap.techmatrix18.com/"></soap:body>
             </input>
             <output>
-                <soap:body use="literal" namespace="http://server.ws.soap.baeldung.com/"></soap:body>
+                <soap:body use="literal" namespace="http://server.ws.soap.techmatrix18.com/"></soap:body>
             </output>
         </operation>
     </binding>
     <service name="BarcoServiceImpl">
         <port name="BarcoServiceImplPort" binding="tns:BarcoServiceImplPortBinding">
-            <soap:address location="http://localhost:8080/soap-wsdl/barco.wsdl"></soap:address>
+            <soap:address location="http://localhost:8888/soap-wsdl/barco.wsdl"></soap:address>
         </port>
     </service>
 </definitions>

@@ -307,10 +307,10 @@
                 <version>3.0.2</version>
                 <configuration>
                     <wsdlUrls>
-                        <wsdlUrl>http://localhost:8888/ws/barco?wsdl</wsdlUrl>
+                        <wsdlUrl>http://localhost:8888/soap-wsdl/barco.wsdl</wsdlUrl>
                     </wsdlUrls>
                     <keep>true</keep>
-                    <packageName>com.baeldung.soap.ws.client.generated</packageName>
+                    <packageName>com.techmatrix18.soap.ws.client.generated</packageName>
                     <sourceDestDir>src/main/java</sourceDestDir>
                 </configuration>
             </plugin>

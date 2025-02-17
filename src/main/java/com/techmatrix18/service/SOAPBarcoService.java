@@ -7,7 +7,7 @@ import jakarta.jws.WebResult;
 import jakarta.jws.WebService;
 import jakarta.jws.soap.SOAPBinding;
 
-@WebService(name = "SOAPBarcoService", targetNamespace = "http://server.ws.soap.baeldung.com/")
+@WebService(name = "SOAPBarcoService", targetNamespace = "http://server.ws.soap.techmatrix18.com/")
 @SOAPBinding(style = SOAPBinding.Style.RPC)
 public interface SOAPBarcoService {
     @WebMethod

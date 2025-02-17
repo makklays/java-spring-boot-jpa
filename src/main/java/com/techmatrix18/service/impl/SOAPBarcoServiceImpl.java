@@ -9,15 +9,15 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-@WebServiceClient(name = "SOAPBarcoServiceImpl", wsdlLocation = "http://localhost:8080/soap-wsdl/barco.wsdl")
+@WebServiceClient(name = "SOAPBarcoServiceImpl", wsdlLocation = "http://localhost:8888/soap-wsdl/barco.wsdl")
 public class SOAPBarcoServiceImpl extends Service {
     public SOAPBarcoServiceImpl() throws URISyntaxException, MalformedURLException {
-        super(new URI("http://localhost:8080/soap-wsdl/barco.wsdl").toURL(), new QName("http://server.ws.soap.baeldung.com/", "SOAPBarcoServiceImpl"));
+        super(new URI("http://localhost:8888/soap-wsdl/barco.wsdl").toURL(), new QName("http://server.ws.soap.techmatrix18.com/", "SOAPBarcoServiceImpl"));
     }
 
     @WebEndpoint(name = "SOAPBarcoServiceImplPort")
     public SOAPBarcoService getSOAPBarcoServiceImplPort() {
-        return super.getPort(new QName("http://server.ws.soap.baeldung.com/", "SOAPBarcoServiceImpl"), SOAPBarcoService.class);
+        return super.getPort(new QName("http://server.ws.soap.techmatrix18.com/", "SOAPBarcoServiceImpl"), SOAPBarcoService.class);
     }
 }
 
