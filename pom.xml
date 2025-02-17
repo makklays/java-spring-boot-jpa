@@ -132,11 +132,7 @@
             <artifactId>hibernate-core</artifactId>
             <version>6.2.2.Final</version>
         </dependency>
-        <dependency>
-            <groupId>com.zaxxer</groupId>
-            <artifactId>HikariCP</artifactId>
-            <version>5.1.0</version>
-        </dependency>
+
         <dependency>
             <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-hikaricp</artifactId>
@@ -279,6 +275,7 @@
             <groupId>com.sun.xml.ws</groupId>
             <artifactId>jaxws-rt</artifactId>
             <version>4.0.3</version>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>com.sun.xml.ws</groupId>
@@ -304,14 +301,19 @@
             <plugin>
                 <groupId>com.sun.xml.ws</groupId>
                 <artifactId>jaxws-maven-plugin</artifactId>
-                <version>3.0.2</version>
+                <version>4.0.2</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>wsimport</goal>
+                        </goals>
+                    </execution>
+                </executions>
                 <configuration>
-                    <wsdlUrls>
-                        <wsdlUrl>http://localhost:8888/soap-wsdl/barco.wsdl</wsdlUrl>
-                    </wsdlUrls>
+                    <wsdlDirectory>src/main/resources/soap-wsdl</wsdlDirectory>
                     <keep>true</keep>
                     <packageName>com.techmatrix18.soap.ws.client.generated</packageName>
-                    <sourceDestDir>src/main/java</sourceDestDir>
+                    <sourceDestDir>${project.build.directory}/generated-sources/</sourceDestDir>
                 </configuration>
             </plugin>
 
