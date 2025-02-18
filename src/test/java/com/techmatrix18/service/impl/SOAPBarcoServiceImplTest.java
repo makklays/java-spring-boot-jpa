@@ -16,12 +16,12 @@ public class SOAPBarcoServiceImplTest {
     @BeforeAll
     public static void setup() throws MalformedURLException, URISyntaxException {
         SOAPBarcoServiceImpl service = new SOAPBarcoServiceImpl();
-        SOAPBarcoService barcoService = service.getSOAPBarcoServiceImplPort();
+        barcoService = service.getSOAPBarcoServiceImplPort();
     }
 
     @Test
     public void givenCountryService_whenCountryIndia_thenCapitalIsNewDelhi() {
-        assertEquals("1905", barcoService.findByTitle("TUAPSE").getYear());
+        assertEquals(1905, barcoService.findByTitle("TUAPSE").getYear());
     }
 
     @Test
@@ -31,7 +31,7 @@ public class SOAPBarcoServiceImplTest {
 
     @Test
     public void givenCountryService_whenCountryUSA_thenCurrencyUSD() {
-        assertEquals("8000000", barcoService.findByTitle("ЛЕТУЧИЙ ГОЛЛАНДЕЦ").getSpeedometer());
+        assertEquals(8000000, barcoService.findByTitle("ЛЕТУЧИЙ ГОЛЛАНДЕЦ").getSpeedometer());
     }
 }
 

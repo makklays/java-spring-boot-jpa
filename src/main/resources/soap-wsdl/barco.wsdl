@@ -7,7 +7,7 @@
              xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
     <types>
         <xsd:schema>
-            <xsd:import namespace="http://server.ws.soap.techmatrix18.com/" schemaLocation="../soap-xsd/barco.xsd"></xsd:import>
+            <xsd:import namespace="http://server.ws.soap.techmatrix18.com/" schemaLocation="../soap-xsd/barco.xsd?xsd"></xsd:import>
         </xsd:schema>
     </types>
     <message name="findByTitle">
@@ -37,7 +37,7 @@
     </binding>
     <service name="BarcoServiceImpl">
         <port name="BarcoServiceImplPort" binding="tns:BarcoServiceImplPortBinding">
-            <soap:address location="http://localhost:8888/soap-wsdl/barco.wsdl"></soap:address>
+            <soap:address location="http://localhost:8888/soap-wsdl/barco.wsdl?wsdl"></soap:address>
         </port>
     </service>
 </definitions>
