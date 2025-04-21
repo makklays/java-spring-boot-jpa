@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{app.title}"> Title </title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/fontawesome-free-6.6.0-web/css/all.min.css}"/>
+</head>
+<body>
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-6">
+            <h1><i class="fa-regular fa-credit-card"></i> Transfer</h1>
+        </div>
+        <div class="col-md-6 align-self-center" style="text-align:right;">
+
+        </div>
+    </div>
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/welcome}">Home</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/menu}">Menu</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/cards/list}" th:text="#{app.list-cards}">List</a></li>
+            <li class="breadcrumb-item"><a th:href="@{'/cards/' + ${card.id}}" th:text="'Card: ' + ${card.title}">Card</a></li>
+            <li class="breadcrumb-item active" aria-current="page" th:text="#{app.transfer}" >Transfer</li>
+        </ol>
+    </nav>
+
+    <form action="#" th:action="@{/cards/transfer-post}" method="POST" >
+        <div class="card">
+            <div class="card-body">
+
+                <input type="hidden" name="card_id" th:value="${card.id}" />
+                <input type="hidden" name="number" th:value="${card.number}" />
+
+                <div class="row" style="margin-bottom:10px;">
+                    <div class="col-md-4">
+                        <label for="number1" class="form-label">From card number:</label>
+                        <input type="text" class="form-control" id="number1" placeholder="1111 2222 3333 4444" th:value="${card.number}" disabled="disabled" />
+                        <!--span style="color:red;">Number error</span -->
+                    </div>
+                </div>
+
+                <div class="row" style="margin-bottom:10px;">
+                    <div class="col-md-4">
+                        <label for="numberTo" class="form-label">To card number:</label>
+                        <input type="text" name="numberTo" class="form-control" id="numberTo" placeholder="1111 2222 3333 4444" />
+                        <!--span style="color:red;">Number error</span -->
+                    </div>
+                </div>
+
+                <div class="row" style="margin-bottom:10px;">
+                    <div class="col-md-4">
+                        <label for="amount1" class="form-label">Amount, EUR:</label>
+                        <input type="text" name="amount" class="form-control" id="amount1" placeholder="100.00" />
+                        <!-- span style="color:red;">Amount error</span -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <br/>
+        <button type="submit" class="btn btn-primary" th:text="#{form.recarga}">Top up</button>
+        <a href="#" th:href="@{'/cards/'+ ${card.id}}" th:text="#{app.back}" class="btn btn-secondary" style="margin-left:20px;"> Back</a>
+
+    </form>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions targetNamespace="http://server.ws.soap.techmatrix18.com/"
+             xmlns:tns="http://server.ws.soap.techmatrix18.com/"
+             xmlns="http://schemas.xmlsoap.org/wsdl/"
+             name="BarcoServiceImpl"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+    <types>
+        <xsd:schema>
+            <xsd:import namespace="http://server.ws.soap.techmatrix18.com/" schemaLocation="../soap-xsd/barco.xsd?xsd"></xsd:import>
+        </xsd:schema>
+    </types>
+    <message name="findByTitle">
+        <part name="arg0" type="xsd:string"></part>
+    </message>
+    <message name="findByTitleResponse">
+        <part name="return" type="tns:barco"></part>
+    </message>
+
+    <portType name="BarcoService">
+        <operation name="findByTitle">
+            <input  message="tns:findByTitle"></input>
+            <output message="tns:findByTitleResponse"></output>
+        </operation>
+    </portType>
+    <binding name="BarcoServiceImplPortBinding" type="tns:BarcoService">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc"></soap:binding>
+        <operation name="findByTitle">
+            <soap:operation soapAction=""></soap:operation>
+            <input>
+                <soap:body use="literal" namespace="http://server.ws.soap.techmatrix18.com/"></soap:body>
+            </input>
+            <output>
+                <soap:body use="literal" namespace="http://server.ws.soap.techmatrix18.com/"></soap:body>
+            </output>
+        </operation>
+    </binding>
+    <service name="BarcoServiceImpl">
+        <port name="BarcoServiceImplPort" binding="tns:BarcoServiceImplPortBinding">
+            <soap:address location="http://localhost:8888/soap-wsdl/barco.wsdl?wsdl"></soap:address>
+        </port>
+    </service>
+</definitions>
+

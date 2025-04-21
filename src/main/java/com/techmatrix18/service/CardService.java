@@ -3,6 +3,8 @@ package com.techmatrix18.service;
 import com.techmatrix18.model.Card;
 import com.techmatrix18.model.User;
 import org.springframework.data.domain.Page;
+
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +20,8 @@ public interface CardService {
 
     Optional<Card> getCardById(Long id);
 
+    User getUserByNumber(Long number);
+
     boolean addCard(Card card);
 
     boolean updateCard(Card card);
@@ -27,5 +31,7 @@ public interface CardService {
     User getUserByCardId(Long cardId);
 
     Page<Card> findPaginated(int pageNo, int pageSize);
+
+    boolean sendMoneyFromCardToCard(String cardIdFrom, String cardNumberTo, BigDecimal addAmount, String purpose);
 }
 
