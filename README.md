@@ -1,4 +1,8 @@
 
+### La eschema del proyecto.. 
+
+<img src="./src/main/resources/static/schemas/photo_2024-04-23_21-50-08.jpg" title="la eschema UML" />
+
 ### La TAREA del PROYECTO (ES)
 
 Crear un almacén virtual de mercancías.
@@ -36,7 +40,7 @@ The program upload at the repository of github.
 PS: This task create Alexander Kuziv for company TechMatrix18.com
 
 
-##### Secuencia de conexión, configuración y desarrollo:
+#### Secuencia de conexión, configuración y desarrollo:
 
 1. Añadi `<dependiencies>` para MySQL, H2, Spring, Hibernate, Logback.
 2. Crea la connección a las base de datos MySQL, H2.
@@ -46,6 +50,14 @@ PS: This task create Alexander Kuziv for company TechMatrix18.com
 6. Crea los Controladores con Entidades y Repositories.
 7. Crea los Tests de integracion (para Controladores).
 
-##### Pantallas 
+#### Pantallas 
 
-pronto añadiré...  
+<img src="./src/main/resources/static/screens/photo_2024-04-23_22-00-56.jpg" width="500" title="la pantalla" />
+<img src="./src/main/resources/static/screens/photo_2024-04-23_22-04-21.jpg" width="500" title="la pantalla" />
+<img src="./src/main/resources/static/screens/photo_2024-04-23_22-06-20.jpg" width="500" title="la pantalla" />
+<img src="./src/main/resources/static/screens/photo_2024-04-23_22-08-38.jpg" width="500" title="la pantalla" />
+<img src="./src/main/resources/static/screens/photo_2024-04-23_22-10-19.jpg" width="500" title="la pantalla" />
+<img src="./src/main/resources/static/screens/photo_2024-04-23_22-12-13.jpg" width="500" title="la pantalla" />
+<img src="./src/main/resources/static/screens/photo_2024-04-23_22-15-29.jpg" width="500" title="la pantalla" />
+
+pronto añadiré más...  
