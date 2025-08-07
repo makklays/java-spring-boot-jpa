@@ -1,5 +1,5 @@
 
-### El eschema UML del proyecto.. 
+### El esquema UML del proyecto.. 
 
 <img src="./src/main/resources/static/schemas/photo_2024-04-23_21-50-08.jpg" title="la eschema UML" />
 
